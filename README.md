@@ -30,9 +30,9 @@ It is designed with a modern UI, smooth navigation, and features that make furni
 👥 Team Members
 
 ### This project was created by the Decora Team 💡
-Farha Ahmed	
-Karen 
-Othman
-Habiba Basel
-Abdelaziz
+Farha Ahmed	,
+Karen ,
+Othman,
+Habiba Basel,
+Abdelaziz,
 AbdElrahman Taher
