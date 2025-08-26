@@ -36,3 +36,5 @@ Othman,
 Habiba Basel,
 Abdelaziz,
 AbdElrahman Taher
+
+📂 [Project Resources & Files](https://drive.google.com/drive/folders/1Y-9wyM-NmRRSBZkVCwYR_f3M9h6oDDDv?usp=drive_link)
