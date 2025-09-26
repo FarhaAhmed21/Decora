@@ -200,4 +200,4 @@ Metrics for project success:
 ---
 
 ## 📜 License  
-This project is licensed under the **Yat Company**.  
+This project is licensed under the **Depi - yat Company**.  
