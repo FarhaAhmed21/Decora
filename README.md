@@ -17,12 +17,12 @@ Decora aims to bridge the gap between **digital browsing and real-life home styl
 ---
 
 ## 👥 Team Members (pentaRae)  
-- Farha Ahmed  
-- Karen  
-- Othman  
-- Habiba Basel  
-- Abdelaziz  
-- AbdElrahman Taher  
+- Farha Ahmed Ali Zaki
+- Karen Samuel Gerges Shenouda
+- Othman Nasser Mohamed Hassan
+- Habiba Basel Fathy Aboelaelh
+- Abdelaziz Adel Mohamed Hamed
+- AbdElrahman Ahmed Taher Ahmed   
 
 ---
 
