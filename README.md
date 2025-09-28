@@ -17,11 +17,11 @@ Decora aims to bridge the gap between **digital browsing and real-life home styl
 ---
 
 ## 👥 Team Members (pentaRae)  
-- Farha Ahmed Ali Zaki
-- Karen Samuel Gerges Shenouda
-- Othman Nasser Mohamed Hassan
-- Habiba Basel Fathy Aboelaelh
-- Abdelaziz Adel Mohamed Hamed
+- Farha Ahmed Ali Zaki  
+- Karen Samuel Gerges Shenouda  
+- Othman Nasser Mohamed Hassan  
+- Habiba Basel Fathy Aboelaelh  
+- Abdelaziz Adel Mohamed Hamed  
 - AbdElrahman Ahmed Taher Ahmed   
 
 ---
@@ -29,7 +29,6 @@ Decora aims to bridge the gap between **digital browsing and real-life home styl
 # 📅 Work Plan – Decora Furniture Store App  
 
 ## **Phase 1 – Research & Planning**  
-
 **Tasks:**  
 - Market & competitor analysis (IKEA, West Elm, Wayfair, etc.)  
 - Define audience personas (Homeowners, Students, Families, Interior Enthusiasts)  
@@ -46,7 +45,6 @@ Decora aims to bridge the gap between **digital browsing and real-life home styl
 ---
 
 ## **Phase 2 – Visual Identity & Branding**  
-
 **Tasks:**  
 - Logo design (modern + elegant with furniture element)  
 - Define color palette (light & dark themes)  
@@ -100,7 +98,6 @@ Decora aims to bridge the gap between **digital browsing and real-life home styl
 ---
 
 ## **Phase 4 – Backend Development & Integration**  
-
 **Tasks:**  
 - Setup Firebase project  
 - Implement Firebase Auth (Google, Facebook, Email/Password)  
@@ -114,15 +111,22 @@ Decora aims to bridge the gap between **digital browsing and real-life home styl
 
 ---
 
----
+## **Phase 5 – Unit Testing & Quality Assurance**  
+**Tasks:**  
+- Write unit tests for core features (authentication, cart, favorites, search)  
+- Perform widget and integration testing for UI components  
+- Test Firestore queries, security rules, and offline persistence  
 
-## **Phase 5 – Finalization & Deployment**  
+**Deliverables:**  
+- Unit test reports (coverage, passed/failed cases)  
+- QA checklist and bug report log  
+- Verified stable build ready for deployment  
 
+
+## **Phase 6 – Finalization & Deployment**  
 **Tasks:**  
 - Prepare final presentation (slides, demo video)  
 - Deploy to Google Play Store & Apple App Store  
-- Create documentation (README, DESIGN.md, API docs)  
-- Prepare marketing materials (social media posts, banners, app previews)  
 
 **Deliverables:**  
 - Final presentation deck  
@@ -131,7 +135,7 @@ Decora aims to bridge the gap between **digital browsing and real-life home styl
 
 ---
 
-## **Phase 6 – Maintenance & Future Updates (Post-launch)**  
+## **Phase 7 – Maintenance & Future Updates (Post-launch)**  
 **Ongoing**  
 - Monitor app performance (crashes, analytics)  
 - Collect user feedback  
@@ -139,49 +143,97 @@ Decora aims to bridge the gap between **digital browsing and real-life home styl
 
 ---
 
+## **Bones Phase – Innovation & AI Features (Quiz & LLM Integration)**
+
+These advanced features will enhance personalization, engagement, and customer support:  
+
+1. **📝 Furniture Style Quiz**  
+   - A fun onboarding quiz to understand user preferences.  
+   - Generates a **style profile** (Modern, Minimalist, Scandinavian, Classic).  
+   - Recommends products & collections matching the user’s taste.  
+
+2. **🤖 AI-Powered Shopping Assistant (LLM Integration)**  
+   - In-app chatbot powered by a Large Language Model (LLM).  
+   - Users can ask natural language questions like:  
+     - *“Show me wooden coffee tables under $200.”*  
+     - *“What furniture fits in a 2x3 meter bedroom?”*  
+   - AI searches the catalog and suggests relevant items.  
+
+3. **📚 Smart FAQ & Support Bot**  
+   - LLM trained on **shipping, returns, warranties, and delivery FAQs**.  
+   - Provides instant answers 24/7.  
+   - Option to escalate to a **live support agent** if needed.    
+
+4. **🗺️ Google Maps Store Locator & Delivery Tracking**  
+     - Integrated **Google Maps** to help users:  
+     - Find **nearest Decora showrooms / partner stores**.  
+     - Track **live delivery status** of purchased items on the map.  
+     - Push notifications when the delivery is nearby.    
+---
+
 ## 🛠️ Roles & Responsibilities  
 
-- **Farha Ahmed** → Project Manager & Flutter Developer (UI/UX & Core Features)  
-  - Splash screen  
-  - Onboarding screen  
-  - Authentication (Login, Register, Google, Facebook, Forget password + verification)  
-  - Privacy Policy & Instructions  
+### **Phase 3 – Core App Development (Frontend)**  
+- **Farha** →  in-app chat, onboarding,favourites, Splash Screen, Categories Screen.  
+- **Karen** → Home screen, product details, AR preview UI (VTO).  
+- **Othman** → Cart, shared cart, privacy policy,order cancellation.  
+- **Habiba** → Search with filters/voice ,Authentication . 
+- **Abdelaziz** → Notifications, delivery estimation, stock alerts.  
+- **AbdElrahman** → Profile , best sellers section, Offers Screen.  
 
-- **Karen** → Research & Audience Analysis, Content Writer  
-  - Home screen  
-  - Product details 
-  - AR Preview screen  
+---
 
-- **Othman** → Flutter Developer (Backend Integration & Cart/Checkout)  
-  - Favourites screen  
-  - Cart screen  
-  - Shared Cart (invite via email, notification sync)  
-  - Order cancellation  
+### **Phase 4 – Backend Development & Integration**  
+- **Farha Ahmed** → Firestore for support chat 
+- **Karen** → Firestore integration for product catalog + AR data.  
+- **Othman** → Firestore for cart, shared cart, and orders.  
+- **Habiba Basel** → Firestore for user profiles, addresses, and preferences.  Firebase Auth integration (Google, Facebook, Email).  
+- **Abdelaziz** → Firebase Cloud Messaging for notifications.  
+- **AbdElrahman Taher** →Firestore for user profiles + user reviews.  
 
-- **Habiba Basel** → Designer (Posters, Branding, Complementary Visuals)  
-  - Search with filters & voice search  
-  - Multi-language support (Arabic & English)  
-  - Light & Dark modes  
-  - Save multiple addresses in user account  
+---
 
-- **Abdelaziz** → Logo Design & Visual Identity  
-  - Payment gateway integration  
-  - Notification screen (order tracking)  
-  - Delivery time estimation  
-  - Out-of-stock bar + back-in-stock notification  
+### **Phase 5 – Unit Testing & Quality Assurance**  
+- **Farha Ahmed** → Unit tests for auth & onboarding flow.  
+- **Karen** → Widget tests for home & product details.  
+- **Othman** → Integration tests for cart & checkout.  
+- **Habiba Basel** → Test multi-language support & dark/light mode.  
+- **Abdelaziz** → Test notification triggers & delivery estimates.  
+- **AbdElrahman Taher** → QA testing for profile & chat system.  
 
-- **AbdElrahman Taher** → Reviewer & Presentation Specialist  
-  - User profile screen  
-  - In-app chat with customer support  
-  - Best Seller section  
+---
+
+### **Phase 6 – Finalization & Deployment**  
+- **Farha Ahmed** → Android build + Play Store submission.  
+- **Karen** → Documentation & app descriptions for stores.  
+- **Othman** → iOS build + App Store submission.  
+- **Habiba Basel** → Demo video + screenshots for marketing.  
+- **Abdelaziz** → Visual assets for store banners.  
+- **AbdElrahman Taher** → Final presentation (slides & pitch).  
+
+---
+
+### **Phase 7 – Maintenance & Future Updates**  
+- **Farha Ahmed** → Manage bug fixes & performance monitoring.  
+- **Karen** → Collect user feedback & update content.  
+- **Othman** → Backend optimization & Firestore cost monitoring.  
+- **Habiba Basel** → UX improvements for accessibility.  
+- **Abdelaziz** → Update branding visuals for new features.  
+- **AbdElrahman Taher** → Prepare update presentations & reports.  
+
+---
+
+### **Bones Phase – Innovation & AI Features (Quiz & LLM Integration)**  
+- **Farha Ahmed** → Build quiz UI & AI assistant entry point.  
+- **Karen** → Design quiz questions & train LLM with product data.  
+- **Othman** → Integrate LLM API with Firestore catalog search.  
+- **Habiba Basel** → Multi-language support for quiz & chatbot.  
+- **Abdelaziz** → Visual identity for AI bot + quiz results screens.  
+- **AbdElrahman Taher** → Demo presentation & feature testing.  
 
 ---
 
 ## 📊 KPIs (Key Performance Indicators)  
-
-Metrics for project success:  
-
-- 📈 **User Adoption Rate** → downloads, registrations  
 - ⏱️ **Response Time** → smooth performance (<12s load time)  
 - 💡 **System Uptime** → app availability, minimal crashes  
 - 🎨 **User Satisfaction** → positive feedback on design & usability  
@@ -189,13 +241,12 @@ Metrics for project success:
 ---
 
 ## 👨‍🏫 Instructor  
-- Michael Hany 
+- Michael Hany  
 
 ---
 
 ## 📂 Project Files  
 - [📦 Google Drive](https://drive.google.com/drive/folders/1Y-9wyM-NmRRSBZkVCwYR_f3M9h6oDDDv?usp=sharing)  
-
 
 ---
 
