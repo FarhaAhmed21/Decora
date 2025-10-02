@@ -15,5 +15,5 @@ class AppLocalizationsEn extends AppLocalizations {
   String get welcome => 'Welcome to Decora';
 
   @override
-  String get changeLanguage => 'تغيير اللغة';
+  String get changeLanguage => 'Change Language';
 }

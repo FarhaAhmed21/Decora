@@ -49,7 +49,7 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 context.read<LocaleCubit>().toggleLocale();
               },
-              child: Text(l10n.changeLanguage),
+              child: Text(l10n.changeLanguage,style: TextStyle(backgroundColor:Colors.red ),),
             ),
           ],
         ),
