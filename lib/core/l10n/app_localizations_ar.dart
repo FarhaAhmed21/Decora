@@ -15,5 +15,5 @@ class AppLocalizationsAr extends AppLocalizations {
   String get welcome => 'مرحبًا بك في ديكورا';
 
   @override
-  String get changeLanguage => 'Change Language';
+  String get changeLanguage => 'تغيير اللغة';
 }
