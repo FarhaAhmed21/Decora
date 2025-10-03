@@ -1,4 +1,4 @@
-import 'package:decora/cart/pages/cart_page.dart';
+import 'package:decora/cart/pages/main_cart_page.dart';
 import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/core/l10n/local_cubit.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: const [Locale('en'), Locale('ar')],
-          home:  CartPage(),
+          home:  MainCartPage(),
         );
       },
     );

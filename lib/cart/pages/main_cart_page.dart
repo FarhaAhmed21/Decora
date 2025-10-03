@@ -1,12 +1,12 @@
 import 'package:decora/cart/widgets/cart_app_bar.dart';
 import 'package:flutter/material.dart';
 
-class CartPage extends StatelessWidget {
-  const CartPage({super.key});
+class MainCartPage extends StatelessWidget {
+  const MainCartPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController( // ✅ provides TabController to both
+    return DefaultTabController( 
       length: 2,
       child: Scaffold(
         appBar: const CartAppBar(),
