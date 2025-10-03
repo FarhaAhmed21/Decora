@@ -1,4 +1,4 @@
-import 'package:decora/cart/widgets/product_card.dart';
+import 'package:decora/src/features/cart/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 
 class MyCart extends StatelessWidget {
@@ -9,7 +9,7 @@ class MyCart extends StatelessWidget {
     return ListView.builder(
       itemCount: 10,
       itemBuilder: (context, index) {
-        return ProductCard();
+        return const ProductCard();
       },
     );
   }

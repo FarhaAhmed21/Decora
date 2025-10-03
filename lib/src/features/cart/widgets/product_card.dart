@@ -1,4 +1,7 @@
-import 'package:decora/core/util/app_font.dart';
+import 'package:decora/core/l10n/app_localizations.dart';
+import 'package:decora/core/utils/app_size.dart';
+import 'package:decora/generated/assets.dart';
+import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
@@ -11,7 +14,7 @@ class ProductCard extends StatelessWidget {
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         child: Card(
-          color: Color(0xFFF6F6F6),
+          color: AppColors.cardColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
@@ -22,16 +25,12 @@ class ProductCard extends StatelessWidget {
               children: [
                 // Product Image
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(20),
                   child: Container(
-                    width: 100,
-                    height: 100,
-                    color: Colors.grey[400],
-                    child: const Icon(
-                      Icons.image,
-                      size: 50,
-                      color: Colors.white,
-                    ),
+                    width: AppSize.width(context) * 0.27,
+                    height: AppSize.height(context) * 0.13,
+                    color: AppColors.innerCardColor,
+                    child: Image.asset(Assets.couchImage),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -42,31 +41,27 @@ class ProductCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Title + Rating
-                      Row(
+                      const Row(
                         children: [
                           Expanded(
                             child: Text(
                               "Moss Accent Sofa",
-                              style: AppFont.fontStyle(
+                              style: TextStyle(
                                 fontWeight: FontWeight.w400,
-                                fontsize: 16,
+                                fontSize: 16,
                                 color: Colors.black,
                               ),
 
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                          const Icon(
-                            Icons.star,
-                            size: 18,
-                            color: Colors.orange,
-                          ),
-                          const SizedBox(width: 4),
+                          Icon(Icons.star, size: 18, color: Colors.orange),
+                          SizedBox(width: 4),
                           Text(
                             "4.9",
-                            style: AppFont.fontStyle(
+                            style: TextStyle(
                               fontWeight: FontWeight.w400,
-                              fontsize: 12,
+                              fontSize: 12,
                               color: Colors.black,
                             ),
                           ),
@@ -78,9 +73,9 @@ class ProductCard extends StatelessWidget {
                       Wrap(
                         spacing: 6,
                         children: [
-                          _buildTag("Dining"),
-                          _buildTag("Furniture"),
-                          _buildTag("Wood"),
+                          _buildTag(AppLocalizations.of(context)!.dining),
+                          _buildTag(AppLocalizations.of(context)!.furniture),
+                          _buildTag(AppLocalizations.of(context)!.wood),
                         ],
                       ),
                       const SizedBox(height: 8),
@@ -88,11 +83,11 @@ class ProductCard extends StatelessWidget {
                       // Price + Quantity Controls
                       Row(
                         children: [
-                          Text(
+                          const Text(
                             "\$240",
-                            style: AppFont.fontStyle(
+                            style: TextStyle(
                               fontWeight: FontWeight.w400,
-                              fontsize: 16,
+                              fontSize: 16,
                               color: Colors.black,
                             ),
                           ),
@@ -101,8 +96,8 @@ class ProductCard extends StatelessWidget {
                           Row(
                             children: [
                               Container(
-                                width: 40,
-                                height: 40,
+                                width: AppSize.height(context)*0.047,
+                                height: AppSize.height(context)*0.047,
                                 decoration: BoxDecoration(
                                   color: Colors.grey[300],
                                   borderRadius: BorderRadius.circular(8),
@@ -113,21 +108,21 @@ class ProductCard extends StatelessWidget {
                                   iconSize: 18,
                                 ),
                               ),
-                              SizedBox(width: 10),
-                              Text(
+                              const SizedBox(width: 10),
+                              const Text(
                                 "1",
-                                style: AppFont.fontStyle(
+                                style: TextStyle(
                                   fontWeight: FontWeight.w500,
-                                  fontsize: 16,
+                                  fontSize: 16,
                                   color: Colors.black,
                                 ),
                               ),
-                              SizedBox(width: 10),
+                              const SizedBox(width: 10),
                               Container(
-                                width: 40,
-                                height: 40,
+                                width: AppSize.height(context)*0.047,
+                                height: AppSize.height(context)*0.047,
                                 decoration: BoxDecoration(
-                                  color: Color(0xFF446F4D),
+                                  color: AppColors.primary,
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: IconButton(
@@ -154,7 +149,7 @@ class ProductCard extends StatelessWidget {
     );
   }
 
-  Widget _buildTag(String label) {
+  Widget _buildTag(String tag) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
@@ -162,10 +157,11 @@ class ProductCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       child: Text(
-        label,
-        style: AppFont.fontStyle(
+        tag,
+
+        style: const TextStyle(
           fontWeight: FontWeight.w400,
-          fontsize: 12,
+          fontSize: 12,
           color: Colors.green,
         ),
       ),

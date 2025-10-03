@@ -36,4 +36,31 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get our_Categories => 'فئاتنا';
+
+  @override
+  String get cart => 'سلة تسوق';
+
+  @override
+  String get my_cart => 'سلة التسوق الخاصة بي';
+
+  @override
+  String get shared_cart => 'عربة التسوق المشتركة';
+
+  @override
+  String get dining => 'تناول الطعام';
+
+  @override
+  String get furniture => 'أثاث';
+
+  @override
+  String get wood => 'خشب';
+
+  @override
+  String get owners => 'المالكين';
+
+  @override
+  String get view_all => 'عرض الكل';
+
+  @override
+  String get checkout => 'الدفع';
 }

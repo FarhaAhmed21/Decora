@@ -1,5 +1,6 @@
-import 'package:decora/cart/widgets/product_card.dart';
-import 'package:decora/core/util/app_font.dart';
+import 'package:decora/core/l10n/app_localizations.dart';
+import 'package:decora/core/utils/app_size.dart';
+import 'package:decora/src/features/cart/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_overlap/flutter_image_overlap.dart';
 
@@ -20,18 +21,18 @@ class SharedCart extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    "Owners: ",
-                    style: AppFont.fontStyle(
+                    "${AppLocalizations.of(context)!.owners}: ",
+                    style: const TextStyle(
                       fontWeight: FontWeight.w500,
-                      fontsize: 16,
+                      fontSize: 16,
                       color: Colors.black,
                     ),
                   ),
                   const SizedBox(width: 8),
                   SizedBox(
-                    width: 200,
-                    child: OverlappingImages(
-                      images: const [
+                    width: AppSize.width(context) * 0.3,
+                    child: const OverlappingImages(
+                      images: [
                         NetworkImage(
                           'https://tse4.mm.bing.net/th/id/OIP.PVLm8FPquyPaETrn3OHvuwHaEK?cb=12',
                         ),
@@ -50,10 +51,10 @@ class SharedCart extends StatelessWidget {
                   TextButton(
                     onPressed: () {},
                     child: Text(
-                      "View all",
-                      style: AppFont.fontStyle(
+                      AppLocalizations.of(context)!.view_all,
+                      style: const TextStyle(
                         fontWeight: FontWeight.w500,
-                        fontsize: 14,
+                        fontSize: 14,
                         color: Colors.black,
                       ),
                     ),
@@ -61,7 +62,6 @@ class SharedCart extends StatelessWidget {
                 ],
               ),
             ),
-
 
             // 🔹 Product List (inside scroll view)
             ListView.builder(

@@ -1,3 +1,5 @@
+import 'package:decora/core/l10n/app_localizations.dart';
+import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -29,18 +31,16 @@ class _CartAppBarState extends State<CartAppBar> {
   Widget build(BuildContext context) {
     return AppBar(
       title: Text(
-        "Cart",
-        style: GoogleFonts.montserrat(
-          fontSize: 18,
-          fontWeight: FontWeight.w500,
-        ),
+        AppLocalizations.of(context)!.cart,
+        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
       ),
       centerTitle: true,
       leading: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.only(left: 15.0, top: 8),
         child: Container(
+          height: 30,
           decoration: BoxDecoration(
-            color: Colors.grey[200],
+            color: Colors.grey[300],
             borderRadius: BorderRadius.circular(8),
           ),
           child: IconButton(
@@ -57,9 +57,8 @@ class _CartAppBarState extends State<CartAppBar> {
             child: _currentIndex == 1
                 ? CircleAvatar(
                     radius: 20,
-                    backgroundColor: Color(0xFF446F4D),
+                    backgroundColor: AppColors.primary,
                     child: IconButton(
-                      key: const ValueKey('addPerson'),
                       icon: const Icon(
                         Icons.person_add_alt,
                         color: Colors.white,
@@ -79,7 +78,7 @@ class _CartAppBarState extends State<CartAppBar> {
         tabs: [
           Tab(
             child: Text(
-              "My Cart",
+              AppLocalizations.of(context)!.my_cart,
               style: GoogleFonts.montserrat(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
@@ -88,7 +87,7 @@ class _CartAppBarState extends State<CartAppBar> {
           ),
           Tab(
             child: Text(
-              "Shared Cart",
+              AppLocalizations.of(context)!.shared_cart,
               style: GoogleFonts.montserrat(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,

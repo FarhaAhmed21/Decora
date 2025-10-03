@@ -151,6 +151,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Our Categories'**
   String get our_Categories;
+
+  /// No description provided for @cart.
+  ///
+  /// In en, this message translates to:
+  /// **'Cart'**
+  String get cart;
+
+  /// No description provided for @my_cart.
+  ///
+  /// In en, this message translates to:
+  /// **'My Cart'**
+  String get my_cart;
+
+  /// No description provided for @shared_cart.
+  ///
+  /// In en, this message translates to:
+  /// **'Shared Cart'**
+  String get shared_cart;
+
+  /// No description provided for @dining.
+  ///
+  /// In en, this message translates to:
+  /// **'Dining'**
+  String get dining;
+
+  /// No description provided for @furniture.
+  ///
+  /// In en, this message translates to:
+  /// **'Furniture'**
+  String get furniture;
+
+  /// No description provided for @wood.
+  ///
+  /// In en, this message translates to:
+  /// **'Wood'**
+  String get wood;
+
+  /// No description provided for @owners.
+  ///
+  /// In en, this message translates to:
+  /// **'Owners'**
+  String get owners;
+
+  /// No description provided for @view_all.
+  ///
+  /// In en, this message translates to:
+  /// **'View all'**
+  String get view_all;
+
+  /// No description provided for @checkout.
+  ///
+  /// In en, this message translates to:
+  /// **'Checkout'**
+  String get checkout;
 }
 
 class _AppLocalizationsDelegate
