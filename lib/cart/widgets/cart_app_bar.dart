@@ -28,15 +28,11 @@ class _CartAppBarState extends State<CartAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 200),
-        child: Text(
-          _currentIndex == 0 ? "My Cart" : "Shared Cart",
-          key: ValueKey(_currentIndex),
-          style: GoogleFonts.montserrat(
-            fontSize: 18,
-            fontWeight: FontWeight.w500,
-          ),
+      title: Text(
+        "Cart",
+        style: GoogleFonts.montserrat(
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
         ),
       ),
       centerTitle: true,
@@ -48,21 +44,31 @@ class _CartAppBarState extends State<CartAppBar> {
             borderRadius: BorderRadius.circular(8),
           ),
           child: IconButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () {},
             icon: const Icon(Icons.arrow_back_ios_new),
           ),
         ),
       ),
       actions: [
-        AnimatedSwitcher(
-          duration: const Duration(milliseconds: 200),
-          child: _currentIndex == 1
-              ? IconButton(
-                  key: const ValueKey('addPerson'),
-                  icon: const Icon(Icons.person_add),
-                  onPressed: () {},
-                )
-              : const SizedBox.shrink(key: ValueKey('empty')),
+        Padding(
+          padding: const EdgeInsets.only(right: 8.0),
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 200),
+            child: _currentIndex == 1
+                ? CircleAvatar(
+                    radius: 20,
+                    backgroundColor: Color(0xFF446F4D),
+                    child: IconButton(
+                      key: const ValueKey('addPerson'),
+                      icon: const Icon(
+                        Icons.person_add_alt,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {},
+                    ),
+                  )
+                : const SizedBox.shrink(key: ValueKey('empty')),
+          ),
         ),
       ],
       bottom: TabBar(

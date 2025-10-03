@@ -1,3 +1,4 @@
+import 'package:decora/cart/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 
 class MyCart extends StatelessWidget {
@@ -5,6 +6,11 @@ class MyCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("MyCart"));
+    return ListView.builder(
+      itemCount: 10,
+      itemBuilder: (context, index) {
+        return ProductCard();
+      },
+    );
   }
 }

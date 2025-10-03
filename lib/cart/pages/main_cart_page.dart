@@ -1,3 +1,5 @@
+import 'package:decora/cart/pages/my_cart.dart';
+import 'package:decora/cart/pages/shared_cart.dart';
 import 'package:decora/cart/widgets/cart_app_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -6,16 +8,11 @@ class MainCartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController( 
+    return DefaultTabController(
       length: 2,
       child: Scaffold(
         appBar: const CartAppBar(),
-        body: const TabBarView(
-          children: [
-            Center(child: Text("My Cart Content")),
-            Center(child: Text("Shared Cart Content")),
-          ],
-        ),
+        body: const TabBarView(children: [MyCart(), SharedCart()]),
       ),
     );
   }
