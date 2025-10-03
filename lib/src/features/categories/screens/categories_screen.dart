@@ -1,3 +1,4 @@
+import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/src/shared/components/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:decora/src/features/categories/models/category_model.dart';
@@ -13,7 +14,7 @@ class CategoriesScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            const CustomAppBar(title: "Our Categories"),
+            CustomAppBar(title: AppLocalizations.of(context)!.our_Categories),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
