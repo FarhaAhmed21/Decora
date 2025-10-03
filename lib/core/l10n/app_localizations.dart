@@ -115,6 +115,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Change Language'**
   String get changeLanguage;
+
+  /// No description provided for @location.
+  ///
+  /// In en, this message translates to:
+  /// **'Location'**
+  String get location;
+
+  /// No description provided for @searchFurniture.
+  ///
+  /// In en, this message translates to:
+  /// **'Search Furniture'**
+  String get searchFurniture;
+
+  /// No description provided for @cairoEgypt.
+  ///
+  /// In en, this message translates to:
+  /// **'Cairo, Egypt'**
+  String get cairoEgypt;
+
+  /// No description provided for @product_added_to_favourite_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Product added to Favourite successfully'**
+  String get product_added_to_favourite_successfully;
+
+  /// No description provided for @product_added_to_Cart_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Product added to Cart successfully'**
+  String get product_added_to_Cart_successfully;
+
+  /// No description provided for @our_Categories.
+  ///
+  /// In en, this message translates to:
+  /// **'Our Categories'**
+  String get our_Categories;
 }
 
 class _AppLocalizationsDelegate

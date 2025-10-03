@@ -2,5 +2,11 @@
     "@@locale": "ar",
     "helloWorld": "مرحبا بالعالم",
     "welcome": "مرحبًا بك في ديكورا",
-    "changeLanguage": "تغيير اللغة"
+    "changeLanguage": "تغيير اللغة",
+    "location": "الموقع",
+    "searchFurniture": "ابحث عن الأثاث",
+    "cairoEgypt": "مصر , القاهرة",
+    "product_added_to_favourite_successfully": "تمت إضافة المنتج إلى المفضلة بنجاح",
+    "product_added_to_Cart_successfully": "تمت إضافة المنتج إلى السلة بنجاح",
+    "our_Categories": "فئاتنا"
 }

@@ -16,4 +16,24 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get changeLanguage => 'تغيير اللغة';
+
+  @override
+  String get location => 'الموقع';
+
+  @override
+  String get searchFurniture => 'ابحث عن الأثاث';
+
+  @override
+  String get cairoEgypt => 'مصر , القاهرة';
+
+  @override
+  String get product_added_to_favourite_successfully =>
+      'تمت إضافة المنتج إلى المفضلة بنجاح';
+
+  @override
+  String get product_added_to_Cart_successfully =>
+      'تمت إضافة المنتج إلى السلة بنجاح';
+
+  @override
+  String get our_Categories => 'فئاتنا';
 }
