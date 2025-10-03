@@ -8,4 +8,6 @@ abstract class AppColors {
   static const secondaryText = Color(0xFF7C7B7B);
   static const orange = Color(0xFFEB9136);
   static const background = Color(0xFFFFFFFF);
+  static const innerCardColor = Color(0xFFEEF3EF);
+  static const productCardColor = Color(0xffEEF3EF);
 }

@@ -44,7 +44,7 @@ class CustomAppBar extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: 48), // balance right side
+          const SizedBox(width: 48),
         ],
       ),
     );

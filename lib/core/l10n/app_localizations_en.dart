@@ -16,4 +16,24 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get changeLanguage => 'Change Language';
+
+  @override
+  String get location => 'Location';
+
+  @override
+  String get searchFurniture => 'Search Furniture';
+
+  @override
+  String get cairoEgypt => 'Cairo, Egypt';
+
+  @override
+  String get product_added_to_favourite_successfully =>
+      'Product added to Favourite successfully';
+
+  @override
+  String get product_added_to_Cart_successfully =>
+      'Product added to Cart successfully';
+
+  @override
+  String get our_Categories => 'Our Categories';
 }
