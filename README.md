@@ -181,7 +181,7 @@ These advanced features will enhance personalization, engagement, and customer s
 ---
 
 ### **Phase 4 – Backend Development & Integration**  
-- **Farha Ahmed** → Firestore for support chat 
+- **Farha Ahmed** → Apply Dark mode in all Screens ,Firestore for support chat , Integrate with paymob.
 - **Karen** → Firestore integration for product catalog + AR data .  
 - **Othman** → Firestore for cart, shared cart .  
 - **Habiba Basel** → Firestore for user profiles, addresses, and preferences.  Firebase Auth integration (Google, Facebook, Email).  
