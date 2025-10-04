@@ -15,4 +15,7 @@ class Assets {
   static String shoppingBagIcon = "assets/icons/shopping-bag.png";
   static String searchIcon = "assets/icons/search-icon.png";
   static String filterIcon = "assets/icons/fliter-icon.png";
+  static String micIcon = "assets/icons/mic-icon.png";
+  static String plusIcon = "assets/icons/plus-sign-icon.png";
+  static String sentIcon = "assets/icons/sent-icon.png";
 }
