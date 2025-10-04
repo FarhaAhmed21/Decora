@@ -37,6 +37,7 @@ dependencies:
   flutter_bloc: ^8.1.6   # (latest stable)
   flutter_localizations:
     sdk: flutter
+  lottie: ^3.3.2
 
 dev_dependencies:
   flutter_test:
@@ -65,6 +66,8 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
+    - assets/images/
+    - assets/animations/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
