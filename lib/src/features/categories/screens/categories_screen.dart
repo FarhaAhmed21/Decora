@@ -36,8 +36,8 @@ class CategoriesScreen extends StatelessWidget {
 Widget buildGridView({required List<CategoryModel> categories}) {
   return GridView.count(
     crossAxisCount: 2,
-    childAspectRatio: 0.97,
-    mainAxisSpacing: 8,
+    childAspectRatio: 0.88,
+    mainAxisSpacing: 15,
     crossAxisSpacing: 15,
     children: List.generate(categories.length, (index) {
       return CategoryCard(

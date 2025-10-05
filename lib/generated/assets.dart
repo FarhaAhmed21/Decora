@@ -18,4 +18,5 @@ class Assets {
   static String micIcon = "assets/icons/mic-icon.png";
   static String plusIcon = "assets/icons/plus-sign-icon.png";
   static String sentIcon = "assets/icons/sent-icon.png";
+  static String settingsIcon = "assets/icons/settings-icon.png";
 }

@@ -1,5 +1,6 @@
 import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/core/l10n/local_cubit.dart';
+import 'package:decora/src/features/categories/screens/categories_screen.dart';
 import 'package:decora/src/features/favourites/screens/favourite_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
     return BlocBuilder<LocaleCubit, Locale>(
       builder: (context, locale) {
         return MaterialApp(
+          debugShowCheckedModeBanner: false,
           locale: locale,
           localizationsDelegates: const [
             AppLocalizations.delegate,
@@ -24,7 +26,10 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: const [Locale('en'), Locale('ar')],
-          theme: ThemeData(fontFamily: 'Montserratt'),
+          theme: ThemeData(
+            fontFamily: 'Montserratt',
+            scaffoldBackgroundColor: Colors.white,
+          ),
           home: const FavouriteScreen(),
         );
       },
