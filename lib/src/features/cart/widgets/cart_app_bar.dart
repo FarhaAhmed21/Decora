@@ -15,26 +15,44 @@ class CartAppBar extends StatefulWidget implements PreferredSizeWidget {
 
 class _CartAppBarState extends State<CartAppBar> {
   int _currentIndex = 0;
+  TabController? _controller;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final controller = DefaultTabController.of(context);
-    controller.addListener(() {
-      if (!controller.indexIsChanging) {
-        setState(() => _currentIndex = controller.index);
-      }
-    });
+    _controller ??= DefaultTabController.of(context)
+      ..addListener(_handleTabChange);
+  }
+
+  void _handleTabChange() {
+    if (!_controller!.indexIsChanging) {
+      setState(() => _currentIndex = _controller!.index);
+    }
+  }
+
+  @override
+  void dispose() {
+   
+    _controller?.removeListener(_handleTabChange);
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!; 
+    final tabTextStyle = GoogleFonts.montserrat(
+      fontSize: 18,
+      fontWeight: FontWeight.w500,
+    );
+
     return AppBar(
       title: Text(
-        AppLocalizations.of(context)!.cart,
+        l10n.cart,
         style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
       ),
       centerTitle: true,
+
+      // Leading back button
       leading: Padding(
         padding: const EdgeInsets.only(left: 15.0, top: 8),
         child: Container(
@@ -49,52 +67,47 @@ class _CartAppBarState extends State<CartAppBar> {
           ),
         ),
       ),
+
+      //  Actions
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: 8.0),
           child: AnimatedSwitcher(
             duration: const Duration(milliseconds: 200),
             child: _currentIndex == 1
-                ? CircleAvatar(
-                    radius: 20,
-                    backgroundColor: AppColors.primary,
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.person_add_alt,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {},
-                    ),
-                  )
+                ? const _AddPersonButton(key: ValueKey('add'))
                 : const SizedBox.shrink(key: ValueKey('empty')),
           ),
         ),
       ],
+
+      //  TabBar
       bottom: TabBar(
-        indicatorColor: const Color(0xFF8A5A39), // brown
+        indicatorColor: const Color(0xFF8A5A39), 
         labelColor: Colors.black,
         indicatorSize: TabBarIndicatorSize.tab,
         indicatorWeight: 3,
         tabs: [
-          Tab(
-            child: Text(
-              AppLocalizations.of(context)!.my_cart,
-              style: GoogleFonts.montserrat(
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-          Tab(
-            child: Text(
-              AppLocalizations.of(context)!.shared_cart,
-              style: GoogleFonts.montserrat(
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
+          Tab(child: Text(l10n.my_cart, style: tabTextStyle)),
+          Tab(child: Text(l10n.shared_cart, style: tabTextStyle)),
         ],
+      ),
+    );
+  }
+}
+
+
+class _AddPersonButton extends StatelessWidget {
+  const _AddPersonButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return CircleAvatar(
+      radius: 20,
+      backgroundColor: AppColors.primary,
+      child: IconButton(
+        icon: const Icon(Icons.person_add_alt, color: Colors.white),
+        onPressed: () {},
       ),
     );
   }
