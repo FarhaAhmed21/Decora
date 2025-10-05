@@ -14,9 +14,8 @@ class TopLocationBar extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsets.only(left: width * 0.02),
-      child: Container(
+      child: SizedBox(
         height: height * 0.04,
-        color: Colors.white,
         child: ListTile(
           title: Text(
             AppLocalizations.of(context)!.location,
@@ -32,7 +31,7 @@ class TopLocationBar extends StatelessWidget {
                 Assets.locationIcon,
                 width: width * 0.045,
                 height: width * 0.045,
-                color: AppColors.mainText,
+                color: Colors.black,
               ),
               SizedBox(width: width * 0.015),
               Text(
@@ -45,21 +44,45 @@ class TopLocationBar extends StatelessWidget {
               ),
             ],
           ),
-          trailing: InkWell(
-            borderRadius: BorderRadius.circular(width * 0.03),
-            onTap: () {},
-            child: Container(
-              padding: EdgeInsets.all(width * 0.02),
-              decoration: BoxDecoration(
-                color: AppColors.cardColor,
-                borderRadius: BorderRadius.circular(width * 0.06),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              InkWell(
+                borderRadius: BorderRadius.circular(width * 0.03),
+                onTap: () {},
+                child: Container(
+                  padding: const EdgeInsets.all(6),
+                  width: 40,
+                  decoration: BoxDecoration(
+                    color: AppColors.cardColor,
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  child: Image.asset(
+                    Assets.settingsIcon,
+                    color: Colors.black,
+                    width: 25,
+                  ),
+                ),
               ),
-              child: Image.asset(
-                Assets.notificationIcon,
-                width: width * 0.07,
-                height: width * 0.07,
+              const SizedBox(width: 5),
+              InkWell(
+                borderRadius: BorderRadius.circular(width * 0.03),
+                onTap: () {},
+                child: Container(
+                  padding: const EdgeInsets.all(6),
+                  width: 40,
+                  decoration: BoxDecoration(
+                    color: AppColors.cardColor,
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  child: Image.asset(
+                    Assets.notificationIcon,
+                    color: Colors.black,
+                    width: 25,
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ),

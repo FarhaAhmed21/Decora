@@ -8,12 +8,12 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40,
+      height: 72,
       color: Colors.white,
       child: Row(
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 24),
+            padding: const EdgeInsets.only(left: 20),
             child: InkWell(
               borderRadius: BorderRadius.circular(12),
               onTap: () => Navigator.pop(context),
@@ -38,7 +38,7 @@ class CustomAppBar extends StatelessWidget {
                 title,
                 style: const TextStyle(
                   color: Colors.black,
-                  fontWeight: FontWeight.w400,
+                  fontWeight: FontWeight.w600,
                   fontSize: 18,
                 ),
               ),

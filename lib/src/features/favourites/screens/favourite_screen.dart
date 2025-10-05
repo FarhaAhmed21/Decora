@@ -18,22 +18,26 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
         child: Column(
           children: [
             const TopLocationBar(),
-            const SizedBox(height: 33),
+            const SizedBox(height: 35),
             const CustomSearchBar(),
-            SizedBox(
-              height: 650,
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  return GridView.count(
-                    crossAxisCount: 2,
-                    childAspectRatio: 0.70,
-                    mainAxisSpacing: 8,
-                    crossAxisSpacing: 8,
-                    children: List.generate(8, (index) {
-                      return const CustomCard();
-                    }),
-                  );
-                },
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: SizedBox(
+                height: 650,
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    return GridView.count(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.70,
+                      mainAxisSpacing: 8,
+                      crossAxisSpacing: 8,
+                      children: List.generate(8, (index) {
+                        return const CustomCard();
+                      }),
+                    );
+                  },
+                ),
               ),
             ),
           ],
