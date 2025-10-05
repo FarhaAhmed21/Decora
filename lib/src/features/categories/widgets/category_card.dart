@@ -15,7 +15,11 @@ class CategoryCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Column(
-        children: [Image.asset(img), const SizedBox(height: 8), Text(title)],
+        children: [
+          Image.asset(img),
+          const SizedBox(height: 8),
+          Text(title, style: const TextStyle(fontWeight: FontWeight.w600)),
+        ],
       ),
     );
   }

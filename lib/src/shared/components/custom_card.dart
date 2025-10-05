@@ -20,7 +20,7 @@ class _CustomCardState extends State<CustomCard> {
       color: AppColors.cardColor,
       child: Container(
         width: 200,
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.symmetric(horizontal: 12),
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
