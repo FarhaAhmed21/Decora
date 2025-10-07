@@ -1,7 +1,7 @@
 import 'package:decora/core/l10n/app_localizations.dart';
+import 'package:decora/src/features/cart/widgets/invitaion_dialog.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CartAppBar extends StatefulWidget implements PreferredSizeWidget {
   const CartAppBar({super.key});
@@ -32,15 +32,14 @@ class _CartAppBarState extends State<CartAppBar> {
 
   @override
   void dispose() {
-   
     _controller?.removeListener(_handleTabChange);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!; 
-    final tabTextStyle = GoogleFonts.montserrat(
+    final l10n = AppLocalizations.of(context)!;
+    final tabTextStyle = const TextStyle(
       fontSize: 18,
       fontWeight: FontWeight.w500,
     );
@@ -72,18 +71,19 @@ class _CartAppBarState extends State<CartAppBar> {
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: 8.0),
+
           child: AnimatedSwitcher(
             duration: const Duration(milliseconds: 200),
             child: _currentIndex == 1
                 ? const _AddPersonButton(key: ValueKey('add'))
-                : const SizedBox.shrink(key: ValueKey('empty')),
+                : const SizedBox.shrink(),
           ),
         ),
       ],
 
       //  TabBar
       bottom: TabBar(
-        indicatorColor: const Color(0xFF8A5A39), 
+        indicatorColor: const Color(0xFF8A5A39),
         labelColor: Colors.black,
         indicatorSize: TabBarIndicatorSize.tab,
         indicatorWeight: 3,
@@ -96,7 +96,6 @@ class _CartAppBarState extends State<CartAppBar> {
   }
 }
 
-
 class _AddPersonButton extends StatelessWidget {
   const _AddPersonButton({super.key});
 
@@ -107,7 +106,12 @@ class _AddPersonButton extends StatelessWidget {
       backgroundColor: AppColors.primary,
       child: IconButton(
         icon: const Icon(Icons.person_add_alt, color: Colors.white),
-        onPressed: () {},
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (context) => const InvitationDialog(),
+          );
+        },
       ),
     );
   }

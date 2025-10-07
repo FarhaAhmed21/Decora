@@ -63,4 +63,37 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get checkout => 'الدفع';
+
+  @override
+  String get promo_code => 'هل لديك رمز ترويجي؟';
+
+  @override
+  String get avilable => 'متاح';
+
+  @override
+  String get payment_summary => 'ملخص الدفع';
+
+  @override
+  String get sub_total => 'المجموع الفرعي';
+
+  @override
+  String get taxes => 'الضرائب';
+
+  @override
+  String get discount => 'تخفيض';
+
+  @override
+  String get total => 'إجمالي';
+
+  @override
+  String get pay_now => 'ادفع الأن';
+
+  @override
+  String get invitation => 'دعوه';
+
+  @override
+  String get enter_user_name => 'ادخل اسم المستخدم';
+
+  @override
+  String get invite => 'أدعو';
 }

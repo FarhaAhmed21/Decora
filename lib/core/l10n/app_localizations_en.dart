@@ -63,4 +63,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get checkout => 'Checkout';
+
+  @override
+  String get promo_code => 'Have a Promo Code?';
+
+  @override
+  String get avilable => 'Avilable';
+
+  @override
+  String get payment_summary => 'Payment Summary';
+
+  @override
+  String get sub_total => 'Sub total';
+
+  @override
+  String get taxes => 'Taxes';
+
+  @override
+  String get discount => 'Discount';
+
+  @override
+  String get total => 'Total';
+
+  @override
+  String get pay_now => 'Pay Now';
+
+  @override
+  String get invitation => 'Invitation';
+
+  @override
+  String get enter_user_name => 'Enter User Name';
+
+  @override
+  String get invite => 'Invite';
 }

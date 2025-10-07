@@ -17,6 +17,17 @@
     "wood":"Wood",
     "owners":"Owners",
     "view_all":"View all", 
-    "checkout":"Checkout"   
+    "checkout":"Checkout",  
+    "promo_code":"Have a Promo Code?",
+    "avilable":"Avilable",
+    "payment_summary":"Payment Summary",
+    "sub_total":"Sub total",
+    "taxes":"Taxes",
+    "discount":"Discount",
+    "total": "Total",
+    "pay_now":"Pay Now",
+    "invitation":"Invitation",
+    "enter_user_name":"Enter User Name",
+    "invite":"Invite"
 
 }

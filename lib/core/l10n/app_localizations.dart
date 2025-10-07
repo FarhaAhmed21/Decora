@@ -205,6 +205,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Checkout'**
   String get checkout;
+
+  /// No description provided for @promo_code.
+  ///
+  /// In en, this message translates to:
+  /// **'Have a Promo Code?'**
+  String get promo_code;
+
+  /// No description provided for @avilable.
+  ///
+  /// In en, this message translates to:
+  /// **'Avilable'**
+  String get avilable;
+
+  /// No description provided for @payment_summary.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Summary'**
+  String get payment_summary;
+
+  /// No description provided for @sub_total.
+  ///
+  /// In en, this message translates to:
+  /// **'Sub total'**
+  String get sub_total;
+
+  /// No description provided for @taxes.
+  ///
+  /// In en, this message translates to:
+  /// **'Taxes'**
+  String get taxes;
+
+  /// No description provided for @discount.
+  ///
+  /// In en, this message translates to:
+  /// **'Discount'**
+  String get discount;
+
+  /// No description provided for @total.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get total;
+
+  /// No description provided for @pay_now.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay Now'**
+  String get pay_now;
+
+  /// No description provided for @invitation.
+  ///
+  /// In en, this message translates to:
+  /// **'Invitation'**
+  String get invitation;
+
+  /// No description provided for @enter_user_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter User Name'**
+  String get enter_user_name;
+
+  /// No description provided for @invite.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite'**
+  String get invite;
 }
 
 class _AppLocalizationsDelegate

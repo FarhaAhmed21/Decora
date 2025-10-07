@@ -17,5 +17,16 @@
     "wood":"خشب",
     "owners":"المالكين",
     "view_all":"عرض الكل",
-    "checkout":"الدفع"
+    "checkout":"الدفع",
+    "promo_code":"هل لديك رمز ترويجي؟",
+    "avilable":"متاح",
+    "payment_summary":"ملخص الدفع",
+    "sub_total":"المجموع الفرعي",
+    "taxes":"الضرائب",
+    "discount":"تخفيض",
+    "total":"إجمالي",
+    "pay_now":"ادفع الأن",
+    "invitation":"دعوه",
+    "enter_user_name":"ادخل اسم المستخدم",
+    "invite":"أدعو"
 }
