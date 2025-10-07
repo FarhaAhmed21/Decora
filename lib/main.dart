@@ -1,12 +1,26 @@
 import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/core/l10n/local_cubit.dart';
+<<<<<<< HEAD
 import 'package:decora/src/features/cart/pages/main_cart_page.dart';
+=======
+import 'package:decora/src/features/splash/cubit/splash_cubit.dart';
+import 'package:decora/src/features/splash/screens/splash_screen.dart';
+import 'package:decora/src/shared/theme/app_colors.dart';
+>>>>>>> origin/develop
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
-  runApp(BlocProvider(create: (_) => LocaleCubit(), child: const MyApp()));
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => LocaleCubit()),
+        BlocProvider(create: (_) => SplashCubit()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -25,8 +39,16 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: const [Locale('en'), Locale('ar')],
+<<<<<<< HEAD
           theme: ThemeData(fontFamily: 'Montserratt'),
           home: const MainCartPage(),
+=======
+          theme: ThemeData(
+            fontFamily: 'Montserratt',
+            scaffoldBackgroundColor: AppColors.background,
+          ),
+          home: const SplashScreen(),
+>>>>>>> origin/develop
         );
       },
     );

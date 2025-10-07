@@ -16,20 +16,14 @@ class CategoriesScreen extends StatelessWidget {
           children: [
             CustomAppBar(title: AppLocalizations.of(context)!.our_Categories),
             Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 650,
-                    child: LayoutBuilder(
-                      builder: (context, constraints) {
-                        return buildGridView(
-                          categories: CategoriyRepo.categories,
-                        );
-                      },
-                    ),
-                  ),
-                ],
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+              child: SizedBox(
+                height: 650,
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    return buildGridView(categories: CategoriyRepo.categories);
+                  },
+                ),
               ),
             ),
           ],
@@ -42,9 +36,9 @@ class CategoriesScreen extends StatelessWidget {
 Widget buildGridView({required List<CategoryModel> categories}) {
   return GridView.count(
     crossAxisCount: 2,
-    childAspectRatio: 0.97,
-    mainAxisSpacing: 8,
-    crossAxisSpacing: 8,
+    childAspectRatio: 0.88,
+    mainAxisSpacing: 15,
+    crossAxisSpacing: 15,
     children: List.generate(categories.length, (index) {
       return CategoryCard(
         title: categories[index].name,

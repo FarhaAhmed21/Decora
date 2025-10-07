@@ -16,21 +16,23 @@ class _CustomCardState extends State<CustomCard> {
   Widget build(BuildContext context) {
     return Card(
       elevation: 0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       color: AppColors.cardColor,
       child: Container(
         width: 200,
         padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Stack(
               children: [
                 Container(
-                  color: AppColors.productCardColor,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: AppColors.productCardColor,
+                  ),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
                     child: Image.asset(
                       Assets.luxeSofa,
                       height: 140,
@@ -84,20 +86,19 @@ class _CustomCardState extends State<CustomCard> {
                 ),
               ],
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 8),
 
             // Title
             const Text(
               "Olive Luxe Sofa",
               style: TextStyle(
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w500,
                 fontSize: 16,
                 color: AppColors.mainText,
               ),
             ),
 
-            const SizedBox(height: 6),
-
+            //const SizedBox(height: 1),
             Row(
               children: [
                 Image.asset(Assets.starIcon, width: 14, height: 14),
@@ -120,9 +121,9 @@ class _CustomCardState extends State<CustomCard> {
                 const Text(
                   "\$250",
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
                     fontSize: 18,
                     color: AppColors.mainText,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
                 GestureDetector(
@@ -144,13 +145,19 @@ class _CustomCardState extends State<CustomCard> {
                       ),
                     );
                   },
-                  child: CircleAvatar(
-                    backgroundColor: AppColors.primary,
+                  child: Container(
+                    width: 43,
+                    height: 40,
+                    padding: const EdgeInsets.all(11.03),
+                    decoration: BoxDecoration(
+                      color: AppColors.primary,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                     child: Image.asset(
                       Assets.shoppingBagIcon,
-                      color: AppColors.cardColor,
-                      width: 20,
-                      height: 20,
+                      color: Colors.white,
+                      width: 30,
+                      height: 30,
                     ),
                   ),
                 ),
