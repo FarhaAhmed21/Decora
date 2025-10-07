@@ -1,3 +1,4 @@
+import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -20,7 +21,7 @@ class CustomAppBar extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(8.89),
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade200,
+                  color: AppColors.cardColor,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: const Icon(
