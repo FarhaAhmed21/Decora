@@ -10,7 +10,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: 'Profile'),
-      body:  const ProfileBody(name: "Abdelrahman Taher",email: "abdolrahman.taher",profileImagepath: "assets/images/ss.png",),
+      body:  const ProfileBody(name: "Abdelrahman Taher",email: "abdolrahman.taher",profileImagepath: "assets/images/ss.jpg",),
       bottomNavigationBar: CustomBottomNavBar(
         selectedIndex: 3, // Assuming 'Profile' is the 4th item
         onItemTapped: (index) {
@@ -21,7 +21,7 @@ class ProfileScreen extends StatelessWidget {
         onPressed: () {},
         backgroundColor: AppColors.primaryGreen,
         shape: const CircleBorder(),
-        child: Image.asset('assets/icons/VTO.png', height: 24, width: 24, color: Colors.white), // أيقونة الكرسي
+        child: Image.asset('assets/icons/VTO.png', height: 24, width: 24, color: Colors.white), 
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
