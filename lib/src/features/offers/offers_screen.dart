@@ -21,9 +21,9 @@ class OffersScreen extends StatelessWidget {
             const CustomSearchBar(),
             Expanded(child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 11,
-                crossAxisSpacing: 12,
+                 crossAxisCount: 2,
+                mainAxisSpacing: 14,
+                crossAxisSpacing: 16,
                 childAspectRatio: 0.6,
               ),
               itemCount: 10, 

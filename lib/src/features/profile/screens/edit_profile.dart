@@ -118,9 +118,7 @@ class EditProfileUI extends StatelessWidget {
 
   Widget _buildField(String label, String hint) {
 
-    if(label=="Location"){
-
-    }
+   
     return Padding(
       padding: const EdgeInsets.only(bottom: 15),
       child: Column(
