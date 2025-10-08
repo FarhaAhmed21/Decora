@@ -9,7 +9,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: 'Profile'),
+      backgroundColor: AppColors.background,
       body:  const ProfileBody(name: "Abdelrahman Taher",email: "abdolrahman.taher",profileImagepath: "assets/images/ss.jpg",),
       bottomNavigationBar: CustomBottomNavBar(
         selectedIndex: 3, // Assuming 'Profile' is the 4th item
@@ -43,42 +43,50 @@ class ProfileBody extends StatelessWidget {
       'Help & Support',
       'Logout',
     ];
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          const SizedBox(height: 30),
-          CircleAvatar(
-            radius: 60,
-            backgroundImage: AssetImage(profileImagepath),
+    return Column(
+      children: [
+        SizedBox(height: MediaQuery.of(context).padding.top + 5),
+        const CustomAppBar(title: 'Profile'),
+        SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(height: 30),
+              CircleAvatar(
+                radius: 60,
+                backgroundImage: AssetImage(profileImagepath),
+              ),
+              const SizedBox(height: 15),
+              Text(
+                name,
+                style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: AppColors.textColor)
+              ),
+              const SizedBox(height: 5),
+              Text(
+                email,
+                style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 14, color: AppColors.textColor)
+              ),
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0), 
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Column(
+                    children: settingsItems.map((title) {
+                      return CustomSettingsTile(
+                        title: title,
+                        iconPath: 'assets/icons/arrow-left-01.png', 
+                        onTap: () {
+                          print('$title tapped!');
+                        },
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 15),
-          Text(
-            name,
-            style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: AppColors.textColor)
-          ),
-          const SizedBox(height: 5),
-          Text(
-            email,
-            style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 14, color: AppColors.textColor)
-          ),
-          const SizedBox(height: 30),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0), 
-            child: Column(
-              children: settingsItems.map((title) {
-                return CustomSettingsTile(
-                  title: title,
-                  iconPath: 'assets/icons/arrow-left-01.png', 
-                  onTap: () {
-                    print('$title tapped!');
-                  },
-                );
-              }).toList(),
-            ),
-          ),
-          const SizedBox(height: 80),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -110,7 +118,7 @@ class CustomSettingsTile extends StatelessWidget {
           borderRadius: tileBorderRadius, 
           
           child: Container(
-            height: 45, 
+            height: 62, 
             width: double.infinity, 
             decoration: const BoxDecoration(
               color: Color.fromRGBO(246, 246, 246, 1),
@@ -126,7 +134,8 @@ class CustomSettingsTile extends StatelessWidget {
                     style: const TextStyle(
                       fontWeight: FontWeight.w400, 
                       fontSize: 16, 
-                      color: Colors.black
+                      color: AppColors.mainText,
+                      fontFamily: 'Montserratt',
                     ),
                   ),
 
