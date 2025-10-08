@@ -11,10 +11,10 @@ class CategoriesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar(title: AppLocalizations.of(context)!.our_Categories),
       body: SafeArea(
         child: Column(
           children: [
-            CustomAppBar(title: AppLocalizations.of(context)!.our_Categories),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
               child: SizedBox(
