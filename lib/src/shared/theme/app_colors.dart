@@ -12,5 +12,7 @@ abstract class AppColors {
   static const productCardColor = Color.fromRGBO(238, 243, 239, 1);
   static const primaryGreen = Color(0xFF388E3C);
   static const textColor = Color.fromARGB(255, 47, 55, 67);
+  static const offerColor = Color.fromRGBO(235, 145, 54, 1);
+
 
 }
