@@ -7,7 +7,6 @@ import 'package:decora/src/features/categories/widgets/category_card.dart';
 
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
