@@ -10,18 +10,28 @@ class CategoriesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final isLandscape = size.width > size.height;
+
     return Scaffold(
       appBar: CustomAppBar(title: AppLocalizations.of(context)!.our_Categories),
       body: SafeArea(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-              child: SizedBox(
-                height: 650,
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: size.width * 0.050,
+                  vertical: size.height * 0.015,
+                ),
                 child: LayoutBuilder(
                   builder: (context, constraints) {
-                    return buildGridView(categories: CategoriyRepo.categories);
+                    return buildGridView(
+                      categories: CategoriyRepo.categories,
+                      context: context,
+                      size: size,
+                      isLandscape: isLandscape,
+                    );
                   },
                 ),
               ),
@@ -33,12 +43,19 @@ class CategoriesScreen extends StatelessWidget {
   }
 }
 
-Widget buildGridView({required List<CategoryModel> categories}) {
+Widget buildGridView({
+  required List<CategoryModel> categories,
+  required BuildContext context,
+  required Size size,
+  required bool isLandscape,
+}) {
   return GridView.count(
-    crossAxisCount: 2,
-    childAspectRatio: 0.88,
-    mainAxisSpacing: 15,
-    crossAxisSpacing: 15,
+    crossAxisCount: (size.width ~/ 180).clamp(2, isLandscape ? 4 : 6),
+    childAspectRatio: isLandscape
+        ? size.width / (size.height * 2.5)
+        : size.width / (size.height / 1.9),
+    mainAxisSpacing: size.width * 0.04,
+    crossAxisSpacing: size.width * 0.04,
     children: List.generate(categories.length, (index) {
       return CategoryCard(
         title: categories[index].name,
