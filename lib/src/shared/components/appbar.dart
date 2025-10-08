@@ -1,3 +1,4 @@
+import 'package:decora/core/utils/app_size.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -7,26 +8,29 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final h = AppSize.height(context);
+    final w = AppSize.width(context);
+
     return Container(
-      height: 72,
+      height: h * 0.076,
       color: Colors.white,
       child: Row(
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 20),
+            padding: EdgeInsets.only(left: w * 0.055),
             child: InkWell(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(w * 0.012),
               onTap: () => Navigator.pop(context),
               child: Container(
-                padding: const EdgeInsets.all(8.89),
+                padding: EdgeInsets.all(w * 0.025),
                 decoration: BoxDecoration(
                   color: Colors.grey.shade200,
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(w * 0.02),
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.arrow_back_ios_new,
                   color: Colors.black,
-                  size: 18,
+                  size: w * 0.045,
                 ),
               ),
             ),
@@ -36,15 +40,15 @@ class CustomAppBar extends StatelessWidget {
             child: Center(
               child: Text(
                 title,
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.w600,
-                  fontSize: 18,
+                  fontSize: w * 0.05,
                 ),
               ),
             ),
           ),
-          const SizedBox(width: 48),
+          SizedBox(width: w * 0.09),
         ],
       ),
     );

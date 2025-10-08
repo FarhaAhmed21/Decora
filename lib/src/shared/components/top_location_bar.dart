@@ -13,7 +13,7 @@ class TopLocationBar extends StatelessWidget {
     final height = size.height;
 
     return Padding(
-      padding: EdgeInsets.only(left: width * 0.02),
+      padding: EdgeInsets.symmetric(horizontal: width * 0.009),
       child: SizedBox(
         height: height * 0.04,
         child: ListTile(
@@ -51,34 +51,34 @@ class TopLocationBar extends StatelessWidget {
                 borderRadius: BorderRadius.circular(width * 0.03),
                 onTap: () {},
                 child: Container(
-                  padding: const EdgeInsets.all(6),
-                  width: 40,
+                  padding: EdgeInsets.all(width * 0.001),
+                  width: width * 0.1,
                   decoration: BoxDecoration(
                     color: AppColors.cardColor,
-                    borderRadius: BorderRadius.circular(50),
+                    borderRadius: BorderRadius.circular(width * 0.05),
                   ),
                   child: Image.asset(
                     Assets.settingsIcon,
                     color: Colors.black,
-                    width: 25,
+                    width: width * 0.025,
                   ),
                 ),
               ),
-              const SizedBox(width: 5),
+              SizedBox(width: width * 0.009),
               InkWell(
                 borderRadius: BorderRadius.circular(width * 0.03),
                 onTap: () {},
                 child: Container(
-                  padding: const EdgeInsets.all(6),
-                  width: 40,
+                  padding: EdgeInsets.all(width * 0.001),
+                  width: width * 0.1,
                   decoration: BoxDecoration(
                     color: AppColors.cardColor,
-                    borderRadius: BorderRadius.circular(50),
+                    borderRadius: BorderRadius.circular(width * 0.05),
                   ),
                   child: Image.asset(
                     Assets.notificationIcon,
                     color: Colors.black,
-                    width: 25,
+                    width: width * 0.025,
                   ),
                 ),
               ),
