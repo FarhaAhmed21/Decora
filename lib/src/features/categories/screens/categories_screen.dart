@@ -14,10 +14,10 @@ class CategoriesScreen extends StatelessWidget {
     final isLandscape = size.width > size.height;
 
     return Scaffold(
+      appBar: CustomAppBar(title: AppLocalizations.of(context)!.our_Categories),
       body: SafeArea(
         child: Column(
           children: [
-            CustomAppBar(title: AppLocalizations.of(context)!.our_Categories),
             Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(

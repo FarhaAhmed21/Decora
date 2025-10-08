@@ -15,11 +15,12 @@ class ChatScreen extends StatelessWidget {
     final height = size.height;
 
     return Scaffold(
+      appBar: const CustomAppBar(title: "Admin"),
       backgroundColor: AppColors.background,
       body: SafeArea(
+        
         child: Column(
           children: [
-            const CustomAppBar(title: "Admin"),
             Expanded(
               child: ListView(
                 padding: const EdgeInsets.all(16),

@@ -20,4 +20,6 @@ class Assets {
   static String plusIcon = "assets/icons/plus-sign-icon.png";
   static String sentIcon = "assets/icons/sent-icon.png";
   static String settingsIcon = "assets/icons/settings-icon.png";
+  static String shippingIcon = "assets/icons/shipping-icon.png";
+  static String sideArrowIcon = "assets/icons/side-arrow.png";
 }
