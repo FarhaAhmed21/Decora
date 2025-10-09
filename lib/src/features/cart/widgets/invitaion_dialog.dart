@@ -42,19 +42,19 @@ class InvitationDialog extends StatelessWidget {
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _SocialIcon(
+                _SocialIconButton(
                   icon: FontAwesomeIcons.link,
                   color: Color(0xFF1976D2),
                 ),
-                _SocialIcon(
+                _SocialIconButton(
                   icon: FontAwesomeIcons.whatsapp,
                   color: Color(0xFF25D366),
                 ),
-                _SocialIcon(
+                _SocialIconButton(
                   icon: FontAwesomeIcons.telegram,
                   color: Color(0xFF26A4E3),
                 ),
-                _SocialIcon(
+                _SocialIconButton(
                   icon: FontAwesomeIcons.facebookMessenger,
                   color: Color(0xFF9C27B0),
                 ),
@@ -127,18 +127,22 @@ class InvitationDialog extends StatelessWidget {
   }
 }
 
-class _SocialIcon extends StatelessWidget {
+class _SocialIconButton extends StatelessWidget {
   final IconData icon;
   final Color color;
 
-  const _SocialIcon({required this.icon, required this.color});
+  const _SocialIconButton({required this.icon, required this.color});
 
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
       radius: 26,
       backgroundColor: color,
-      child: Icon(icon, color: Colors.white, size: 22),
+      child: IconButton(
+        color: Colors.white,
+        onPressed: () {},
+        icon: Icon(icon, size: 22),
+      ),
     );
   }
 }

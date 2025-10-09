@@ -45,6 +45,7 @@ class _CartAppBarState extends State<CartAppBar> {
     );
 
     return AppBar(
+      backgroundColor: Colors.white,
       title: Text(
         l10n.cart,
         style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
@@ -57,7 +58,7 @@ class _CartAppBarState extends State<CartAppBar> {
         child: Container(
           height: 30,
           decoration: BoxDecoration(
-            color: Colors.grey[300],
+            color: AppColors.cardColor,
             borderRadius: BorderRadius.circular(8),
           ),
           child: IconButton(
@@ -70,7 +71,7 @@ class _CartAppBarState extends State<CartAppBar> {
       //  Actions
       actions: [
         Padding(
-          padding: const EdgeInsets.only(right: 8.0),
+          padding: const EdgeInsets.only(right: 12.0),
 
           child: AnimatedSwitcher(
             duration: const Duration(milliseconds: 200),
@@ -83,7 +84,7 @@ class _CartAppBarState extends State<CartAppBar> {
 
       //  TabBar
       bottom: TabBar(
-        indicatorColor: const Color(0xFF8A5A39),
+        indicatorColor: AppColors.orange,
         labelColor: Colors.black,
         indicatorSize: TabBarIndicatorSize.tab,
         indicatorWeight: 3,
