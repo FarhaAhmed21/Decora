@@ -22,4 +22,8 @@ class Assets {
   static String settingsIcon = "assets/icons/settings-icon.png";
   static String shippingIcon = "assets/icons/shipping-icon.png";
   static String sideArrowIcon = "assets/icons/side-arrow.png";
+  static String trackingIcon1 = "assets/icons/icon-one.png";
+  static String trackingIcon2 = "assets/icons/icon-two.png";
+  static String trackingIcon3 = "assets/icons/icon-three.png";
+  static String trackingIcon4 = "assets/icons/icon-four.png";
 }
