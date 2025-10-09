@@ -22,9 +22,9 @@ class OffersScreen extends StatelessWidget {
             Expanded(child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                  crossAxisCount: 2,
-                mainAxisSpacing: 14,
-                crossAxisSpacing: 16,
-                childAspectRatio: 0.6,
+                  childAspectRatio: 0.70,
+                      mainAxisSpacing: 8,
+                      crossAxisSpacing: 8,
               ),
               itemCount: 10, 
               itemBuilder: (context, index) {

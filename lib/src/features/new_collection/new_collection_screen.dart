@@ -21,10 +21,10 @@ class NewCollectionScreen extends StatelessWidget {
             const CustomSearchBar(),
             Expanded(child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 14,
-                crossAxisSpacing: 16,
-                childAspectRatio: 0.6,
+               crossAxisCount: 2,
+                  childAspectRatio: 0.70,
+                      mainAxisSpacing: 8,
+                      crossAxisSpacing: 8,
               ),
               itemCount: 10, 
               itemBuilder: (context, index) {
