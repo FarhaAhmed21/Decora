@@ -16,99 +16,105 @@ class EditProfileUI extends StatelessWidget {
           SizedBox(height: MediaQuery.of(context).padding.top + 5),
           const CustomAppBar(title: "Edit Profile"),
 
-          SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Column(
-          
-              children: [
-                const SizedBox(height: 20),
-          
-                // ---------------- Profile Image ----------------
-                Stack(
-                  alignment: Alignment.bottomRight,
-                  children: [
-                    CircleAvatar(
-                      radius: 70,
-                      backgroundImage: AssetImage(profileImagePath),
-                    ),
-                    Container(
-                      width:44 ,
-                      height:44 ,
-                      margin: const EdgeInsets.only(bottom: 3, right: 6),
-                      decoration: const BoxDecoration(
-                        color: AppColors.primary,
-                        shape: BoxShape.circle,
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Column(
+            
+                children: [
+                  const SizedBox(height: 20),
+            
+                  // ---------------- Profile Image ----------------
+                  Stack(
+                    alignment: Alignment.bottomRight,
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: AppColors.primary,
+                        radius: 73,
+                        child: CircleAvatar(
+                          radius: 70,
+                          backgroundImage: AssetImage(profileImagePath),
+                        ),
                       ),
-                      padding: const EdgeInsets.all(4),
-                      child:  IconButton(
-                        icon: const Icon(Icons.edit, color: Colors.white),
-                        onPressed: () {},
-                        iconSize: 20,
+                      Container(
+                        width:44 ,
+                        height:44 ,
+                        margin: const EdgeInsets.only(bottom: 3, right: 6),
+                        decoration: const BoxDecoration(
+                          color: AppColors.primary,
+                          shape: BoxShape.circle,
+                        ),
+                        padding: const EdgeInsets.all(4),
+                        child:  IconButton(
+                          icon: Image.asset('assets/icons/edit-02.png', height: 24, width: 24, color: Colors.white,),
+                          onPressed: () {},
+                          iconSize: 20,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-          
-                const SizedBox(height: 20),
-          
-                
-                _buildField("Name", "Name"),
-                _buildField("Email", "Email"),
-                _buildField("Phone Number", "Phone Number"),
-                _buildField("Location", "Description.."),
-          
-                const SizedBox(height: 10),
-          
-                Row(
-                  children: [
-                    Container(
-                      decoration: const BoxDecoration(
-                        color: AppColors.primary,
-                        shape: BoxShape.circle,
+                    ],
+                  ),
+            
+                  const SizedBox(height: 20),
+            
+                  
+                  _buildField("Name", "Name"),
+                  _buildField("Email", "Email"),
+                  _buildField("Phone Number", "Phone Number"),
+                  _buildField("Location", "Description.."),
+            
+                  const SizedBox(height: 5),
+            
+                  Row(
+                    children: [
+                      Container(
+                        decoration: const BoxDecoration(
+                          color: AppColors.primary,
+                          shape: BoxShape.circle,
+                        ),
+                        width: 30,
+                        height: 30,
+                        child: IconButton(
+                          icon: const Icon(Icons.add, color: Colors.white),
+                          onPressed: () {},
+                          iconSize: 15,
+                        ),
                       ),
-                      width: 30,
-                      height: 30,
-                      child: IconButton(
-                        icon: const Icon(Icons.add, color: Colors.white),
-                        onPressed: () {},
-                        iconSize: 15,
+                      const SizedBox(width: 10),
+                      const Text(
+                        "Add another Location",
+                        style: TextStyle(color: Colors.black54),
                       ),
-                    ),
-                    const SizedBox(width: 10),
-                    const Text(
-                      "Add another Location",
-                      style: TextStyle(color: Colors.black54),
-                    ),
-                  ],
-                ),
-          
-                const SizedBox(height: 10),
-          
-                // ---------------- Save Button ----------------
-                SizedBox(
-                  width: double.infinity,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                    ],
+                  ),
+            
+                  const SizedBox(height: 50),
+            
+                  // ---------------- Save Button ----------------
+                  SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primary,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
-                    ),
-                    child: const Text(
-                      "Save Changes",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white,
+                      child: const Text(
+                        "Save Changes",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
-                ),
-          
-                const SizedBox(height: 20),
-              ],
+            
+                  const SizedBox(height: 20),
+                ],
+              ),
             ),
           ),
         ],
