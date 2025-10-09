@@ -1,6 +1,6 @@
-import 'package:decora/src/features/onboarding/screens/onboarding-screen-one.dart';
-import 'package:decora/src/features/onboarding/screens/onboarding-screen-three.dart';
-import 'package:decora/src/features/onboarding/screens/onboarding-screen-two.dart';
+import 'package:decora/src/features/onboarding/screens/onboarding_screen_one.dart';
+import 'package:decora/src/features/onboarding/screens/onboarding_screen_three.dart';
+import 'package:decora/src/features/onboarding/screens/onboarding_screen_two.dart';
 import 'package:flutter/material.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 
@@ -130,15 +130,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
         textController: _textController,
         subtitleController: _subtitleController,
       ),
-      OnboardingPageTwo(
-        lampAnimation: _lampAnimation,
-        imageAnimation: _imageAnimation,
-        textAnimation: _textAnimation,
-        subtitleAnimation: _subtitleAnimation,
-        treeAnimation: _treeAnimation,
-        textController: _textController,
-        subtitleController: _subtitleController,
-      ),
+      const OnboardingPageTwo(),
       OnboardingPageThree(
         lampAnimation: _lampAnimation,
         imageAnimation: _imageAnimation,
