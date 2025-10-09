@@ -10,4 +10,6 @@ abstract class AppColors {
   static const background = Color(0xFFFFFFFF);
   static const innerCardColor = Color(0xFFEEF3EF);
   static const productCardColor = Color(0xffEEF3EF);
+  static const buttonGrey = Color(0xffcfcfcf8a);
+
 }
