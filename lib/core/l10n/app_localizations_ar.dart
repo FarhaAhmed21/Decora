@@ -36,4 +36,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get our_Categories => 'فئاتنا';
+
+  @override
+  String get discount => '20 % خصم';
 }

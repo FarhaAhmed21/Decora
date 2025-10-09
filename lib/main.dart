@@ -1,6 +1,7 @@
 import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/core/l10n/local_cubit.dart';
 import 'package:decora/src/features/favourites/screens/favourite_screen.dart';
+import 'package:decora/src/features/home/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
           ],
           supportedLocales: const [Locale('en'), Locale('ar')],
           theme: ThemeData(fontFamily: 'Montserratt'),
-          home: const FavouriteScreen(),
+          home: const HomeScreen(),
         );
       },
     );

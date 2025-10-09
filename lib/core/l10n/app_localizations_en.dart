@@ -36,4 +36,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get our_Categories => 'Our Categories';
+
+  @override
+  String get discount => ' 20 % off';
 }

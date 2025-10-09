@@ -151,6 +151,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Our Categories'**
   String get our_Categories;
+
+  /// No description provided for @discount.
+  ///
+  /// In en, this message translates to:
+  /// **' 20 % off'**
+  String get discount;
 }
 
 class _AppLocalizationsDelegate

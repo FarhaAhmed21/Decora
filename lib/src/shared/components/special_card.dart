@@ -3,16 +3,16 @@ import 'package:decora/generated/assets.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class CustomCard extends StatefulWidget {
-  const CustomCard({super.key});
+class SpecialCard extends StatefulWidget {
+  const SpecialCard({super.key});
 
   @override
-  State<CustomCard> createState() => _CustomCardState();
+  State<SpecialCard> createState() => _CustomCardState();
 }
 
-class _CustomCardState extends State<CustomCard> {
+class _CustomCardState extends State<SpecialCard> {
   bool isFavourite = false;
-  bool isdiscount = false;
+  bool isDiscount = true;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -20,7 +20,7 @@ class _CustomCardState extends State<CustomCard> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       color: AppColors.cardColor,
       child: Container(
-        width: 200,
+
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
         child: Column(
@@ -40,27 +40,27 @@ class _CustomCardState extends State<CustomCard> {
                     ),
                   ),
                 ),
-        if(isdiscount)
-                Positioned(
+                if(isDiscount)
+                  Positioned(
 
-                  left: 10,
-                  child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    left: 10,
+                    child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
 
-                      margin: const EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
 
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
 
-                          borderRadius: BorderRadius.circular(16.0),
-                          color: AppColors.orange
-                      ),
-                      child: Text( AppLocalizations.of(
-                        context,
-                      )!.discount,style: TextStyle(fontSize: 12,color:AppColors.innerCardColor,fontWeight: FontWeight.bold,))
+                            borderRadius: BorderRadius.circular(8.0),
+                            color: AppColors.orange
+                        ),
+                        child: Text( AppLocalizations.of(
+                          context,
+                        )!.discount,style: TextStyle(fontSize: 12,color:AppColors.innerCardColor,fontWeight: FontWeight.bold,))
 
+                    ),
                   ),
-                ),
 
                 Positioned(
                   top: 10,
@@ -91,17 +91,17 @@ class _CustomCardState extends State<CustomCard> {
                     },
                     child: isFavourite
                         ? Image.asset(
-                            Assets.heartIcon,
-                            color: AppColors.primary,
-                            width: 18,
-                            height: 18,
-                          )
+                      Assets.heartIcon,
+                      color: AppColors.primary,
+                      width: 18,
+                      height: 18,
+                    )
                         : Image.asset(
-                            Assets.heartOutline,
-                            color: AppColors.primary,
-                            width: 18,
-                            height: 18,
-                          ),
+                      Assets.heartOutline,
+                      color: AppColors.primary,
+                      width: 18,
+                      height: 18,
+                    ),
                   ),
                 ),
               ],
@@ -149,31 +149,13 @@ class _CustomCardState extends State<CustomCard> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          AppLocalizations.of(
-                            context,
-                          )!.product_added_to_Cart_successfully,
-                        ),
-                        backgroundColor: AppColors.primary,
-                        duration: const Duration(seconds: 1),
-                        // behavior:
-                        //     SnackBarBehavior.floating,
-                        // shape: RoundedRectangleBorder(
-                        //   borderRadius: BorderRadius.circular(12),
-                        // ),
-                      ),
-                    );
+
                   },
-                  child: CircleAvatar(
-                    backgroundColor: AppColors.primary,
-                    child: Image.asset(
-                      Assets.shoppingBagIcon,
-                      color: AppColors.cardColor,
-                      width: 20,
-                      height: 20,
-                    ),
+                  child: Row(
+                    children: [
+                      Text("Explore",style: TextStyle(fontSize: 14,color:AppColors.primary,)),
+                      Icon(Icons.arrow_forward,color: AppColors.primary, size: 14,),
+                    ],
                   ),
                 ),
               ],
