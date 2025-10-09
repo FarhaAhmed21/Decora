@@ -16,14 +16,12 @@ class _OnboardingScreenState extends State<OnboardingScreen>
   final PageController _pageController = PageController();
   int currentIndex = 0;
 
-  // Animation controllers
   late AnimationController _lampController;
   late AnimationController _imageController;
   late AnimationController _textController;
   late AnimationController _subtitleController;
   late AnimationController _treeController;
 
-  // Animations
   late Animation<Offset> _lampAnimation;
   late Animation<Offset> _imageAnimation;
   late Animation<Offset> _textAnimation;
@@ -38,7 +36,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
   }
 
   void _initAnimations() {
-    const duration = Duration(milliseconds: 1400);
+    const duration = Duration(milliseconds: 1650);
 
     _lampController = AnimationController(vsync: this, duration: duration);
     _imageController = AnimationController(vsync: this, duration: duration);
@@ -77,7 +75,6 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     _imageController.forward();
     _textController.forward();
     _subtitleController.forward();
-    await Future.delayed(const Duration(milliseconds: 300));
     _lampController.forward();
   }
 

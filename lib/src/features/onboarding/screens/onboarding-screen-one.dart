@@ -74,16 +74,19 @@ class OnboardingPageOne extends StatelessWidget {
                   opacity: textController,
                   child: const Text(
                     "Find Your Perfect Style",
-                    textAlign: TextAlign.center,
                     style: TextStyle(
                       color: AppColors.mainText,
                       fontSize: 32,
-                      fontWeight: FontWeight.w600,
                       fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.w600,
+                      height: 1,
+                      letterSpacing: -0.64,
                     ),
+                    textAlign: TextAlign.center,
                   ),
                 ),
               ),
+
               const SizedBox(height: 12),
               SlideTransition(
                 position: subtitleAnimation,
@@ -98,7 +101,9 @@ class OnboardingPageOne extends StatelessWidget {
                         color: AppColors.secondaryText,
                         fontSize: 14,
                         fontFamily: 'Montserrat',
-                        height: 1.8,
+                        fontWeight: FontWeight.w400,
+                        height: 1.80,
+                        letterSpacing: -0.28,
                       ),
                     ),
                   ),
