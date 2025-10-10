@@ -131,15 +131,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
         subtitleController: _subtitleController,
       ),
       const OnboardingPageTwo(),
-      OnboardingPageThree(
-        lampAnimation: _lampAnimation,
-        imageAnimation: _imageAnimation,
-        textAnimation: _textAnimation,
-        subtitleAnimation: _subtitleAnimation,
-        treeAnimation: _treeAnimation,
-        textController: _textController,
-        subtitleController: _subtitleController,
-      ),
+      const OnboardingPageThree(),
     ];
 
     return Scaffold(

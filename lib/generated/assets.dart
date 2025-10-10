@@ -25,4 +25,5 @@ class Assets {
   static String rectangle2 = 'assets/images/bottom-Rectangle.png';
   static String woodImg = 'assets/images/wood.png';
   static String fabric = 'assets/images/fabrics.png';
+  static String onBoarding3 = 'assets/images/onboarding3.png';
 }
