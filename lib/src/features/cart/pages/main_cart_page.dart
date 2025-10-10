@@ -31,8 +31,8 @@ class _MainCartPageState extends State<MainCartPage> {
         body: const TabBarView(children: [MyCart(), SharedCart()]),
 
         bottomNavigationBar: Container(
-          height: AppSize.height(context) * 0.16,
-          padding: const EdgeInsets.all(16),
+          height: AppSize.height(context) * 0.13,
+          padding: const EdgeInsets.symmetric(vertical: 8,horizontal: 3),
           color: Colors.white,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 20),
