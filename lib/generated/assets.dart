@@ -26,4 +26,7 @@ class Assets {
   static String woodImg = 'assets/images/wood.png';
   static String fabric = 'assets/images/fabrics.png';
   static String onBoarding3 = 'assets/images/onboarding3.png';
+  static String shippingIcon = "assets/icons/shipping-icon.png";
+  static String sideArrowIcon = "assets/icons/side-arrow.png";
+
 }
