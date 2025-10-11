@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 
+import '../../../../core/l10n/app_localizations.dart';
+import '../../../../core/utils/app_size.dart';
 import '../../../../generated/assets.dart';
 import '../../../shared/theme/app_colors.dart';
 
@@ -11,6 +13,9 @@ class NewCollections extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final h = AppSize.height(context);
+    final w = AppSize.width(context);
+    //final isLandscape = w > h;
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Container(
@@ -19,7 +24,7 @@ class NewCollections extends StatelessWidget {
             color: AppColors.cardColor,
           ),
           padding: const EdgeInsets.all(16.0) ,
-          height: 180,
+          height:h* 0.1666,
 
           child :Row(
               children: [
@@ -29,28 +34,34 @@ class NewCollections extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text("New Collection",style: TextStyle(fontSize: 18,color:AppColors.mainText,fontWeight: FontWeight.bold,),),
-                        const SizedBox(height: 8,),
-                        const Text("Elevate your living room with timeless sofas",style: TextStyle(fontSize: 12,color: AppColors.secondaryText ,),maxLines: 2,),
-                        const SizedBox(height: 16,),
+                         Text(AppLocalizations.of(
+                          context,
+                        )!.new_collection,style:const TextStyle(fontSize: 18,color:AppColors.mainText,fontWeight: FontWeight.bold,),),
+
+                         Text( AppLocalizations.of(
+                          context,
+                        )!.elevate_your_living_room_with_timeless_sofas,style: const TextStyle(fontSize: 14,color: AppColors.secondaryText ,),maxLines: 2,),
+
                         ElevatedButton(onPressed: (){},
-                          style:  const ButtonStyle(
-                            backgroundColor:WidgetStatePropertyAll<Color>(
+                          style:  ButtonStyle(
+                            backgroundColor:const WidgetStatePropertyAll<Color>(
                                 AppColors.primary),
-                            padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(
+                            padding: const WidgetStatePropertyAll<EdgeInsetsGeometry>(
                               EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
                             ),
                             minimumSize: WidgetStatePropertyAll<Size>(
-                              Size(120, 40), // e.g., minimum width of 150 and height of 50
+                              Size(120, h *0.029), // e.g., minimum width of 150 and height of 50
                             ),
-                            shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
+                            shape: const WidgetStatePropertyAll<RoundedRectangleBorder>(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.all(Radius.circular(15.0)), // Use a value like 8.0, 15.0, or 25.0 for a pill shape
                               ),
                             ),
 
                           ),
-                          child: const Text("Explore ",style: TextStyle(fontSize: 14,color:AppColors.cardColor,),),
+                          child:  Text(AppLocalizations.of(
+                            context,
+                          )!.explore,style: const TextStyle(fontSize: 14,color:AppColors.cardColor,),),
                         )
 
                       ]

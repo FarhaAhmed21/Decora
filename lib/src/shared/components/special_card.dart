@@ -57,7 +57,7 @@ class _CustomCardState extends State<SpecialCard> {
                         ),
                         child: Text( AppLocalizations.of(
                           context,
-                        )!.discount,style: TextStyle(fontSize: 12,color:AppColors.innerCardColor,fontWeight: FontWeight.bold,))
+                        )!.discount,style: const TextStyle(fontSize: 12,color:AppColors.innerCardColor,fontWeight: FontWeight.bold,))
 
                     ),
                   ),
@@ -153,8 +153,10 @@ class _CustomCardState extends State<SpecialCard> {
                   },
                   child: Row(
                     children: [
-                      Text("Explore",style: TextStyle(fontSize: 14,color:AppColors.primary,)),
-                      Icon(Icons.arrow_forward,color: AppColors.primary, size: 14,),
+                      Text(AppLocalizations.of(
+                        context,
+                      )!.explore,style: const TextStyle(fontSize: 14,color:AppColors.primary,)),
+                      const Icon(Icons.arrow_forward,color: AppColors.primary, size: 14,),
                     ],
                   ),
                 ),

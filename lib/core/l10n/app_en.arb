@@ -28,6 +28,12 @@
     "pay_now":"Pay Now",
     "invitation":"Invitation",
     "enter_user_name":"Enter User Name",
-    "invite":"Invite"
+    "invite":"Invite",
+    "see_all": "See all",
+   "decora_specials" :"Decora Specials",
+    "categories": "Categories",
+    "new_collection": "New Collection",
+    "elevate_your_living_room_with_timeless_sofas": "Elevate your living room with timeless sofas",
+    "explore": "Explore"
 
 }

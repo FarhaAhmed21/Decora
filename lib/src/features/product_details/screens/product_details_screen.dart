@@ -333,7 +333,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8.0),
-                                  color: AppColors.buttonGrey,
+                                  color: AppColors.innerCardColor,
 
                                 ),
                                   child:Center(child: Text("-",style: TextStyle(fontSize: 16,color:AppColors.mainText,fontWeight: FontWeight.bold,)))

@@ -96,4 +96,23 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get invite => 'أدعو';
+
+  @override
+  String get see_all => 'انظر المزيد ';
+
+  @override
+  String get decora_specials => 'خصومات ديكورا';
+
+  @override
+  String get categories => 'Categories';
+
+  @override
+  String get new_collection => 'مجموعة جديدة';
+
+  @override
+  String get elevate_your_living_room_with_timeless_sofas =>
+      'ارتقي بغرفة معيشتك مع أرائك خالدة';
+
+  @override
+  String get explore => 'استكشف';
 }
