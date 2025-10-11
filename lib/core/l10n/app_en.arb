@@ -9,5 +9,25 @@
     "product_added_to_favourite_successfully": "Product added to Favourite successfully",
     "product_added_to_Cart_successfully": "Product added to Cart successfully",
     "our_Categories": "Our Categories",
-    "discount":" 20 % off"
+    "cart":"Cart",
+    "my_cart":"My Cart",
+    "shared_cart":"Shared Cart",
+    "dining":"Dining",
+    "furniture":"Furniture",
+    "wood":"Wood",
+    "owners":"Owners",
+    "view_all":"View all", 
+    "checkout":"Checkout",  
+    "promo_code":"Have a Promo Code?",
+    "avilable":"Avilable",
+    "payment_summary":"Payment Summary",
+    "sub_total":"Sub total",
+    "taxes":"Taxes",
+    "discount":"Discount",
+    "total": "Total",
+    "pay_now":"Pay Now",
+    "invitation":"Invitation",
+    "enter_user_name":"Enter User Name",
+    "invite":"Invite"
+
 }

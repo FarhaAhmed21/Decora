@@ -1,3 +1,4 @@
+import 'package:decora/core/utils/app_size.dart';
 import 'package:decora/src/shared/components/custom_card.dart';
 import 'package:decora/src/shared/components/searchbar.dart';
 import 'package:decora/src/shared/components/top_location_bar.dart';
@@ -13,27 +14,39 @@ class FavouriteScreen extends StatefulWidget {
 class _FavouriteScreenState extends State<FavouriteScreen> {
   @override
   Widget build(BuildContext context) {
+    final h = AppSize.height(context);
+    final w = AppSize.width(context);
+    final isLandscape = w > h;
+
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
             const TopLocationBar(),
-            const SizedBox(height: 33),
+            SizedBox(height: h * 0.045),
             const CustomSearchBar(),
-            SizedBox(
-              height: 650,
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  return GridView.count(
-                    crossAxisCount: 2,
-                    childAspectRatio: 0.70,
-                    mainAxisSpacing: 8,
-                    crossAxisSpacing: 8,
-                    children: List.generate(8, (index) {
-                      return const CustomCard();
-                    }),
-                  );
-                },
+            SizedBox(height: h * 0.015),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: w * 0.035),
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    return GridView.count(
+                      crossAxisCount: (w ~/ (180 * w)).clamp(
+                        2,
+                        isLandscape ? 4 : 6,
+                      ),
+                      childAspectRatio: isLandscape
+                          ? w / (h * 1.6)
+                          : w / (h / 1.48),
+                      mainAxisSpacing: 0.010 * w,
+                      crossAxisSpacing: 0.010 * w,
+                      children: List.generate(8, (index) {
+                        return const CustomCard();
+                      }),
+                    );
+                  },
+                ),
               ),
             ),
           ],

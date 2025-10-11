@@ -38,5 +38,62 @@ class AppLocalizationsAr extends AppLocalizations {
   String get our_Categories => 'فئاتنا';
 
   @override
-  String get discount => '20 % خصم';
+  String get cart => 'سلة تسوق';
+
+  @override
+  String get my_cart => 'سلة التسوق الخاصة بي';
+
+  @override
+  String get shared_cart => 'عربة التسوق المشتركة';
+
+  @override
+  String get dining => 'تناول الطعام';
+
+  @override
+  String get furniture => 'أثاث';
+
+  @override
+  String get wood => 'خشب';
+
+  @override
+  String get owners => 'المالكين';
+
+  @override
+  String get view_all => 'عرض الكل';
+
+  @override
+  String get checkout => 'الدفع';
+
+  @override
+  String get promo_code => 'هل لديك رمز ترويجي؟';
+
+  @override
+  String get avilable => 'متاح';
+
+  @override
+  String get payment_summary => 'ملخص الدفع';
+
+  @override
+  String get sub_total => 'المجموع الفرعي';
+
+  @override
+  String get taxes => 'الضرائب';
+
+  @override
+  String get discount => 'تخفيض';
+
+  @override
+  String get total => 'إجمالي';
+
+  @override
+  String get pay_now => 'ادفع الأن';
+
+  @override
+  String get invitation => 'دعوه';
+
+  @override
+  String get enter_user_name => 'ادخل اسم المستخدم';
+
+  @override
+  String get invite => 'أدعو';
 }

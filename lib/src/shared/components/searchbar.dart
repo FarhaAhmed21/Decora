@@ -9,29 +9,46 @@ class CustomSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final h = AppSize.height(context);
+    final w = AppSize.width(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: EdgeInsets.symmetric(horizontal: w * 0.035),
       child: Row(
         children: [
-          Expanded(
-            child: Container(
-              height: AppSize.height(context) * 0.04,
-              decoration: BoxDecoration(
-                color: AppColors.cardColor,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: TextField(
-                decoration: InputDecoration(
-                  prefixIcon: Image.asset(Assets.searchIcon),
-                  hintText: AppLocalizations.of(context)!.searchFurniture,
-                  hintStyle: const TextStyle(color: AppColors.secondaryText),
-                  border: InputBorder.none,
-                ),
+          Container(
+            width: w * 0.78,
+            height: h * 0.047,
+            decoration: ShapeDecoration(
+              color: const Color(0xFFF6F6F6),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(w * 0.033),
               ),
             ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    height: AppSize.height(context) * 0.04,
+                    decoration: BoxDecoration(
+                      color: AppColors.cardColor,
+                      borderRadius: BorderRadius.circular(w * 0.033),
+                    ),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        prefixIcon: Image.asset(Assets.searchIcon),
+                        hintText: AppLocalizations.of(context)!.searchFurniture,
+                        hintStyle: const TextStyle(
+                          color: AppColors.secondaryText,
+                        ),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
-
-          const SizedBox(width: 5),
+          SizedBox(width: w * 0.01),
           InkWell(
             borderRadius: BorderRadius.circular(12),
             onTap: () {},

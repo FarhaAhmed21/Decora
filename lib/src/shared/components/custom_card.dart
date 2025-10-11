@@ -1,4 +1,5 @@
 import 'package:decora/core/l10n/app_localizations.dart';
+import 'package:decora/core/utils/app_size.dart';
 import 'package:decora/generated/assets.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -15,26 +16,34 @@ class _CustomCardState extends State<CustomCard> {
   bool isdiscount = false;
   @override
   Widget build(BuildContext context) {
+    final h = AppSize.height(context);
+    final w = AppSize.width(context);
     return Card(
       elevation: 0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(w * 0.02),
+      ),
       color: AppColors.cardColor,
       child: Container(
-        width: 200,
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+        width: w * 0.20,
+        padding: EdgeInsets.all(w * 0.025),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(w * 0.02),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Stack(
               children: [
                 Container(
-                  color: AppColors.productCardColor,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(w * 0.02),
+                    color: AppColors.productCardColor,
+                  ),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
                     child: Image.asset(
                       Assets.luxeSofa,
-                      height: 140,
+                      height: h * 0.18,
                       width: double.infinity,
                       fit: BoxFit.cover,
                     ),
@@ -63,8 +72,8 @@ class _CustomCardState extends State<CustomCard> {
                 ),
 
                 Positioned(
-                  top: 10,
-                  right: 10,
+                  top: h * 0.015,
+                  right: w * 0.020,
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
@@ -93,41 +102,40 @@ class _CustomCardState extends State<CustomCard> {
                         ? Image.asset(
                             Assets.heartIcon,
                             color: AppColors.primary,
-                            width: 18,
-                            height: 18,
+                            width: w * 0.05,
+                            height: h * 0.018,
                           )
                         : Image.asset(
                             Assets.heartOutline,
                             color: AppColors.primary,
-                            width: 18,
-                            height: 18,
+                            width: w * 0.05,
+                            height: h * 0.018,
                           ),
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: h * 0.008),
 
             // Title
-            const Text(
+            Text(
               "Olive Luxe Sofa",
               style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                fontSize: w * 0.04,
                 color: AppColors.mainText,
               ),
             ),
 
-            const SizedBox(height: 6),
-
+            //const SizedBox(height: 1),
             Row(
               children: [
-                Image.asset(Assets.starIcon, width: 14, height: 14),
-                const SizedBox(width: 4),
-                const Text(
+                Image.asset(Assets.starIcon, width: w * 0.04, height: w * 0.04),
+                SizedBox(width: w * 0.015),
+                Text(
                   "4.9",
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: w * 0.035,
                     fontWeight: FontWeight.w500,
                     color: AppColors.secondaryText,
                   ),
@@ -139,12 +147,12 @@ class _CustomCardState extends State<CustomCard> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
+                Text(
                   "\$250",
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
+                    fontSize: w * 0.045,
                     color: AppColors.mainText,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
                 GestureDetector(
@@ -166,13 +174,19 @@ class _CustomCardState extends State<CustomCard> {
                       ),
                     );
                   },
-                  child: CircleAvatar(
-                    backgroundColor: AppColors.primary,
+                  child: Container(
+                    width: w * 0.09,
+                    height: h * 0.040,
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: AppColors.primary,
+                      borderRadius: BorderRadius.circular(w * 0.02),
+                    ),
                     child: Image.asset(
                       Assets.shoppingBagIcon,
-                      color: AppColors.cardColor,
-                      width: 20,
-                      height: 20,
+                      color: Colors.white,
+                      width: w * 0.30,
+                      height: h * 0.030,
                     ),
                   ),
                 ),
