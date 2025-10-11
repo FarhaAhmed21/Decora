@@ -18,62 +18,65 @@ class OrderTrackingProductContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: AppSize.height(context) * 0.1 + 22,
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 15),
-      decoration: BoxDecoration(
-        color: AppColors.cardColor,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Row(
-        children: [
-          Container(
-            height: AppSize.height(context) * 0.1,
-            width: AppSize.width(context) * 0.25,
-            decoration: BoxDecoration(
-              color: AppColors.productCardColor,
-              borderRadius: BorderRadius.circular(8),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Container(
+        height: AppSize.height(context) * 0.1 + 22,
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        decoration: BoxDecoration(
+          color: AppColors.cardColor,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Row(
+          children: [
+            Container(
+              height: AppSize.height(context) * 0.1,
+              width: AppSize.width(context) * 0.25,
+              decoration: BoxDecoration(
+                color: AppColors.productCardColor,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Image.asset(imagePath, fit: BoxFit.cover),
             ),
-            child: Image.asset(imagePath, fit: BoxFit.cover),
-          ),
-          const SizedBox(width: 9),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      color: AppColors.mainText,
-                      fontSize: 19,
+            const SizedBox(width: 9),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        color: AppColors.mainText,
+                        fontSize: 19,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  Text(
-                    subtitle,
-                    style: const TextStyle(
-                      color: AppColors.primary,
-                      fontSize: 12,
+                    Text(
+                      subtitle,
+                      style: const TextStyle(
+                        color: AppColors.primary,
+                        fontSize: 12,
+                      ),
                     ),
-                  ),
-                  const Spacer(),
-                  Text(
-                    price,
-                    style: const TextStyle(
-                      color: AppColors.mainText,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                    const Spacer(),
+                    Text(
+                      price,
+                      style: const TextStyle(
+                        color: AppColors.mainText,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

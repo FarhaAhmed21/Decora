@@ -18,19 +18,18 @@ class OrderTrackingScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            OrderTrackingProductContainer(
-              title: "Moss Accent Sofa",
-              subtitle: "Seater Sofa | Qty : 2",
-              price: "1120 EGP",
-              imagePath: Assets.couchImage,
-            ),
-            const SizedBox(height: 20),
-
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    OrderTrackingProductContainer(
+                      title: "Moss Accent Sofa",
+                      subtitle: "Seater Sofa | Qty : 2",
+                      price: "1120 EGP",
+                      imagePath: Assets.couchImage,
+                    ),
+                    const SizedBox(height: 10),
                     const Text(
                       "Order Details",
                       style: TextStyle(
