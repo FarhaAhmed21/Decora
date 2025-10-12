@@ -1,3 +1,4 @@
+import 'package:decora/src/features/Auth/screens/login_screen.dart';
 import 'package:decora/src/features/onboarding/screens/onboarding_screen_one.dart';
 import 'package:decora/src/features/onboarding/screens/onboarding_screen_three.dart';
 import 'package:decora/src/features/onboarding/screens/onboarding_screen_two.dart';
@@ -105,7 +106,10 @@ class _OnboardingScreenState extends State<OnboardingScreen>
         curve: Curves.easeInOut,
       );
     } else {
-      Navigator.pushReplacementNamed(context, '/home');
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const LoginScreen()),
+      );
     }
   }
 

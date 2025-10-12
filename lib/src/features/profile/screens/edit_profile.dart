@@ -14,8 +14,13 @@ class EditProfileUI extends StatelessWidget {
       body: Column(
         children: [
           SizedBox(height: MediaQuery.of(context).padding.top + 5),
-          const CustomAppBar(title: "Edit Profile"),
 
+          CustomAppBar(
+            title: "Edit Profile",
+            onBackPressed: () {
+              Navigator.pop(context);
+            },
+          ),
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),

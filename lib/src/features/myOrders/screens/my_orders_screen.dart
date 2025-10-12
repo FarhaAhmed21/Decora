@@ -9,13 +9,18 @@ class MyOrdesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: "My Orders"),
+      appBar: CustomAppBar(
+        title: "My Orders",
+        onBackPressed: () {
+          Navigator.pop(context);
+        },
+      ),
       body: Column(
         children: [
-          SingleChildScrollView(
+          const SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Padding(
-              padding: const EdgeInsets.only(left: 20),
+              padding: EdgeInsets.only(left: 20),
               child: Row(
                 children: [
                   TopSlider(text: "All", isSelected: true),
@@ -32,7 +37,9 @@ class MyOrdesScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: Column(
-                  children: [for (int i = 0; i < 7; i++) OrderContainer()],
+                  children: [
+                    for (int i = 0; i < 7; i++) const OrderContainer(),
+                  ],
                 ),
               ),
             ),

@@ -1,3 +1,4 @@
+import 'package:decora/src/features/home/main_screen.dart';
 import 'package:decora/src/features/notifications/widgets/notifications_container.dart';
 import 'package:decora/src/features/notifications/widgets/notifications_text.dart';
 import 'package:decora/src/shared/components/appbar.dart';
@@ -18,7 +19,13 @@ class NotificationsScreen extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: const CustomAppBar(title: 'Notifications'),
+      appBar: CustomAppBar(
+        title: 'Notifications',
+        onBackPressed: () {
+          MainLayout.currentIndex = 1;
+          Navigator.pop(context);
+        },
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: ListView.builder(

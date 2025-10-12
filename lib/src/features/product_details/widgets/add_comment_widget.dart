@@ -4,9 +4,7 @@ import '../../../../core/utils/app_size.dart';
 import '../../../shared/theme/app_colors.dart';
 
 class AddCommentWidget extends StatelessWidget {
-  const AddCommentWidget({
-    super.key,
-  });
+  const AddCommentWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +26,10 @@ class AddCommentWidget extends StatelessWidget {
     const double paddingHorizontal = 8.0;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: paddingHorizontal, vertical: 8.0),
+      padding: const EdgeInsets.symmetric(
+        horizontal: paddingHorizontal,
+        vertical: 8.0,
+      ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -41,28 +42,30 @@ class AddCommentWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
               padding: const EdgeInsets.symmetric(horizontal: 12.0),
-              child: Center( // Use Center to vertically align the entire TextField
+              child: Center(
+                // Use Center to vertically align the entire TextField
                 child: TextField(
                   // Use contentPadding to fine-tune vertical alignment
                   decoration: InputDecoration(
                     hintText: 'Write Your Review',
                     hintStyle: TextStyle(
-                        color: AppColors.secondaryText.withOpacity(0.5),
-                        fontSize: isLandscape ? w * 0.018 : 16
+                      color: AppColors.secondaryText.withOpacity(0.5),
+                      fontSize: isLandscape ? w * 0.018 : 16,
                     ),
                     border: InputBorder.none,
                     isDense: true,
                     // FIX: Apply minimal vertical content padding for centering.
-                    contentPadding: EdgeInsets.symmetric(vertical: -verticalPadding),
+                    contentPadding: EdgeInsets.symmetric(
+                      vertical: -verticalPadding,
+                    ),
                   ),
-                  style: TextStyle(color: AppColors.mainText),
+                  style: const TextStyle(color: AppColors.mainText),
                 ),
               ),
             ),
           ),
 
           SizedBox(width: w * 0.03), // Space between input and icons
-
           // 2. Add Photo Icon (Image Asset) - Vertically centered by Row
           Image.asset(
             "assets/images/add_img.png",
@@ -71,7 +74,6 @@ class AddCommentWidget extends StatelessWidget {
           ),
 
           SizedBox(width: w * 0.02), // Space between icons
-
           // 3. Emoji Icon - Vertically centered by Row
           Icon(
             Icons.sentiment_satisfied_alt_outlined,

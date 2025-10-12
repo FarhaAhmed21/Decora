@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final VoidCallback? onBackPressed;
 
-  const CustomAppBar({super.key, required this.title});
+  const CustomAppBar({
+    super.key,
+    required this.title,
+    required this.onBackPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +21,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             padding: const EdgeInsets.only(left: 20),
             child: InkWell(
               borderRadius: BorderRadius.circular(12),
-              onTap: () => Navigator.pop(context),
+              onTap: onBackPressed ?? () => Navigator.pop(context),
               child: Container(
                 padding: const EdgeInsets.all(8.89),
                 decoration: BoxDecoration(

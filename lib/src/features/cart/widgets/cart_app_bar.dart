@@ -1,5 +1,6 @@
 import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/src/features/cart/widgets/invitaion_dialog.dart';
+import 'package:decora/src/features/home/main_screen.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -62,7 +63,14 @@ class _CartAppBarState extends State<CartAppBar> {
             borderRadius: BorderRadius.circular(8),
           ),
           child: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (_) => const MainLayout()),
+              );
+              MainLayout.currentIndex = 0;
+            },
+
             icon: const Icon(Icons.arrow_back_ios_new),
           ),
         ),
