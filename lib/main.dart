@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: const [Locale('en'), Locale('ar')],
-          home: const ProductDetailsScreen(),
+          home: const HomeScreen(),
           theme: ThemeData(
             fontFamily: 'Montserratt',
             scaffoldBackgroundColor: AppColors.background,

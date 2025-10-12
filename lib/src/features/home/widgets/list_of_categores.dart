@@ -4,7 +4,7 @@ import '../../../shared/theme/app_colors.dart';
 
 class Categories extends StatefulWidget {
 
-  Categories({super.key});
+  Categories({super.key, });
 
   @override
   State<Categories> createState() => _CategoriesState();
