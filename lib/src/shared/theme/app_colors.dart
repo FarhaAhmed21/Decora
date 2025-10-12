@@ -10,6 +10,8 @@ abstract class AppColors {
   static const background = Color.fromRGBO(255, 255, 255, 1);
   static const innerCardColor = Color.fromRGBO(246, 246, 246, 1);
   static const productCardColor = Color.fromRGBO(238, 243, 239, 1);
+  static const orderIconUnSelectedColor = Color.fromRGBO(123, 135, 155, 1);
+  static const shoppingIconColor = Color.fromRGBO(195, 255, 208, 0.37);
   static const innerProductCardBorder = Color.fromARGB(76, 68, 111, 77);
   static const innerProductCardTypeText = Color.fromARGB(255, 68, 111, 77);
 }

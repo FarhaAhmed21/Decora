@@ -1,4 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:decora/src/features/myOrders/widgets/order_container.dart';
 import 'package:decora/src/features/myOrders/widgets/top_slider.dart';
 import 'package:decora/src/shared/components/appbar.dart';
