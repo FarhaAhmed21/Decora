@@ -1,15 +1,15 @@
 import 'package:decora/core/l10n/app_localizations.dart';
+import 'package:decora/core/utils/app_size.dart';
 import 'package:decora/generated/assets.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomCard extends StatefulWidget {
-  // **الخطوة 1: إضافة متغير الخصم**
-  final String? offerPercentage; // يمكن أن يكون فارغًا إذا لم يكن هناك عرض
+  final String? offerPercentage; 
 
   const CustomCard({
     super.key,
-    this.offerPercentage, // جعله اختياريًا
+    this.offerPercentage, 
   });
 
   @override
@@ -26,7 +26,9 @@ class _CustomCardState extends State<CustomCard> {
 
     return Card(
       elevation: 0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(w * 0.02),
+      ),
       color: AppColors.cardColor,
       child: Container(
         width: 192,
@@ -41,14 +43,14 @@ class _CustomCardState extends State<CustomCard> {
 
                 Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(w * 0.02),
                     color: AppColors.productCardColor,
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: Image.asset(
                       Assets.luxeSofa,
-                      height: 140,
+                      height: h * 0.18,
                       width: double.infinity,
                       fit: BoxFit.cover,
                     ),
@@ -83,8 +85,8 @@ class _CustomCardState extends State<CustomCard> {
 
 
                 Positioned(
-                  top: 10,
-                  right: 10,
+                  top: h * 0.015,
+                  right: w * 0.020,
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
@@ -108,23 +110,23 @@ class _CustomCardState extends State<CustomCard> {
                         ? Image.asset(
                             Assets.heartIcon,
                             color: AppColors.primary,
-                            width: 18,
-                            height: 18,
+                            width: w * 0.05,
+                            height: h * 0.018,
                           )
                         : Image.asset(
                             Assets.heartOutline,
                             color: AppColors.primary,
-                            width: 18,
-                            height: 18,
+                            width: w * 0.05,
+                            height: h * 0.018,
                           ),
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: h * 0.008),
 
             // Title
-            const Text(
+            Text(
               "Olive Luxe Sofa",
               style: TextStyle(
                 fontWeight: FontWeight.w400,
@@ -136,12 +138,12 @@ class _CustomCardState extends State<CustomCard> {
 
             Row(
               children: [
-                Image.asset(Assets.starIcon, width: 14, height: 14),
-                const SizedBox(width: 4),
-                const Text(
+                Image.asset(Assets.starIcon, width: w * 0.04, height: w * 0.04),
+                SizedBox(width: w * 0.015),
+                Text(
                   "4.9",
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: w * 0.035,
                     fontWeight: FontWeight.w500,
                     color: AppColors.secondaryText,
                   ),
@@ -152,10 +154,10 @@ class _CustomCardState extends State<CustomCard> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
+                Text(
                   "\$250",
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: w * 0.045,
                     color: AppColors.mainText,
                     fontWeight: FontWeight.w400,
                     fontFamily: 'Montserratt',
@@ -176,18 +178,18 @@ class _CustomCardState extends State<CustomCard> {
                     );
                   },
                   child: Container(
-                    width: 43,
-                    height: 40,
-                    padding: const EdgeInsets.all(11.03),
+                    width: w * 0.09,
+                    height: h * 0.040,
+                    padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
                       color: AppColors.primary,
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(w * 0.02),
                     ),
                     child: Image.asset(
                       Assets.shoppingBagIcon,
                       color: Colors.white,
-                      width: 30,
-                      height: 30,
+                      width: w * 0.30,
+                      height: h * 0.030,
                     ),
                   ),
                 ),

@@ -15,8 +15,21 @@ class Assets {
   static String shoppingBagIcon = "assets/icons/shopping-bag.png";
   static String searchIcon = "assets/icons/search-icon.png";
   static String filterIcon = "assets/icons/fliter-icon.png";
+  static String couchImage = "assets/images/couch.png";
   static String micIcon = "assets/icons/mic-icon.png";
   static String plusIcon = "assets/icons/plus-sign-icon.png";
   static String sentIcon = "assets/icons/sent-icon.png";
   static String settingsIcon = "assets/icons/settings-icon.png";
+  static String onboarding2 = 'assets/images/onboarding2.png';
+  static String rectangle1 = 'assets/images/Top-Rectangle.png';
+  static String rectangle2 = 'assets/images/bottom-Rectangle.png';
+  static String woodImg = 'assets/images/wood.png';
+  static String fabric = 'assets/images/fabrics.png';
+  static String onBoarding3 = 'assets/images/onboarding3.png';
+  static String shippingIcon = "assets/icons/shipping-icon.png";
+  static String sideArrowIcon = "assets/icons/side-arrow.png";
+  static String trackingIcon1 = "assets/icons/icon-one.png";
+  static String trackingIcon2 = "assets/icons/icon-two.png";
+  static String trackingIcon3 = "assets/icons/icon-three.png";
+  static String trackingIcon4 = "assets/icons/icon-four.png";
 }
