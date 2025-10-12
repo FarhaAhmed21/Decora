@@ -1,5 +1,4 @@
 import 'package:decora/core/utils/app_size.dart';
-import 'package:decora/generated/assets.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/widgets.dart';
 

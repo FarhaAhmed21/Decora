@@ -12,7 +12,12 @@ class OrderTrackingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: 'Order Tracking'),
+      appBar: CustomAppBar(
+        title: 'Order Tracking',
+        onBackPressed: () {
+          Navigator.pop(context);
+        },
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
@@ -39,16 +44,16 @@ class OrderTrackingScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 8),
-                    Row(
+                    const Row(
                       children: [
-                        const Text(
+                        Text(
                           "Expected Delivery Date",
                           style: TextStyle(
                             color: AppColors.secondaryText,
                             fontSize: 16,
                           ),
                         ),
-                        const Spacer(),
+                        Spacer(),
                         Text(
                           "10 Dec 2024",
                           style: TextStyle(
@@ -59,16 +64,16 @@ class OrderTrackingScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Row(
+                    const Row(
                       children: [
-                        const Text(
+                        Text(
                           "Order ID",
                           style: TextStyle(
                             color: AppColors.secondaryText,
                             fontSize: 16,
                           ),
                         ),
-                        const Spacer(),
+                        Spacer(),
                         Text(
                           "#GR47",
                           style: TextStyle(

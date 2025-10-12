@@ -1,13 +1,7 @@
 import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/core/l10n/local_cubit.dart';
-import 'package:decora/src/features/favourites/screens/favourite_screen.dart';
-import 'package:decora/src/features/home/screens/home_screen.dart';
-import 'package:decora/src/features/myOrders/screens/my_orders_screen.dart';
-import 'package:decora/src/features/offers/offers_screen.dart';
-import 'package:decora/src/features/product_details/screens/product_details_screen.dart';
-import 'package:decora/src/features/Auth/screens/login_screen.dart';
-import 'package:decora/src/features/onboarding/screens/onboarding_screen.dart';
 import 'package:decora/src/features/splash/cubit/splash_cubit.dart';
+import 'package:decora/src/features/splash/screens/splash_screen.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,7 +35,7 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: const [Locale('en'), Locale('ar')],
-          home: const ProductDetailsScreen(),
+          home: const SplashScreen(),
           theme: ThemeData(
             fontFamily: 'Montserratt',
             scaffoldBackgroundColor: AppColors.background,
@@ -52,30 +46,30 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+// class HomePage extends StatelessWidget {
+//   const HomePage({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-    return Scaffold(
-      appBar: AppBar(title: Text(l10n.helloWorld)),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            //SearchBarWithFilter(),
-            Text(l10n.welcome),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                context.read<LocaleCubit>().toggleLocale();
-              },
-              child: Text(l10n.changeLanguage),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     final l10n = AppLocalizations.of(context)!;
+//     return Scaffold(
+//       appBar: AppBar(title: Text(l10n.helloWorld)),
+//       body: Center(
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children: [
+//             //SearchBarWithFilter(),
+//             Text(l10n.welcome),
+//             const SizedBox(height: 20),
+//             ElevatedButton(
+//               onPressed: () {
+//                 context.read<LocaleCubit>().toggleLocale();
+//               },
+//               child: Text(l10n.changeLanguage),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }

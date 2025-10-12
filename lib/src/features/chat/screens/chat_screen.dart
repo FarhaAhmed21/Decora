@@ -15,10 +15,14 @@ class ChatScreen extends StatelessWidget {
     final height = size.height;
 
     return Scaffold(
-      appBar: const CustomAppBar(title: "Admin"),
+      appBar: CustomAppBar(
+        title: "Admin",
+        onBackPressed: () {
+          Navigator.pop(context);
+        },
+      ),
       backgroundColor: AppColors.background,
       body: SafeArea(
-        
         child: Column(
           children: [
             Expanded(

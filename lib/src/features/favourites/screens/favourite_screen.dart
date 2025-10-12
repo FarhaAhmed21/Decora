@@ -1,4 +1,5 @@
 import 'package:decora/core/utils/app_size.dart';
+import 'package:decora/src/features/product_details/screens/product_details_screen.dart';
 import 'package:decora/src/shared/components/custom_card.dart';
 import 'package:decora/src/shared/components/searchbar.dart';
 import 'package:decora/src/shared/components/top_location_bar.dart';
@@ -42,7 +43,16 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                       mainAxisSpacing: 0.010 * w,
                       crossAxisSpacing: 0.010 * w,
                       children: List.generate(8, (index) {
-                        return const CustomCard(isdiscount: false,);
+                        return GestureDetector(
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const ProductDetailsScreen(),
+                            ),
+                          ),
+                          child: const CustomCard(isdiscount: false),
+                        );
                       }),
                     );
                   },

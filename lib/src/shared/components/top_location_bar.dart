@@ -1,5 +1,6 @@
 import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/generated/assets.dart';
+import 'package:decora/src/features/notifications/screens/notifications_screen.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -67,7 +68,14 @@ class TopLocationBar extends StatelessWidget {
               SizedBox(width: width * 0.009),
               InkWell(
                 borderRadius: BorderRadius.circular(width * 0.03),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const NotificationsScreen(),
+                    ),
+                  );
+                },
                 child: Container(
                   padding: EdgeInsets.all(width * 0.001),
                   width: width * 0.1,

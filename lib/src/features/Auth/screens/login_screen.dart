@@ -2,6 +2,7 @@ import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/src/features/Auth/screens/forgot_password_screen.dart';
 import 'package:decora/src/features/Auth/screens/signup_screen.dart';
 import 'package:decora/src/features/Auth/widgets/customField.dart';
+import 'package:decora/src/features/home/main_screen.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -116,7 +117,12 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(
               height: 55.0,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MainLayout()),
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
                   shape: RoundedRectangleBorder(
