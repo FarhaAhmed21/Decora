@@ -42,7 +42,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                       mainAxisSpacing: 0.010 * w,
                       crossAxisSpacing: 0.010 * w,
                       children: List.generate(8, (index) {
-                        return const CustomCard();
+                        return const CustomCard(isdiscount: false,);
                       }),
                     );
                   },

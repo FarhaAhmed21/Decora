@@ -451,6 +451,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You can now log in with your new password'**
   String get youCanLoginNow;
+
+  /// No description provided for @see_all.
+  ///
+  /// In en, this message translates to:
+  /// **'See all'**
+  String get see_all;
+
+  /// No description provided for @decora_specials.
+  ///
+  /// In en, this message translates to:
+  /// **'Decora Specials'**
+  String get decora_specials;
+
+  /// No description provided for @categories.
+  ///
+  /// In en, this message translates to:
+  /// **'Categories'**
+  String get categories;
+
+  /// No description provided for @new_collection.
+  ///
+  /// In en, this message translates to:
+  /// **'New Collection'**
+  String get new_collection;
+
+  /// No description provided for @elevate_your_living_room_with_timeless_sofas.
+  ///
+  /// In en, this message translates to:
+  /// **'Elevate your living room with timeless sofas'**
+  String get elevate_your_living_room_with_timeless_sofas;
+
+  /// No description provided for @explore.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore'**
+  String get explore;
+
+  /// No description provided for @product_details.
+  ///
+  /// In en, this message translates to:
+  /// **'Product Details'**
+  String get product_details;
+
+  /// No description provided for @price.
+  ///
+  /// In en, this message translates to:
+  /// **'Price:'**
+  String get price;
+
+  /// No description provided for @quantity.
+  ///
+  /// In en, this message translates to:
+  /// **'Quantity:'**
+  String get quantity;
+
+  /// No description provided for @colors.
+  ///
+  /// In en, this message translates to:
+  /// **'Colors:'**
+  String get colors;
+
+  /// No description provided for @reviews.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviews:'**
+  String get reviews;
+
+  /// No description provided for @try_virtual.
+  ///
+  /// In en, this message translates to:
+  /// **'Try Virtual'**
+  String get try_virtual;
 }
 
 class _AppLocalizationsDelegate

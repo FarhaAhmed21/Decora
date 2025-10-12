@@ -59,5 +59,19 @@
     "saveNewPassword": "Save New Password",
     "passwordResetSuccess": "Password Reset\nSuccessfully!",
     "youCanLoginNow": "You can now log in with your new password",
-    "resetPassword": "Reset your password"
+    "resetPassword": "Reset your password",
+    "invite":"Invite",
+    "see_all": "See all",
+   "decora_specials" :"Decora Specials",
+    "categories": "Categories",
+    "new_collection": "New Collection",
+    "elevate_your_living_room_with_timeless_sofas": "Elevate your living room with timeless sofas",
+    "explore": "Explore",
+    "product_details": "Product Details",
+    "price": "Price:",
+   "quantity":"Quantity:",
+    "colors": "Colors:",
+  "reviews": "Reviews:",
+  "try_virtual": "Try Virtual"
+
 }

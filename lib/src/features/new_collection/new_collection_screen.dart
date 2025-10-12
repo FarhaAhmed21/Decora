@@ -28,7 +28,7 @@ class NewCollectionScreen extends StatelessWidget {
               ),
               itemCount: 10, 
               itemBuilder: (context, index) {
-                return const CustomCard(); 
+                return const CustomCard(isdiscount: false,);
               },
             )), 
           ],

@@ -61,5 +61,19 @@
     "youCanLoginNow": "يمكنك الآن تسجيل الدخول باستخدام كلمة المرور الجديدة",
     "resetPassword": "إعادة تعيين كلمة المرور",
     "checkYourEmail": "تحقق من بريدك الإلكتروني",
-    "forgotPassword": "نسيت كلمة المرور"
+    "forgotPassword": "نسيت كلمة المرور",
+    "invite":"أدعو",
+    "see_all": "انظر المزيد ",
+    "decora_specials" :"خصومات ديكورا",
+    "Categories":   "الفئات",
+    "new_collection": "مجموعة جديدة",
+    "elevate_your_living_room_with_timeless_sofas": "ارتقي بغرفة معيشتك مع أرائك خالدة",
+    "explore": "استكشف",
+    "product_details": "تفاصيل المنتج",
+    "price": "السعر:",
+    "quantity":"الكمية:",
+    "colors": "الالوان المتاحة :",
+    "reviews": "التعليقات:",
+    "try_virtual":"جربها"
+
 }
