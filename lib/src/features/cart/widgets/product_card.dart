@@ -11,9 +11,11 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 3),
-      child: SizedBox(
+      child: Container(
+        constraints: const BoxConstraints(maxHeight: 130),
         width: MediaQuery.of(context).size.width,
         child: Card(
+          elevation: 0,
           color: AppColors.cardColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
@@ -29,7 +31,7 @@ class ProductCard extends StatelessWidget {
                   child: Container(
                     width: AppSize.width(context) * 0.27,
                     height: AppSize.height(context) * 0.13,
-                    color: AppColors.innerCardColor,
+                    color: AppColors.productCardColor,
                     child: Image.asset(Assets.couchImage),
                   ),
                 ),
@@ -78,7 +80,7 @@ class ProductCard extends StatelessWidget {
                           _buildTag(AppLocalizations.of(context)!.wood),
                         ],
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 16),
 
                       // Price + Quantity Controls
                       Row(
@@ -96,19 +98,24 @@ class ProductCard extends StatelessWidget {
                           Row(
                             children: [
                               Container(
-                                width: AppSize.height(context)*0.047,
-                                height: AppSize.height(context)*0.047,
+                                width: AppSize.height(context) * 0.04,
+                                height: AppSize.height(context) * 0.04,
                                 decoration: BoxDecoration(
-                                  color: Colors.grey[300],
+                                  color: const Color.fromARGB(
+                                    138,
+                                    207,
+                                    207,
+                                    207,
+                                  ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: IconButton(
                                   onPressed: () {},
                                   icon: const Icon(Icons.remove),
-                                  iconSize: 18,
+                                  iconSize: 15,
                                 ),
                               ),
-                              const SizedBox(width: 10),
+                              const SizedBox(width: 18),
                               const Text(
                                 "1",
                                 style: TextStyle(
@@ -117,10 +124,10 @@ class ProductCard extends StatelessWidget {
                                   color: Colors.black,
                                 ),
                               ),
-                              const SizedBox(width: 10),
+                              const SizedBox(width: 18),
                               Container(
-                                width: AppSize.height(context)*0.047,
-                                height: AppSize.height(context)*0.047,
+                                width: AppSize.height(context) * 0.04,
+                                height: AppSize.height(context) * 0.04,
                                 decoration: BoxDecoration(
                                   color: AppColors.primary,
                                   borderRadius: BorderRadius.circular(8),
@@ -131,7 +138,7 @@ class ProductCard extends StatelessWidget {
                                     Icons.add,
                                     color: Colors.white,
                                   ),
-                                  iconSize: 18,
+                                  iconSize: 15,
                                 ),
                               ),
                             ],
@@ -151,9 +158,9 @@ class ProductCard extends StatelessWidget {
 
   Widget _buildTag(String tag) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 5),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.green.shade300),
+        border: Border.all(color: AppColors.innerProductCardBorder),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Text(
@@ -162,7 +169,7 @@ class ProductCard extends StatelessWidget {
         style: const TextStyle(
           fontWeight: FontWeight.w400,
           fontSize: 12,
-          color: Colors.green,
+          color: AppColors.innerProductCardTypeText,
         ),
       ),
     );
