@@ -4,6 +4,8 @@ import '../../../../core/l10n/app_localizations.dart';
 import '../../../../core/utils/app_size.dart';
 import '../../../../generated/assets.dart';
 import '../../../shared/components/custom_card.dart';
+import '../../../shared/components/custom_floating_action_button.dart';
+import '../../../shared/components/nevbar.dart';
 import '../../../shared/components/searchbar.dart';
 import '../../../shared/components/special_card.dart';
 import '../../../shared/components/top_location_bar.dart';
@@ -26,6 +28,15 @@ class _HomeScreenState extends State<HomeScreen> {
     final w = AppSize.width(context);
     final isLandscape = w > h;
     return Scaffold(
+        bottomNavigationBar: CustomBottomNavBar(
+          selectedIndex: 3, // Assuming 'Profile' is the 4th item
+          onItemTapped: (index) {
+            // Handle navigation logic here
+          },
+        ),
+        floatingActionButton: const Custom_floating_action_button(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+
         body: SingleChildScrollView(
 
           child: SafeArea(child: Column(
@@ -99,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisSpacing: 0.010 * w,
                       crossAxisSpacing: 0.010 * w,
                       children: List.generate(8, (index) {
-                        return const CustomCard();
+                        return const CustomCard(isdiscount: true,offerPercentage:"20%",);
                       }),
                     );
                   },

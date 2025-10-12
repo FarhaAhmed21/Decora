@@ -98,43 +98,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get invite => 'أدعو';
 
   @override
-  String get see_all => 'انظر المزيد ';
-
-  @override
-  String get decora_specials => 'خصومات ديكورا';
-
-  @override
-  String get categories => 'Categories';
-
-  @override
-  String get new_collection => 'مجموعة جديدة';
-
-  @override
-  String get elevate_your_living_room_with_timeless_sofas =>
-      'ارتقي بغرفة معيشتك مع أرائك خالدة';
-
-  @override
-  String get explore => 'استكشف';
-
-  @override
-  String get product_details => 'تفاصيل المنتج';
-
-  @override
-  String get price => 'السعر:';
-
-  @override
-  String get quantity => 'الكمية:';
-
-  @override
-  String get colors => 'الالوان المتاحة :';
-
-  @override
-  String get reviews => 'التعليقات:';
-
-  @override
-  String get try_virtual => 'جربها';
-
-  @override
   String get login => 'تسجيل الدخول';
 
   @override
@@ -228,4 +191,41 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get youCanLoginNow =>
       'يمكنك الآن تسجيل الدخول باستخدام كلمة المرور الجديدة';
+
+  @override
+  String get see_all => 'انظر المزيد ';
+
+  @override
+  String get decora_specials => 'خصومات ديكورا';
+
+  @override
+  String get categories => 'Categories';
+
+  @override
+  String get new_collection => 'مجموعة جديدة';
+
+  @override
+  String get elevate_your_living_room_with_timeless_sofas =>
+      'ارتقي بغرفة معيشتك مع أرائك خالدة';
+
+  @override
+  String get explore => 'استكشف';
+
+  @override
+  String get product_details => 'تفاصيل المنتج';
+
+  @override
+  String get price => 'السعر:';
+
+  @override
+  String get quantity => 'الكمية:';
+
+  @override
+  String get colors => 'الالوان المتاحة :';
+
+  @override
+  String get reviews => 'التعليقات:';
+
+  @override
+  String get try_virtual => 'جربها';
 }

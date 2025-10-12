@@ -1,3 +1,4 @@
+import 'package:decora/src/shared/components/appbar.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/l10n/app_localizations.dart';
@@ -100,18 +101,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        title:  Text(AppLocalizations.of(
-          context,
-        )!.product_details),
-        centerTitle: true,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
 
       body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            CustomAppBar(title:AppLocalizations.of(
+      context,
+      )!.product_details),
             Expanded( // Scrollable content area
               child: SingleChildScrollView(
                 child: Padding(

@@ -98,43 +98,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get invite => 'Invite';
 
   @override
-  String get see_all => 'See all';
-
-  @override
-  String get decora_specials => 'Decora Specials';
-
-  @override
-  String get categories => 'Categories';
-
-  @override
-  String get new_collection => 'New Collection';
-
-  @override
-  String get elevate_your_living_room_with_timeless_sofas =>
-      'Elevate your living room with timeless sofas';
-
-  @override
-  String get explore => 'Explore';
-
-  @override
-  String get product_details => 'Product Details';
-
-  @override
-  String get price => 'Price:';
-
-  @override
-  String get quantity => 'Quantity:';
-
-  @override
-  String get colors => 'Colors:';
-
-  @override
-  String get reviews => 'Reviews:';
-
-  @override
-  String get try_virtual => 'Try Virtual';
-
-  @override
   String get login => 'Login';
 
   @override
@@ -228,4 +191,41 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get youCanLoginNow => 'You can now log in with your new password';
+
+  @override
+  String get see_all => 'See all';
+
+  @override
+  String get decora_specials => 'Decora Specials';
+
+  @override
+  String get categories => 'Categories';
+
+  @override
+  String get new_collection => 'New Collection';
+
+  @override
+  String get elevate_your_living_room_with_timeless_sofas =>
+      'Elevate your living room with timeless sofas';
+
+  @override
+  String get explore => 'Explore';
+
+  @override
+  String get product_details => 'Product Details';
+
+  @override
+  String get price => 'Price:';
+
+  @override
+  String get quantity => 'Quantity:';
+
+  @override
+  String get colors => 'Colors:';
+
+  @override
+  String get reviews => 'Reviews:';
+
+  @override
+  String get try_virtual => 'Try Virtual';
 }
