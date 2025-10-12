@@ -5,12 +5,9 @@ import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomCard extends StatefulWidget {
-  final String? offerPercentage; 
+  final String? offerPercentage;
 
-  const CustomCard({
-    super.key,
-    this.offerPercentage, 
-  });
+  const CustomCard({super.key, this.offerPercentage});
 
   @override
   State<CustomCard> createState() => _CustomCardState();
@@ -21,8 +18,10 @@ class _CustomCardState extends State<CustomCard> {
 
   @override
   Widget build(BuildContext context) {
-
-    final bool hasOffer = widget.offerPercentage != null && widget.offerPercentage!.isNotEmpty;
+    final h = AppSize.height(context);
+    final w = AppSize.width(context);
+    final bool hasOffer =
+        widget.offerPercentage != null && widget.offerPercentage!.isNotEmpty;
 
     return Card(
       elevation: 0,
@@ -40,7 +39,6 @@ class _CustomCardState extends State<CustomCard> {
           children: [
             Stack(
               children: [
-
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(w * 0.02),
@@ -57,7 +55,6 @@ class _CustomCardState extends State<CustomCard> {
                   ),
                 ),
 
-
                 if (hasOffer)
                   Positioned(
                     top: 10,
@@ -66,13 +63,16 @@ class _CustomCardState extends State<CustomCard> {
                       alignment: Alignment.center,
                       width: 72,
                       height: 22,
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 4,
+                      ),
                       decoration: BoxDecoration(
                         color: AppColors.offerColor,
                         borderRadius: BorderRadius.circular(25),
                       ),
                       child: Text(
-                        "${widget.offerPercentage} OFF", 
+                        "${widget.offerPercentage} OFF",
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 10,
@@ -81,8 +81,6 @@ class _CustomCardState extends State<CustomCard> {
                       ),
                     ),
                   ),
-
-
 
                 Positioned(
                   top: h * 0.015,
