@@ -9,17 +9,19 @@ class CustomSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final h = AppSize.height(context);
+    final w = AppSize.width(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: EdgeInsets.symmetric(horizontal: w * 0.035),
       child: Row(
         children: [
           Container(
-            width: 313,
-            height: 45,
+            width: w * 0.78,
+            height: h * 0.047,
             decoration: ShapeDecoration(
               color: const Color(0xFFF6F6F6),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(w * 0.033),
               ),
             ),
             child: Row(
@@ -29,7 +31,7 @@ class CustomSearchBar extends StatelessWidget {
                     height: AppSize.height(context) * 0.04,
                     decoration: BoxDecoration(
                       color: AppColors.cardColor,
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(w * 0.033),
                     ),
                     child: TextField(
                       decoration: InputDecoration(
@@ -46,7 +48,7 @@ class CustomSearchBar extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(width: 4),
+          SizedBox(width: w * 0.01),
           InkWell(
             borderRadius: BorderRadius.circular(12),
             onTap: () {},

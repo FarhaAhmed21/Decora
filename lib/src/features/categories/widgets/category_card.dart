@@ -13,31 +13,32 @@ class CategoryCard extends StatelessWidget {
   final VoidCallback? onTap;
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: onTap,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
-        spacing: 16,
+        spacing: size.width * 0.04,
         children: [
           Container(
-            width: 186,
-            height: 157,
+            width: size.width * 0.5,
+            height: size.width * 0.38,
             decoration: ShapeDecoration(
               image: DecorationImage(image: AssetImage(img), fit: BoxFit.cover),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(size.width * 0.04),
               ),
             ),
           ),
           Text(
             title,
             textAlign: TextAlign.center,
-            style: const TextStyle(
+            style: TextStyle(
               color: AppColors.mainText,
               fontWeight: FontWeight.w800,
-              fontSize: 16,
+              fontSize: size.width * 0.04,
               height: 1,
             ),
           ),
