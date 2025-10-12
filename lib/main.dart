@@ -2,6 +2,7 @@ import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/core/l10n/local_cubit.dart';
 import 'package:decora/src/features/home/screens/home_screen.dart';
 import 'package:decora/src/features/myOrders/screens/my_orders_screen.dart';
+import 'package:decora/src/features/product_details/screens/product_details_screen.dart';
 import 'package:decora/src/features/splash/cubit/splash_cubit.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: const [Locale('en'), Locale('ar')],
-          home: const HomeScreen(),
+          home: const ProductDetailsScreen(),
           theme: ThemeData(
             fontFamily: 'Montserratt',
             scaffoldBackgroundColor: AppColors.background,

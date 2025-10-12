@@ -34,6 +34,12 @@
     "Categories":   "الفئات",
     "new_collection": "مجموعة جديدة",
     "elevate_your_living_room_with_timeless_sofas": "ارتقي بغرفة معيشتك مع أرائك خالدة",
-    "explore": "استكشف"
+    "explore": "استكشف",
+    "product_details": "تفاصيل المنتج",
+    "price": "السعر:",
+    "quantity":"الكمية:",
+    "colors": "الالوان المتاحة :",
+    "reviews": "التعليقات:",
+    "try_virtual":"جربها"
 
 }

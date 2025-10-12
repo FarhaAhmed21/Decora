@@ -22,4 +22,7 @@ class Assets {
   static String settingsIcon = "assets/icons/settings-icon.png";
   static String shippingIcon = "assets/icons/shipping-icon.png";
   static String sideArrowIcon = "assets/icons/side-arrow.png";
+  static String vrnIcon = "assets/images/vr_icon.png";
+  static String addImg = "assets/images/add_img.png";
+
 }

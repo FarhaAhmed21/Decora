@@ -115,4 +115,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get explore => 'استكشف';
+
+  @override
+  String get product_details => 'تفاصيل المنتج';
+
+  @override
+  String get price => 'السعر:';
+
+  @override
+  String get quantity => 'الكمية:';
+
+  @override
+  String get colors => 'الالوان المتاحة :';
+
+  @override
+  String get reviews => 'التعليقات:';
+
+  @override
+  String get try_virtual => 'جربها';
 }

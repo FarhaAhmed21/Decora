@@ -34,6 +34,12 @@
     "categories": "Categories",
     "new_collection": "New Collection",
     "elevate_your_living_room_with_timeless_sofas": "Elevate your living room with timeless sofas",
-    "explore": "Explore"
+    "explore": "Explore",
+    "product_details": "Product Details",
+    "price": "Price:",
+   "quantity":"Quantity:",
+    "colors": "Colors:",
+  "reviews": "Reviews:",
+  "try_virtual": "Try Virtual"
 
 }

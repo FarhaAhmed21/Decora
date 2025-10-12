@@ -307,6 +307,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Explore'**
   String get explore;
+
+  /// No description provided for @product_details.
+  ///
+  /// In en, this message translates to:
+  /// **'Product Details'**
+  String get product_details;
+
+  /// No description provided for @price.
+  ///
+  /// In en, this message translates to:
+  /// **'Price:'**
+  String get price;
+
+  /// No description provided for @quantity.
+  ///
+  /// In en, this message translates to:
+  /// **'Quantity:'**
+  String get quantity;
+
+  /// No description provided for @colors.
+  ///
+  /// In en, this message translates to:
+  /// **'Colors:'**
+  String get colors;
+
+  /// No description provided for @reviews.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviews:'**
+  String get reviews;
+
+  /// No description provided for @try_virtual.
+  ///
+  /// In en, this message translates to:
+  /// **'Try Virtual'**
+  String get try_virtual;
 }
 
 class _AppLocalizationsDelegate

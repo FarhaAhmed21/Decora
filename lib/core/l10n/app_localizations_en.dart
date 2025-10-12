@@ -115,4 +115,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get explore => 'Explore';
+
+  @override
+  String get product_details => 'Product Details';
+
+  @override
+  String get price => 'Price:';
+
+  @override
+  String get quantity => 'Quantity:';
+
+  @override
+  String get colors => 'Colors:';
+
+  @override
+  String get reviews => 'Reviews:';
+
+  @override
+  String get try_virtual => 'Try Virtual';
 }
