@@ -36,7 +36,7 @@ class CustomSearchBar extends StatelessWidget {
                     child: TextField(
                       decoration: InputDecoration(
                         prefixIcon: Image.asset(Assets.searchIcon),
-                        hintText: AppLocalizations.of(context)!.searchFurniture,
+                        hintText: AppLocalizations.of(context)?.searchFurniture,
                         hintStyle: const TextStyle(
                           color: AppColors.secondaryText,
                         ),
@@ -53,7 +53,7 @@ class CustomSearchBar extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             onTap: () {},
             child: Container(
-              padding: const EdgeInsets.all(8.89),
+              padding: const EdgeInsets.all(9),
               decoration: BoxDecoration(
                 color: AppColors.primary,
                 borderRadius: BorderRadius.circular(12),

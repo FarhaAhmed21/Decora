@@ -31,4 +31,8 @@ class Assets {
   static String vrnIcon = "assets/images/vr_icon.png";
   static String addImg = "assets/images/add_img.png";
 
+  static String trackingIcon1 = "assets/icons/icon-one.png";
+  static String trackingIcon2 = "assets/icons/icon-two.png";
+  static String trackingIcon3 = "assets/icons/icon-three.png";
+  static String trackingIcon4 = "assets/icons/icon-four.png";
 }
