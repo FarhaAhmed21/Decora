@@ -1,4 +1,5 @@
 import 'package:decora/src/features/profile/widgets/profile_body.dart';
+import 'package:decora/src/shared/components/custom_floating_action_button.dart';
 import 'package:flutter/material.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:decora/src/shared/components/nevbar.dart';
@@ -21,17 +22,7 @@ class ProfileScreen extends StatelessWidget {
           // Handle navigation logic here
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: AppColors.primaryGreen,
-        shape: const CircleBorder(),
-        child: Image.asset(
-          'assets/icons/VTO.png',
-          height: 24,
-          width: 24,
-          color: Colors.white,
-        ),
-      ),
+      floatingActionButton: const Custom_floating_action_button(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
