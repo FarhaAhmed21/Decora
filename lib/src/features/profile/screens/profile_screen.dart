@@ -1,6 +1,6 @@
+import 'package:decora/src/features/profile/widgets/profile_body.dart';
 import 'package:flutter/material.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
-import 'package:decora/src/shared/components/appbar.dart';
 import 'package:decora/src/shared/components/nevbar.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -10,7 +10,11 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      body:  const ProfileBody(name: "Abdelrahman Taher",email: "abdolrahman.taher",profileImagepath: "assets/images/ss.jpg",),
+      body: const ProfileBody(
+        name: "Abdelrahman Taher",
+        email: "abdolrahman.taher",
+        profileImagepath: "assets/images/ss.jpg",
+      ),
       bottomNavigationBar: CustomBottomNavBar(
         selectedIndex: 3, // Assuming 'Profile' is the 4th item
         onItemTapped: (index) {
@@ -21,140 +25,14 @@ class ProfileScreen extends StatelessWidget {
         onPressed: () {},
         backgroundColor: AppColors.primaryGreen,
         shape: const CircleBorder(),
-        child: Image.asset('assets/icons/VTO.png', height: 24, width: 24, color: Colors.white), 
+        child: Image.asset(
+          'assets/icons/VTO.png',
+          height: 24,
+          width: 24,
+          color: Colors.white,
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-    );
-  }
-}
-class ProfileBody extends StatelessWidget {
-  final String name;
-  final String email;
-  final String profileImagepath;
-  
-  const ProfileBody({super.key, required this.name, required this.email, required this.profileImagepath});
-  @override
-  Widget build(BuildContext context) {
-    final List<String> settingsItems = [
-      'Edit Profile',
-      'Change Password',
-      'Transaction History',
-      'Payment Methods',
-      'Help & Support',
-      'Logout',
-    ];
-    return Column(
-      children: [
-        SizedBox(height: MediaQuery.of(context).padding.top + 5),
-        const CustomAppBar(title: 'Profile'),
-        Expanded(
-          child: SingleChildScrollView(
-            //why 
-            scrollDirection: Axis.vertical,
-            physics: const BouncingScrollPhysics(),
-            child: Column(
-              children: [
-                const SizedBox(height: 30),
-                CircleAvatar(
-                  radius: 73,
-                  backgroundColor: AppColors.primary,
-                  child: CircleAvatar(
-                    radius: 70,
-                    backgroundImage: AssetImage(profileImagepath),
-                  ),
-                ),
-                const SizedBox(height: 15),
-                Text(
-                  name,
-                  style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: AppColors.textColor)
-                ),
-                const SizedBox(height: 5),
-                Text(
-                  email,
-                  style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 14, color: AppColors.textColor)
-                ),
-                const SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0), 
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child: Column(
-                      children: settingsItems.map((title) {
-                        return CustomSettingsTile(
-                          title: title,
-                          iconPath: 'assets/icons/arrow-left-01.png', 
-                          onTap: () {
-                            print('$title tapped!');
-                          },
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class CustomSettingsTile extends StatelessWidget {
-  final String title;
-  final String iconPath;
-  final VoidCallback onTap;
-  
-  static final BorderRadius tileBorderRadius = BorderRadius.circular(8);
-
-  const CustomSettingsTile({
-    super.key,
-    required this.title,
-    required this.iconPath,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10.0), 
-      
-      child: ClipRRect(
-        borderRadius: tileBorderRadius,
-        child: InkWell(
-          onTap: onTap,
-          splashColor: const Color.fromARGB(255, 220, 220, 220), 
-          borderRadius: tileBorderRadius, 
-          
-          child: Container(
-            height: 62, 
-            width: double.infinity, 
-            decoration: const BoxDecoration(
-              color: Color.fromRGBO(246, 246, 246, 1),
-            ),
-            
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w400, 
-                      fontSize: 16, 
-                      color: AppColors.mainText,
-                      fontFamily: 'Montserratt',
-                    ),
-                  ),
-
-                  Image.asset(iconPath, height: 20, width: 20), 
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

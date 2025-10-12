@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:decora/src/shared/components/appbar.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
+
 class EditProfileUI extends StatelessWidget {
   final String profileImagePath;
 
@@ -9,7 +10,6 @@ class EditProfileUI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       backgroundColor: Colors.white,
       body: Column(
         children: [
@@ -20,10 +20,9 @@ class EditProfileUI extends StatelessWidget {
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Column(
-            
                 children: [
                   const SizedBox(height: 20),
-            
+
                   // ---------------- Profile Image ----------------
                   Stack(
                     alignment: Alignment.bottomRight,
@@ -37,33 +36,37 @@ class EditProfileUI extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        width:44 ,
-                        height:44 ,
+                        width: 44,
+                        height: 44,
                         margin: const EdgeInsets.only(bottom: 3, right: 6),
                         decoration: const BoxDecoration(
                           color: AppColors.primary,
                           shape: BoxShape.circle,
                         ),
                         padding: const EdgeInsets.all(4),
-                        child:  IconButton(
-                          icon: Image.asset('assets/icons/edit-02.png', height: 24, width: 24, color: Colors.white,),
+                        child: IconButton(
+                          icon: Image.asset(
+                            'assets/icons/edit-02.png',
+                            height: 24,
+                            width: 24,
+                            color: Colors.white,
+                          ),
                           onPressed: () {},
                           iconSize: 20,
                         ),
                       ),
                     ],
                   ),
-            
+
                   const SizedBox(height: 20),
-            
-                  
+
                   _buildField("Name", "Name"),
                   _buildField("Email", "Email"),
                   _buildField("Phone Number", "Phone Number"),
                   _buildField("Location", "Description.."),
-            
+
                   const SizedBox(height: 5),
-            
+
                   Row(
                     children: [
                       Container(
@@ -86,9 +89,9 @@ class EditProfileUI extends StatelessWidget {
                       ),
                     ],
                   ),
-            
+
                   const SizedBox(height: 50),
-            
+
                   // ---------------- Save Button ----------------
                   SizedBox(
                     width: double.infinity,
@@ -111,7 +114,7 @@ class EditProfileUI extends StatelessWidget {
                       ),
                     ),
                   ),
-            
+
                   const SizedBox(height: 20),
                 ],
               ),
@@ -123,8 +126,6 @@ class EditProfileUI extends StatelessWidget {
   }
 
   Widget _buildField(String label, String hint) {
-
-   
     return Padding(
       padding: const EdgeInsets.only(bottom: 15),
       child: Column(
@@ -132,15 +133,23 @@ class EditProfileUI extends StatelessWidget {
         children: [
           Text(
             label,
-            style:
-                const TextStyle(fontWeight: FontWeight.w400, color:AppColors.mainText, fontSize: 16,fontFamily: 'Montserratt'),
+            style: const TextStyle(
+              fontWeight: FontWeight.w400,
+              color: AppColors.mainText,
+              fontSize: 16,
+              fontFamily: 'Montserratt',
+            ),
           ),
           const SizedBox(height: 5),
           TextField(
-            maxLines: label=="Location"?3: 1,
+            maxLines: label == "Location" ? 3 : 1,
             decoration: InputDecoration(
               hintText: hint,
-              hintStyle: const TextStyle(color: AppColors.secondaryText, fontSize: 14,fontFamily: 'Montserratt'),
+              hintStyle: const TextStyle(
+                color: AppColors.secondaryText,
+                fontSize: 14,
+                fontFamily: 'Montserratt',
+              ),
               filled: true,
               fillColor: const Color(0xFFF6F6F6),
               border: OutlineInputBorder(
