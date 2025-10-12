@@ -8,7 +8,7 @@ class Custom_floating_action_button extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       onPressed: () {},
-      backgroundColor: AppColors.primaryGreen,
+      backgroundColor: AppColors.primary,
       shape: const CircleBorder(),
       child: Image.asset(
         'assets/icons/VTO.png',
