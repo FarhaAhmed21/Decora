@@ -5,7 +5,9 @@ import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomCard extends StatefulWidget {
-  const CustomCard({super.key});
+  final String? offerPercentage;
+
+  const CustomCard({super.key, this.offerPercentage});
 
   @override
   State<CustomCard> createState() => _CustomCardState();
@@ -13,10 +15,14 @@ class CustomCard extends StatefulWidget {
 
 class _CustomCardState extends State<CustomCard> {
   bool isFavourite = false;
+
   @override
   Widget build(BuildContext context) {
     final h = AppSize.height(context);
     final w = AppSize.width(context);
+    final bool hasOffer =
+        widget.offerPercentage != null && widget.offerPercentage!.isNotEmpty;
+
     return Card(
       elevation: 0,
       shape: RoundedRectangleBorder(
@@ -24,11 +30,10 @@ class _CustomCardState extends State<CustomCard> {
       ),
       color: AppColors.cardColor,
       child: Container(
-        width: w * 0.20,
-        padding: EdgeInsets.all(w * 0.025),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(w * 0.02),
-        ),
+        width: 192,
+        height: 276,
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -40,6 +45,7 @@ class _CustomCardState extends State<CustomCard> {
                     color: AppColors.productCardColor,
                   ),
                   child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
                     child: Image.asset(
                       Assets.luxeSofa,
                       height: h * 0.18,
@@ -48,6 +54,33 @@ class _CustomCardState extends State<CustomCard> {
                     ),
                   ),
                 ),
+
+                if (hasOffer)
+                  Positioned(
+                    top: 10,
+                    left: 10,
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: 72,
+                      height: 22,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.offerColor,
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: Text(
+                        "${widget.offerPercentage} OFF",
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
 
                 Positioned(
                   top: h * 0.015,
@@ -66,11 +99,6 @@ class _CustomCardState extends State<CustomCard> {
                               ),
                               backgroundColor: AppColors.primary,
                               duration: const Duration(seconds: 1),
-                              // behavior:
-                              //     SnackBarBehavior.floating,
-                              // shape: RoundedRectangleBorder(
-                              //   borderRadius: BorderRadius.circular(12),
-                              // ),
                             ),
                           );
                         }
@@ -99,13 +127,13 @@ class _CustomCardState extends State<CustomCard> {
             Text(
               "Olive Luxe Sofa",
               style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: w * 0.04,
+                fontWeight: FontWeight.w400,
+                fontSize: 16,
                 color: AppColors.mainText,
+                fontFamily: 'Montserratt',
               ),
             ),
 
-            //const SizedBox(height: 1),
             Row(
               children: [
                 Image.asset(Assets.starIcon, width: w * 0.04, height: w * 0.04),
@@ -121,7 +149,6 @@ class _CustomCardState extends State<CustomCard> {
               ],
             ),
 
-            //const SizedBox(height: 6),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -130,7 +157,8 @@ class _CustomCardState extends State<CustomCard> {
                   style: TextStyle(
                     fontSize: w * 0.045,
                     color: AppColors.mainText,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
+                    fontFamily: 'Montserratt',
                   ),
                 ),
                 GestureDetector(
@@ -144,11 +172,6 @@ class _CustomCardState extends State<CustomCard> {
                         ),
                         backgroundColor: AppColors.primary,
                         duration: const Duration(seconds: 1),
-                        // behavior:
-                        //     SnackBarBehavior.floating,
-                        // shape: RoundedRectangleBorder(
-                        //   borderRadius: BorderRadius.circular(12),
-                        // ),
                       ),
                     );
                   },
