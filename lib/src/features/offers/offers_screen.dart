@@ -15,7 +15,7 @@ class OffersScreen extends StatelessWidget {
     final isLandscape = w > h;
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.background(),
 
       body: SafeArea(
         child: Column(

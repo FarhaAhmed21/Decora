@@ -31,9 +31,9 @@ class MessageWidget extends StatelessWidget {
 
           Flexible(
             child: Container(
-              padding: const EdgeInsets.all(12),
+              padding: const  EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: AppColors.cardColor,
+                color: AppColors.cardColor(),
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(isSender ? 12 : 0),
                   topRight: Radius.circular(isSender ? 0 : 12),
@@ -43,7 +43,7 @@ class MessageWidget extends StatelessWidget {
               ),
               child: Text(
                 text,
-                style: const TextStyle(fontSize: 14, color: AppColors.mainText),
+                style:  TextStyle(fontSize: 14, color: AppColors.mainText()),
               ),
             ),
           ),

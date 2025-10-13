@@ -8,11 +8,11 @@ Widget customField(String label) {
       Text(label, style: const TextStyle(fontSize: 16)),
       const SizedBox(height: 6),
       TextField(
-        cursorColor: AppColors.primary,
+        cursorColor: AppColors.primary(),
         decoration: InputDecoration(
-          focusedBorder: const OutlineInputBorder(
+          focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(12.0)),
-            borderSide: BorderSide(color: AppColors.primary, width: 1.5),
+            borderSide: BorderSide(color: AppColors.primary(), width: 1.5),
           ),
           hintText: label,
           hintStyle: const TextStyle(fontSize: 14),

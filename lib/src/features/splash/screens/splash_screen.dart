@@ -48,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen>
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.background,
+        backgroundColor: Colors.white,
         body: Center(
           child: Lottie.asset(
             'assets/animations/splash-animation.json',

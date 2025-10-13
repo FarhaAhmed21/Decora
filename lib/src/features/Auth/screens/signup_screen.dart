@@ -24,7 +24,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Directionality(
       textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
       child: Scaffold(
-        backgroundColor: AppColors.background,
+        backgroundColor: AppColors.background(),
         body: SafeArea(
           child: SingleChildScrollView(
             padding: EdgeInsets.symmetric(
@@ -77,8 +77,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Text(
                   tr.accessCollections,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: AppColors.secondaryText,
+                  style: TextStyle(
+                    color: AppColors.secondaryText(),
                     fontSize: 13,
                   ),
                 ),
@@ -95,7 +95,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   height: 55,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
+                      backgroundColor: AppColors.primary(),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -129,12 +129,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
         Text(label, style: const TextStyle(fontSize: 16)),
         const SizedBox(height: 6),
         TextField(
-          cursorColor: AppColors.primary,
+          cursorColor: AppColors.primary(),
           obscureText: _obscurePassword,
           decoration: InputDecoration(
-            focusedBorder: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(12.0)),
-              borderSide: BorderSide(color: AppColors.primary, width: 1.5),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(12.0)),
+              borderSide: BorderSide(color: AppColors.primary(), width: 1.5),
             ),
             hintText: label,
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),

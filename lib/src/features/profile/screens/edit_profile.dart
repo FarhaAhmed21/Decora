@@ -33,7 +33,7 @@ class EditProfileUI extends StatelessWidget {
                     alignment: Alignment.bottomRight,
                     children: [
                       CircleAvatar(
-                        backgroundColor: AppColors.primary,
+                        backgroundColor: AppColors.primary(),
                         radius: 73,
                         child: CircleAvatar(
                           radius: 70,
@@ -44,8 +44,8 @@ class EditProfileUI extends StatelessWidget {
                         width: 44,
                         height: 44,
                         margin: const EdgeInsets.only(bottom: 3, right: 6),
-                        decoration: const BoxDecoration(
-                          color: AppColors.primary,
+                        decoration: BoxDecoration(
+                          color: AppColors.primary(),
                           shape: BoxShape.circle,
                         ),
                         padding: const EdgeInsets.all(4),
@@ -75,8 +75,8 @@ class EditProfileUI extends StatelessWidget {
                   Row(
                     children: [
                       Container(
-                        decoration: const BoxDecoration(
-                          color: AppColors.primary,
+                        decoration: BoxDecoration(
+                          color: AppColors.primary(),
                           shape: BoxShape.circle,
                         ),
                         width: 30,
@@ -104,7 +104,7 @@ class EditProfileUI extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primary,
+                        backgroundColor: AppColors.primary(),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -138,9 +138,9 @@ class EditProfileUI extends StatelessWidget {
         children: [
           Text(
             label,
-            style: const TextStyle(
+            style: TextStyle(
               fontWeight: FontWeight.w400,
-              color: AppColors.mainText,
+              color: AppColors.mainText(),
               fontSize: 16,
               fontFamily: 'Montserratt',
             ),
@@ -150,8 +150,8 @@ class EditProfileUI extends StatelessWidget {
             maxLines: label == "Location" ? 3 : 1,
             decoration: InputDecoration(
               hintText: hint,
-              hintStyle: const TextStyle(
-                color: AppColors.secondaryText,
+              hintStyle: TextStyle(
+                color: AppColors.secondaryText(),
                 fontSize: 14,
                 fontFamily: 'Montserratt',
               ),

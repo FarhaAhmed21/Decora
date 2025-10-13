@@ -4,9 +4,10 @@ import '../../../shared/theme/app_colors.dart';
 import '../Logic/comment.dart';
 
 Widget BuildCommentTile(Comment comment) {
-
   return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 4.0), // Outer padding for separation
+    padding: const EdgeInsets.symmetric(
+      vertical: 4.0,
+    ), // Outer padding for separation
     child: Column(
       children: [
         Row(
@@ -19,18 +20,20 @@ Widget BuildCommentTile(Comment comment) {
             ),
             const SizedBox(width: 8),
 
-                Expanded(
+            Expanded(
               child: Container(
-                padding: const EdgeInsets.all(12.0), // Padding inside the gray box
+                padding: const EdgeInsets.all(
+                  12.0,
+                ), // Padding inside the gray box
                 decoration: BoxDecoration(
-                  color: AppColors.cardColor.withOpacity(0.9),
+                  color: AppColors.cardColor(),
                   borderRadius: BorderRadius.circular(12.0),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                     Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
@@ -38,33 +41,31 @@ Widget BuildCommentTile(Comment comment) {
                             comment.name,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 18,
-                              color: AppColors.mainText,
+                              color: AppColors.mainText(),
                             ),
                           ),
                         ),
 
-                              Text(
+                        Text(
                           comment.date,
                           style: TextStyle(
                             fontSize: 14,
-                            color: AppColors.secondaryText.withOpacity(0.8),
+                            color: AppColors.secondaryText(),
                           ),
                         ),
                       ],
                     ),
                     const SizedBox(height: 4),
 
-
                     Text(
                       comment.text,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 16,
-                        color: AppColors.secondaryText,
+                        color: AppColors.secondaryText(),
                       ),
                     ),
-
 
                     if (comment.imagePaths.isNotEmpty)
                       Padding(

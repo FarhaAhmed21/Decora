@@ -38,7 +38,7 @@ class AddCommentWidget extends StatelessWidget {
             child: Container(
               height: containerHeight, // Use the defined height
               decoration: BoxDecoration(
-                color: AppColors.cardColor,
+                color: AppColors.cardColor(),
                 borderRadius: BorderRadius.circular(12),
               ),
               padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -49,7 +49,7 @@ class AddCommentWidget extends StatelessWidget {
                   decoration: InputDecoration(
                     hintText: 'Write Your Review',
                     hintStyle: TextStyle(
-                      color: AppColors.secondaryText.withOpacity(0.5),
+                      color: AppColors.secondaryText(),
                       fontSize: isLandscape ? w * 0.018 : 16,
                     ),
                     border: InputBorder.none,
@@ -59,7 +59,7 @@ class AddCommentWidget extends StatelessWidget {
                       vertical: -verticalPadding,
                     ),
                   ),
-                  style: const TextStyle(color: AppColors.mainText),
+                  style: TextStyle(color: AppColors.mainText()),
                 ),
               ),
             ),
@@ -77,7 +77,7 @@ class AddCommentWidget extends StatelessWidget {
           // 3. Emoji Icon - Vertically centered by Row
           Icon(
             Icons.sentiment_satisfied_alt_outlined,
-            color: AppColors.secondaryText.withOpacity(0.8),
+            color: AppColors.secondaryText(),
             size: iconSize,
           ),
         ],

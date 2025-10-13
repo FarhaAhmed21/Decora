@@ -21,22 +21,22 @@ class ProductDetailsScreen extends StatefulWidget {
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   final List<ProductColor> availableColors = [
     ProductColor(
-      swatchColor: AppColors.orange,
+      swatchColor: AppColors.orange(),
       imagePath: Assets.luxeSofa,
       colorName: 'Terracotta',
     ),
     ProductColor(
-      swatchColor: AppColors.innerCardColor,
+      swatchColor: AppColors.innerCardColor(),
       imagePath: Assets.luxeSofa,
       colorName: 'Forest Green',
     ),
     ProductColor(
-      swatchColor: AppColors.primary,
+      swatchColor: AppColors.primary(),
       imagePath: Assets.luxeSofa,
       colorName: 'Charcoal Black',
     ),
     ProductColor(
-      swatchColor: AppColors.productCardColor,
+      swatchColor: AppColors.productCardColor(),
       imagePath: Assets.bedRoom,
       colorName: 'Mustard Yellow',
     ),
@@ -100,7 +100,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         : h * 0.25; // Taller in landscape
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.background(),
 
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -135,7 +135,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         SizedBox(width: w * 0.02),
                         Column(
                           children: [
-                            // Thumbnails (Using responsive size)
                             ...List.generate(
                               3,
                               (index) => Padding(
@@ -145,10 +144,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   height: imageContainerSize,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8.0),
-                                    color: AppColors.innerCardColor,
+                                    color: AppColors.innerCardColor(),
                                     border: index == 0
                                         ? Border.all(
-                                            color: AppColors.primary,
+                                            color: AppColors.primary(),
                                             width: 2.0,
                                           )
                                         : null,
@@ -181,7 +180,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               productName,
                               style: TextStyle(
                                 fontSize: isLandscape ? w * 0.025 : 18,
-                                color: AppColors.mainText,
+                                color: AppColors.mainText(),
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -189,7 +188,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               extraProductInfo,
                               style: TextStyle(
                                 fontSize: isLandscape ? w * 0.02 : 14,
-                                color: AppColors.secondaryText,
+                                color: AppColors.secondaryText(),
                               ),
                             ),
                           ],
@@ -207,7 +206,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                         context,
                                       )!.product_added_to_favourite_successfully,
                                     ),
-                                    backgroundColor: AppColors.primary,
+                                    backgroundColor: AppColors.primary(),
                                     duration: const Duration(seconds: 1),
                                   ),
                                 );
@@ -218,7 +217,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             isFavourite
                                 ? Icons.favorite
                                 : Icons.favorite_border,
-                            color: AppColors.primary,
+                            color: AppColors.primary(),
                             size: isLandscape
                                 ? w * 0.03
                                 : 30, // Responsive icon size
@@ -237,7 +236,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           height: isLandscape ? w * 0.1 : 60,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8.0),
-                            color: AppColors.innerCardColor,
+                            color: AppColors.innerCardColor(),
                             boxShadow: [
                               BoxShadow(
                                 // ignore: deprecated_member_use
@@ -257,7 +256,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       productDetails,
                       style: TextStyle(
                         fontSize: isLandscape ? w * 0.02 : 16,
-                        color: AppColors.secondaryText,
+                        color: AppColors.secondaryText(),
                       ),
                     ),
                     SizedBox(height: h * 0.02), // Responsive spacing
@@ -268,9 +267,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       children: [
                         Text(
                           AppLocalizations.of(context)!.colors,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 16,
-                            color: AppColors.mainText,
+                            color: AppColors.mainText(),
                           ),
                         ),
 
@@ -288,7 +287,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             Assets.vrnIcon,
                             width: 20,
                             height: 20,
-                            color: AppColors.cardColor,
+                            color: AppColors.cardColor(),
                           ),
                           label: Text(
                             AppLocalizations.of(context)!.try_virtual,
@@ -298,8 +297,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.primary,
-                            foregroundColor: AppColors.cardColor,
+                            backgroundColor: AppColors.primary(),
+                            foregroundColor: AppColors.cardColor(),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12.0),
                             ),
@@ -361,9 +360,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           children: [
                             Text(
                               AppLocalizations.of(context)!.price,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 16,
-                                color: AppColors.mainText,
+                                color: AppColors.mainText(),
                               ),
                             ),
                             Text(
@@ -378,9 +377,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           children: [
                             Text(
                               AppLocalizations.of(context)!.quantity,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 16,
-                                color: AppColors.mainText,
+                                color: AppColors.mainText(),
                               ),
                             ),
                             Container(
@@ -388,7 +387,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               height: isLandscape ? h * 0.05 : 30,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8.0),
-                                color: AppColors.cardColor,
+                                color: AppColors.cardColor(),
                               ),
                               child: Row(
                                 mainAxisAlignment:
@@ -409,14 +408,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                         borderRadius: BorderRadius.circular(
                                           8.0,
                                         ),
-                                        color: AppColors.innerCardColor,
+                                        color: AppColors.innerCardColor(),
                                       ),
-                                      child: const Center(
+                                      child: Center(
                                         child: Text(
                                           "-",
                                           style: TextStyle(
                                             fontSize: 16,
-                                            color: AppColors.mainText,
+                                            color: AppColors.mainText(),
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
@@ -425,9 +424,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   ),
                                   Text(
                                     quantity.toString(),
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 16,
-                                      color: AppColors.mainText,
+                                      color: AppColors.mainText(),
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -444,14 +443,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                         borderRadius: BorderRadius.circular(
                                           8.0,
                                         ),
-                                        color: AppColors.primary,
+                                        color: AppColors.primary(),
                                       ),
-                                      child: const Center(
+                                      child: Center(
                                         child: Text(
                                           "+",
                                           style: TextStyle(
                                             fontSize: 16,
-                                            color: AppColors.cardColor,
+                                            color: AppColors.cardColor(),
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
@@ -474,17 +473,17 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       children: [
                         Text(
                           "${AppLocalizations.of(context)!.reviews} (${comments.length})",
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 18,
-                            color: AppColors.mainText,
+                            color: AppColors.mainText(),
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
                           AppLocalizations.of(context)!.see_all,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 14,
-                            color: AppColors.secondaryText,
+                            color: AppColors.secondaryText(),
                           ),
                         ),
                       ],

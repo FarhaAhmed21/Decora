@@ -10,19 +10,17 @@ class TopSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(
-        right: AppSize.width(context) * 0.027,
-      ),
+      padding: EdgeInsets.only(right: AppSize.width(context) * 0.027),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.primary : AppColors.cardColor,
+          color: isSelected ? AppColors.primary() : AppColors.cardColor(),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Text(
           text,
           style: TextStyle(
-            color: isSelected ? Colors.white : AppColors.mainText,
+            color: isSelected ? Colors.white : AppColors.mainText(),
             fontWeight: FontWeight.bold,
           ),
         ),

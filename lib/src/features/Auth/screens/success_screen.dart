@@ -16,7 +16,7 @@ class PasswordResetSuccessScreen extends StatelessWidget {
       textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: AppColors.background,
+          backgroundColor: AppColors.background(),
           elevation: 0,
           automaticallyImplyLeading: false,
           centerTitle: true,
@@ -53,7 +53,7 @@ class PasswordResetSuccessScreen extends StatelessWidget {
             ),
           ),
         ),
-        backgroundColor: AppColors.background,
+        backgroundColor: AppColors.background(),
         body: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: size.width * 0.043,
@@ -79,8 +79,8 @@ class PasswordResetSuccessScreen extends StatelessWidget {
               Text(
                 tr.youCanLoginNow,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: AppColors.secondaryText,
+                style: TextStyle(
+                  color: AppColors.secondaryText(),
                   fontSize: 14,
                 ),
               ),
@@ -90,10 +90,7 @@ class PasswordResetSuccessScreen extends StatelessWidget {
                 width: double.infinity,
                 child: OutlinedButton(
                   style: OutlinedButton.styleFrom(
-                    side: const BorderSide(
-                      color: AppColors.primary,
-                      width: 1.5,
-                    ),
+                    side: BorderSide(color: AppColors.primary(), width: 1.5),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -102,8 +99,8 @@ class PasswordResetSuccessScreen extends StatelessWidget {
                       Navigator.popUntil(context, (r) => r.isFirst),
                   child: Text(
                     tr.backToLogin,
-                    style: const TextStyle(
-                      color: AppColors.primary,
+                    style: TextStyle(
+                      color: AppColors.primary(),
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),

@@ -46,9 +46,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Text(
                       AppLocalizations.of(context)!.decora_specials,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 18,
-                        color: AppColors.mainText,
+                        color: AppColors.mainText(),
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -105,9 +105,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Text(
                       AppLocalizations.of(context)!.categories,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 18,
-                        color: AppColors.mainText,
+                        color: AppColors.mainText(),
                         fontWeight: FontWeight.bold,
                       ),
                     ),
