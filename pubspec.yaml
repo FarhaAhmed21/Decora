@@ -39,6 +39,7 @@ dependencies:
   font_awesome_flutter: ^10.10.0
   device_preview: ^1.1.0
   flutter_screenutil: ^5.9.3
+  firebase_core: ^4.1.1
 
 dev_dependencies:
   flutter_lints: ^5.0.0

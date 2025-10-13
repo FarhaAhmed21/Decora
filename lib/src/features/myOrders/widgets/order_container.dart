@@ -17,7 +17,7 @@ class OrderContainer extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Row(
+            const Row(
               children: [
                 Text(
                   'Order ID #12345',
@@ -27,7 +27,7 @@ class OrderContainer extends StatelessWidget {
                     fontSize: 18,
                   ),
                 ),
-                const Spacer(),
+                Spacer(),
                 Text(
                   '1120 EGP',
                   style: TextStyle(
@@ -38,7 +38,7 @@ class OrderContainer extends StatelessWidget {
                 ),
               ],
             ),
-            Row(
+            const Row(
               children: [
                 Text(
                   '14 Jun, 2025',
