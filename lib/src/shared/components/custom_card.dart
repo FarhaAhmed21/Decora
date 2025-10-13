@@ -5,7 +5,9 @@ import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomCard extends StatefulWidget {
-  const CustomCard({super.key});
+  final bool isdiscount;
+  final String? offerPercentage;
+  const CustomCard({super.key, required this.isdiscount, this.offerPercentage});
 
   @override
   State<CustomCard> createState() => _CustomCardState();
@@ -13,6 +15,7 @@ class CustomCard extends StatefulWidget {
 
 class _CustomCardState extends State<CustomCard> {
   bool isFavourite = false;
+
   @override
   Widget build(BuildContext context) {
     final h = AppSize.height(context);
@@ -46,6 +49,25 @@ class _CustomCardState extends State<CustomCard> {
                       width: double.infinity,
                       fit: BoxFit.cover,
                     ),
+                  ),
+                ),
+        if(widget.isdiscount)
+                Positioned(
+
+                  left: 10,
+                  child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+
+                      margin: const EdgeInsets.all(10),
+
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+
+                          borderRadius: BorderRadius.circular(16.0),
+                          color: AppColors.orange
+                      ),
+                      child: Text( widget.offerPercentage!,style: TextStyle(fontSize: 12,color:AppColors.innerCardColor,fontWeight: FontWeight.bold,))
+
                   ),
                 ),
 

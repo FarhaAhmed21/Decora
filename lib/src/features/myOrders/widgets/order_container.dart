@@ -52,7 +52,35 @@ class OrderContainer extends StatelessWidget {
             const SizedBox(height: 11),
             Row(
               children: [
-                Image.asset(Assets.shippingIcon, height: 27),
+                Container(
+                  height: 26.5,
+                  width: 97,
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  decoration: BoxDecoration(
+                    color: AppColors.shoppingIconColor,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        Assets.trackingIcon3,
+                        color: AppColors.primary,
+                        height: 14,
+                      ),
+                      const Text(
+                        "Shipping",
+                        style: TextStyle(
+                          color: AppColors.primary,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                //Image.asset(Assets.shippingIcon, height: 27),
                 const Spacer(),
                 const Text(
                   "Details  ",

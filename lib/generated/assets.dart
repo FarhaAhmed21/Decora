@@ -20,6 +20,19 @@ class Assets {
   static String plusIcon = "assets/icons/plus-sign-icon.png";
   static String sentIcon = "assets/icons/sent-icon.png";
   static String settingsIcon = "assets/icons/settings-icon.png";
+  static String onboarding2 = 'assets/images/onboarding2.png';
+  static String rectangle1 = 'assets/images/Top-Rectangle.png';
+  static String rectangle2 = 'assets/images/bottom-Rectangle.png';
+  static String woodImg = 'assets/images/wood.png';
+  static String fabric = 'assets/images/fabrics.png';
+  static String onBoarding3 = 'assets/images/onboarding3.png';
   static String shippingIcon = "assets/icons/shipping-icon.png";
   static String sideArrowIcon = "assets/icons/side-arrow.png";
+  static String vrnIcon = "assets/images/vr_icon.png";
+  static String addImg = "assets/images/add_img.png";
+
+  static String trackingIcon1 = "assets/icons/icon-one.png";
+  static String trackingIcon2 = "assets/icons/icon-two.png";
+  static String trackingIcon3 = "assets/icons/icon-three.png";
+  static String trackingIcon4 = "assets/icons/icon-four.png";
 }

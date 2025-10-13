@@ -1,4 +1,5 @@
 import 'package:decora/core/l10n/app_localizations.dart';
+import 'package:decora/src/features/home/main_screen.dart';
 import 'package:decora/src/shared/components/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:decora/src/features/categories/models/category_model.dart';
@@ -7,14 +8,19 @@ import 'package:decora/src/features/categories/widgets/category_card.dart';
 
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final isLandscape = size.width > size.height;
 
     return Scaffold(
-      appBar: CustomAppBar(title: AppLocalizations.of(context)!.our_Categories),
+      appBar: CustomAppBar(
+        title: AppLocalizations.of(context)!.our_Categories,
+        onBackPressed: () {
+          MainLayout.currentIndex = 1;
+          Navigator.pop(context);
+        },
+      ),
       body: SafeArea(
         child: Column(
           children: [
