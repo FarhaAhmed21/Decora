@@ -7,9 +7,9 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: AppColors.background,
-      body: ProfileBody(
+    return Scaffold(
+      backgroundColor: AppColors.background(),
+      body: const ProfileBody(
         name: "Abdelrahman Taher",
         email: "abdolrahman.taher",
         profileImagepath: "assets/images/ss.jpg",

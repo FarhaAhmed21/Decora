@@ -41,10 +41,10 @@ class CustomSettingsTile extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 16,
-                      color: AppColors.mainText,
+                      color: AppColors.mainText(),
                       fontFamily: 'Montserratt',
                     ),
                   ),

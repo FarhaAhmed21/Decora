@@ -11,12 +11,12 @@ class DateWidget extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 10),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
         decoration: BoxDecoration(
-          border: Border.all(color: AppColors.cardColor, width: 1.0),
+          border: Border.all(color: AppColors.cardColor(), width: 1.0),
           borderRadius: BorderRadius.circular(20),
         ),
         child: Text(
           date,
-          style: const TextStyle(fontSize: 12, color: AppColors.mainText),
+          style: TextStyle(fontSize: 12, color: AppColors.mainText()),
         ),
       ),
     );

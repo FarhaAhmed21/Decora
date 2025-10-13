@@ -53,7 +53,7 @@ class ProfileBody extends StatelessWidget {
                 const SizedBox(height: 30),
                 CircleAvatar(
                   radius: 73,
-                  backgroundColor: AppColors.primary,
+                  backgroundColor: AppColors.primary(),
                   child: CircleAvatar(
                     radius: 70,
                     backgroundImage: AssetImage(profileImagepath),
@@ -62,19 +62,19 @@ class ProfileBody extends StatelessWidget {
                 const SizedBox(height: 15),
                 Text(
                   name,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 20,
-                    color: AppColors.textColor,
+                    color: AppColors.textColor(),
                   ),
                 ),
                 const SizedBox(height: 5),
                 Text(
                   email,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.w400,
                     fontSize: 14,
-                    color: AppColors.textColor,
+                    color: AppColors.textColor(),
                   ),
                 ),
                 const SizedBox(height: 20),

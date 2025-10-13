@@ -24,7 +24,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
         child: Column(
           children: [
             const TopLocationBar(),
-            SizedBox(height: h * 0.045),
+            SizedBox(height: h * 0.055),
             const CustomSearchBar(),
             SizedBox(height: h * 0.015),
             Expanded(
@@ -39,7 +39,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                       ),
                       childAspectRatio: isLandscape
                           ? w / (h * 1.6)
-                          : w / (h / 1.48),
+                          : w / (h / 1.47),
                       mainAxisSpacing: 0.010 * w,
                       crossAxisSpacing: 0.010 * w,
                       children: List.generate(8, (index) {

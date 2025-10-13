@@ -24,9 +24,9 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
     return Directionality(
       textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
       child: Scaffold(
-        backgroundColor: AppColors.background,
+        backgroundColor: AppColors.background(),
         appBar: AppBar(
-          backgroundColor: AppColors.background,
+          backgroundColor: AppColors.background(),
           centerTitle: true,
           automaticallyImplyLeading: false,
           leading: Padding(
@@ -69,8 +69,8 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
               Text(
                 tr.verificationMessage,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: AppColors.secondaryText,
+                style: TextStyle(
+                  color: AppColors.secondaryText(),
                   fontSize: 16,
                 ),
               ),
@@ -80,15 +80,15 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
               TextField(
                 obscureText: _obscurePassword,
                 controller: controller,
-                cursorColor: AppColors.primary,
+                cursorColor: AppColors.primary(),
                 decoration: InputDecoration(
                   hintText: tr.newPassword,
                   hintStyle: const TextStyle(fontSize: 14),
 
-                  border: const OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                  border: OutlineInputBorder(
+                    borderRadius: const BorderRadius.all(Radius.circular(12.0)),
                     borderSide: BorderSide(
-                      color: AppColors.secondaryText,
+                      color: AppColors.secondaryText(),
                       width: 0.5,
                     ),
                   ),
@@ -96,10 +96,10 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                     vertical: 15.0,
                     horizontal: 16.0,
                   ),
-                  focusedBorder: const OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: const BorderRadius.all(Radius.circular(12.0)),
                     borderSide: BorderSide(
-                      color: AppColors.primary,
+                      color: AppColors.primary(),
                       width: 1.5,
                     ),
                   ),
@@ -124,7 +124,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                 height: 52,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,
+                    backgroundColor: AppColors.primary(),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),

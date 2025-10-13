@@ -21,7 +21,7 @@ class TopLocationBar extends StatelessWidget {
           title: Text(
             AppLocalizations.of(context)!.location,
             style: TextStyle(
-              color: AppColors.secondaryText,
+              color: AppColors.secondaryText(),
               fontWeight: FontWeight.w400,
               fontSize: width * 0.035,
             ),
@@ -32,13 +32,13 @@ class TopLocationBar extends StatelessWidget {
                 Assets.locationIcon,
                 width: width * 0.045,
                 height: width * 0.045,
-                color: Colors.black,
+                color: AppTheme.isDarkMode ? Colors.white : Colors.black,
               ),
               SizedBox(width: width * 0.015),
               Text(
                 AppLocalizations.of(context)!.cairoEgypt,
                 style: TextStyle(
-                  color: AppColors.mainText,
+                  color: AppColors.mainText(),
                   fontWeight: FontWeight.w600,
                   fontSize: width * 0.04,
                 ),
@@ -55,12 +55,12 @@ class TopLocationBar extends StatelessWidget {
                   padding: EdgeInsets.all(width * 0.001),
                   width: width * 0.1,
                   decoration: BoxDecoration(
-                    color: AppColors.cardColor,
+                    color: AppColors.cardColor(),
                     borderRadius: BorderRadius.circular(width * 0.05),
                   ),
                   child: Image.asset(
                     Assets.settingsIcon,
-                    color: Colors.black,
+                    color: AppTheme.isDarkMode ? Colors.white : Colors.black,
                     width: width * 0.025,
                   ),
                 ),
@@ -80,12 +80,12 @@ class TopLocationBar extends StatelessWidget {
                   padding: EdgeInsets.all(width * 0.001),
                   width: width * 0.1,
                   decoration: BoxDecoration(
-                    color: AppColors.cardColor,
+                    color: AppColors.cardColor(),
                     borderRadius: BorderRadius.circular(width * 0.05),
                   ),
                   child: Image.asset(
                     Assets.notificationIcon,
-                    color: Colors.black,
+                    color: AppTheme.isDarkMode ? Colors.white : Colors.black,
                     width: width * 0.025,
                   ),
                 ),

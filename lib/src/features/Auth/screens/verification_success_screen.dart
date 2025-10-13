@@ -15,9 +15,9 @@ class VerificationSuccessScreen extends StatelessWidget {
     return Directionality(
       textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
       child: Scaffold(
-        backgroundColor: AppColors.background,
+        backgroundColor: AppColors.background(),
         appBar: AppBar(
-          backgroundColor: AppColors.background,
+          backgroundColor: AppColors.background(),
           elevation: 0,
           automaticallyImplyLeading: false,
           centerTitle: true,
@@ -81,8 +81,8 @@ class VerificationSuccessScreen extends StatelessWidget {
               Text(
                 tr.verificationSuccessMessage,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: AppColors.secondaryText,
+                style: TextStyle(
+                  color: AppColors.secondaryText(),
                   fontSize: 14,
                 ),
               ),
@@ -93,7 +93,7 @@ class VerificationSuccessScreen extends StatelessWidget {
                 width: double.infinity,
                 child: OutlinedButton(
                   style: OutlinedButton.styleFrom(
-                    side: const BorderSide(color: AppColors.primary, width: 1),
+                    side: BorderSide(color: AppColors.primary(), width: 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -103,10 +103,7 @@ class VerificationSuccessScreen extends StatelessWidget {
                   },
                   child: Text(
                     tr.backToLogin,
-                    style: const TextStyle(
-                      color: AppColors.primary,
-                      fontSize: 16,
-                    ),
+                    style: TextStyle(color: AppColors.primary(), fontSize: 16),
                   ),
                 ),
               ),

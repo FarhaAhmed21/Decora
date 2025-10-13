@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
           home: const SplashScreen(),
           theme: ThemeData(
             fontFamily: 'Montserratt',
-            scaffoldBackgroundColor: AppColors.background,
+            scaffoldBackgroundColor: AppColors.background(),
           ),
         );
       },

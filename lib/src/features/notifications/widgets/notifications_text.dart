@@ -9,10 +9,10 @@ class NotificationsText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: const TextStyle(
+      style: TextStyle(
         fontSize: 19,
         fontWeight: FontWeight.bold,
-        color: AppColors.mainText,
+        color: AppColors.mainText(),
       ),
     );
   }

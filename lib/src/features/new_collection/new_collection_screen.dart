@@ -12,7 +12,7 @@ class NewCollectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.background(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(

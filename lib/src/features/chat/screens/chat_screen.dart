@@ -21,7 +21,7 @@ class ChatScreen extends StatelessWidget {
           Navigator.pop(context);
         },
       ),
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.background(),
       body: SafeArea(
         child: Column(
           children: [
@@ -78,7 +78,7 @@ class ChatScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: AppColors.cardColor, width: 2.0),
+                  border: Border.all(color: AppColors.cardColor(), width: 2.0),
                 ),
                 child: Row(
                   children: [
@@ -88,12 +88,12 @@ class ChatScreen extends StatelessWidget {
                       child: Container(
                         padding: EdgeInsets.all(width * 0.02),
                         decoration: BoxDecoration(
-                          color: AppColors.cardColor,
+                          color: AppColors.cardColor(),
                           borderRadius: BorderRadius.circular(width * 0.06),
                         ),
                         child: Image.asset(
                           Assets.micIcon,
-                          color: AppColors.primary,
+                          color: AppColors.primary(),
                           width: width * 0.05,
                           height: width * 0.05,
                         ),
@@ -106,24 +106,26 @@ class ChatScreen extends StatelessWidget {
                       child: Container(
                         padding: EdgeInsets.all(width * 0.02),
                         decoration: BoxDecoration(
-                          color: AppColors.cardColor,
+                          color: AppColors.cardColor(),
                           borderRadius: BorderRadius.circular(width * 0.06),
                         ),
                         child: Image.asset(
                           Assets.plusIcon,
-                          color: AppColors.primary,
+                          color: AppColors.primary(),
                           width: width * 0.05,
                           height: width * 0.05,
                         ),
                       ),
                     ),
                     SizedBox(width: width * 0.015),
-                    const Expanded(
+                    Expanded(
                       child: TextField(
                         decoration: InputDecoration(
                           hintText: "Type Something..",
                           border: InputBorder.none,
-                          hintStyle: TextStyle(color: AppColors.secondaryText),
+                          hintStyle: TextStyle(
+                            color: AppColors.secondaryText(),
+                          ),
                         ),
                       ),
                     ),
@@ -132,12 +134,12 @@ class ChatScreen extends StatelessWidget {
                       child: Container(
                         padding: EdgeInsets.all(width * 0.04),
                         decoration: BoxDecoration(
-                          color: AppColors.primary,
+                          color: AppColors.primary(),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Image.asset(
                           Assets.sentIcon,
-                          color: AppColors.background,
+                          color: AppColors.background(),
                           width: width * 0.05,
                           height: width * 0.05,
                         ),

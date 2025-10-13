@@ -14,7 +14,7 @@ class CustomFloatingActionButton extends StatelessWidget {
           MaterialPageRoute(builder: (context) => const VtoScreen()),
         );
       },
-      backgroundColor: AppColors.primary,
+      backgroundColor: AppColors.primary(),
       shape: const CircleBorder(),
       child: Image.asset(
         'assets/icons/VTO.png',
