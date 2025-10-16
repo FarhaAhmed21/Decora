@@ -3,6 +3,7 @@ import 'package:decora/core/l10n/local_cubit.dart';
 import 'package:decora/src/features/Auth/screens/login_screen.dart';
 import 'package:decora/src/features/onboarding/screens/onboarding_screen.dart';
 import 'package:decora/src/features/splash/cubit/splash_cubit.dart';
+import 'package:decora/src/features/vto/screens/vto_screen.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: const [Locale('en'), Locale('ar')],
-          home: const LoginScreen(),
+          home: VtoScreen(),
           theme: ThemeData(
             fontFamily: 'Montserratt',
             scaffoldBackgroundColor: AppColors.background,
