@@ -1,3 +1,4 @@
+import 'package:decora/src/features/Auth/screens/login_screen.dart';
 import 'package:decora/src/features/onboarding/screens/onboarding_screen_one.dart';
 import 'package:decora/src/features/onboarding/screens/onboarding_screen_three.dart';
 import 'package:decora/src/features/onboarding/screens/onboarding_screen_two.dart';
@@ -105,7 +106,10 @@ class _OnboardingScreenState extends State<OnboardingScreen>
         curve: Curves.easeInOut,
       );
     } else {
-      Navigator.pushReplacementNamed(context, '/home');
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const LoginScreen()),
+      );
     }
   }
 
@@ -161,7 +165,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                   height: 6,
                   decoration: BoxDecoration(
                     color: currentIndex == index
-                        ? AppColors.primary
+                        ? AppColors.primary()
                         : Colors.grey.shade400,
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -178,7 +182,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                     icon: const Icon(Icons.arrow_back_ios_new),
                     color: currentIndex == 0
                         ? Colors.grey.shade400
-                        : AppColors.primary,
+                        : AppColors.primary(),
                   ),
                   InkWell(
                     onTap: _nextPage,
@@ -189,7 +193,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                         vertical: 12,
                       ),
                       decoration: BoxDecoration(
-                        color: AppColors.primary,
+                        color: AppColors.primary(),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: currentIndex == 2

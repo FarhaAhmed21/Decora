@@ -17,9 +17,9 @@ class ForgetPasswordScreen extends StatelessWidget {
     return Directionality(
       textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
       child: Scaffold(
-        backgroundColor: AppColors.background,
+        backgroundColor: AppColors.background(),
         appBar: AppBar(
-          backgroundColor: AppColors.background,
+          backgroundColor: AppColors.background(),
           centerTitle: true,
           automaticallyImplyLeading: false,
           leading: Padding(
@@ -67,8 +67,8 @@ class ForgetPasswordScreen extends StatelessWidget {
                     child: Text(
                       tr.enterEmailOrPhone,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        color: AppColors.secondaryText,
+                      style: TextStyle(
+                        color: AppColors.secondaryText(),
                         fontSize: 17,
                       ),
                     ),
@@ -81,7 +81,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                     height: 50,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primary,
+                        backgroundColor: AppColors.primary(),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),

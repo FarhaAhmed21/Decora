@@ -12,7 +12,12 @@ class OrderTrackingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: 'Order Tracking'),
+      appBar: CustomAppBar(
+        title: 'Order Tracking',
+        onBackPressed: () {
+          Navigator.pop(context);
+        },
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
@@ -30,10 +35,10 @@ class OrderTrackingScreen extends StatelessWidget {
                       imagePath: Assets.couchImage,
                     ),
                     const SizedBox(height: 10),
-                    const Text(
+                    Text(
                       "Order Details",
                       style: TextStyle(
-                        color: AppColors.mainText,
+                        color: AppColors.mainText(),
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
@@ -41,10 +46,10 @@ class OrderTrackingScreen extends StatelessWidget {
                     const SizedBox(height: 8),
                     Row(
                       children: [
-                        const Text(
+                        Text(
                           "Expected Delivery Date",
                           style: TextStyle(
-                            color: AppColors.secondaryText,
+                            color: AppColors.secondaryText(),
                             fontSize: 16,
                           ),
                         ),
@@ -52,7 +57,7 @@ class OrderTrackingScreen extends StatelessWidget {
                         Text(
                           "10 Dec 2024",
                           style: TextStyle(
-                            color: AppColors.mainText,
+                            color: AppColors.mainText(),
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
@@ -61,10 +66,10 @@ class OrderTrackingScreen extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        const Text(
+                        Text(
                           "Order ID",
                           style: TextStyle(
-                            color: AppColors.secondaryText,
+                            color: AppColors.secondaryText(),
                             fontSize: 16,
                           ),
                         ),
@@ -72,7 +77,7 @@ class OrderTrackingScreen extends StatelessWidget {
                         Text(
                           "#GR47",
                           style: TextStyle(
-                            color: AppColors.mainText,
+                            color: AppColors.mainText(),
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
@@ -80,10 +85,10 @@ class OrderTrackingScreen extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 25),
-                    const Text(
+                    Text(
                       "Order Status",
                       style: TextStyle(
-                        color: AppColors.mainText,
+                        color: AppColors.mainText(),
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),

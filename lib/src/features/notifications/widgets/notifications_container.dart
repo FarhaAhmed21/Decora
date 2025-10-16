@@ -23,7 +23,7 @@ class NoificationsContainer extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
         decoration: BoxDecoration(
           border: Border.all(
-            color: AppColors.primary,
+            color: AppColors.primary(),
             width: 1,
           ), // CHECK THIS: Looks pixely
           borderRadius: BorderRadius.circular(16),
@@ -37,12 +37,14 @@ class NoificationsContainer extends StatelessWidget {
                 width: 48,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: icon == 0 ? AppColors.primary : AppColors.cardColor,
+                  color: icon == 0
+                      ? AppColors.primary()
+                      : AppColors.cardColor(),
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Image.asset(
                   "assets/icons/notification-icon.png",
-                  color: icon == 0 ? Colors.white : AppColors.primary,
+                  color: icon == 0 ? Colors.white : AppColors.primary(),
                   fit: BoxFit.contain,
                 ),
               ),
@@ -55,9 +57,9 @@ class NoificationsContainer extends StatelessWidget {
                   children: [
                     Text(
                       title,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: AppColors.mainText,
+                        color: AppColors.mainText(),
                         fontSize:
                             15, // CHECK THIS: Check the font with the device
                         letterSpacing: -0.2,
@@ -65,11 +67,11 @@ class NoificationsContainer extends StatelessWidget {
                     ),
                     Text(
                       message,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontWeight: FontWeight.bold,
 
                         fontSize: 12,
-                        color: AppColors.secondaryText,
+                        color: AppColors.secondaryText(),
                         letterSpacing: -0.2,
                       ),
                     ),
@@ -83,10 +85,10 @@ class NoificationsContainer extends StatelessWidget {
                 children: [
                   Text(
                     time,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 10,
-                      color: AppColors.secondaryText,
+                      color: AppColors.secondaryText(),
                     ),
                   ),
                 ],

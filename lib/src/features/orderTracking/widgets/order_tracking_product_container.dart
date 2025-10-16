@@ -1,5 +1,4 @@
 import 'package:decora/core/utils/app_size.dart';
-import 'package:decora/generated/assets.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/widgets.dart';
 
@@ -25,7 +24,7 @@ class OrderTrackingProductContainer extends StatelessWidget {
         width: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 15),
         decoration: BoxDecoration(
-          color: AppColors.cardColor,
+          color: AppColors.cardColor(),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Row(
@@ -34,7 +33,7 @@ class OrderTrackingProductContainer extends StatelessWidget {
               height: AppSize.height(context) * 0.1,
               width: AppSize.width(context) * 0.25,
               decoration: BoxDecoration(
-                color: AppColors.productCardColor,
+                color: AppColors.productCardColor(),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Image.asset(imagePath, fit: BoxFit.cover),
@@ -48,8 +47,8 @@ class OrderTrackingProductContainer extends StatelessWidget {
                   children: [
                     Text(
                       title,
-                      style: const TextStyle(
-                        color: AppColors.mainText,
+                      style: TextStyle(
+                        color: AppColors.mainText(),
                         fontSize: 19,
                       ),
                       maxLines: 1,
@@ -57,16 +56,16 @@ class OrderTrackingProductContainer extends StatelessWidget {
                     ),
                     Text(
                       subtitle,
-                      style: const TextStyle(
-                        color: AppColors.primary,
+                      style: TextStyle(
+                        color: AppColors.primary(),
                         fontSize: 12,
                       ),
                     ),
                     const Spacer(),
                     Text(
                       price,
-                      style: const TextStyle(
-                        color: AppColors.mainText,
+                      style: TextStyle(
+                        color: AppColors.mainText(),
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),

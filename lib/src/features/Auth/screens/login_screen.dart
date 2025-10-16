@@ -2,6 +2,7 @@ import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/src/features/Auth/screens/forgot_password_screen.dart';
 import 'package:decora/src/features/Auth/screens/signup_screen.dart';
 import 'package:decora/src/features/Auth/widgets/customField.dart';
+import 'package:decora/src/features/home/main_screen.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -23,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.background(),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(
           horizontal: size.width * 0.06,
@@ -55,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: size.width * 0.032,
-                  color: AppColors.secondaryText,
+                  color: AppColors.secondaryText(),
                 ),
               ),
             ),
@@ -82,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           rememberMe = newValue ?? false;
                         });
                       },
-                      activeColor: AppColors.primary,
+                      activeColor: AppColors.primary(),
                     ),
                     Text(
                       loc.rememberMe,
@@ -102,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Text(
                     loc.forgotPassword,
                     style: TextStyle(
-                      color: AppColors.primary,
+                      color: AppColors.primary(),
                       fontWeight: FontWeight.w600,
                       fontSize: size.width * 0.035,
                       decoration: TextDecoration.underline,
@@ -116,9 +117,14 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(
               height: 55.0,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MainLayout()),
+                  );
+                },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
+                  backgroundColor: AppColors.primary(),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12.0),
                   ),
@@ -137,15 +143,15 @@ class _LoginScreenState extends State<LoginScreen> {
 
             Row(
               children: [
-                const Expanded(child: Divider(color: AppColors.primary)),
+                Expanded(child: Divider(color: AppColors.primary())),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: Text(
                     loc.orLoginWith,
-                    style: const TextStyle(color: AppColors.secondaryText),
+                    style: TextStyle(color: AppColors.secondaryText()),
                   ),
                 ),
-                const Expanded(child: Divider(color: AppColors.primary)),
+                Expanded(child: Divider(color: AppColors.primary())),
               ],
             ),
             SizedBox(height: size.height * 0.03),
@@ -155,26 +161,26 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: size.width * 0.04),
-                  child: const Icon(
+                  child: Icon(
                     FontAwesomeIcons.google,
                     size: 30,
-                    color: AppColors.primary,
+                    color: AppColors.primary(),
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: size.width * 0.04),
-                  child: const Icon(
+                  child: Icon(
                     FontAwesomeIcons.apple,
                     size: 35,
-                    color: AppColors.primary,
+                    color: AppColors.primary(),
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: size.width * 0.04),
-                  child: const Icon(
+                  child: Icon(
                     FontAwesomeIcons.facebookF,
                     size: 30,
-                    color: AppColors.primary,
+                    color: AppColors.primary(),
                   ),
                 ),
               ],
@@ -199,8 +205,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                   child: Text(
                     loc.createAccount,
-                    style: const TextStyle(
-                      color: AppColors.primary,
+                    style: TextStyle(
+                      color: AppColors.primary(),
                       fontWeight: FontWeight.bold,
                       decoration: TextDecoration.underline,
                     ),
@@ -217,22 +223,22 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget customPasswordField(AppLocalizations loc) {
     return TextField(
       obscureText: _obscurePassword,
-      cursorColor: AppColors.primary,
+      cursorColor: AppColors.primary(),
       decoration: InputDecoration(
         hintText: loc.password,
         hintStyle: const TextStyle(fontSize: 14),
 
-        border: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(12.0)),
-          borderSide: BorderSide(color: AppColors.secondaryText, width: 0.5),
+        border: OutlineInputBorder(
+          borderRadius: const BorderRadius.all(Radius.circular(12.0)),
+          borderSide: BorderSide(color: AppColors.secondaryText(), width: 0.5),
         ),
         contentPadding: const EdgeInsets.symmetric(
           vertical: 15.0,
           horizontal: 16.0,
         ),
-        focusedBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(12.0)),
-          borderSide: BorderSide(color: AppColors.primary, width: 1.5),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: const BorderRadius.all(Radius.circular(12.0)),
+          borderSide: BorderSide(color: AppColors.primary(), width: 1.5),
         ),
         suffixIcon: IconButton(
           icon: Icon(

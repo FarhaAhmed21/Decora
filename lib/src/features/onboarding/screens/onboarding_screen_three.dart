@@ -103,7 +103,7 @@ class _OnboardingPageThreeState extends State<OnboardingPageThree>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Stack(
           children: [
@@ -121,7 +121,7 @@ class _OnboardingPageThreeState extends State<OnboardingPageThree>
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.w600,
-                          color: AppColors.mainText,
+                          color: AppColors.lightMainText,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -132,7 +132,7 @@ class _OnboardingPageThreeState extends State<OnboardingPageThree>
                           'Use our AR feature to place furniture in your own room and preview how it looks instantly. Shop with confidence knowing every item fits your space and style.',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: AppColors.secondaryText,
+                            color: AppColors.lightSecondaryText,
                             fontSize: 15,
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.w400,
@@ -189,14 +189,14 @@ class _OnboardingPageThreeState extends State<OnboardingPageThree>
                           children: [
                             Icon(
                               Icons.check_circle,
-                              color: AppColors.background,
+                              color: AppColors.lightBackground,
                               size: 24,
                             ),
                             SizedBox(width: 8),
                             Text(
                               'Scanned Successful!',
                               style: TextStyle(
-                                color: AppColors.background,
+                                color: AppColors.lightBackground,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),

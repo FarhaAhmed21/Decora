@@ -1,3 +1,4 @@
+
 import 'dart:io';
 
 import 'package:decora/src/shared/theme/app_colors.dart';
@@ -392,3 +393,4 @@ class DashedRectPainter extends CustomPainter {
 // 1. Add the necessary assets ('assets/images/chair_placeholder.png', 'assets/images/room_placeholder.jpg', etc.)
 //    and update the `furnitureImages` list.
 // 2. Update your `pubspec.yaml` to include the assets directory.
+

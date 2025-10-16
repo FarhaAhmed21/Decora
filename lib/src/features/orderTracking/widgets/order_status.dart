@@ -90,13 +90,13 @@ class OrderStatusIcons extends StatelessWidget {
                 color: shouldShowGradient
                     ? null
                     : isCompleted
-                    ? AppColors.primary
-                    : AppColors.orderIconUnSelectedColor,
+                    ? AppColors.primary()
+                    : AppColors.orderIconUnSelectedColor(),
                 gradient: shouldShowGradient
-                    ? const LinearGradient(
+                    ? LinearGradient(
                         colors: [
-                          AppColors.primary,
-                          AppColors.orderIconUnSelectedColor,
+                          AppColors.primary(),
+                          AppColors.orderIconUnSelectedColor(),
                         ],
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
@@ -114,8 +114,8 @@ class OrderStatusIcons extends StatelessWidget {
               width: 42,
               decoration: BoxDecoration(
                 color: isCompleted
-                    ? AppColors.primary
-                    : AppColors.orderIconUnSelectedColor,
+                    ? AppColors.primary()
+                    : AppColors.orderIconUnSelectedColor(),
                 borderRadius: BorderRadius.circular(21),
               ),
               child: Image.asset(iconPath, scale: 1.45),
@@ -128,16 +128,16 @@ class OrderStatusIcons extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: const TextStyle(
-                    color: AppColors.mainText,
+                  style: TextStyle(
+                    color: AppColors.mainText(),
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
                   isCompleted ? date : "Unknown",
-                  style: const TextStyle(
-                    color: AppColors.secondaryText,
+                  style: TextStyle(
+                    color: AppColors.secondaryText(),
                     fontSize: 14,
                   ),
                 ),
@@ -147,10 +147,7 @@ class OrderStatusIcons extends StatelessWidget {
             const Spacer(),
             Text(
               isCompleted ? "Completed" : "Pending",
-              style: const TextStyle(
-                color: AppColors.secondaryText,
-                fontSize: 14,
-              ),
+              style: TextStyle(color: AppColors.secondaryText(), fontSize: 14),
             ),
           ],
         ),

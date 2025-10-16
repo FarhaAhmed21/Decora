@@ -75,7 +75,7 @@ class OnboardingPageOne extends StatelessWidget {
                   child: const Text(
                     "Find Your Perfect Style",
                     style: TextStyle(
-                      color: AppColors.mainText,
+                      color: AppColors.lightMainText,
                       fontSize: 32,
                       fontFamily: 'Montserrat',
                       fontWeight: FontWeight.w600,
@@ -98,7 +98,7 @@ class OnboardingPageOne extends StatelessWidget {
                       "Explore a wide collection of modern and classic furniture pieces, carefully designed to bring comfort and elegance into every corner of your home.",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: AppColors.secondaryText,
+                        color: AppColors.lightSecondaryText,
                         fontSize: 14,
                         fontFamily: 'Montserrat',
                         fontWeight: FontWeight.w400,

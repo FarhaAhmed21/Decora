@@ -1,3 +1,4 @@
+import 'package:decora/src/features/onboarding/screens/onboarding_screen.dart';
 import 'package:decora/src/features/splash/cubit/splash_cubit.dart';
 import 'package:decora/src/features/splash/cubit/splash_sate.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
@@ -42,12 +43,12 @@ class _SplashScreenState extends State<SplashScreen>
         if (state is SplashCompleted) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const HomePage()),
+            MaterialPageRoute(builder: (context) => const OnboardingScreen()),
           );
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.background,
+        backgroundColor: Colors.white,
         body: Center(
           child: Lottie.asset(
             'assets/animations/splash-animation.json',

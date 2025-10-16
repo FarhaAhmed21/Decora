@@ -5,7 +5,9 @@ import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomCard extends StatefulWidget {
-  const CustomCard({super.key});
+  final bool isdiscount;
+  final String? offerPercentage;
+  const CustomCard({super.key, required this.isdiscount, this.offerPercentage});
 
   @override
   State<CustomCard> createState() => _CustomCardState();
@@ -13,6 +15,7 @@ class CustomCard extends StatefulWidget {
 
 class _CustomCardState extends State<CustomCard> {
   bool isFavourite = false;
+
   @override
   Widget build(BuildContext context) {
     final h = AppSize.height(context);
@@ -22,7 +25,7 @@ class _CustomCardState extends State<CustomCard> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(w * 0.02),
       ),
-      color: AppColors.cardColor,
+      color: AppColors.cardColor(),
       child: Container(
         width: w * 0.20,
         padding: EdgeInsets.all(w * 0.025),
@@ -37,7 +40,7 @@ class _CustomCardState extends State<CustomCard> {
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(w * 0.02),
-                    color: AppColors.productCardColor,
+                    color: AppColors.productCardColor(),
                   ),
                   child: ClipRRect(
                     child: Image.asset(
@@ -48,6 +51,32 @@ class _CustomCardState extends State<CustomCard> {
                     ),
                   ),
                 ),
+                if (widget.isdiscount)
+                  Positioned(
+                    left: 10,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+
+                      margin: const EdgeInsets.all(10),
+
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16.0),
+                        color: AppColors.orange(),
+                      ),
+                      child: Text(
+                        widget.offerPercentage!,
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: AppColors.innerCardColor(),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
 
                 Positioned(
                   top: h * 0.015,
@@ -64,7 +93,7 @@ class _CustomCardState extends State<CustomCard> {
                                   context,
                                 )!.product_added_to_favourite_successfully,
                               ),
-                              backgroundColor: AppColors.primary,
+                              backgroundColor: AppColors.primary(),
                               duration: const Duration(seconds: 1),
                               // behavior:
                               //     SnackBarBehavior.floating,
@@ -79,13 +108,13 @@ class _CustomCardState extends State<CustomCard> {
                     child: isFavourite
                         ? Image.asset(
                             Assets.heartIcon,
-                            color: AppColors.primary,
+                            color: AppColors.primary(),
                             width: w * 0.05,
                             height: h * 0.018,
                           )
                         : Image.asset(
                             Assets.heartOutline,
-                            color: AppColors.primary,
+                            color: AppColors.primary(),
                             width: w * 0.05,
                             height: h * 0.018,
                           ),
@@ -101,7 +130,7 @@ class _CustomCardState extends State<CustomCard> {
               style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: w * 0.04,
-                color: AppColors.mainText,
+                color: AppColors.mainText(),
               ),
             ),
 
@@ -115,7 +144,7 @@ class _CustomCardState extends State<CustomCard> {
                   style: TextStyle(
                     fontSize: w * 0.035,
                     fontWeight: FontWeight.w500,
-                    color: AppColors.secondaryText,
+                    color: AppColors.secondaryText(),
                   ),
                 ),
               ],
@@ -129,7 +158,7 @@ class _CustomCardState extends State<CustomCard> {
                   "\$250",
                   style: TextStyle(
                     fontSize: w * 0.045,
-                    color: AppColors.mainText,
+                    color: AppColors.mainText(),
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -142,7 +171,7 @@ class _CustomCardState extends State<CustomCard> {
                             context,
                           )!.product_added_to_Cart_successfully,
                         ),
-                        backgroundColor: AppColors.primary,
+                        backgroundColor: AppColors.primary(),
                         duration: const Duration(seconds: 1),
                         // behavior:
                         //     SnackBarBehavior.floating,
@@ -157,7 +186,7 @@ class _CustomCardState extends State<CustomCard> {
                     height: h * 0.040,
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: AppColors.primary,
+                      color: AppColors.primary(),
                       borderRadius: BorderRadius.circular(w * 0.02),
                     ),
                     child: Image.asset(

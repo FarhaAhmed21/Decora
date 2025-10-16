@@ -17,9 +17,9 @@ class CustomSearchBar extends StatelessWidget {
         children: [
           Container(
             width: w * 0.78,
-            height: h * 0.047,
+            height: h * 0.055,
             decoration: ShapeDecoration(
-              color: const Color(0xFFF6F6F6),
+              color: AppColors.cardColor(),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(w * 0.033),
               ),
@@ -30,16 +30,13 @@ class CustomSearchBar extends StatelessWidget {
                   child: Container(
                     height: AppSize.height(context) * 0.04,
                     decoration: BoxDecoration(
-                      color: AppColors.cardColor,
                       borderRadius: BorderRadius.circular(w * 0.033),
                     ),
                     child: TextField(
                       decoration: InputDecoration(
                         prefixIcon: Image.asset(Assets.searchIcon),
-                        hintText: AppLocalizations.of(context)!.searchFurniture,
-                        hintStyle: const TextStyle(
-                          color: AppColors.secondaryText,
-                        ),
+                        hintText: AppLocalizations.of(context)?.searchFurniture,
+                        hintStyle: TextStyle(color: AppColors.secondaryText()),
                         border: InputBorder.none,
                       ),
                     ),
@@ -53,9 +50,9 @@ class CustomSearchBar extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             onTap: () {},
             child: Container(
-              padding: const EdgeInsets.all(8.89),
+              padding: const EdgeInsets.all(9),
               decoration: BoxDecoration(
-                color: AppColors.primary,
+                color: AppColors.primary(),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Image.asset(Assets.filterIcon),

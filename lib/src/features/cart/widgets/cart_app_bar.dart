@@ -1,5 +1,6 @@
 import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/src/features/cart/widgets/invitaion_dialog.dart';
+import 'package:decora/src/features/home/main_screen.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -58,11 +59,18 @@ class _CartAppBarState extends State<CartAppBar> {
         child: Container(
           height: 30,
           decoration: BoxDecoration(
-            color: AppColors.cardColor,
+            color: AppColors.cardColor(),
             borderRadius: BorderRadius.circular(8),
           ),
           child: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (_) => const MainLayout()),
+              );
+              MainLayout.currentIndex = 0;
+            },
+
             icon: const Icon(Icons.arrow_back_ios_new),
           ),
         ),
@@ -84,7 +92,7 @@ class _CartAppBarState extends State<CartAppBar> {
 
       //  TabBar
       bottom: TabBar(
-        indicatorColor: AppColors.orange,
+        indicatorColor: AppColors.orange(),
         labelColor: Colors.black,
         indicatorSize: TabBarIndicatorSize.tab,
         indicatorWeight: 3,
@@ -104,7 +112,7 @@ class _AddPersonButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircleAvatar(
       radius: 20,
-      backgroundColor: AppColors.primary,
+      backgroundColor: AppColors.primary(),
       child: IconButton(
         icon: const Icon(Icons.person_add_alt, color: Colors.white),
         onPressed: () {
