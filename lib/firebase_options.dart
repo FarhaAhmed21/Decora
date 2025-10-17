@@ -42,17 +42,17 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyD6qL-SVsTQBcH3ggt090dPFFceXsCB1DA',
-    appId: '1:1027264268287:web:3449af8d87720e0abbc9ca',
+    appId: '1:1027264268287:web:3cde12d31c61f02fbbc9ca',
     messagingSenderId: '1027264268287',
     projectId: 'decors-4da56',
     authDomain: 'decors-4da56.firebaseapp.com',
     storageBucket: 'decors-4da56.firebasestorage.app',
-    measurementId: 'G-FDTH6TNF9W',
+    measurementId: 'G-SFJ0BCL95F',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBra70ZNg_lRfZg7lWATeSqKC0c51MPiec',
-    appId: '1:1027264268287:android:b7d11da3c182ab1fbbc9ca',
+    appId: '1:1027264268287:android:6aab405a3be41fcbbbc9ca',
     messagingSenderId: '1027264268287',
     projectId: 'decors-4da56',
     storageBucket: 'decors-4da56.firebasestorage.app',
@@ -60,29 +60,32 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCe-Gs0TCtKU-zZndkMaWkKyNzVtO3tbD4',
-    appId: '1:1027264268287:ios:07ba4a3774acdb52bbc9ca',
+    appId: '1:1027264268287:ios:c6763d58219faf5fbbc9ca',
     messagingSenderId: '1027264268287',
     projectId: 'decors-4da56',
     storageBucket: 'decors-4da56.firebasestorage.app',
+    iosClientId: '1027264268287-jugnkq6t8oe63eo8kh9rm932sou6sf25.apps.googleusercontent.com',
     iosBundleId: 'com.example.decora',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyCe-Gs0TCtKU-zZndkMaWkKyNzVtO3tbD4',
-    appId: '1:1027264268287:ios:07ba4a3774acdb52bbc9ca',
+    appId: '1:1027264268287:ios:c6763d58219faf5fbbc9ca',
     messagingSenderId: '1027264268287',
     projectId: 'decors-4da56',
     storageBucket: 'decors-4da56.firebasestorage.app',
+    iosClientId: '1027264268287-jugnkq6t8oe63eo8kh9rm932sou6sf25.apps.googleusercontent.com',
     iosBundleId: 'com.example.decora',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
     apiKey: 'AIzaSyD6qL-SVsTQBcH3ggt090dPFFceXsCB1DA',
-    appId: '1:1027264268287:web:b39051d251342684bbc9ca',
+    appId: '1:1027264268287:web:cb5acf40733aeb5fbbc9ca',
     messagingSenderId: '1027264268287',
     projectId: 'decors-4da56',
     authDomain: 'decors-4da56.firebaseapp.com',
     storageBucket: 'decors-4da56.firebasestorage.app',
-    measurementId: 'G-GXDLV4VTGT',
+    measurementId: 'G-R11RFY7S7F',
   );
+
 }
