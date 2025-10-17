@@ -228,4 +228,61 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get try_virtual => 'جربها';
+
+  @override
+  String get accountAlreadyExistsTitle => 'الحساب موجود بالفعل';
+
+  @override
+  String get accountAlreadyExistsDescription =>
+      'هذا البريد الإلكتروني مرتبط بطريقة تسجيل دخول أخرى (مثل Google). يُرجى تسجيل الدخول بتلك الطريقة لربط حسابك في فيسبوك.';
+
+  @override
+  String get cancel => 'إلغاء';
+
+  @override
+  String get continueWithGoogle => 'المتابعة باستخدام Google';
+
+  @override
+  String get enterEmail => 'من فضلك أدخل البريد الإلكتروني';
+
+  @override
+  String get enterPassword => 'من فضلك أدخل كلمة المرور';
+
+  @override
+  String get invalidEmail => 'صيغة البريد الإلكتروني غير صحيحة';
+
+  @override
+  String get wrongCredentials => 'البريد الإلكتروني أو كلمة المرور غير صحيحة';
+
+  @override
+  String get ok => 'حسنًا';
+
+  @override
+  String get userNotFound => 'المستخدم غير موجود في النظام';
+
+  @override
+  String get loginFailedTitle => 'فشل تسجيل الدخول';
+
+  @override
+  String get emailNotFound => 'البريد الإلكتروني غير موجود';
+
+  @override
+  String get emailNotFoundMessage =>
+      'هذا البريد الإلكتروني غير مسجّل في النظام.';
+
+  @override
+  String get otpIncorrect => 'الرمز غير صحيح';
+
+  @override
+  String get otpSent => 'تم إرسال الرمز إلى بريدك الإلكتروني';
+
+  @override
+  String get enterUsername => 'الرجاء إدخال اسم المستخدم';
+
+  @override
+  String get passwordTooShort => 'كلمة المرور يجب أن تكون 6 أحرف على الأقل';
+
+  @override
+  String get enterEmailreset =>
+      'أدخل بريدك الإلكتروني لإعادة تعيين كلمة المرور';
 }

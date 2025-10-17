@@ -74,6 +74,24 @@
     "quantity":"الكمية:",
     "colors": "الالوان المتاحة :",
     "reviews": "التعليقات:",
-    "try_virtual":"جربها"
+    "try_virtual":"جربها",
+     "accountAlreadyExistsTitle": "الحساب موجود بالفعل",
+  "accountAlreadyExistsDescription": "هذا البريد الإلكتروني مرتبط بطريقة تسجيل دخول أخرى (مثل Google). يُرجى تسجيل الدخول بتلك الطريقة لربط حسابك في فيسبوك.",
+  "cancel": "إلغاء",
+  "continueWithGoogle": "المتابعة باستخدام Google",
+  "enterEmail": "من فضلك أدخل البريد الإلكتروني",
+  "enterPassword": "من فضلك أدخل كلمة المرور",
+  "invalidEmail": "صيغة البريد الإلكتروني غير صحيحة",
+  "wrongCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+  "ok": "حسنًا",
+  "userNotFound": "المستخدم غير موجود في النظام",
+  "loginFailedTitle": "فشل تسجيل الدخول",
+  "emailNotFound": "البريد الإلكتروني غير موجود",
+   "enterUsername": "الرجاء إدخال اسم المستخدم",
+"emailNotFoundMessage": "هذا البريد الإلكتروني غير مسجّل في النظام.",
+"otpIncorrect": "الرمز غير صحيح",
+  "otpSent": "تم إرسال الرمز إلى بريدك الإلكتروني",
+  "passwordTooShort": "كلمة المرور يجب أن تكون 6 أحرف على الأقل",
+      "enterEmailreset": "أدخل بريدك الإلكتروني لإعادة تعيين كلمة المرور"
 
 }

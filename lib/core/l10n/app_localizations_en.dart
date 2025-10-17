@@ -228,4 +228,61 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get try_virtual => 'Try Virtual';
+
+  @override
+  String get accountAlreadyExistsTitle => 'Account Already Exists';
+
+  @override
+  String get accountAlreadyExistsDescription =>
+      'This email is already linked with another sign-in method (e.g., Google). Please sign in using that method to link your Facebook account.';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get continueWithGoogle => 'Continue with Google';
+
+  @override
+  String get enterEmail => 'Please enter your email';
+
+  @override
+  String get enterPassword => 'Please enter your password';
+
+  @override
+  String get invalidEmail => 'Invalid email format';
+
+  @override
+  String get wrongCredentials => 'Invalid email or password';
+
+  @override
+  String get ok => 'OK';
+
+  @override
+  String get userNotFound => 'User not found in our system';
+
+  @override
+  String get loginFailedTitle => 'Login Failed';
+
+  @override
+  String get emailNotFound => 'Email Not Found';
+
+  @override
+  String get emailNotFoundMessage =>
+      'This email is not registered in our system.';
+
+  @override
+  String get otpIncorrect => 'OTP is incorrect';
+
+  @override
+  String get otpSent => 'OTP has been sent to your email';
+
+  @override
+  String get enterUsername => 'Please enter your username';
+
+  @override
+  String get passwordTooShort => 'Password must be at least 6 characters';
+
+  @override
+  String get enterEmailreset =>
+      'Enter your registered email to reset your password';
 }
