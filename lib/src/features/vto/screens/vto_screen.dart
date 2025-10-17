@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:decora/src/shared/theme/app_colors.dart';
@@ -18,6 +17,8 @@ const String _kChairAssetName = 'assets/images/chair_placeholder.png';
 // and add the orange chair asset.
 
 class VtoScreen extends StatefulWidget {
+  const VtoScreen({super.key});
+
   @override
   _VtoScreenState createState() => _VtoScreenState();
 }
@@ -53,8 +54,10 @@ class _VtoScreenState extends State<VtoScreen> {
   Future<void> _initCamera() async {
     final cameras = await availableCameras();
     if (cameras.isNotEmpty) {
-      _cameraController =
-          CameraController(cameras.first, ResolutionPreset.medium);
+      _cameraController = CameraController(
+        cameras.first,
+        ResolutionPreset.medium,
+      );
       await _cameraController!.initialize();
       if (mounted) {
         setState(() {});
@@ -84,18 +87,18 @@ class _VtoScreenState extends State<VtoScreen> {
   // Renders the background, either live camera, picked image, or a placeholder
   Widget _buildBackground() {
     if (_isLive) {
-      return (_cameraController != null && _cameraController!.value.isInitialized
+      return (_cameraController != null &&
+              _cameraController!.value.isInitialized
           ? CameraPreview(_cameraController!)
-          : Center(child: CircularProgressIndicator(color: Colors.white)));
+          : const Center(
+              child: CircularProgressIndicator(color: Colors.white),
+            ));
     } else if (_pickedImage != null) {
-      return Image.file(
-        File(_pickedImage!.path),
-        fit: BoxFit.cover,
-      );
+      return Image.file(File(_pickedImage!.path), fit: BoxFit.cover);
     } else {
       // Placeholder background for the room aesthetic
       return Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.white,
           image: DecorationImage(
             // Replace with an asset if you want the specific room image
@@ -135,23 +138,21 @@ class _VtoScreenState extends State<VtoScreen> {
                   gap: 5.0,
                 ),
               ),
-              Center(
-                child: Image.asset(
-                  _selectedFurniture,
-                  fit: BoxFit.fill,
-                ),
-              ),
+              Center(child: Image.asset(_selectedFurniture, fit: BoxFit.fill)),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 10.0),
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 5,
+                    ),
                     decoration: BoxDecoration(
                       color: Colors.black54,
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    child: Text(
+                    child: const Text(
                       '< 360 >',
                       style: TextStyle(color: Colors.white, fontSize: 14),
                     ),
@@ -165,14 +166,13 @@ class _VtoScreenState extends State<VtoScreen> {
     );
   }
 
-
   // Renders the vertical scroll list of furniture on the right
   Widget _buildFurnitureList() {
     return Align(
       alignment: Alignment.centerRight,
       child: Padding(
         padding: const EdgeInsets.only(right: 10.0, top: 50, bottom: 50),
-        child: Container(
+        child: SizedBox(
           width: 60,
           child: ListView.builder(
             shrinkWrap: true,
@@ -195,7 +195,12 @@ class _VtoScreenState extends State<VtoScreen> {
                           ? Border.all(color: Colors.white, width: 3)
                           : null,
                       boxShadow: isSelected
-                          ? [BoxShadow(color: Colors.black26, blurRadius: 5)]
+                          ? [
+                              const BoxShadow(
+                                color: Colors.black26,
+                                blurRadius: 5,
+                              ),
+                            ]
                           : null,
                     ),
                     child: ClipRRect(
@@ -224,8 +229,8 @@ class _VtoScreenState extends State<VtoScreen> {
       left: 0,
       right: 0,
       child: Container(
-        height: AppSize.height(context)*0.2,
-        color: AppColors.background, // Dark background for contrast
+        height: AppSize.height(context) * 0.2,
+        color: AppColors.background(), // Dark background for contrast
         padding: const EdgeInsets.only(bottom: 20),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -234,13 +239,15 @@ class _VtoScreenState extends State<VtoScreen> {
             // Video / Toggle Live
             GestureDetector(
               onTap: _toggleLiveCamera,
-              child: Image.asset(Assets.videoIcon, color: AppColors.mainText, ),
+              child: Image.asset(Assets.videoIcon, color: AppColors.mainText()),
             ),
             // Main Shutter Button
             GestureDetector(
               onTap: () async {
                 try {
-                  if (_isLive && _cameraController != null && _cameraController!.value.isInitialized) {
+                  if (_isLive &&
+                      _cameraController != null &&
+                      _cameraController!.value.isInitialized) {
                     final image = await _cameraController!.takePicture();
                     setState(() {
                       _pickedImage = image;
@@ -250,7 +257,11 @@ class _VtoScreenState extends State<VtoScreen> {
                     // If using a gallery or background image, you can later implement
                     // saving a screenshot using RepaintBoundary
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Live camera is off. Turn it on to capture!')),
+                      const SnackBar(
+                        content: Text(
+                          'Live camera is off. Turn it on to capture!',
+                        ),
+                      ),
                     );
                   }
                 } catch (e) {
@@ -262,16 +273,16 @@ class _VtoScreenState extends State<VtoScreen> {
                 width: 100,
                 height: 100,
                 decoration: BoxDecoration(
-                  color:  AppColors.shoppingIconColor,
+                  color: AppColors.shoppingIconColor(),
                   shape: BoxShape.circle,
-
                 ),
                 child: Center(
                   child: Container(
                     width: 70,
                     height: 70,
                     decoration: BoxDecoration(
-                      color:AppColors.primary, // Green center like in the image
+                      color:
+                          AppColors.primary(), // Green center like in the image
                       shape: BoxShape.circle,
                     ),
                   ),
@@ -281,17 +292,13 @@ class _VtoScreenState extends State<VtoScreen> {
             // Gallery / Pick Image
             GestureDetector(
               onTap: _pickImage,
-              child: Image.asset(Assets.imageIcon, color: AppColors.mainText, ),
+              child: Image.asset(Assets.imageIcon, color: AppColors.mainText()),
             ),
           ],
         ),
       ),
     );
   }
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -313,14 +320,8 @@ class _VtoScreenState extends State<VtoScreen> {
               // 3. Furniture Selection List
               _buildFurnitureList(),
 
-
-
-
-
-
               // 6. Bottom Controls (Camera/Gallery/Shutter)
               _buildBottomControls(),
-
             ],
           ),
         ),
@@ -335,7 +336,11 @@ class DashedRectPainter extends CustomPainter {
   final double strokeWidth;
   final double gap;
 
-  DashedRectPainter({required this.color, required this.strokeWidth, required this.gap});
+  DashedRectPainter({
+    required this.color,
+    required this.strokeWidth,
+    required this.gap,
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -393,4 +398,3 @@ class DashedRectPainter extends CustomPainter {
 // 1. Add the necessary assets ('assets/images/chair_placeholder.png', 'assets/images/room_placeholder.jpg', etc.)
 //    and update the `furnitureImages` list.
 // 2. Update your `pubspec.yaml` to include the assets directory.
-
