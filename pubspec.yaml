@@ -35,10 +35,15 @@ dependencies:
   flutter_image_overlap: ^0.0.8
   flutter_localizations:
     sdk: flutter
-  lottie: ^3.3.2
+  lottie: 3.0.0
   font_awesome_flutter: ^10.10.0
   device_preview: ^1.1.0
   flutter_screenutil: ^5.9.3
+  drag_and_drop_lists: ^0.4.2
+  camera: ^0.10.0+4       # For live camera feed
+  image_picker: ^0.8.7+4 # For taking photos
+  object_3d: ^1.0.0 # For rendering 3D models (OBJ/GLTF)
+
   firebase_core: ^4.1.1
   cloud_firestore: ^6.0.2
 

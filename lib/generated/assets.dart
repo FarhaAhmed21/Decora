@@ -35,4 +35,8 @@ class Assets {
   static String trackingIcon2 = "assets/icons/icon-two.png";
   static String trackingIcon3 = "assets/icons/icon-three.png";
   static String trackingIcon4 = "assets/icons/icon-four.png";
+  static String imageIcon = "assets/icons/import_image_icon.png";
+  static String videoIcon = "assets/icons/video_icon.png";
+
+
 }
