@@ -1,5 +1,6 @@
 import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/src/features/Auth/screens/success_screen.dart';
+import 'package:decora/src/features/Auth/services/auth_service.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -12,14 +13,49 @@ class NewPasswordScreen extends StatefulWidget {
 }
 
 class _NewPasswordScreenState extends State<NewPasswordScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _passwordController = TextEditingController();
   bool _obscurePassword = true;
+  bool _isLoading = false;
+  final AuthService _authService = AuthService();
+
+  @override
+  void dispose() {
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _saveNewPassword() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    setState(() => _isLoading = true);
+
+    try {
+      final user = _authService.currentUser;
+      if (user != null) {
+        try {
+          await user.updatePassword(_passwordController.text.trim());
+        } catch (_) {}
+
+        await _authService.firestoreService.markPasswordChanged(user.uid);
+      }
+
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const PasswordResetSuccessScreen()),
+        );
+      }
+    } finally {
+      setState(() => _isLoading = false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final tr = AppLocalizations.of(context)!;
     final size = MediaQuery.of(context).size;
     final isArabic = Localizations.localeOf(context).languageCode == 'ar';
-    final controller = TextEditingController();
 
     return Directionality(
       textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
@@ -30,10 +66,10 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
           centerTitle: true,
           automaticallyImplyLeading: false,
           leading: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8),
             child: Container(
               decoration: BoxDecoration(
-                color: const Color(0xFFF6F6F6),
+                color: AppColors.innerCardColor(),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: InkWell(
@@ -45,7 +81,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                         ? FontAwesomeIcons.chevronRight
                         : FontAwesomeIcons.chevronLeft,
                     size: 16,
-                    color: Colors.black87,
+                    color: AppColors.mainText(),
                   ),
                 ),
               ),
@@ -53,99 +89,108 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
           ),
           title: Text(
             tr.createNewPassword,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: Colors.black87,
+              color: AppColors.secondaryText(),
             ),
           ),
         ),
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: size.width * 0.04),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: size.height * 0.03),
-              Text(
-                tr.verificationMessage,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: AppColors.secondaryText(),
-                  fontSize: 16,
-                ),
-              ),
-              const SizedBox(height: 30),
-              Text(tr.newPassword, style: const TextStyle(fontSize: 16)),
-              const SizedBox(height: 6),
-              TextField(
-                obscureText: _obscurePassword,
-                controller: controller,
-                cursorColor: AppColors.primary(),
-                decoration: InputDecoration(
-                  hintText: tr.newPassword,
-                  hintStyle: const TextStyle(fontSize: 14),
-
-                  border: OutlineInputBorder(
-                    borderRadius: const BorderRadius.all(Radius.circular(12.0)),
-                    borderSide: BorderSide(
-                      color: AppColors.secondaryText(),
-                      width: 0.5,
+        body: SafeArea(
+          child: SingleChildScrollView(
+            padding: EdgeInsets.symmetric(
+              horizontal: size.width * 0.04,
+              vertical: size.height * 0.03,
+            ),
+            child: Form(
+              key: _formKey,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Text(
+                      tr.verificationMessage,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: AppColors.secondaryText(),
+                        fontSize: 16,
+                      ),
                     ),
                   ),
-                  contentPadding: const EdgeInsets.symmetric(
-                    vertical: 15.0,
-                    horizontal: 16.0,
+                  SizedBox(height: size.height * 0.04),
+                  Text(
+                    tr.newPassword,
+                    style: TextStyle(fontSize: 16, color: AppColors.mainText()),
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: const BorderRadius.all(Radius.circular(12.0)),
-                    borderSide: BorderSide(
-                      color: AppColors.primary(),
-                      width: 1.5,
-                    ),
-                  ),
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      _obscurePassword
-                          ? Icons.visibility_off
-                          : Icons.visibility,
-                      color: Colors.grey,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _obscurePassword = !_obscurePassword;
-                      });
+                  SizedBox(height: size.height * 0.01),
+                  TextFormField(
+                    controller: _passwordController,
+                    obscureText: _obscurePassword,
+                    textDirection: TextDirection.ltr,
+                    style: TextStyle(color: AppColors.mainText()),
+                    cursorColor: AppColors.primary(),
+                    validator: (value) {
+                      if (value == null || value.isEmpty)
+                        return tr.enterNewPassword;
+                      if (value.length < 6) return tr.passwordTooShort;
+                      return null;
                     },
+                    decoration: InputDecoration(
+                      hintText: tr.newPassword,
+                      hintStyle: TextStyle(color: AppColors.secondaryText()),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: AppColors.primary(),
+                          width: 1.5,
+                        ),
+                      ),
+                      filled: true,
+                      fillColor: AppColors.innerCardColor(),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _obscurePassword
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: Colors.grey,
+                        ),
+                        onPressed: () => setState(
+                          () => _obscurePassword = !_obscurePassword,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                  SizedBox(height: size.height * 0.04),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 52,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primary(),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      onPressed: _isLoading ? null : _saveNewPassword,
+                      child: _isLoading
+                          ? const CircularProgressIndicator(color: Colors.white)
+                          : Text(
+                              tr.saveNewPassword,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(height: 50),
-              SizedBox(
-                width: double.infinity,
-                height: 52,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary(),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const PasswordResetSuccessScreen(),
-                    ),
-                  ),
-                  child: Text(
-                    tr.saveNewPassword,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),

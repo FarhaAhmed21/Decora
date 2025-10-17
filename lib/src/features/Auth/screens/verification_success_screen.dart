@@ -21,21 +21,19 @@ class VerificationSuccessScreen extends StatelessWidget {
           elevation: 0,
           automaticallyImplyLeading: false,
           centerTitle: true,
-
           title: Text(
             tr.emailVerification,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: Colors.black87,
+              color: AppColors.secondaryText(),
             ),
           ),
-
           leading: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 9),
             child: Container(
               decoration: BoxDecoration(
-                color: const Color(0xFFF6F6F6),
+                color: AppColors.innerCardColor(),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: InkWell(
@@ -46,7 +44,7 @@ class VerificationSuccessScreen extends StatelessWidget {
                     Directionality.of(context) == TextDirection.rtl
                         ? FontAwesomeIcons.chevronRight
                         : FontAwesomeIcons.chevronLeft,
-                    color: Colors.black87,
+                    color: AppColors.mainText(),
                     size: 16,
                   ),
                 ),
@@ -63,21 +61,20 @@ class VerificationSuccessScreen extends StatelessWidget {
             children: [
               Image.asset(
                 'assets/icons/true_icon.png',
-                height: size.height * 0.075,
+                height: 65,
                 fit: BoxFit.contain,
               ),
               SizedBox(height: size.height * 0.02),
-
               Text(
                 tr.verificationSuccess,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
+                  color: AppColors.secondaryText(),
                 ),
               ),
-              const SizedBox(height: 10),
-
+              SizedBox(height: size.height * 0.02),
               Text(
                 tr.verificationSuccessMessage,
                 textAlign: TextAlign.center,
@@ -86,8 +83,7 @@ class VerificationSuccessScreen extends StatelessWidget {
                   fontSize: 14,
                 ),
               ),
-              SizedBox(height: size.height * 0.05),
-
+              SizedBox(height: size.height * 0.04),
               SizedBox(
                 height: 52,
                 width: double.infinity,
