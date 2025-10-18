@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/src/features/Auth/screens/otp_verification_screen.dart';
 import 'package:decora/src/features/Auth/widgets/customField.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -100,14 +103,47 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => const OtpVerificationScreen(),
-                        ),
-                      );
+                    onPressed: () async {
+                      try {
+                        // إنشاء المستخدم
+                        UserCredential userCredential = await FirebaseAuth
+                            .instance
+                            .createUserWithEmailAndPassword(
+                              email: "doniawanees@gmail.com",
+                              password: "Ommy1973@@",
+                            );
+
+                        // الحصول على UID الخاص بالمستخدم الجديد
+                        String uid = userCredential.user!.uid;
+
+                        // تخزين بيانات المستخدم في Firestore بنفس UID
+                        await FirebaseFirestore.instance
+                            .collection('Users')
+                            .doc(uid)
+                            .set({
+                              'name': "Donia",
+                              'email': "doniawanees@gmail.com",
+                              'uid': uid,
+                              'phone_num': '',
+                              'location': '',
+                              'photo_link': '',
+                            });
+
+                        // الانتقال لصفحة التحقق
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const OtpVerificationScreen(),
+                          ),
+                        );
+                      } catch (e) {
+                        print('Error creating user: $e');
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Error: ${e.toString()}')),
+                        );
+                      }
                     },
+
                     child: Text(
                       tr.createAccount,
                       style: const TextStyle(color: Colors.white, fontSize: 16),

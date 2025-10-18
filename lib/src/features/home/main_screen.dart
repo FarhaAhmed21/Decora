@@ -19,7 +19,7 @@ class _MainLayoutState extends State<MainLayout> {
     const HomeScreen(), //0
     const MainCartPage(), //1
     const FavouriteScreen(), //2
-    const ProfileScreen(), //3
+    ProfileScreen(), //3
   ];
 
   void onTabTapped(int index) {

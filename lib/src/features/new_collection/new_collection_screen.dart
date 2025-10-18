@@ -1,3 +1,4 @@
+import 'package:decora/core/utils/app_size.dart';
 import 'package:decora/src/features/home/main_screen.dart';
 import 'package:decora/src/features/product_details/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
@@ -11,10 +12,14 @@ class NewCollectionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final h = AppSize.height(context);
+    final w = AppSize.width(context);
+    final isLandscape = w > h;
+
     return Scaffold(
       backgroundColor: AppColors.background(),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 7),
         child: Column(
           children: [
             SizedBox(height: MediaQuery.of(context).padding.top + 5),
@@ -29,11 +34,13 @@ class NewCollectionScreen extends StatelessWidget {
             const CustomSearchBar(),
             Expanded(
               child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: 0.70,
-                  mainAxisSpacing: 8,
-                  crossAxisSpacing: 8,
+                  childAspectRatio: isLandscape
+                      ? w / (h * 1.6)
+                      : w / (h / 1.48),
+                  mainAxisSpacing: 0.010 * w,
+                  crossAxisSpacing: 0.010 * w,
                 ),
                 itemCount: 10,
                 itemBuilder: (context, index) {

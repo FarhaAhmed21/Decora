@@ -3,9 +3,14 @@ import 'package:decora/src/features/Auth/screens/forgot_password_screen.dart';
 import 'package:decora/src/features/Auth/screens/signup_screen.dart';
 import 'package:decora/src/features/Auth/widgets/customField.dart';
 import 'package:decora/src/features/home/main_screen.dart';
+import 'package:decora/src/features/profile/models/usermodel.dart';
+import 'package:decora/src/features/profile/services/user_firebase.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -117,7 +122,13 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(
               height: 55.0,
               child: ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
+                  UserCredential userCredential = await FirebaseAuth.instance
+                      .signInWithEmailAndPassword(
+                        email: "abdoph71@gmail.com",
+                        password: "Ommy1973@@",
+                      );
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const MainLayout()),

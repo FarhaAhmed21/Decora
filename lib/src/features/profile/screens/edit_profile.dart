@@ -10,7 +10,7 @@ class EditProfileUI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.background(),
       body: Column(
         children: [
           SizedBox(height: MediaQuery.of(context).padding.top + 5),
@@ -88,9 +88,12 @@ class EditProfileUI extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 10),
-                      const Text(
+                      Text(
                         "Add another Location",
-                        style: TextStyle(color: Colors.black54),
+                        style: TextStyle(
+                          color: AppColors.mainText(),
+                          fontSize: 16,
+                        ),
                       ),
                     ],
                   ),
@@ -148,6 +151,11 @@ class EditProfileUI extends StatelessWidget {
           const SizedBox(height: 5),
           TextField(
             maxLines: label == "Location" ? 3 : 1,
+            style: TextStyle(
+              color: AppColors.mainText(),
+              fontSize: 16,
+              fontFamily: 'Montserratt',
+            ),
             decoration: InputDecoration(
               hintText: hint,
               hintStyle: TextStyle(
@@ -156,7 +164,7 @@ class EditProfileUI extends StatelessWidget {
                 fontFamily: 'Montserratt',
               ),
               filled: true,
-              fillColor: const Color(0xFFF6F6F6),
+              fillColor: AppColors.cardColor(),
               border: OutlineInputBorder(
                 borderSide: BorderSide.none,
                 borderRadius: BorderRadius.circular(12),

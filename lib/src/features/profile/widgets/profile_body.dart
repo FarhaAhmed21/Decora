@@ -8,7 +8,7 @@ import 'package:decora/src/shared/components/appbar.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class ProfileBody extends StatelessWidget {
+class ProfileBody extends StatefulWidget {
   final String name;
   final String email;
   final String profileImagepath;
@@ -21,6 +21,11 @@ class ProfileBody extends StatelessWidget {
   });
 
   @override
+  State<ProfileBody> createState() => _ProfileBodyState();
+}
+
+class _ProfileBodyState extends State<ProfileBody> {
+  @override
   Widget build(BuildContext context) {
     final List<String> settingsItems = [
       'Edit Profile',
@@ -31,8 +36,8 @@ class ProfileBody extends StatelessWidget {
     ];
 
     final List<Widget> navigations = [
-      EditProfileUI(profileImagePath: profileImagepath),
-      EditProfileUI(profileImagePath: profileImagepath),
+      EditProfileUI(profileImagePath: widget.profileImagepath),
+      EditProfileUI(profileImagePath: widget.profileImagepath),
       const MyOrdesScreen(),
       const ChatScreen(),
       const LoginScreen(),
@@ -43,7 +48,13 @@ class ProfileBody extends StatelessWidget {
         SizedBox(height: MediaQuery.of(context).padding.top + 5),
         CustomAppBar(
           title: 'Profile',
-          onBackPressed: () => Navigator.pop(context),
+          onBackPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (_) => const MainLayout()),
+            );
+            MainLayout.currentIndex = 0;
+          },
         ),
         Expanded(
           child: SingleChildScrollView(
@@ -54,14 +65,14 @@ class ProfileBody extends StatelessWidget {
                 CircleAvatar(
                   radius: 73,
                   backgroundColor: AppColors.primary(),
-                  child: CircleAvatar(
+                  child: const CircleAvatar(
                     radius: 70,
-                    backgroundImage: AssetImage(profileImagepath),
+                    backgroundImage: AssetImage("assets/images/ss.jpg"),
                   ),
                 ),
                 const SizedBox(height: 15),
                 Text(
-                  name,
+                  widget.name,
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 20,
@@ -70,7 +81,7 @@ class ProfileBody extends StatelessWidget {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  email,
+                  widget.email,
                   style: TextStyle(
                     fontWeight: FontWeight.w400,
                     fontSize: 14,
