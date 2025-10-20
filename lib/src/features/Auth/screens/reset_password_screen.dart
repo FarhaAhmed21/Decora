@@ -6,8 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class NewPasswordScreen extends StatefulWidget {
-  const NewPasswordScreen({super.key});
-
+  NewPasswordScreen({super.key});
   @override
   State<NewPasswordScreen> createState() => _NewPasswordScreenState();
 }
@@ -43,7 +42,9 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
       if (mounted) {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (_) => const PasswordResetSuccessScreen()),
+          MaterialPageRoute(
+            builder: (_) => PasswordResetSuccessScreen(back: "widget.back"),
+          ),
         );
       }
     } finally {
@@ -131,8 +132,9 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                     style: TextStyle(color: AppColors.mainText()),
                     cursorColor: AppColors.primary(),
                     validator: (value) {
-                      if (value == null || value.isEmpty)
+                      if (value == null || value.isEmpty) {
                         return tr.enterNewPassword;
+                      }
                       if (value.length < 6) return tr.passwordTooShort;
                       return null;
                     },

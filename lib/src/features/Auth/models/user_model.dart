@@ -3,11 +3,11 @@ import 'package:decora/src/features/Auth/models/preferences_model.dart';
 
 class UserModel {
   final String id;
-  final String? name;
+  String? name;
   final String? email;
-  final String? photoUrl;
-  final String? phone;
-  final List<AddressModel>? addresses;
+  String? photoUrl;
+  String? phone;
+  List<AddressModel>? addresses;
   final PreferencesModel? preferences;
 
   UserModel({

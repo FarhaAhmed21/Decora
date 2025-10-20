@@ -492,9 +492,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     const AddCommentWidget(),
                     // Display comments
                     const SizedBox(height: 8),
-                    ...comments
-                        .map((comment) => BuildCommentTile(comment))
-                        .toList(),
+                    ...comments.map((comment) => BuildCommentTile(comment)),
 
                     SizedBox(
                       height: h * 0.02,

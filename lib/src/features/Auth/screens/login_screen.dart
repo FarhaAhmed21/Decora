@@ -209,7 +209,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   decoration: InputDecoration(
                     hintText: loc.password,
                     errorText: _emailError,
-                    hintStyle: TextStyle(
+                    hintStyle: const TextStyle(
                       fontSize: 14,
                       color: AppColors.lightSecondaryText,
                     ),
