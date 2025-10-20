@@ -26,14 +26,20 @@ class ProfileBody extends StatefulWidget {
 }
 
 class _ProfileBodyState extends State<ProfileBody> {
+  bool _isLoading = false;
+
   void _logout(BuildContext context) async {
+    setState(() => _isLoading = true);
     await FirebaseAuth.instance.signOut();
+    await Future.delayed(const Duration(milliseconds: 600));
+    if (!mounted) return;
     MainLayout.currentIndex = 0;
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (_) => const LoginScreen()),
       (route) => false,
     );
+    setState(() => _isLoading = false);
   }
 
   String generateOtp() {
@@ -58,122 +64,152 @@ class _ProfileBodyState extends State<ProfileBody> {
       const LoginScreen(),
     ];
 
-    return Column(
+    return Stack(
       children: [
-        SizedBox(height: MediaQuery.of(context).padding.top + 5),
-        CustomAppBar(
-          title: 'Profile',
-          onBackPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => const MainLayout()),
-            );
-            setState(() {
-              MainLayout.currentIndex = 0;
-            });
-          },
-        ),
-        Expanded(
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Column(
-              children: [
-                const SizedBox(height: 30),
-                CircleAvatar(
-                  key: UniqueKey(),
-                  radius: 73,
-                  backgroundColor: AppColors.primary(),
-                  child: CircleAvatar(
-                    radius: 70,
-                    backgroundImage:
-                        widget.user.photoUrl != null &&
-                            widget.user.photoUrl!.isNotEmpty
-                        ? NetworkImage(widget.user.photoUrl!)
-                        : NetworkImage(default_url) as ImageProvider,
-                  ),
-                ),
-                const SizedBox(height: 15),
-                Text(
-                  widget.user.name ?? 'No Name',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 20,
-                    color: AppColors.textColor(),
-                  ),
-                ),
-                const SizedBox(height: 5),
-                Text(
-                  widget.user.email ?? '',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 14,
-                    color: AppColors.textColor(),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Column(
-                    children: List.generate(settingsItems.length, (index) {
-                      final title = settingsItems[index];
-                      return CustomSettingsTile(
-                        title: title,
-                        iconPath: 'assets/icons/arrow-left-01.png',
-                        onTap: () async {
-                          if (title == 'Logout') {
-                            _logout(context);
-                          } else if (title == 'Edit Profile') {
-                            final updatedUser =
-                                await Navigator.push<UserModel?>(
+        Column(
+          children: [
+            SizedBox(height: MediaQuery.of(context).padding.top + 5),
+            CustomAppBar(
+              title: 'Profile',
+              onBackPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const MainLayout()),
+                );
+                setState(() {
+                  MainLayout.currentIndex = 0;
+                });
+              },
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 30),
+                    CircleAvatar(
+                      key: UniqueKey(),
+                      radius: 73,
+                      backgroundColor: AppColors.primary(),
+                      child: CircleAvatar(
+                        radius: 70,
+                        backgroundImage:
+                            widget.user.photoUrl != null &&
+                                widget.user.photoUrl!.isNotEmpty
+                            ? NetworkImage(widget.user.photoUrl!)
+                            : NetworkImage(default_url) as ImageProvider,
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    Text(
+                      widget.user.name ?? 'No Name',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 20,
+                        color: AppColors.textColor(),
+                      ),
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      widget.user.email ?? '',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14,
+                        color: AppColors.textColor(),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: Column(
+                        children: List.generate(settingsItems.length, (index) {
+                          final title = settingsItems[index];
+                          return CustomSettingsTile(
+                            title: title,
+                            iconPath: 'assets/icons/arrow-left-01.png',
+                            onTap: () async {
+                              setState(() => _isLoading = true);
+
+                              if (title == 'Logout') {
+                                _logout(context);
+                              } else if (title == 'Edit Profile') {
+                                final updatedUser =
+                                    await Navigator.push<UserModel?>(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) =>
+                                            EditProfileUI(user: widget.user),
+                                      ),
+                                    );
+
+                                if (updatedUser != null && mounted) {
+                                  setState(() => widget.user = updatedUser);
+                                  if (updatedUser.photoUrl != null &&
+                                      updatedUser.photoUrl!.isNotEmpty) {
+                                    precacheImage(
+                                      NetworkImage(updatedUser.photoUrl!),
+                                      context,
+                                    );
+                                  }
+                                }
+                              } else if (title == 'Change Password') {
+                                final otp = generateOtp();
+                                await sendOtpEmail(widget.user.email!, otp);
+                                if (!mounted) return;
+                                Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (_) =>
-                                        EditProfileUI(user: widget.user),
+                                    builder: (_) => OtpResetScreen(
+                                      otp: otp,
+                                      email: widget.user.email!,
+                                      usePurpose: "change",
+                                    ),
                                   ),
                                 );
-
-                            if (updatedUser != null && mounted) {
-                              setState(() => widget.user = updatedUser);
-                              if (updatedUser.photoUrl != null &&
-                                  updatedUser.photoUrl!.isNotEmpty) {
-                                precacheImage(
-                                  NetworkImage(updatedUser.photoUrl!),
+                              } else {
+                                Navigator.push(
                                   context,
+                                  MaterialPageRoute(
+                                    builder: (_) => navigations[index - 1],
+                                  ),
                                 );
                               }
-                            }
-                          } else if (title == 'Change Password') {
-                            final otp = generateOtp();
-                            await sendOtpEmail(widget.user.email!, otp);
 
-                            if (!mounted) return;
+                              await Future.delayed(
+                                const Duration(milliseconds: 500),
+                              );
+                              if (mounted) setState(() => _isLoading = false);
+                            },
+                          );
+                        }),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
 
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => OtpResetScreen(
-                                  otp: otp,
-                                  email: widget.user.email!,
-                                ),
-                              ),
-                            );
-                          } else {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => navigations[index - 1],
-                              ),
-                            );
-                          }
-                        },
-                      );
-                    }),
+        // ✅ Loading Overlay
+        if (_isLoading)
+          AnimatedOpacity(
+            opacity: _isLoading ? 1 : 0,
+            duration: const Duration(milliseconds: 300),
+            child: Container(
+              color: Colors.black.withOpacity(0.3),
+              child: const Center(
+                child: SizedBox(
+                  height: 60,
+                  width: 60,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 5,
+                    color: Colors.white,
                   ),
                 ),
-              ],
+              ),
             ),
           ),
-        ),
       ],
     );
   }
