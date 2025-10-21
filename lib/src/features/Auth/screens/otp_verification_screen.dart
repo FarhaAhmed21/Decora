@@ -43,8 +43,12 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
   @override
   void dispose() {
-    for (var node in focusNodes) node.dispose();
-    for (var c in controllers) c.dispose();
+    for (var node in focusNodes) {
+      node.dispose();
+    }
+    for (var c in controllers) {
+      c.dispose();
+    }
     super.dispose();
   }
 
@@ -66,6 +70,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
         id: widget.uid,
         name: widget.name,
         email: widget.email,
+        photoUrl:
+            "https://cvhrma.org/wp-content/uploads/2015/07/default-profile-photo.jpg",
       );
       await FirestoreService().saveUserData(userModel);
 
@@ -97,7 +103,9 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     setState(() {
       _isResending = false;
       _currentOtp = newOtp;
-      for (var c in controllers) c.clear();
+      for (var c in controllers) {
+        c.clear();
+      }
     });
 
     ScaffoldMessenger.of(
@@ -221,7 +229,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     onPressed: _verifyOtp,
                     child: Text(
                       tr.verify,
-                      style: TextStyle(color: Colors.white, fontSize: 15),
+                      style: const TextStyle(color: Colors.white, fontSize: 15),
                     ),
                   ),
                 ),

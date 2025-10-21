@@ -8,7 +8,7 @@ Future<void> sendOtpEmail(String recipientEmail, String otp) async {
   final smtpServer = gmail(username, password);
 
   final message = Message()
-    ..from = Address(username, 'Decora Support')
+    ..from = const Address(username, 'Decora Support')
     ..recipients.add(recipientEmail)
     ..subject = 'OTP Verification'
     ..text = 'Your OTP code is: $otp';
