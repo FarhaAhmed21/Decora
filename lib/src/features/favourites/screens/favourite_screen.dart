@@ -4,6 +4,8 @@ import 'package:decora/src/shared/components/custom_card.dart';
 import 'package:decora/src/shared/components/searchbar.dart';
 import 'package:decora/src/shared/components/top_location_bar.dart';
 import 'package:flutter/material.dart';
+import '../../product_details/models/product_model.dart';
+import '../../product_details/services/product_services.dart';
 
 class FavouriteScreen extends StatefulWidget {
   const FavouriteScreen({super.key});
@@ -13,6 +15,15 @@ class FavouriteScreen extends StatefulWidget {
 }
 
 class _FavouriteScreenState extends State<FavouriteScreen> {
+  final ProductService _productService = ProductService();
+  late Future<List<Product>> productsFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    productsFuture = _productService.getProducts();
+  }
+
   @override
   Widget build(BuildContext context) {
     final h = AppSize.height(context);
@@ -27,33 +38,42 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
             SizedBox(height: h * 0.055),
             const CustomSearchBar(),
             SizedBox(height: h * 0.015),
+
             Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: w * 0.035),
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    return GridView.count(
-                      crossAxisCount: (w ~/ (180 * w)).clamp(
-                        2,
-                        isLandscape ? 4 : 6,
+                child: FutureBuilder<List<Product>>(
+                  future: productsFuture,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else if (snapshot.hasError) {
+                      return Center(child: Text('Error: ${snapshot.error}'));
+                    } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                      return const Center(child: Text('No products found'));
+                    }
+
+                    final products = snapshot.data!;
+                    return GridView.builder(
+                      itemCount: products.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: isLandscape ? 4 : 2,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                        childAspectRatio: isLandscape ? 1 : 0.75,
                       ),
-                      childAspectRatio: isLandscape
-                          ? w / (h * 1.6)
-                          : w / (h / 1.47),
-                      mainAxisSpacing: 0.010 * w,
-                      crossAxisSpacing: 0.010 * w,
-                      children: List.generate(8, (index) {
+                      itemBuilder: (context, index) {
+                        final product = products[index];
                         return GestureDetector(
                           onTap: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  const ProductDetailsScreen(),
+                              builder: (context) => ProductDetailsScreen(product: product),
                             ),
                           ),
-                          child: const CustomCard(isdiscount: false),
+                          child: CustomCard(product: product),
                         );
-                      }),
+                      },
                     );
                   },
                 ),

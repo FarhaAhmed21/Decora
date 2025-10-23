@@ -6,8 +6,26 @@ import 'package:decora/src/shared/components/appbar.dart';
 import 'package:decora/src/shared/components/searchbar.dart';
 import 'package:decora/src/shared/components/custom_card.dart';
 
-class NewCollectionScreen extends StatelessWidget {
+import '../product_details/models/product_model.dart';
+import '../product_details/services/product_services.dart';
+
+class NewCollectionScreen extends StatefulWidget {
   const NewCollectionScreen({super.key});
+
+  @override
+  State<NewCollectionScreen> createState() => _NewCollectionScreenState();
+}
+
+class _NewCollectionScreenState extends State<NewCollectionScreen> {
+  final ProductService _productService = ProductService();
+  late Future<List<Product>> productsFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    // You can modify this to get only new collection items later
+    productsFuture = _productService.getProducts();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,24 +45,44 @@ class NewCollectionScreen extends StatelessWidget {
             ),
             const SizedBox(height: 5),
             const CustomSearchBar(),
+
             Expanded(
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.70,
-                  mainAxisSpacing: 8,
-                  crossAxisSpacing: 8,
-                ),
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const ProductDetailsScreen(),
-                      ),
+              child: FutureBuilder<List<Product>>(
+                future: productsFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return const Center(child: Text('No products found'));
+                  }
+
+                  final products = snapshot.data!;
+                  return GridView.builder(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.70,
+                      mainAxisSpacing: 8,
+                      crossAxisSpacing: 8,
                     ),
-                    child: const CustomCard(isdiscount: false),
+                    itemCount: products.length,
+                    itemBuilder: (context, index) {
+                      final product = products[index];
+                      return GestureDetector(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                ProductDetailsScreen(product: product),
+                          ),
+                        ),
+                        child: CustomCard(
+                          product: product,
+
+                        ),
+                      );
+                    },
                   );
                 },
               ),

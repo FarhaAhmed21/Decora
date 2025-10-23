@@ -1,18 +1,66 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/generated/assets.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
+import '../../features/product_details/models/product_model.dart';
+
 class SpecialCard extends StatefulWidget {
-  const SpecialCard({super.key});
+  final Product product;
+  const SpecialCard({super.key, required this.product});
 
   @override
   State<SpecialCard> createState() => _CustomCardState();
 }
 
 class _CustomCardState extends State<SpecialCard> {
-  bool isFavourite = false;
-  bool isDiscount = true;
+  late bool isFavourite;
+   late bool isDiscount ;
+  @override
+  void initState() {
+    super.initState();
+    isFavourite = widget.product.isFavourite;
+    isDiscount = widget.product.discount > 0;
+  }
+  Future<void> toggleFavourite() async {
+    try {
+      // Update Firestore
+      await FirebaseFirestore.instance
+          .collection('products')
+          .doc(widget.product.id)
+          .update({'isfavourite': !isFavourite});
+
+      // Update local UI
+      setState(() {
+        isFavourite = !isFavourite;
+      });
+
+      // Show feedback
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            isFavourite
+                ? AppLocalizations.of(context)!
+                .product_added_to_favourite_successfully
+                : "Removed from favourites",
+          ),
+          backgroundColor: AppColors.primary(),
+          duration: const Duration(seconds: 1),
+        ),
+      );
+    } catch (e) {
+      print("Error updating favourite: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Error updating favourite status"),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -31,8 +79,8 @@ class _CustomCardState extends State<SpecialCard> {
                   color: AppColors.productCardColor(),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(16),
-                    child: Image.asset(
-                      Assets.luxeSofa,
+                    child: Image.network(
+                      widget.product.colors.first.imageUrl,
                       height: 140,
                       width: double.infinity,
                       fit: BoxFit.cover,
@@ -56,7 +104,7 @@ class _CustomCardState extends State<SpecialCard> {
                         color: AppColors.orange(),
                       ),
                       child: Text(
-                        AppLocalizations.of(context)!.discount,
+                        " ${widget.product.discount}${AppLocalizations.of(context)!.discount}",
                         style: TextStyle(
                           fontSize: 12,
                           color: AppColors.innerCardColor(),
@@ -70,29 +118,7 @@ class _CustomCardState extends State<SpecialCard> {
                   top: 10,
                   right: 10,
                   child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        isFavourite = !isFavourite;
-                        if (isFavourite) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                AppLocalizations.of(
-                                  context,
-                                )!.product_added_to_favourite_successfully,
-                              ),
-                              backgroundColor: AppColors.primary(),
-                              duration: const Duration(seconds: 1),
-                              // behavior:
-                              //     SnackBarBehavior.floating,
-                              // shape: RoundedRectangleBorder(
-                              //   borderRadius: BorderRadius.circular(12),
-                              // ),
-                            ),
-                          );
-                        }
-                      });
-                    },
+                    onTap: toggleFavourite,
                     child: isFavourite
                         ? Image.asset(
                             Assets.heartIcon,

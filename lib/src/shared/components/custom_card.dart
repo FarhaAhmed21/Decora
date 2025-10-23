@@ -1,25 +1,71 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/core/utils/app_size.dart';
-import 'package:decora/generated/assets.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
+import '../../features/product_details/models/product_model.dart';
 
 class CustomCard extends StatefulWidget {
-  final bool isdiscount;
-  final String? offerPercentage;
-  const CustomCard({super.key, required this.isdiscount, this.offerPercentage});
+  final Product product;
+
+  const CustomCard({super.key, required this.product});
 
   @override
   State<CustomCard> createState() => _CustomCardState();
 }
 
 class _CustomCardState extends State<CustomCard> {
-  bool isFavourite = false;
+  late bool isFavourite;
+
+  @override
+  void initState() {
+    super.initState();
+    isFavourite = widget.product.isFavourite;
+  }
+
+  Future<void> toggleFavourite() async {
+    try {
+      // Update Firestore
+      await FirebaseFirestore.instance
+          .collection('products')
+          .doc(widget.product.id)
+          .update({'isfavourite': !isFavourite});
+
+      // Update local UI
+      setState(() {
+        isFavourite = !isFavourite;
+      });
+
+      // Show feedback
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            isFavourite
+                ? AppLocalizations.of(context)!
+                .product_added_to_favourite_successfully
+                : "Removed from favourites",
+          ),
+          backgroundColor: AppColors.primary(),
+          duration: const Duration(seconds: 1),
+        ),
+      );
+    } catch (e) {
+      print("Error updating favourite: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Error updating favourite status"),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final h = AppSize.height(context);
     final w = AppSize.width(context);
+    final product = widget.product;
+
     return Card(
       elevation: 0,
       shape: RoundedRectangleBorder(
@@ -37,21 +83,27 @@ class _CustomCardState extends State<CustomCard> {
           children: [
             Stack(
               children: [
+
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(w * 0.02),
                     color: AppColors.productCardColor(),
                   ),
                   child: ClipRRect(
-                    child: Image.asset(
-                      Assets.luxeSofa,
+                    borderRadius: BorderRadius.circular(w * 0.02),
+                    child: Image.network(
+                      product.colors.isNotEmpty
+                          ? product.colors.first.imageUrl
+                          : 'https://via.placeholder.com/150',
                       height: h * 0.18,
                       width: double.infinity,
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
-                if (widget.isdiscount)
+
+                // Discount Badge
+                if (product.discount > 0)
                   Positioned(
                     left: 10,
                     child: Container(
@@ -59,16 +111,13 @@ class _CustomCardState extends State<CustomCard> {
                         horizontal: 8,
                         vertical: 4,
                       ),
-
                       margin: const EdgeInsets.all(10),
-
-                      alignment: Alignment.center,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16.0),
                         color: AppColors.orange(),
                       ),
                       child: Text(
-                        widget.offerPercentage!,
+                        '${product.discount}%',
                         style: TextStyle(
                           fontSize: 12,
                           color: AppColors.innerCardColor(),
@@ -78,55 +127,28 @@ class _CustomCardState extends State<CustomCard> {
                     ),
                   ),
 
+                // Favourite Icon
                 Positioned(
                   top: h * 0.015,
                   right: w * 0.020,
                   child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        isFavourite = !isFavourite;
-                        if (isFavourite) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                AppLocalizations.of(
-                                  context,
-                                )!.product_added_to_favourite_successfully,
-                              ),
-                              backgroundColor: AppColors.primary(),
-                              duration: const Duration(seconds: 1),
-                              // behavior:
-                              //     SnackBarBehavior.floating,
-                              // shape: RoundedRectangleBorder(
-                              //   borderRadius: BorderRadius.circular(12),
-                              // ),
-                            ),
-                          );
-                        }
-                      });
-                    },
-                    child: isFavourite
-                        ? Image.asset(
-                            Assets.heartIcon,
-                            color: AppColors.primary(),
-                            width: w * 0.05,
-                            height: h * 0.018,
-                          )
-                        : Image.asset(
-                            Assets.heartOutline,
-                            color: AppColors.primary(),
-                            width: w * 0.05,
-                            height: h * 0.018,
-                          ),
+                    onTap: toggleFavourite,
+                    child: Icon(
+                      isFavourite ? Icons.favorite : Icons.favorite_border,
+                      color: AppColors.primary(),
+                      size: w * 0.07,
+                    ),
                   ),
                 ),
               ],
             ),
             SizedBox(height: h * 0.008),
 
-            // Title
+            // Product Title
             Text(
-              "Olive Luxe Sofa",
+              product.name,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: w * 0.04,
@@ -134,28 +156,14 @@ class _CustomCardState extends State<CustomCard> {
               ),
             ),
 
-            //const SizedBox(height: 1),
-            Row(
-              children: [
-                Image.asset(Assets.starIcon, width: w * 0.04, height: w * 0.04),
-                SizedBox(width: w * 0.015),
-                Text(
-                  "4.9",
-                  style: TextStyle(
-                    fontSize: w * 0.035,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.secondaryText(),
-                  ),
-                ),
-              ],
-            ),
+            const SizedBox(height: 4),
 
-            //const SizedBox(height: 6),
+            // Price
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "\$250",
+                  "\$${product.price}",
                   style: TextStyle(
                     fontSize: w * 0.045,
                     color: AppColors.mainText(),
@@ -167,34 +175,22 @@ class _CustomCardState extends State<CustomCard> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
-                          AppLocalizations.of(
-                            context,
-                          )!.product_added_to_Cart_successfully,
+                          AppLocalizations.of(context)!
+                              .product_added_to_Cart_successfully,
                         ),
                         backgroundColor: AppColors.primary(),
                         duration: const Duration(seconds: 1),
-                        // behavior:
-                        //     SnackBarBehavior.floating,
-                        // shape: RoundedRectangleBorder(
-                        //   borderRadius: BorderRadius.circular(12),
-                        // ),
                       ),
                     );
                   },
                   child: Container(
                     width: w * 0.09,
                     height: h * 0.040,
-                    padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
                       color: AppColors.primary(),
                       borderRadius: BorderRadius.circular(w * 0.02),
                     ),
-                    child: Image.asset(
-                      Assets.shoppingBagIcon,
-                      color: Colors.white,
-                      width: w * 0.30,
-                      height: h * 0.030,
-                    ),
+                    child: const Icon(Icons.shopping_bag, color: Colors.white),
                   ),
                 ),
               ],

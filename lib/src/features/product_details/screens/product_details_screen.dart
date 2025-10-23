@@ -5,82 +5,47 @@ import '../../../../core/l10n/app_localizations.dart';
 import '../../../../core/utils/app_size.dart';
 import '../../../../generated/assets.dart';
 import '../../../shared/theme/app_colors.dart';
-import '../Logic/product_color.dart';
-import '../Logic/comment.dart';
+
+import '../models/product_model.dart';
 import '../widgets/add_comment_widget.dart';
 import '../widgets/build_comment_tile.dart';
 import '../widgets/buy_now_button.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
-  const ProductDetailsScreen({super.key});
+  final Product product;
+
+  const ProductDetailsScreen({super.key, required this.product});
 
   @override
   State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
-  final List<ProductColor> availableColors = [
-    ProductColor(
-      swatchColor: AppColors.orange(),
-      imagePath: Assets.luxeSofa,
-      colorName: 'Terracotta',
-    ),
-    ProductColor(
-      swatchColor: AppColors.innerCardColor(),
-      imagePath: Assets.luxeSofa,
-      colorName: 'Forest Green',
-    ),
-    ProductColor(
-      swatchColor: AppColors.primary(),
-      imagePath: Assets.luxeSofa,
-      colorName: 'Charcoal Black',
-    ),
-    ProductColor(
-      swatchColor: AppColors.productCardColor(),
-      imagePath: Assets.bedRoom,
-      colorName: 'Mustard Yellow',
-    ),
-  ];
 
-  // Dummy data for comments
-  final List<Comment> comments = [
-    Comment(
-      name: "Mona Ahmed",
-      profilePicPath:
-          Assets.decoreAccessories, // Assuming you have image paths in Assets
-      text: "Its a Verry comfortable sofa",
-      date: "10 May 2025",
-      imagePaths: [],
-    ),
-    Comment(
-      name: "Abdelrahman Mahmoud",
-      profilePicPath: Assets.couchImage,
-      text: "It is really beautiful",
-      date: "10 May 2025",
-      imagePaths: [Assets.luxeSofa, Assets.bedRoom],
-    ),
-    Comment(
-      name: "Mona Ahmed",
-      profilePicPath: Assets.diningRoom,
-      text: "Love the color and material!",
-      date: "10 May 2025",
-      imagePaths: [],
-    ),
-  ];
 
   late ProductColor _selectedColor;
-  String productName = "Rustic Charm Sofa";
-  String extraProductInfo = "Two seater";
-  String productDetails =
-      "The Rustic Charm Sofa is a cozy two-seater with timeless rustic style. Durable, comfortable, and perfect for compact spaces or welcoming guests";
-  double productPrice = 250;
-  int quantity = 1;
-  bool isFavourite = false;
+  late List<ProductColor> availableColor;
+  late String productName;
+  late String extraProductInfo;
+ late String productDetails ;
+ late double productPrice;
+  late int quantity ;
+  late bool isFavourite;
+  late List<Comment> comment;
 
   @override
   void initState() {
     super.initState();
-    _selectedColor = availableColors.first;
+    _selectedColor = widget.product.colors.first;
+    availableColor = widget.product.colors;
+    productName = widget.product.name;
+    extraProductInfo = widget.product.extraInfo;
+    productDetails = widget.product.details;
+    productPrice = widget.product.price;
+    quantity = 1;
+    isFavourite=widget.product.isFavourite;
+    comment = widget.product.comments;
+
   }
 
   // Helper Widget to build a single comment tile
@@ -126,8 +91,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         Expanded(
                           child: SizedBox(
                             height: mainImageHeight, // Responsive height
-                            child: Image.asset(
-                              _selectedColor.imagePath,
+                            child: Image.network(
+                              _selectedColor.imageUrl,
                               fit: BoxFit.fill,
                             ),
                           ),
@@ -318,9 +283,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             height: 30,
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
-                              itemCount: availableColors.length,
+                              itemCount: availableColor.length,
                               itemBuilder: (context, index) {
-                                final color = availableColors[index];
+                                final color = availableColor[index];
                                 final isSelected = _selectedColor == color;
 
                                 return GestureDetector(
@@ -335,7 +300,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     ),
                                     child: CircleAvatar(
                                       radius: 22,
-                                      backgroundColor: color.swatchColor,
+                                      backgroundColor: color.color,
                                       child: isSelected
                                           ? const CircleAvatar(
                                               radius: 10,
@@ -472,7 +437,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "${AppLocalizations.of(context)!.reviews} (${comments.length})",
+                          "${AppLocalizations.of(context)!.reviews} (${comment.length})",
                           style: TextStyle(
                             fontSize: 18,
                             color: AppColors.mainText(),
@@ -492,7 +457,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     const AddCommentWidget(),
                     // Display comments
                     const SizedBox(height: 8),
-                    ...comments
+                    ...comment
                         .map((comment) => BuildCommentTile(comment))
                         .toList(),
 

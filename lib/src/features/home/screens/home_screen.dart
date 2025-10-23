@@ -2,6 +2,9 @@ import 'package:decora/src/features/categories/screens/categories_screen.dart';
 import 'package:decora/src/features/offers/offers_screen.dart';
 import 'package:decora/src/features/product_details/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:decora/src/features/product_details/models/product_model.dart';
+// NOTE: Assuming this service has methods to fetch different lists of products
+import 'package:decora/src/features/product_details/services/product_services.dart';
 
 import '../../../../core/l10n/app_localizations.dart';
 import '../../../../core/utils/app_size.dart';
@@ -21,21 +24,42 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final ProductService _productService = ProductService();
+
+  // Future for the horizontal "Decora Specials" list (e.g., offers/featured)
+  late Future<List<Product>> _specialsFuture;
+
+  // Future for the main product grid
+  late Future<List<Product>> _mainProductsFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    // Assuming getSpecialProducts() or a similar method exists in your service
+    _specialsFuture = _productService.getDiscountedProducts();
+    // Assuming getProducts() fetches the main list for the grid
+    _mainProductsFuture = _productService.getProducts();
+  }
+
   @override
   Widget build(BuildContext context) {
     final h = AppSize.height(context);
     final w = AppSize.width(context);
     final isLandscape = w > h;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start, // Align content to start for better padding management
             children: [
               const TopLocationBar(),
               SizedBox(height: h * 0.045),
               const CustomSearchBar(),
               SizedBox(height: h * 0.015),
               const NewCollections(),
+
+              // --- Decora Specials Header ---
               Padding(
                 padding: const EdgeInsets.only(
                   left: 16.0,
@@ -55,6 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     const Spacer(),
                     GestureDetector(
                       onTap: () {
+                        // Navigates to the OffersScreen
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -74,31 +99,60 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 260,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 8,
-                  itemBuilder: (BuildContext context, int index) {
-                    return SizedBox(
-                      width: 250,
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 12.0),
-                        child: GestureDetector(
-                          onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const ProductDetailsScreen(),
+
+              // --- Decora Specials List (Horizontal) ---
+              FutureBuilder<List<Product>>(
+                future: _specialsFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const SizedBox(
+                      height: 260,
+                      child: Center(child: CircularProgressIndicator()),
+                    );
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error loading specials: ${snapshot.error}'));
+                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return const SizedBox(
+                      height: 260,
+                      child: Center(child: Text('No specials available')),
+                    );
+                  }
+
+                  final specials = snapshot.data!;
+
+                  return SizedBox(
+                    height: 260,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      // Use the actual number of products
+                      itemCount: specials.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final product = specials[index];
+                        return SizedBox(
+                          width: 250,
+                          child: Padding(
+                            // Add left padding to the first item for alignment
+                            padding: EdgeInsets.only(right: 12.0, left: index == 0 ? 16.0 : 0.0),
+                            child: GestureDetector(
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      ProductDetailsScreen(product: product),
+                                ),
+                              ),
+                              // Assuming SpecialCard accepts a Product model
+                              child: SpecialCard(product: product),
                             ),
                           ),
-                          child: const SpecialCard(),
-                        ),
-                      ),
-                    );
-                  },
-                ),
+                        );
+                      },
+                    ),
+                  );
+                },
               ),
+
+              // --- Categories Header ---
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
@@ -112,9 +166,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     const Spacer(),
-
                     GestureDetector(
                       onTap: () {
+                        // Navigates to the CategoriesScreen
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -134,42 +188,62 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              Categories(),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: w * 0.035),
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    return GridView.count(
+
+
+               Categories(),
+
+              // --- Main Product Grid ---
+              FutureBuilder<List<Product>>(
+                future: _mainProductsFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Padding(
+                      padding: EdgeInsets.all(30),
+                      child: Center(child: CircularProgressIndicator()),
+                    );
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error loading products: ${snapshot.error}'));
+                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return const Center(child: Text('No products found'));
+                  }
+
+                  final products = snapshot.data!;
+
+                  return Padding(
+                    padding: EdgeInsets.symmetric(horizontal: w * 0.035),
+                    child: GridView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      crossAxisCount: (w ~/ (180 * w)).clamp(
-                        2,
-                        isLandscape ? 4 : 6,
+                      itemCount: products.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        // Recalculated crossAxisCount to be closer to the original logic,
+                        // but simplified for the common 2-column layout in portrait.
+                        crossAxisCount: isLandscape ? 4 : 2,
+                        // Adjusted to fit the CustomCard structure (a common aspect ratio for 2 items/row)
+                        childAspectRatio: w / (h / (isLandscape ? 1.6 : 2.5)),
+                        mainAxisSpacing: 0.010 * w,
+                        crossAxisSpacing: 0.010 * w,
                       ),
-                      childAspectRatio: isLandscape
-                          ? w / (h * 1.6)
-                          : w / (h / 1.48),
-                      mainAxisSpacing: 0.010 * w,
-                      crossAxisSpacing: 0.010 * w,
-                      children: List.generate(8, (index) {
+                      itemBuilder: (context, index) {
+                        final product = products[index];
                         return GestureDetector(
                           onTap: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  const ProductDetailsScreen(),
+                              builder: (_) => ProductDetailsScreen(product: product),
                             ),
                           ),
-                          child: const CustomCard(
-                            isdiscount: true,
-                            offerPercentage: "20%",
-                          ),
+                          // Pass the product to CustomCard
+                          child: CustomCard(
+                            product: product,
+                            ),
                         );
-                      }),
-                    );
-                  },
-                ),
+                      },
+                    ),
+                  );
+                },
               ),
+              SizedBox(height: h * 0.05), // Add some space at the bottom
             ],
           ),
         ),
