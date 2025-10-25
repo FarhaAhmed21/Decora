@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PasswordResetSuccessScreen extends StatelessWidget {
-  const PasswordResetSuccessScreen({super.key});
-
+  PasswordResetSuccessScreen({super.key, this.back = "login"});
+  String back;
   @override
   Widget build(BuildContext context) {
     final tr = AppLocalizations.of(context)!;
@@ -97,7 +97,7 @@ class PasswordResetSuccessScreen extends StatelessWidget {
                   onPressed: () =>
                       Navigator.popUntil(context, (r) => r.isFirst),
                   child: Text(
-                    tr.backToLogin,
+                    back == "login" ? tr.backToLogin : "Back To Profile Page",
                     style: TextStyle(
                       color: AppColors.primary(),
                       fontSize: 15,

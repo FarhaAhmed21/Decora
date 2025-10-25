@@ -208,8 +208,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) return tr.enterEmail;
-                      if (!EmailValidator.validate(value))
+                      if (!EmailValidator.validate(value)) {
                         return tr.invalidEmail;
+                      }
                       return null;
                     },
                   ),
@@ -255,8 +256,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ),
                     validator: (value) {
-                      if (value == null || value.isEmpty)
+                      if (value == null || value.isEmpty) {
                         return tr.enterPassword;
+                      }
                       if (value.length < 6) return tr.passwordTooShort;
                       return null;
                     },
@@ -274,10 +276,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                       child: _isLoading
-                          ? CircularProgressIndicator(color: Colors.white)
+                          ? const CircularProgressIndicator(color: Colors.white)
                           : Text(
                               tr.createAccount,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
                               ),
