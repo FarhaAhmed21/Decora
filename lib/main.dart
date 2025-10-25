@@ -19,25 +19,6 @@ void main() async {
   print('🔥 Firebase initialized successfully');
 
   await dotenv.load(fileName: ".env");
-  // final authToken = await PaymobService.getAuthToken();
-  // print("✅ Auth Token: $authToken");
-
-  // final orderId = await PaymobService.createOrder(
-  //   authToken: authToken!,
-  //   amountCents: 10000,
-  // );
-  // print("🆔 Order ID: $orderId");
-
-  // final paymentKey = await PaymobService.getPaymentKey(
-  //   authToken: authToken,
-  //   orderId: orderId!,
-  //   amountCents: 10000,
-  // );
-  // print("💳 Payment Key: $paymentKey");
-
-  // final iframeUrl = PaymobService.getPaymentUrl(paymentKey!);
-  // print("🌐 Iframe URL: $iframeUrl");
-
   runApp(
     MultiBlocProvider(
       providers: [
