@@ -6,6 +6,7 @@ import '../../../../core/utils/app_size.dart';
 import '../../../../generated/assets.dart';
 import '../../../shared/theme/app_colors.dart';
 
+import '../../vto/screens/vto_screen.dart';
 import '../models/product_model.dart';
 import '../services/product_services.dart';
 import '../widgets/add_comment_widget.dart';
@@ -255,11 +256,16 @@ initState()  {
                         ElevatedButton.icon(
                           onPressed: () {
                             // TODO: Implement AR/VR functionality here
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => VtoScreen( products: [widget.product])),
+                            );
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 content: Text('Starting Virtual Try-On...'),
                               ),
                             );
+
                           },
                           icon: Image.asset(
                             Assets.vrnIcon,

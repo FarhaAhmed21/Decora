@@ -17,10 +17,12 @@ class ProductService {
         .collection('products')
         .where('discount', isGreaterThan: 0)
         .get();
-
-    return snapshot.docs.map((doc) {
+    List<Product> products = snapshot.docs.map((doc) {
       return Product.fromMap(doc.data(), doc.id);
     }).toList();
+    print("there are ${products.length} discounted products karen");
+
+    return products;
   }
   Future<List<Comment>> fetchComments(Product product) async {
     final snapshot = await FirebaseFirestore.instance

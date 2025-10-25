@@ -42,7 +42,7 @@ class _CategoriesState extends State<Categories> {
               padding: const EdgeInsets.symmetric(
                 horizontal: 20,
                 vertical: 10,
-              ), // 👈 ADDED PADDING
+              ),
 
               alignment: Alignment.center,
               decoration: BoxDecoration(
