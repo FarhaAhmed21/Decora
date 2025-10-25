@@ -3,6 +3,8 @@ import 'package:decora/core/utils/app_size.dart';
 import 'package:decora/src/features/cart/pages/my_cart.dart';
 import 'package:decora/src/features/cart/pages/shared_cart.dart';
 import 'package:decora/src/features/cart/widgets/cart_app_bar.dart';
+import 'package:decora/src/payment/screen/payment-screen.dart';
+import 'package:decora/src/payment/repo/paymob-service.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -67,8 +69,40 @@ class _MainCartPageState extends State<MainCartPage> {
     );
   }
 
-  void handlePayNow() {
-    //TODO: payment logic
+  void handlePayNow() async {
+    try {
+      final authToken = await PaymobService.getAuthToken();
+      print("🔹 Auth Token: $authToken");
+
+      final orderId = await PaymobService.createOrder(
+        authToken: authToken,
+        amountCents: ((subTotal + taxes - discount) * 100).toInt(),
+      );
+      print("🔹 Order ID: $orderId");
+
+      final paymentKey = await PaymobService.getPaymentKey(
+        authToken: authToken,
+        orderId: orderId,
+        amountCents: ((subTotal + taxes - discount) * 100).toInt(),
+      );
+      print("🔹 Payment Key: $paymentKey");
+
+      // 4️⃣ Generate payment URL
+      final paymentUrl = PaymobService.getPaymentUrl(paymentKey);
+      print("🔹 Payment URL: $paymentUrl");
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => PaymentScreen(paymentUrl: paymentUrl),
+        ),
+      );
+    } catch (e) {
+      print("❌ Payment Error: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("حدث خطأ أثناء تنفيذ عملية الدفع")),
+      );
+    }
   }
 
   void openCheckoutSheet(BuildContext context) {

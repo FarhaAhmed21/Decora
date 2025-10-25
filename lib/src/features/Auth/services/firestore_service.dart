@@ -16,4 +16,16 @@ class FirestoreService {
       'lastPasswordChange': FieldValue.serverTimestamp(),
     });
   }
+
+  //get user data
+  Future<UserModel> getUserData(String uid) async {
+    final userRef = _firestore.collection(userCollection).doc(uid);
+    final doc = await userRef.get();
+
+    if (doc.exists && doc.data() != null) {
+      return UserModel.fromMap(doc.data()!);
+    } else {
+      throw Exception('User not found');
+    }
+  }
 }

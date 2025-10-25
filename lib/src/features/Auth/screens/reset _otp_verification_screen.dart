@@ -10,7 +10,15 @@ class OtpResetScreen extends StatefulWidget {
   final String otp;
   final String email;
 
-  const OtpResetScreen({super.key, required this.otp, required this.email});
+  /// usePurpose can be "reset" or "change"
+  final String usePurpose;
+
+  const OtpResetScreen({
+    super.key,
+    required this.otp,
+    required this.email,
+    this.usePurpose = "reset",
+  });
 
   @override
   State<OtpResetScreen> createState() => _OtpResetScreenState();
@@ -33,8 +41,12 @@ class _OtpResetScreenState extends State<OtpResetScreen> {
 
   @override
   void dispose() {
-    for (var node in focusNodes) node.dispose();
-    for (var c in controllers) c.dispose();
+    for (var node in focusNodes) {
+      node.dispose();
+    }
+    for (var c in controllers) {
+      c.dispose();
+    }
     super.dispose();
   }
 
@@ -61,8 +73,30 @@ class _OtpResetScreenState extends State<OtpResetScreen> {
       SnackBar(content: Text(AppLocalizations.of(context)!.otpSent)),
     );
 
-    for (var c in controllers) c.clear();
+    for (var c in controllers) {
+      c.clear();
+    }
     FocusScope.of(context).requestFocus(focusNodes[0]);
+  }
+
+  void _handleOtpVerification() {
+    final tr = AppLocalizations.of(context)!;
+
+    if (_verifyOtp()) {
+      Widget targetScreen;
+
+      if (widget.usePurpose == "change") {
+        targetScreen = NewPasswordScreen();
+      } else {
+        targetScreen = NewPasswordScreen();
+      }
+
+      Navigator.push(context, MaterialPageRoute(builder: (_) => targetScreen));
+    } else {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(tr.otpIncorrect)));
+    }
   }
 
   @override
@@ -102,7 +136,9 @@ class _OtpResetScreenState extends State<OtpResetScreen> {
             ),
           ),
           title: Text(
-            tr.resetPassword,
+            widget.usePurpose == "change"
+                ? "Change Your Password"
+                : tr.resetPassword,
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -179,23 +215,13 @@ class _OtpResetScreenState extends State<OtpResetScreen> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      onPressed: () {
-                        if (_verifyOtp()) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => const NewPasswordScreen(),
-                            ),
-                          );
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(tr.otpIncorrect)),
-                          );
-                        }
-                      },
+                      onPressed: _handleOtpVerification,
                       child: Text(
                         tr.verify,
-                        style: TextStyle(color: Colors.white, fontSize: 16),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                   ),
