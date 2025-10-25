@@ -5,82 +5,61 @@ import '../../../../core/l10n/app_localizations.dart';
 import '../../../../core/utils/app_size.dart';
 import '../../../../generated/assets.dart';
 import '../../../shared/theme/app_colors.dart';
-import '../Logic/product_color.dart';
-import '../Logic/comment.dart';
+
+import '../../vto/screens/vto_screen.dart';
+import '../models/product_model.dart';
+import '../services/product_services.dart';
 import '../widgets/add_comment_widget.dart';
 import '../widgets/build_comment_tile.dart';
 import '../widgets/buy_now_button.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
-  const ProductDetailsScreen({super.key});
+  final Product product;
+
+  const ProductDetailsScreen({super.key, required this.product});
 
   @override
   State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
-  final List<ProductColor> availableColors = [
-    ProductColor(
-      swatchColor: AppColors.orange(),
-      imagePath: Assets.luxeSofa,
-      colorName: 'Terracotta',
-    ),
-    ProductColor(
-      swatchColor: AppColors.innerCardColor(),
-      imagePath: Assets.luxeSofa,
-      colorName: 'Forest Green',
-    ),
-    ProductColor(
-      swatchColor: AppColors.primary(),
-      imagePath: Assets.luxeSofa,
-      colorName: 'Charcoal Black',
-    ),
-    ProductColor(
-      swatchColor: AppColors.productCardColor(),
-      imagePath: Assets.bedRoom,
-      colorName: 'Mustard Yellow',
-    ),
-  ];
 
-  // Dummy data for comments
-  final List<Comment> comments = [
-    Comment(
-      name: "Mona Ahmed",
-      profilePicPath:
-          Assets.decoreAccessories, // Assuming you have image paths in Assets
-      text: "Its a Verry comfortable sofa",
-      date: "10 May 2025",
-      imagePaths: [],
-    ),
-    Comment(
-      name: "Abdelrahman Mahmoud",
-      profilePicPath: Assets.couchImage,
-      text: "It is really beautiful",
-      date: "10 May 2025",
-      imagePaths: [Assets.luxeSofa, Assets.bedRoom],
-    ),
-    Comment(
-      name: "Mona Ahmed",
-      profilePicPath: Assets.diningRoom,
-      text: "Love the color and material!",
-      date: "10 May 2025",
-      imagePaths: [],
-    ),
-  ];
 
   late ProductColor _selectedColor;
-  String productName = "Rustic Charm Sofa";
-  String extraProductInfo = "Two seater";
-  String productDetails =
-      "The Rustic Charm Sofa is a cozy two-seater with timeless rustic style. Durable, comfortable, and perfect for compact spaces or welcoming guests";
-  double productPrice = 250;
-  int quantity = 1;
-  bool isFavourite = false;
+  late List<ProductColor> availableColor;
+  late String productName;
+  late String extraProductInfo;
+ late String productDetails ;
+ late double productPrice;
+  late int quantity ;
+  late bool isFavourite;
+  late List<Comment> comments;
+  late int buyQuantity;
+  final ProductService _productService = ProductService();
 
   @override
-  void initState() {
+initState()  {
     super.initState();
-    _selectedColor = availableColors.first;
+    comments= [];
+    _selectedColor = widget.product.colors.first;
+    availableColor = widget.product.colors;
+    productName = widget.product.name;
+    extraProductInfo = widget.product.extraInfo;
+    productDetails = widget.product.details;
+    productPrice = widget.product.price;
+    quantity =  widget.product.quantity;
+    isFavourite = false;
+
+    _loadComments();
+
+    buyQuantity=0;
+
+  }
+  Future<void> _loadComments() async {
+    final fetchedComments = await _productService.fetchComments(widget.product);
+    setState(() {
+      comments = fetchedComments;
+    });
   }
 
   // Helper Widget to build a single comment tile
@@ -126,8 +105,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         Expanded(
                           child: SizedBox(
                             height: mainImageHeight, // Responsive height
-                            child: Image.asset(
-                              _selectedColor.imagePath,
+                            child: Image.network(
+                              _selectedColor.imageUrl,
                               fit: BoxFit.fill,
                             ),
                           ),
@@ -225,7 +204,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: h * 0.04), // Responsive spacing
+                    SizedBox(height: h * 0.04),
                     // 3. Info Boxes (Placeholder)
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -250,7 +229,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: h * 0.04), // Responsive spacing
+                    SizedBox(height: h * 0.04),
                     // 4. Product Details
                     Text(
                       productDetails,
@@ -259,7 +238,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         color: AppColors.secondaryText(),
                       ),
                     ),
-                    SizedBox(height: h * 0.02), // Responsive spacing
+                    SizedBox(height: h * 0.02),
                     // 6. Colors Selector
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -277,11 +256,16 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         ElevatedButton.icon(
                           onPressed: () {
                             // TODO: Implement AR/VR functionality here
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => VtoScreen( products: [widget.product])),
+                            );
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 content: Text('Starting Virtual Try-On...'),
                               ),
                             );
+
                           },
                           icon: Image.asset(
                             Assets.vrnIcon,
@@ -318,9 +302,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             height: 30,
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
-                              itemCount: availableColors.length,
+                              itemCount: availableColor.length,
                               itemBuilder: (context, index) {
-                                final color = availableColors[index];
+                                final color = availableColor[index];
                                 final isSelected = _selectedColor == color;
 
                                 return GestureDetector(
@@ -335,7 +319,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     ),
                                     child: CircleAvatar(
                                       radius: 22,
-                                      backgroundColor: color.swatchColor,
+                                      backgroundColor: color.color,
                                       child: isSelected
                                           ? const CircleAvatar(
                                               radius: 10,
@@ -367,7 +351,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             ),
                             Text(
                               "\$$productPrice",
-                              style: const TextStyle(fontSize: 20),
+                              style:  TextStyle(fontSize: 20,color: AppColors.secondaryText()),
                             ),
                           ],
                         ),
@@ -396,8 +380,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   GestureDetector(
                                     onTap: () {
                                       setState(() {
-                                        if (quantity > 1) {
-                                          quantity--;
+                                        if (buyQuantity > 1 ) {
+                                          buyQuantity--;
                                         }
                                       });
                                     },
@@ -423,7 +407,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     ),
                                   ),
                                   Text(
-                                    quantity.toString(),
+                                    buyQuantity.toString(),
                                     style: TextStyle(
                                       fontSize: 16,
                                       color: AppColors.mainText(),
@@ -433,7 +417,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   GestureDetector(
                                     onTap: () {
                                       setState(() {
-                                        quantity++;
+                                        if ( buyQuantity<quantity) {
+                                          buyQuantity++;
+                                        }
                                       });
                                     },
                                     child: Container(

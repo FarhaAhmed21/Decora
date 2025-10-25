@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:decora/src/features/product_details/models/product_model.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -17,7 +18,8 @@ const String _kChairAssetName = 'assets/images/chair_placeholder.png';
 // and add the orange chair asset.
 
 class VtoScreen extends StatefulWidget {
-  const VtoScreen({super.key});
+  final List<Product> products;
+  const VtoScreen({super.key, required this.products});
 
   @override
   _VtoScreenState createState() => _VtoScreenState();
@@ -28,21 +30,20 @@ class _VtoScreenState extends State<VtoScreen> {
   CameraController? _cameraController;
   bool _isLive = true; // Start with live camera on as a common VTO pattern
   String _selectedFurniture = _kChairAssetName;
+   final List<String> images= [];
 
-  // List of furniture items (you'll need to update these paths)
-  List<String> furnitureImages = [
-    // The main chair
-    'assets/images/office.png', // Placeholder
-    'assets/images/luxe-sofa.png', // Placeholder
-    'assets/images/lamp.png', // Placeholder
-    'assets/images/couch.png', // Placeholder
-    // Add more actual asset paths here
-  ];
 
   @override
   void initState() {
     super.initState();
     _initCamera();
+    for (var product in widget.products) {
+      for (var color in product.colors) {
+        images.add(color.imageUrl);
+      }
+    }
+
+
   }
 
   @override
@@ -138,7 +139,7 @@ class _VtoScreenState extends State<VtoScreen> {
                   gap: 5.0,
                 ),
               ),
-              Center(child: Image.asset(_selectedFurniture, fit: BoxFit.fill)),
+              Center(child: Image.network(_selectedFurniture, fit: BoxFit.fill)),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
@@ -176,9 +177,9 @@ class _VtoScreenState extends State<VtoScreen> {
           width: 60,
           child: ListView.builder(
             shrinkWrap: true,
-            itemCount: furnitureImages.length,
+            itemCount:images.length,
             itemBuilder: (context, index) {
-              final item = furnitureImages[index];
+              final item =images[index];
               final isSelected = item == _selectedFurniture;
               return Padding(
                 padding: const EdgeInsets.only(bottom: 15.0),
@@ -205,7 +206,7 @@ class _VtoScreenState extends State<VtoScreen> {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
-                      child: Image.asset(
+                      child: Image.network(
                         item,
                         width: 50,
                         height: 50,

@@ -4,15 +4,40 @@ import 'package:decora/src/shared/components/custom_card.dart';
 import 'package:decora/src/shared/components/searchbar.dart';
 import 'package:decora/src/shared/components/top_location_bar.dart';
 import 'package:flutter/material.dart';
+import '../../product_details/models/product_model.dart';
 
 class FavouriteScreen extends StatefulWidget {
-  const FavouriteScreen({super.key});
+  final List<Product> favProducts;
+
+  const FavouriteScreen({super.key, required this.favProducts});
 
   @override
   State<FavouriteScreen> createState() => _FavouriteScreenState();
 }
 
 class _FavouriteScreenState extends State<FavouriteScreen> {
+  late List<Product> filteredProducts;
+  bool isSearching = false;
+
+  void _onSearchChanged(String query) {
+    setState(() {
+      if (query.isEmpty) {
+        isSearching = false;
+        filteredProducts = widget.favProducts;
+      } else {
+        isSearching = true;
+        filteredProducts = widget.favProducts.where((product) {
+          final name = product.name.toLowerCase();
+          return name.contains(query.toLowerCase());
+        }).toList();
+      }
+    });
+  }
+  @override
+  void initState() {
+    super.initState();
+    filteredProducts = widget.favProducts;
+  }
   @override
   Widget build(BuildContext context) {
     final h = AppSize.height(context);
@@ -25,35 +50,30 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
           children: [
             const TopLocationBar(),
             SizedBox(height: h * 0.055),
-            const CustomSearchBar(),
+            CustomSearchBar( onSearchChanged: _onSearchChanged),
             SizedBox(height: h * 0.015),
             Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: w * 0.035),
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    return GridView.count(
-                      crossAxisCount: (w ~/ (180 * w)).clamp(
-                        2,
-                        isLandscape ? 4 : 6,
+                child: GridView.builder(
+                  itemCount: filteredProducts.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: isLandscape ? 4 : 2,
+                    childAspectRatio: isLandscape ? 1.3 : 0.75,
+                    mainAxisSpacing: 0.010 * w,
+                    crossAxisSpacing: 0.010 * w,
+                  ),
+                  itemBuilder: (context, index) {
+                    final product = filteredProducts[index];
+                    return GestureDetector(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) =>
+                              ProductDetailsScreen(product: product),
+                        ),
                       ),
-                      childAspectRatio: isLandscape
-                          ? w / (h * 1.6)
-                          : w / (h / 1.47),
-                      mainAxisSpacing: 0.010 * w,
-                      crossAxisSpacing: 0.010 * w,
-                      children: List.generate(8, (index) {
-                        return GestureDetector(
-                          onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const ProductDetailsScreen(),
-                            ),
-                          ),
-                          child: const CustomCard(isdiscount: false),
-                        );
-                      }),
+                      child: CustomCard(product: product),
                     );
                   },
                 ),

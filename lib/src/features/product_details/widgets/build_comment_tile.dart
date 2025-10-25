@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../shared/theme/app_colors.dart';
-import '../Logic/comment.dart';
+import '../models/product_model.dart';
+
 
 Widget BuildCommentTile(Comment comment) {
   return Padding(
@@ -16,7 +17,7 @@ Widget BuildCommentTile(Comment comment) {
             // Profile Picture
             CircleAvatar(
               radius: 20,
-              backgroundImage: AssetImage(comment.profilePicPath),
+              backgroundImage: NetworkImage(comment.profilePic),
             ),
             const SizedBox(width: 8),
 
@@ -32,13 +33,14 @@ Widget BuildCommentTile(Comment comment) {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
                           child: Text(
-                            comment.name,
+                            comment.userName,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                             style: TextStyle(
@@ -57,6 +59,7 @@ Widget BuildCommentTile(Comment comment) {
                         ),
                       ],
                     ),
+
                     const SizedBox(height: 4),
 
                     Text(
@@ -67,7 +70,7 @@ Widget BuildCommentTile(Comment comment) {
                       ),
                     ),
 
-                    if (comment.imagePaths.isNotEmpty)
+                    if (comment.profilePic.isNotEmpty)
                       Padding(
                         padding: const EdgeInsets.only(top: 8.0),
                         child: SizedBox(
@@ -75,14 +78,14 @@ Widget BuildCommentTile(Comment comment) {
                           child: ListView.builder(
                             shrinkWrap: true,
                             scrollDirection: Axis.horizontal,
-                            itemCount: comment.imagePaths.length,
+                            itemCount: comment.postPics.length,
                             itemBuilder: (context, index) {
                               return Padding(
                                 padding: const EdgeInsets.only(right: 8.0),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8.0),
-                                  child: Image.asset(
-                                    comment.imagePaths[index],
+                                  child: Image.network(
+                                    comment.postPics[index],
                                     width: 80,
                                     height: 80,
                                     fit: BoxFit.cover,
