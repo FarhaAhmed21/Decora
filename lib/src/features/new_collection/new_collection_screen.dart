@@ -8,7 +8,6 @@ import 'package:decora/src/shared/components/appbar.dart';
 import 'package:decora/src/shared/components/searchbar.dart';
 import 'package:decora/src/shared/components/custom_card.dart';
 
-import '../product_details/services/product_services.dart';
 
 class NewCollectionScreen extends StatefulWidget {
   const NewCollectionScreen({super.key});

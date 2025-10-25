@@ -3,6 +3,7 @@ import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/core/utils/app_size.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
+import '../../../generated/assets.dart';
 import '../../features/product_details/models/product_model.dart';
 
 class CustomCard extends StatefulWidget {
@@ -158,6 +159,24 @@ class _CustomCardState extends State<CustomCard> {
                 ),
 
                 const SizedBox(height: 4),
+                //const SizedBox(height: 1),
+                Row(
+                  children: [
+                    Image.asset(Assets.starIcon, width: w * 0.04, height: w * 0.04),
+                    SizedBox(width: w * 0.015),
+                    Text(
+                      "4.9",
+                      style: TextStyle(
+                        fontSize: w * 0.035,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.secondaryText(),
+                      ),
+                    ),
+                  ],
+                ),
+
+                //const SizedBox(height: 6),
+
 
                 // Price + Cart button
                 Row(
@@ -191,8 +210,13 @@ class _CustomCardState extends State<CustomCard> {
                           color: AppColors.primary(),
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        child: const Icon(Icons.shopping_bag,
-                            color: Colors.white),
+                        child: Image.asset(
+                          Assets.shoppingBagIcon,
+                          color: Colors.white,
+                          width: w * 0.30,
+                          height: h * 0.030,
+                        ),
+
                       ),
                     ),
                   ],
