@@ -33,6 +33,7 @@ class Comment {
   final String date;
   final String profilePic;
   final String email;
+  final List<String> postPics;
 
   Comment({
     required this.userName,
@@ -40,15 +41,19 @@ class Comment {
     required this.date,
     required this.profilePic,
     required this.email,
+    required this.postPics,
   });
 
-  factory Comment.fromMap(Map<String, dynamic> map) {
+
+  factory Comment.fromMap(Map<String, dynamic> json) {
     return Comment(
-      userName: map['userName'] ?? '',
-      text: map['text'] ?? '',
-      date: map['date'] ?? '',
-      profilePic: map['profilePic'] ?? '',
-      email: map['email'] ?? '',
+      userName: json['userName'] ?? '',
+      email: json['email'] ?? '',
+      text: json['text'] ?? '',
+      date: json['date'] ?? '',
+      profilePic: json['profilePic'] ?? '',
+      postPics: List<String>.from(json['postPics'] ?? []),
+
     );
   }
 }
@@ -60,7 +65,8 @@ class Product {
   final String details;
   final double price;
   final int discount;
-  final bool isFavourite;
+  final int quantity;
+  final bool isNewCollection;
   final String category;
   final List<ProductColor> colors;
   final List<Comment> comments;
@@ -72,7 +78,8 @@ class Product {
     required this.details,
     required this.price,
     required this.discount,
-    required this.isFavourite,
+    required this.quantity,
+    required this.isNewCollection,
     required this.category,
     required this.colors,
     required this.comments,
@@ -94,7 +101,8 @@ class Product {
       details: data['details'] ?? '',
       price: (data['price'] ?? 0).toDouble(),
       discount: (data['discount'] ?? 0).toInt(),
-      isFavourite: data['isfavourite']?.toString() == 'true',
+      quantity: (data['quantity'] ?? 0).toInt(),
+      isNewCollection: data['isNewCollection'] ?? false,
       category: data['categories'] ?? '',
       colors: colorsList,
       comments: commentsList,

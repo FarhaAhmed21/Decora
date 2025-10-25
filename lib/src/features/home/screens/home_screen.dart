@@ -39,6 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _specialsFuture = _productService.getDiscountedProducts();
     // Assuming getProducts() fetches the main list for the grid
     _mainProductsFuture = _productService.getProducts();
+    //_productService.replaceProductsInFirestore();
   }
 
   @override
@@ -216,11 +217,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: products.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        // Recalculated crossAxisCount to be closer to the original logic,
-                        // but simplified for the common 2-column layout in portrait.
                         crossAxisCount: isLandscape ? 4 : 2,
-                        // Adjusted to fit the CustomCard structure (a common aspect ratio for 2 items/row)
-                        childAspectRatio: w / (h / (isLandscape ? 1.6 : 2.5)),
+                        childAspectRatio: isLandscape ? 1.3 : 0.75,
                         mainAxisSpacing: 0.010 * w,
                         crossAxisSpacing: 0.010 * w,
                       ),

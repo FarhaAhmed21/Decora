@@ -7,6 +7,7 @@ import '../../../../generated/assets.dart';
 import '../../../shared/theme/app_colors.dart';
 
 import '../models/product_model.dart';
+import '../services/product_services.dart';
 import '../widgets/add_comment_widget.dart';
 import '../widgets/build_comment_tile.dart';
 import '../widgets/buy_now_button.dart';
@@ -31,21 +32,33 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
  late double productPrice;
   late int quantity ;
   late bool isFavourite;
-  late List<Comment> comment;
+  late List<Comment> comments;
+  late int buyQuantity;
+  final ProductService _productService = ProductService();
 
   @override
-  void initState() {
+initState()  {
     super.initState();
+    comments= [];
     _selectedColor = widget.product.colors.first;
     availableColor = widget.product.colors;
     productName = widget.product.name;
     extraProductInfo = widget.product.extraInfo;
     productDetails = widget.product.details;
     productPrice = widget.product.price;
-    quantity = 1;
-    isFavourite=widget.product.isFavourite;
-    comment = widget.product.comments;
+    quantity =  widget.product.quantity;
+    isFavourite = false;
 
+    _loadComments();
+
+    buyQuantity=0;
+
+  }
+  Future<void> _loadComments() async {
+    final fetchedComments = await _productService.fetchComments(widget.product);
+    setState(() {
+      comments = fetchedComments;
+    });
   }
 
   // Helper Widget to build a single comment tile
@@ -190,7 +203,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: h * 0.04), // Responsive spacing
+                    SizedBox(height: h * 0.04),
                     // 3. Info Boxes (Placeholder)
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -215,7 +228,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: h * 0.04), // Responsive spacing
+                    SizedBox(height: h * 0.04),
                     // 4. Product Details
                     Text(
                       productDetails,
@@ -224,7 +237,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         color: AppColors.secondaryText(),
                       ),
                     ),
-                    SizedBox(height: h * 0.02), // Responsive spacing
+                    SizedBox(height: h * 0.02),
                     // 6. Colors Selector
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -332,7 +345,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             ),
                             Text(
                               "\$$productPrice",
-                              style: const TextStyle(fontSize: 20),
+                              style:  TextStyle(fontSize: 20,color: AppColors.secondaryText()),
                             ),
                           ],
                         ),
@@ -361,8 +374,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   GestureDetector(
                                     onTap: () {
                                       setState(() {
-                                        if (quantity > 1) {
-                                          quantity--;
+                                        if (buyQuantity > 1 ) {
+                                          buyQuantity--;
                                         }
                                       });
                                     },
@@ -388,7 +401,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     ),
                                   ),
                                   Text(
-                                    quantity.toString(),
+                                    buyQuantity.toString(),
                                     style: TextStyle(
                                       fontSize: 16,
                                       color: AppColors.mainText(),
@@ -398,7 +411,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   GestureDetector(
                                     onTap: () {
                                       setState(() {
-                                        quantity++;
+                                        if ( buyQuantity<quantity) {
+                                          buyQuantity++;
+                                        }
                                       });
                                     },
                                     child: Container(
@@ -437,7 +452,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "${AppLocalizations.of(context)!.reviews} (${comment.length})",
+                          "${AppLocalizations.of(context)!.reviews} (${comments.length})",
                           style: TextStyle(
                             fontSize: 18,
                             color: AppColors.mainText(),
@@ -457,7 +472,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     const AddCommentWidget(),
                     // Display comments
                     const SizedBox(height: 8),
-                    ...comment
+                    ...comments
                         .map((comment) => BuildCommentTile(comment))
                         .toList(),
 

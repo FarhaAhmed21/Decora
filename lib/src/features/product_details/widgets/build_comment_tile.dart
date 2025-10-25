@@ -33,13 +33,14 @@ Widget BuildCommentTile(Comment comment) {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
                           child: Text(
-                            comment.text,
+                            comment.userName,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                             style: TextStyle(
@@ -58,6 +59,7 @@ Widget BuildCommentTile(Comment comment) {
                         ),
                       ],
                     ),
+
                     const SizedBox(height: 4),
 
                     Text(
@@ -76,14 +78,14 @@ Widget BuildCommentTile(Comment comment) {
                           child: ListView.builder(
                             shrinkWrap: true,
                             scrollDirection: Axis.horizontal,
-                            itemCount: comment.profilePic.length,
+                            itemCount: comment.postPics.length,
                             itemBuilder: (context, index) {
                               return Padding(
                                 padding: const EdgeInsets.only(right: 8.0),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8.0),
                                   child: Image.network(
-                                    comment.profilePic[index],
+                                    comment.postPics[index],
                                     width: 80,
                                     height: 80,
                                     fit: BoxFit.cover,

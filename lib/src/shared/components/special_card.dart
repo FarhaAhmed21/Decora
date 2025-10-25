@@ -3,7 +3,6 @@ import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/generated/assets.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
-
 import '../../features/product_details/models/product_model.dart';
 
 class SpecialCard extends StatefulWidget {
@@ -11,196 +10,225 @@ class SpecialCard extends StatefulWidget {
   const SpecialCard({super.key, required this.product});
 
   @override
-  State<SpecialCard> createState() => _CustomCardState();
+  State<SpecialCard> createState() => _SpecialCardState();
 }
 
-class _CustomCardState extends State<SpecialCard> {
+class _SpecialCardState extends State<SpecialCard> {
   late bool isFavourite;
-   late bool isDiscount ;
+  late bool isDiscount;
+
   @override
   void initState() {
     super.initState();
-    isFavourite = widget.product.isFavourite;
+    isFavourite = true;
     isDiscount = widget.product.discount > 0;
   }
-  Future<void> toggleFavourite() async {
-    try {
-      // Update Firestore
-      await FirebaseFirestore.instance
-          .collection('products')
-          .doc(widget.product.id)
-          .update({'isfavourite': !isFavourite});
-
-      // Update local UI
-      setState(() {
-        isFavourite = !isFavourite;
-      });
-
-      // Show feedback
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            isFavourite
-                ? AppLocalizations.of(context)!
-                .product_added_to_favourite_successfully
-                : "Removed from favourites",
-          ),
-          backgroundColor: AppColors.primary(),
-          duration: const Duration(seconds: 1),
-        ),
-      );
-    } catch (e) {
-      print("Error updating favourite: $e");
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Error updating favourite status"),
-          backgroundColor: Colors.red,
-        ),
-      );
-    }
-  }
-
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      color: AppColors.cardColor(),
-      child: Container(
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Stack(
+    final product = widget.product;
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final cardWidth = constraints.maxWidth;
+        final imageHeight = cardWidth * 0.7; // proportional image height
+        final fontScale = cardWidth * 0.04; // adaptive text scaling
+
+        return Card(
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          color: AppColors.cardColor(),
+          child: Padding(
+            padding: EdgeInsets.all(cardWidth * 0.04),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  color: AppColors.productCardColor(),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
-                    child: Image.network(
-                      widget.product.colors.first.imageUrl,
-                      height: 140,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                if (isDiscount)
-                  Positioned(
-                    left: 10,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 4,
-                      ),
-
-                      margin: const EdgeInsets.all(10),
-
-                      alignment: Alignment.center,
+                Stack(
+                  children: [
+                    // Image with fallback and consistent height
+                    Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.0),
-                        color: AppColors.orange(),
+                        color: AppColors.productCardColor(),
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                      child: Text(
-                        " ${widget.product.discount}${AppLocalizations.of(context)!.discount}",
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: AppColors.innerCardColor(),
-                          fontWeight: FontWeight.bold,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: Image.network(
+                          product.colors.isNotEmpty
+                              ? product.colors.first.imageUrl
+                              : 'https://via.placeholder.com/150',
+                          height: imageHeight,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                          loadingBuilder: (context, child, loadingProgress) {
+                            if (loadingProgress == null) return child;
+                            return Container(
+                              height: imageHeight,
+                              width: double.infinity,
+                              color: AppColors.productCardColor(),
+                              alignment: Alignment.center,
+                              child:
+                              const CircularProgressIndicator(strokeWidth: 2),
+                            );
+                          },
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              height: imageHeight,
+                              width: double.infinity,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: AppColors.productCardColor(),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Icon(
+                                Icons.broken_image,
+                                size: imageHeight * 0.4,
+                                color: Colors.grey[400],
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ),
-                  ),
 
-                Positioned(
-                  top: 10,
-                  right: 10,
-                  child: GestureDetector(
-                    onTap: toggleFavourite,
-                    child: isFavourite
-                        ? Image.asset(
-                            Assets.heartIcon,
-                            color: AppColors.primary(),
-                            width: 18,
-                            height: 18,
-                          )
-                        : Image.asset(
-                            Assets.heartOutline,
-                            color: AppColors.primary(),
-                            width: 18,
-                            height: 18,
+                    // Discount badge
+                    if (isDiscount)
+                      Positioned(
+                        left: cardWidth * 0.03,
+                        top: cardWidth * 0.03,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: cardWidth * 0.03,
+                            vertical: cardWidth * 0.015,
                           ),
-                  ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.0),
+                            color: AppColors.orange(),
+                          ),
+                          child: Text(
+                            " ${product.discount}${AppLocalizations.of(context)!.discount}",
+                            style: TextStyle(
+                              fontSize: fontScale * 0.8,
+                              color: AppColors.innerCardColor(),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+
+                    // Favourite icon
+                    Positioned(
+                      top: cardWidth * 0.03,
+                      right: cardWidth * 0.03,
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() => isFavourite = !isFavourite);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                isFavourite
+                                    ? AppLocalizations.of(context)!
+                                    .product_added_to_favourite_successfully
+                                    : "Removed from favourites",
+                              ),
+                              backgroundColor: AppColors.primary(),
+                              duration: const Duration(seconds: 1),
+                            ),
+                          );
+                        },
+                        child: Image.asset(
+                          isFavourite
+                              ? Assets.heartIcon
+                              : Assets.heartOutline,
+                          color: AppColors.primary(),
+                          width: cardWidth * 0.08,
+                          height: cardWidth * 0.08,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            const SizedBox(height: 10),
 
-            // Title
-            Text(
-              "Olive Luxe Sofa",
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
-                color: AppColors.mainText(),
-              ),
-            ),
+                SizedBox(height: cardWidth * 0.03),
 
-            const SizedBox(height: 6),
-
-            Row(
-              children: [
-                Image.asset(Assets.starIcon, width: 14, height: 14),
-                const SizedBox(width: 4),
+                // Product name
                 Text(
-                  "4.9",
+                  product.name,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.secondaryText(),
-                  ),
-                ),
-              ],
-            ),
-
-            //const SizedBox(height: 6),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "\$250",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    fontSize: fontScale * 1.2,
                     color: AppColors.mainText(),
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {},
-                  child: Row(
-                    children: [
-                      Text(
-                        AppLocalizations.of(context)!.explore,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: AppColors.primary(),
-                        ),
+
+                SizedBox(height: cardWidth * 0.02),
+
+                // Rating
+                Row(
+                  children: [
+                    Image.asset(
+                      Assets.starIcon,
+                      width: cardWidth * 0.05,
+                      height: cardWidth * 0.05,
+                    ),
+                    SizedBox(width: cardWidth * 0.02),
+                    Text(
+                      "4.9",
+                      style: TextStyle(
+                        fontSize: fontScale,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.secondaryText(),
                       ),
-                      Icon(
-                        Icons.arrow_forward,
-                        color: AppColors.primary(),
-                        size: 14,
+                    ),
+                  ],
+                ),
+
+                SizedBox(height: cardWidth * 0.03),
+
+                // Price and Explore button
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "\$${product.price}",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: fontScale * 1.2,
+                        color: AppColors.mainText(),
                       ),
-                    ],
-                  ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        // Navigate to product details (optional)
+                      },
+                      child: Row(
+                        children: [
+                          Text(
+                            AppLocalizations.of(context)!.explore,
+                            style: TextStyle(
+                              fontSize: fontScale,
+                              color: AppColors.primary(),
+                            ),
+                          ),
+                          Icon(
+                            Icons.arrow_forward,
+                            color: AppColors.primary(),
+                            size: fontScale,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
