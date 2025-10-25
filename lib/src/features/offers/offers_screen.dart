@@ -1,4 +1,3 @@
-import 'package:decora/src/features/product_details/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:decora/src/shared/components/appbar.dart';
@@ -6,23 +5,41 @@ import 'package:decora/src/shared/components/searchbar.dart';
 import 'package:decora/src/shared/components/custom_card.dart';
 
 import '../product_details/models/product_model.dart';
-import '../product_details/services/product_services.dart';
+import '../product_details/screens/product_details_screen.dart';
+
 
 class OffersScreen extends StatefulWidget {
-  const OffersScreen({super.key});
+  final List<Product> specials;
+
+  const OffersScreen({super.key, required this.specials});
 
   @override
   State<OffersScreen> createState() => _OffersScreenState();
 }
 
 class _OffersScreenState extends State<OffersScreen> {
-  final ProductService _productService = ProductService();
-  late Future<List<Product>> discountedProductsFuture;
+  late List<Product> filteredProducts;
+  bool isSearching = false;
 
   @override
   void initState() {
     super.initState();
-    discountedProductsFuture = _productService.getDiscountedProducts();
+    filteredProducts = widget.specials;
+  }
+
+  void _onSearchChanged(String query) {
+    setState(() {
+      if (query.isEmpty) {
+        isSearching = false;
+        filteredProducts = widget.specials;
+      } else {
+        isSearching = true;
+        filteredProducts = widget.specials.where((product) {
+          final name = product.name.toLowerCase();
+          return name.contains(query.toLowerCase());
+        }).toList();
+      }
+    });
   }
 
   @override
@@ -38,52 +55,45 @@ class _OffersScreenState extends State<OffersScreen> {
           children: [
             CustomAppBar(
               title: 'Decora Specials',
-              onBackPressed: () {
-                Navigator.pop(context);
-              },
+              onBackPressed: () => Navigator.pop(context),
             ),
-            const CustomSearchBar(),
+            CustomSearchBar(onSearchChanged: _onSearchChanged),
             SizedBox(height: h * 0.015),
 
             Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: w * 0.025),
-                child: FutureBuilder<List<Product>>(
-                  future: discountedProductsFuture,
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(child: CircularProgressIndicator());
-                    } else if (snapshot.hasError) {
-                      return Center(child: Text('Error: ${snapshot.error}'));
-                    } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                      return const Center(child: Text('No discounted products found'));
-                    }
-
-                    final discountedProducts = snapshot.data!;
-                    return GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: isLandscape ? 4 : 2,
-                        childAspectRatio:
-                        isLandscape ? w / (h * 1.6) : w / (h / 1.48),
-                        mainAxisSpacing: 0.010 * w,
-                        crossAxisSpacing: 0.010 * w,
+                child: filteredProducts.isEmpty
+                    ? Center(
+                  child: Text(
+                    'No products found',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: AppColors.secondaryText(),
+                    ),
+                  ),
+                )
+                    : GridView.builder(
+                  itemCount: filteredProducts.length,
+                  gridDelegate:
+                  SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: isLandscape ? 4 : 2,
+                    childAspectRatio:
+                    isLandscape ? w / (h * 1.6) : w / (h / 1.48),
+                    mainAxisSpacing: 0.010 * w,
+                    crossAxisSpacing: 0.010 * w,
+                  ),
+                  itemBuilder: (context, index) {
+                    final product = filteredProducts[index];
+                    return GestureDetector(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) =>
+                              ProductDetailsScreen(product: product),
+                        ),
                       ),
-                      itemCount: discountedProducts.length,
-                      itemBuilder: (context, index) {
-                        final product = discountedProducts[index];
-                        return GestureDetector(
-                          onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  ProductDetailsScreen(product: product),
-                            ),
-                          ),
-                          child: CustomCard(product: discountedProducts[index],
-
-                          ),
-                        );
-                      },
+                      child: CustomCard(product: product),
                     );
                   },
                 ),

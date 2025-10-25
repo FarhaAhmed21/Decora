@@ -24,6 +24,18 @@ class ProductService {
 
     return products;
   }
+  Future<List<Product>> getNewCollectionProducts() async {
+    final snapshot = await _firestore
+        .collection('products')
+        .where('isNewCollection',isEqualTo:true )
+        .get();
+    List<Product> products = snapshot.docs.map((doc) {
+      return Product.fromMap(doc.data(), doc.id);
+    }).toList();
+    print("there are ${products.length} of new collection products karen");
+
+    return products;
+  }
   Future<List<Comment>> fetchComments(Product product) async {
     final snapshot = await FirebaseFirestore.instance
         .collection('products')
@@ -76,6 +88,7 @@ class ProductService {
 
     print("🎉 All products updated successfully!");
   }
+
 
 
 }

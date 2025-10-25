@@ -5,7 +5,8 @@ import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomSearchBar extends StatelessWidget {
-  const CustomSearchBar({super.key});
+  final Function(String)? onSearchChanged;
+  const CustomSearchBar({super.key,  required this.onSearchChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +34,7 @@ class CustomSearchBar extends StatelessWidget {
                       borderRadius: BorderRadius.circular(w * 0.033),
                     ),
                     child: TextField(
+                      onChanged: onSearchChanged,
                       decoration: InputDecoration(
                         prefixIcon: Image.asset(Assets.searchIcon),
                         hintText: AppLocalizations.of(context)?.searchFurniture,
