@@ -1,3 +1,4 @@
+import 'package:decora/src/shared/components/filter_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:decora/src/features/home/main_screen.dart';
 import 'package:decora/src/features/product_details/models/product_model.dart';
@@ -7,8 +8,6 @@ import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:decora/src/shared/components/appbar.dart';
 import 'package:decora/src/shared/components/searchbar.dart';
 import 'package:decora/src/shared/components/custom_card.dart';
-
-import '../product_details/services/product_services.dart';
 
 class NewCollectionScreen extends StatefulWidget {
   const NewCollectionScreen({super.key});
@@ -24,6 +23,9 @@ class _NewCollectionScreenState extends State<NewCollectionScreen> {
   bool isLoading = true;
   bool hasError = false;
   bool isSearching = false;
+
+  double _minPrice = 0;
+  double _maxPrice = 2000;
 
   @override
   void initState() {
@@ -48,6 +50,7 @@ class _NewCollectionScreenState extends State<NewCollectionScreen> {
     }
   }
 
+  // 🔍 Search logic
   void _onSearchChanged(String query) {
     setState(() {
       if (query.isEmpty) {
@@ -63,6 +66,31 @@ class _NewCollectionScreenState extends State<NewCollectionScreen> {
     });
   }
 
+  // ✅ Apply price filter
+  void _applyPriceFilter(double min, double max) {
+    setState(() {
+      filteredProducts = allProducts.where((product) {
+        return product.price >= min && product.price <= max;
+      }).toList();
+    });
+  }
+
+  // ✅ Open shared filter sheet
+  void _openFilterSheet() {
+    showFilterBottomSheet(
+      context: context,
+      minPrice: _minPrice,
+      maxPrice: _maxPrice,
+      onApply: (min, max) {
+        setState(() {
+          _minPrice = min;
+          _maxPrice = max;
+        });
+        _applyPriceFilter(min, max);
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final h = MediaQuery.of(context).size.height;
@@ -71,11 +99,10 @@ class _NewCollectionScreenState extends State<NewCollectionScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.background(),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+      body: SafeArea(
         child: Column(
           children: [
-            SizedBox(height: MediaQuery.of(context).padding.top + 5),
+            //SizedBox(height: MediaQuery.of(context).padding.top + 5),
             CustomAppBar(
               title: 'New Collection',
               onBackPressed: () {
@@ -84,16 +111,14 @@ class _NewCollectionScreenState extends State<NewCollectionScreen> {
               },
             ),
             const SizedBox(height: 5),
-            CustomSearchBar(onSearchChanged: _onSearchChanged),
+            CustomSearchBar(
+              onSearchChanged: _onSearchChanged,
+              onFilterTap: _openFilterSheet, // ✅ Added filter button
+            ),
             const SizedBox(height: 10),
 
-            // 🌀 Loading
             if (isLoading)
-              const Expanded(
-                child: Center(child: CircularProgressIndicator()),
-              )
-
-            // ❌ Error
+              const Expanded(child: Center(child: CircularProgressIndicator()))
             else if (hasError)
               const Expanded(
                 child: Center(
@@ -104,44 +129,44 @@ class _NewCollectionScreenState extends State<NewCollectionScreen> {
                   ),
                 ),
               )
-
             // 📭 Empty
             else if (filteredProducts.isEmpty)
-                const Expanded(
-                  child: Center(
-                    child: Text(
-                      'No products found.',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ),
-                )
-
-              // ✅ Grid of products
-              else
-                Expanded(
-                  child: GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: isLandscape ? 4 : 2,
-                      childAspectRatio: isLandscape ? 1.2 : 0.70,
-                      mainAxisSpacing: 8,
-                      crossAxisSpacing: 8,
-                    ),
-                    itemCount: filteredProducts.length,
-                    itemBuilder: (context, index) {
-                      final product = filteredProducts[index];
-                      return GestureDetector(
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                ProductDetailsScreen(product: product),
-                          ),
-                        ),
-                        child: CustomCard(product: product),
-                      );
-                    },
+              const Expanded(
+                child: Center(
+                  child: Text(
+                    'No products found.',
+                    style: TextStyle(fontSize: 16),
                   ),
                 ),
+              )
+            // ✅ Products Grid
+            else
+              Expanded(
+                child: GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: isLandscape ? 4 : 2,
+                    childAspectRatio: isLandscape
+                        ? w / (h * 1.6)
+                        : w / (h / 1.48),
+                    mainAxisSpacing: 0.010 * w,
+                    crossAxisSpacing: 0.010 * w,
+                  ),
+                  itemCount: filteredProducts.length,
+                  itemBuilder: (context, index) {
+                    final product = filteredProducts[index];
+                    return GestureDetector(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              ProductDetailsScreen(product: product),
+                        ),
+                      ),
+                      child: CustomCard(product: product),
+                    );
+                  },
+                ),
+              ),
           ],
         ),
       ),

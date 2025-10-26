@@ -1,3 +1,4 @@
+import 'package:decora/src/shared/components/filter_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/l10n/app_localizations.dart';
 import '../../../../core/utils/app_size.dart';
@@ -26,13 +27,15 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late List<Product> filteredProducts;
   bool isSearching = false;
-  late String selectedCategory= 'All';
+  late String selectedCategory = 'All';
+
+  double _minPrice = 0;
+  double _maxPrice = 2000;
 
   @override
   void initState() {
     super.initState();
     filteredProducts = widget.products;
-
   }
 
   void _onSearchChanged(String query) {
@@ -49,11 +52,38 @@ class _HomeScreenState extends State<HomeScreen> {
       }
     });
   }
+
+  void _applyPriceFilter(double min, double max) {
+    setState(() {
+      filteredProducts = widget.products.where((product) {
+        final price = product.price;
+        final inCategory =
+            selectedCategory == 'All' || product.category == selectedCategory;
+        return price >= _minPrice && price <= _maxPrice && inCategory;
+      }).toList();
+    });
+  }
+
+  void _openFilterSheet() {
+    showFilterBottomSheet(
+      context: context,
+      minPrice: _minPrice,
+      maxPrice: _maxPrice,
+      onApply: (min, max) {
+        setState(() {
+          _minPrice = min;
+          _maxPrice = max;
+        });
+        _applyPriceFilter(min, max);
+      },
+    );
+  }
+
   List<Product> get filteredByCategory {
     if (selectedCategory == 'All') {
-      return widget.products;
+      return filteredProducts;
     } else {
-      return widget.products
+      return filteredProducts
           .where((product) => product.category == selectedCategory)
           .toList();
     }
@@ -73,51 +103,54 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             const TopLocationBar(),
             SizedBox(height: h * 0.045),
-            CustomSearchBar(onSearchChanged: _onSearchChanged),
+            CustomSearchBar(
+              onSearchChanged: _onSearchChanged,
+              onFilterTap: _openFilterSheet,
+            ),
             SizedBox(height: h * 0.015),
 
-            // in search
+            // Search Results
             if (isSearching)
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: w * 0.035),
                   child: filteredProducts.isEmpty
                       ? Center(
-                    child: Text(
-                      'No products found',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: AppColors.secondaryText(),
-                      ),
-                    ),
-                  )
-                      : GridView.builder(
-                    itemCount: filteredProducts.length,
-                    gridDelegate:
-                    SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: isLandscape ? 3 : 2,
-                      childAspectRatio: isLandscape ? 0.8 : 0.75,
-                      mainAxisSpacing: 0.010 * w,
-                      crossAxisSpacing: 0.010 * w,
-                    ),
-                    itemBuilder: (context, index) {
-                      final product = filteredProducts[index];
-                      return GestureDetector(
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) =>
-                                ProductDetailsScreen(product: product),
+                          child: Text(
+                            'No products found',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: AppColors.secondaryText(),
+                            ),
                           ),
+                        )
+                      : GridView.builder(
+                          itemCount: filteredProducts.length,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: isLandscape ? 3 : 2,
+                                childAspectRatio: isLandscape ? 0.8 : 0.75,
+                                mainAxisSpacing: 0.010 * w,
+                                crossAxisSpacing: 0.010 * w,
+                              ),
+                          itemBuilder: (context, index) {
+                            final product = filteredProducts[index];
+                            return GestureDetector(
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) =>
+                                      ProductDetailsScreen(product: product),
+                                ),
+                              ),
+                              child: CustomCard(product: product),
+                            );
+                          },
                         ),
-                        child: CustomCard(product: product),
-                      );
-                    },
-                  ),
                 ),
               )
             else
-            // search is done
+              // Normal Home View
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
@@ -126,7 +159,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       const NewCollections(),
                       Padding(
                         padding: const EdgeInsets.only(
-                            left: 16.0, right: 16.0, bottom: 8.0),
+                          left: 16.0,
+                          right: 16.0,
+                          bottom: 8.0,
+                        ),
                         child: Row(
                           children: [
                             Text(
@@ -143,7 +179,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (_) =>  OffersScreen(specials:widget.specials),
+                                    builder: (_) =>
+                                        OffersScreen(specials: widget.specials),
                                   ),
                                 );
                               },
@@ -168,7 +205,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             final product = widget.specials[index];
                             return Padding(
                               padding: EdgeInsets.only(
-                                  right: 12.0, left: index == 0 ? 16.0 : 0.0),
+                                right: 12.0,
+                                left: index == 0 ? 16.0 : 0.0,
+                              ),
                               child: GestureDetector(
                                 onTap: () => Navigator.push(
                                   context,
@@ -217,53 +256,58 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                       ),
-                       Categories(selectedCategory:selectedCategory, onCategorySelected: (category) {
-    setState(() {
-    selectedCategory = category;
-    });
-    },),
-                SizedBox(height: h * 0.015),
-
-
-                Padding(
-                padding: EdgeInsets.symmetric(horizontal: w * 0.035),
-                child: visibleProducts.isEmpty
-                    ? Center(
-                  child: Text(
-                    'No products in this category',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: AppColors.secondaryText(),
-                    ),
-                  ),
-                )
-                    : GridView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: visibleProducts.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: isLandscape ? 3 : 2,
-                    childAspectRatio: isLandscape ? 0.8 : 0.75,
-                    mainAxisSpacing: 0.010 * w,
-                    crossAxisSpacing: 0.010 * w,
-                  ),
-                  itemBuilder: (context, index) {
-                    final product = visibleProducts[index];
-                    return GestureDetector(
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) =>
-                              ProductDetailsScreen(product: product),
-                        ),
+                      Categories(
+                        selectedCategory: selectedCategory,
+                        onCategorySelected: (category) {
+                          setState(() {
+                            selectedCategory = category;
+                            _applyPriceFilter(_minPrice, _maxPrice);
+                          });
+                        },
                       ),
-                      child: CustomCard(product: product),
-                    );
-                  },
-                ),
-              ),
-
-            SizedBox(height: h * 0.05),
+                      SizedBox(height: h * 0.015),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: w * 0.035),
+                        child: visibleProducts.isEmpty
+                            ? Center(
+                                child: Text(
+                                  'No products in this category',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: AppColors.secondaryText(),
+                                  ),
+                                ),
+                              )
+                            : GridView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: visibleProducts.length,
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: isLandscape ? 3 : 2,
+                                      childAspectRatio: isLandscape
+                                          ? 0.8
+                                          : 0.75,
+                                      mainAxisSpacing: 0.010 * w,
+                                      crossAxisSpacing: 0.010 * w,
+                                    ),
+                                itemBuilder: (context, index) {
+                                  final product = visibleProducts[index];
+                                  return GestureDetector(
+                                    onTap: () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => ProductDetailsScreen(
+                                          product: product,
+                                        ),
+                                      ),
+                                    ),
+                                    child: CustomCard(product: product),
+                                  );
+                                },
+                              ),
+                      ),
+                      SizedBox(height: h * 0.05),
                     ],
                   ),
                 ),

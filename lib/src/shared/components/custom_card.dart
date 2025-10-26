@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/core/utils/app_size.dart';
+import 'package:decora/src/features/favourites/services/fav_service.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../features/product_details/models/product_model.dart';
 
@@ -20,9 +22,20 @@ class _CustomCardState extends State<CustomCard> {
   @override
   void initState() {
     super.initState();
-    isFavourite = false;
-  }
+    isFavourite = false; // initial default
 
+    User user = FirebaseAuth.instance.currentUser!;
+    final userDoc = FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid);
+    userDoc.get().then((doc) {
+      if (doc.exists && doc.data()!.containsKey('favourites')) {
+        setState(() {
+          isFavourite = (doc['favourites'] as List).contains(widget.product.id);
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +84,9 @@ class _CustomCardState extends State<CustomCard> {
                               width: double.infinity,
                               color: AppColors.productCardColor(),
                               alignment: Alignment.center,
-                              child: const CircularProgressIndicator(strokeWidth: 2),
+                              child: const CircularProgressIndicator(
+                                strokeWidth: 2,
+                              ),
                             );
                           },
                           errorBuilder: (context, error, stackTrace) {
@@ -93,7 +108,6 @@ class _CustomCardState extends State<CustomCard> {
                           },
                         ),
                       ),
-
                     ),
 
                     // Discount Badge
@@ -126,15 +140,31 @@ class _CustomCardState extends State<CustomCard> {
                       top: 8,
                       right: 8,
                       child: GestureDetector(
-                        onTap: (){
-                          setState(() { isFavourite = !isFavourite; });
-                          ScaffoldMessenger.of(context).showSnackBar( SnackBar( content: Text( isFavourite ? AppLocalizations.of(context)! .product_added_to_favourite_successfully : "Removed from favourites", ), backgroundColor: AppColors.primary(), duration: const Duration(seconds: 1), ), );
-
+                        onTap: () {
+                          setState(() {
+                            isFavourite = !isFavourite;
+                          });
+                          if (isFavourite) {
+                            FavService().addfavtolist(product.id);
+                          } else {
+                            FavService().deletefavfromlist(product.id);
+                          }
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                isFavourite
+                                    ? AppLocalizations.of(
+                                        context,
+                                      )!.product_added_to_favourite_successfully
+                                    : "Removed from favourites",
+                              ),
+                              backgroundColor: AppColors.primary(),
+                              duration: const Duration(seconds: 1),
+                            ),
+                          );
                         },
                         child: Icon(
-                          isFavourite
-                              ? Icons.favorite
-                              : Icons.favorite_border,
+                          isFavourite ? Icons.favorite : Icons.favorite_border,
                           color: AppColors.primary(),
                           size: cardWidth * 0.1,
                         ),
@@ -176,8 +206,9 @@ class _CustomCardState extends State<CustomCard> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                              AppLocalizations.of(context)!
-                                  .product_added_to_Cart_successfully,
+                              AppLocalizations.of(
+                                context,
+                              )!.product_added_to_Cart_successfully,
                             ),
                             backgroundColor: AppColors.primary(),
                             duration: const Duration(seconds: 1),
@@ -191,8 +222,10 @@ class _CustomCardState extends State<CustomCard> {
                           color: AppColors.primary(),
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        child: const Icon(Icons.shopping_bag,
-                            color: Colors.white),
+                        child: const Icon(
+                          Icons.shopping_bag,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ],

@@ -56,30 +56,25 @@ class _MainLayoutState extends State<MainLayout> {
           );
         }
 
-
         final specials = snapshot.data![0] as List<Product>;
         final products = snapshot.data![1] as List<Product>;
-
 
         final screens = [
           HomeScreen(products: products, specials: specials),
           const MainCartPage(),
-          FavouriteScreen(favProducts:[]),
-           ProfileScreen(),
+          FavouriteScreen(),
+          ProfileScreen(),
         ];
 
         return Scaffold(
-          body: IndexedStack(
-            index: MainLayout.currentIndex,
-            children: screens,
-          ),
+          body: IndexedStack(index: MainLayout.currentIndex, children: screens),
           bottomNavigationBar: CustomBottomNavBar(
             selectedIndex: MainLayout.currentIndex,
             onItemTapped: onTabTapped,
           ),
           floatingActionButton: CustomFloatingActionButton(products: products),
           floatingActionButtonLocation:
-          FloatingActionButtonLocation.centerDocked,
+              FloatingActionButtonLocation.centerDocked,
         );
       },
     );

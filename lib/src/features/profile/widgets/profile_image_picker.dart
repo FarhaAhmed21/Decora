@@ -32,12 +32,18 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
         children: [
           ListTile(
             leading: Icon(Icons.photo_camera, color: AppColors.primary()),
-            title: const Text("Take a Photo"),
+            title: Text(
+              "Take a Photo",
+              style: TextStyle(color: AppColors.mainText()),
+            ),
             onTap: () => _pickImage(ImageSource.camera),
           ),
           ListTile(
             leading: Icon(Icons.photo_library, color: AppColors.primary()),
-            title: const Text("Choose from Gallery"),
+            title: Text(
+              "Choose from Gallery",
+              style: TextStyle(color: AppColors.mainText()),
+            ),
             onTap: () => _pickImage(ImageSource.gallery),
           ),
         ],

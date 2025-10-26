@@ -2,8 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/generated/assets.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../features/product_details/models/product_model.dart';
+import 'package:decora/src/features/favourites/services/fav_service.dart';
 
 class SpecialCard extends StatefulWidget {
   final Product product;
@@ -20,14 +22,24 @@ class _SpecialCardState extends State<SpecialCard> {
   @override
   void initState() {
     super.initState();
-    isFavourite = true;
+    isFavourite = false;
+    User user = FirebaseAuth.instance.currentUser!;
+    final userDoc = FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid);
+    userDoc.get().then((doc) {
+      if (doc.exists && doc.data()!.containsKey('favourites')) {
+        setState(() {
+          isFavourite = (doc['favourites'] as List).contains(widget.product.id);
+        });
+      }
+    });
     isDiscount = widget.product.discount > 0;
   }
 
   @override
   Widget build(BuildContext context) {
     final product = widget.product;
-
 
     return SizedBox(
       width: 180,
@@ -70,7 +82,9 @@ class _SpecialCardState extends State<SpecialCard> {
                               return Container(
                                 height: imageHeight,
                                 alignment: Alignment.center,
-                                child: const CircularProgressIndicator(strokeWidth: 2),
+                                child: const CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                ),
                               );
                             },
                             errorBuilder: (context, error, stackTrace) {
@@ -124,12 +138,18 @@ class _SpecialCardState extends State<SpecialCard> {
                         child: GestureDetector(
                           onTap: () {
                             setState(() => isFavourite = !isFavourite);
+                            if (isFavourite) {
+                              FavService().addfavtolist(product.id);
+                            } else {
+                              FavService().deletefavfromlist(product.id);
+                            }
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
                                   isFavourite
-                                      ? AppLocalizations.of(context)!
-                                      .product_added_to_favourite_successfully
+                                      ? AppLocalizations.of(
+                                          context,
+                                        )!.product_added_to_favourite_successfully
                                       : "Removed from favourites",
                                 ),
                                 backgroundColor: AppColors.primary(),
@@ -138,7 +158,9 @@ class _SpecialCardState extends State<SpecialCard> {
                             );
                           },
                           child: Image.asset(
-                            isFavourite ? Assets.heartIcon : Assets.heartOutline,
+                            isFavourite
+                                ? Assets.heartIcon
+                                : Assets.heartOutline,
                             color: AppColors.primary(),
                             width: cardWidth * 0.08,
                             height: cardWidth * 0.08,

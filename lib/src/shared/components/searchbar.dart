@@ -6,7 +6,13 @@ import 'package:flutter/material.dart';
 
 class CustomSearchBar extends StatelessWidget {
   final Function(String)? onSearchChanged;
-  const CustomSearchBar({super.key,  required this.onSearchChanged});
+  final VoidCallback? onFilterTap;
+
+  const CustomSearchBar({
+    super.key,
+    required this.onSearchChanged,
+    this.onFilterTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,32 +31,20 @@ class CustomSearchBar extends StatelessWidget {
                 borderRadius: BorderRadius.circular(w * 0.033),
               ),
             ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    height: AppSize.height(context) * 0.04,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(w * 0.033),
-                    ),
-                    child: TextField(
-                      onChanged: onSearchChanged,
-                      decoration: InputDecoration(
-                        prefixIcon: Image.asset(Assets.searchIcon),
-                        hintText: AppLocalizations.of(context)?.searchFurniture,
-                        hintStyle: TextStyle(color: AppColors.secondaryText()),
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+            child: TextField(
+              onChanged: onSearchChanged,
+              decoration: InputDecoration(
+                prefixIcon: Image.asset(Assets.searchIcon),
+                hintText: AppLocalizations.of(context)?.searchFurniture,
+                hintStyle: TextStyle(color: AppColors.secondaryText()),
+                border: InputBorder.none,
+              ),
             ),
           ),
           SizedBox(width: w * 0.01),
           InkWell(
             borderRadius: BorderRadius.circular(12),
-            onTap: () {},
+            onTap: onFilterTap,
             child: Container(
               padding: const EdgeInsets.all(9),
               decoration: BoxDecoration(
