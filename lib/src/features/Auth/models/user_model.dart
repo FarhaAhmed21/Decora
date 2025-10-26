@@ -9,6 +9,7 @@ class UserModel {
   String? phone;
   List<AddressModel>? addresses;
   final PreferencesModel? preferences;
+  List<String> favourites;
 
   UserModel({
     required this.id,
@@ -18,6 +19,7 @@ class UserModel {
     this.phone,
     this.addresses,
     this.preferences,
+    this.favourites = const [],
   });
 
   Map<String, dynamic> toMap() {
@@ -29,6 +31,7 @@ class UserModel {
       'phone': phone,
       'addresses': addresses?.map((a) => a.toMap()).toList() ?? [],
       'preferences': preferences?.toMap() ?? {},
+      'favourites': favourites,
     };
   }
 
@@ -49,6 +52,8 @@ class UserModel {
               Map<String, dynamic>.from(map['preferences']),
             )
           : null,
+      favourites:
+          (map['favourites'] as List?)?.map((e) => e.toString()).toList() ?? [],
     );
   }
 }
