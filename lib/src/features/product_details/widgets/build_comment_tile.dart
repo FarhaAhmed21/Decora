@@ -1,31 +1,57 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:decora/src/features/Auth/models/user_model.dart';
 import 'package:flutter/material.dart';
-
 import '../../../shared/theme/app_colors.dart';
 import '../models/product_model.dart';
 
-
 Widget BuildCommentTile(Comment comment) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(
-      vertical: 4.0,
-    ), // Outer padding for separation
-    child: Column(
-      children: [
-        Row(
+  return FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
+    future: FirebaseFirestore.instance
+        .collection('users')
+        .where('id', isEqualTo: comment.userid)
+        .get(),
+    builder: (context, snapshot) {
+      // أثناء التحميل
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Center(child: CircularProgressIndicator()),
+        );
+      }
+
+      // في حالة الخطأ
+      if (snapshot.hasError) {
+        return const Text("حدث خطأ أثناء تحميل بيانات المستخدم");
+      }
+
+      // في حالة عدم وجود بيانات
+      if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+        return const Text("المستخدم غير موجود");
+      }
+
+      // جلب بيانات المستخدم
+      final userData = snapshot.data!.docs.first.data();
+      final user = UserModel.fromMap(userData);
+
+      // واجهة التعليق
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4.0),
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Profile Picture
+            // صورة البروفايل
             CircleAvatar(
               radius: 20,
-              backgroundImage: NetworkImage(comment.profilePic),
+              backgroundImage:
+                  (user.photoUrl != null && user.photoUrl!.isNotEmpty)
+                  ? NetworkImage(user.photoUrl!)
+                  : const AssetImage('assets/images/default_user.png')
+                        as ImageProvider,
             ),
             const SizedBox(width: 8),
-
             Expanded(
               child: Container(
-                padding: const EdgeInsets.all(
-                  12.0,
-                ), // Padding inside the gray box
+                padding: const EdgeInsets.all(12.0),
                 decoration: BoxDecoration(
                   color: AppColors.cardColor(),
                   borderRadius: BorderRadius.circular(12.0),
@@ -33,23 +59,21 @@ Widget BuildCommentTile(Comment comment) {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
+                    // الاسم والتاريخ
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
                           child: Text(
-                            comment.userName,
+                            user.name ?? "user un defined",
                             overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
                             style: TextStyle(
                               fontSize: 18,
                               color: AppColors.mainText(),
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
-
                         Text(
                           comment.date,
                           style: TextStyle(
@@ -59,9 +83,8 @@ Widget BuildCommentTile(Comment comment) {
                         ),
                       ],
                     ),
-
                     const SizedBox(height: 4),
-
+                    // نص التعليق
                     Text(
                       comment.text,
                       style: TextStyle(
@@ -69,40 +92,13 @@ Widget BuildCommentTile(Comment comment) {
                         color: AppColors.secondaryText(),
                       ),
                     ),
-
-                    if (comment.profilePic.isNotEmpty)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
-                        child: SizedBox(
-                          height: 80, // Height for the horizontal image list
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            itemCount: comment.postPics.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(right: 8.0),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Image.network(
-                                    comment.postPics[index],
-                                    width: 80,
-                                    height: 80,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ),
                   ],
                 ),
               ),
             ),
           ],
         ),
-      ],
-    ),
+      );
+    },
   );
 }

@@ -28,32 +28,17 @@ class ProductColor {
 }
 
 class Comment {
-  final String userName;
   final String text;
   final String date;
-  final String profilePic;
-  final String email;
-  final List<String> postPics;
+  final String userid;
 
-  Comment({
-    required this.userName,
-    required this.text,
-    required this.date,
-    required this.profilePic,
-    required this.email,
-    required this.postPics,
-  });
-
+  Comment({required this.text, required this.date, required this.userid});
 
   factory Comment.fromMap(Map<String, dynamic> json) {
     return Comment(
-      userName: json['userName'] ?? '',
-      email: json['email'] ?? '',
       text: json['text'] ?? '',
       date: json['date'] ?? '',
-      profilePic: json['profilePic'] ?? '',
-      postPics: List<String>.from(json['postPics'] ?? []),
-
+      userid: json['userid'] ?? '',
     );
   }
 }
