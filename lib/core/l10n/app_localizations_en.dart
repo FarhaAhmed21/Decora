@@ -155,7 +155,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get backToLogin => 'Back To Login';
 
   @override
-  String get resetPassword => 'Reset your password';
+  String get resetPassword => 'Reset Your Password';
 
   @override
   String get enterEmailOrPhone =>
@@ -285,4 +285,7 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get enterEmailreset =>
       'Enter your registered email to reset your password';
+
+  @override
+  String get enter_promo_code => 'Enter promo code';
 }

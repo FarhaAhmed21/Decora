@@ -39,8 +39,8 @@ class _CustomCardState extends State<CustomCard> {
 
   @override
   Widget build(BuildContext context) {
-    final h = AppSize.height(context);
-    final w = AppSize.width(context);
+    // final h = AppSize.height(context);
+    // final w = AppSize.width(context);
     final product = widget.product;
 
     return LayoutBuilder(

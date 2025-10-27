@@ -110,7 +110,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get rememberMe => 'تذكرني';
 
   @override
-  String get forgotPassword => 'نسيت كلمة المرور';
+  String get forgotPassword => 'نسيت كلمة المرور؟';
 
   @override
   String get orLoginWith => 'أو سجل باستخدام';
@@ -285,4 +285,7 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get enterEmailreset =>
       'أدخل بريدك الإلكتروني لإعادة تعيين كلمة المرور';
+
+  @override
+  String get enter_promo_code => 'أدخل رمز العرض الترويجي';
 }

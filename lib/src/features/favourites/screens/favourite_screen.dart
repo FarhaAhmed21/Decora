@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:decora/core/utils/app_size.dart';
 import 'package:decora/src/features/favourites/services/fav_service.dart';
@@ -7,7 +6,6 @@ import 'package:decora/src/shared/components/custom_card.dart';
 import 'package:decora/src/shared/components/filter_bottom_sheet.dart';
 import 'package:decora/src/shared/components/searchbar.dart';
 import 'package:decora/src/shared/components/top_location_bar.dart';
-import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import '../../product_details/models/product_model.dart';
 
@@ -44,7 +42,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
         filteredProducts = favs;
       });
     } catch (e) {
-      print("Error loading favourites: $e");
+      // print("Error loading favourites: $e");
     } finally {
       setState(() => isLoading = false);
     }

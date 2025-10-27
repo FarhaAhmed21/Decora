@@ -109,7 +109,8 @@ class _MainCartPageState extends State<MainCartPage> {
     setState(() => isSheetOpen = true); // ✅ toggle button
 
     scaffoldKey.currentState!.showBottomSheet(
-      (context) => SizedBox(
+      (context) => Container(
+        color: AppColors.background(),
         width: AppSize.width(context),
         height: AppSize.height(context) * 0.42,
         child: Padding(
@@ -158,8 +159,8 @@ class _MainCartPageState extends State<MainCartPage> {
                 child: TextField(
                   decoration: InputDecoration(
                     focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        color: Colors.black,
+                      borderSide: BorderSide(
+                        color: AppColors.textColor(),
                         width: 2,
                       ),
                       borderRadius: BorderRadius.circular(12),
@@ -167,7 +168,8 @@ class _MainCartPageState extends State<MainCartPage> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    hintText: "Enter promo code",
+                    hintStyle: TextStyle(color: AppColors.textColor()),
+                    hintText: AppLocalizations.of(context)!.enter_promo_code,
                     suffixIcon: SizedBox(
                       width: 110,
                       child: Padding(
@@ -206,7 +208,8 @@ class _MainCartPageState extends State<MainCartPage> {
               const SizedBox(height: 20),
               Text(
                 AppLocalizations.of(context)!.payment_summary,
-                style: const TextStyle(
+                style: TextStyle(
+                  color: AppColors.textColor(),
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
                 ),
@@ -250,6 +253,7 @@ class _MainCartPageState extends State<MainCartPage> {
         Text(
           name,
           style: TextStyle(
+            color: AppColors.textColor(),
             fontSize: 16,
             fontWeight: name == AppLocalizations.of(context)!.total
                 ? FontWeight.w600
@@ -259,6 +263,8 @@ class _MainCartPageState extends State<MainCartPage> {
         Text(
           "$amount EGP",
           style: TextStyle(
+            color: AppColors.textColor(),
+
             fontSize: 16,
             fontWeight: name == AppLocalizations.of(context)!.total
                 ? FontWeight.w600

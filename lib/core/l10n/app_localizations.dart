@@ -383,7 +383,7 @@ abstract class AppLocalizations {
   /// No description provided for @resetPassword.
   ///
   /// In en, this message translates to:
-  /// **'Reset your password'**
+  /// **'Reset Your Password'**
   String get resetPassword;
 
   /// No description provided for @enterEmailOrPhone.
@@ -631,6 +631,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter your registered email to reset your password'**
   String get enterEmailreset;
+
+  /// No description provided for @enter_promo_code.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter promo code'**
+  String get enter_promo_code;
 }
 
 class _AppLocalizationsDelegate

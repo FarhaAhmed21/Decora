@@ -12,7 +12,7 @@ class ProductCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 3),
       child: Container(
-        constraints: const BoxConstraints(maxHeight: 130),
+        constraints: const BoxConstraints(maxHeight: 140),
         width: MediaQuery.of(context).size.width,
         child: Card(
           elevation: 0,
@@ -43,7 +43,7 @@ class ProductCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Title + Rating
-                      const Row(
+                      Row(
                         children: [
                           Expanded(
                             child: Text(
@@ -51,20 +51,20 @@ class ProductCard extends StatelessWidget {
                               style: TextStyle(
                                 fontWeight: FontWeight.w400,
                                 fontSize: 16,
-                                color: Colors.black,
+                                color: AppColors.textColor(),
                               ),
 
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                          Icon(Icons.star, size: 18, color: Colors.orange),
-                          SizedBox(width: 4),
+                          Icon(Icons.star, size: 18, color: AppColors.orange()),
+                          const SizedBox(width: 4),
                           Text(
                             "4.9",
                             style: TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 12,
-                              color: Colors.black,
+                              color: AppColors.textColor(),
                             ),
                           ),
                         ],
@@ -85,12 +85,12 @@ class ProductCard extends StatelessWidget {
                       // Price + Quantity Controls
                       Row(
                         children: [
-                          const Text(
+                          Text(
                             "\$240",
                             style: TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 16,
-                              color: Colors.black,
+                              color: AppColors.textColor(),
                             ),
                           ),
                           const Spacer(),
@@ -111,17 +111,17 @@ class ProductCard extends StatelessWidget {
                                 ),
                                 child: IconButton(
                                   onPressed: () {},
-                                  icon: const Icon(Icons.remove),
+                                  icon: const Icon(Icons.remove, color: Colors.white,),
                                   iconSize: 15,
                                 ),
                               ),
                               const SizedBox(width: 18),
-                              const Text(
+                              Text(
                                 "1",
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 16,
-                                  color: Colors.black,
+                                  color: AppColors.textColor(),
                                 ),
                               ),
                               const SizedBox(width: 18),

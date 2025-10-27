@@ -1,6 +1,7 @@
 import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/core/utils/app_size.dart';
 import 'package:decora/src/features/cart/widgets/product_card.dart';
+import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_overlap/flutter_image_overlap.dart';
 
@@ -67,10 +68,10 @@ class _SharedCartState extends State<SharedCart>
                       children: [
                         Text(
                           "${AppLocalizations.of(context)!.owners}: ",
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 16,
-                            color: Colors.black,
+                            color: AppColors.textColor(),
                           ),
                         ),
                         const SizedBox(width: 8),
@@ -107,10 +108,10 @@ class _SharedCartState extends State<SharedCart>
                       onPressed: () {},
                       child: Text(
                         AppLocalizations.of(context)!.view_all,
-                        style: const TextStyle(
+                        style:  TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 14,
-                          color: Colors.black,
+                          color: AppColors.textColor(),
                         ),
                       ),
                     ),
