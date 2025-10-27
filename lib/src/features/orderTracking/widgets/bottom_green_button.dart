@@ -25,7 +25,7 @@ class BottomGreenButton extends StatelessWidget {
           width: double.infinity,
           padding: const EdgeInsets.symmetric(vertical: 14),
           decoration: BoxDecoration(
-            color: AppColors.primary,
+            color: AppColors.primary(),
             borderRadius: BorderRadius.circular(10),
           ),
           child: Center(

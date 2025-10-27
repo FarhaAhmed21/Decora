@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PasswordResetSuccessScreen extends StatelessWidget {
-  const PasswordResetSuccessScreen({super.key});
-
+  PasswordResetSuccessScreen({super.key, this.back = "login"});
+  String back;
   @override
   Widget build(BuildContext context) {
     final tr = AppLocalizations.of(context)!;
@@ -16,25 +16,23 @@ class PasswordResetSuccessScreen extends StatelessWidget {
       textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: AppColors.background,
+          backgroundColor: AppColors.background(),
           elevation: 0,
           automaticallyImplyLeading: false,
           centerTitle: true,
-
           title: Text(
             tr.resetPassword,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: Colors.black87,
+              color: AppColors.secondaryText(),
             ),
           ),
-
           leading: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 9),
             child: Container(
               decoration: BoxDecoration(
-                color: const Color(0xFFF6F6F6),
+                color: AppColors.innerCardColor(),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: InkWell(
@@ -45,7 +43,7 @@ class PasswordResetSuccessScreen extends StatelessWidget {
                     Directionality.of(context) == TextDirection.rtl
                         ? FontAwesomeIcons.chevronRight
                         : FontAwesomeIcons.chevronLeft,
-                    color: Colors.black87,
+                    color: AppColors.mainText(),
                     size: 16,
                   ),
                 ),
@@ -53,7 +51,7 @@ class PasswordResetSuccessScreen extends StatelessWidget {
             ),
           ),
         ),
-        backgroundColor: AppColors.background,
+        backgroundColor: AppColors.background(),
         body: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: size.width * 0.043,
@@ -63,37 +61,35 @@ class PasswordResetSuccessScreen extends StatelessWidget {
             children: [
               Image.asset(
                 'assets/icons/true_icon.png',
-                height: size.height * 0.075,
+                height: 65,
                 fit: BoxFit.contain,
               ),
               SizedBox(height: size.height * 0.02),
               Text(
                 tr.passwordResetSuccess,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
+                  color: AppColors.secondaryText(),
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 10),
+              SizedBox(height: size.height * 0.02),
               Text(
                 tr.youCanLoginNow,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: AppColors.secondaryText,
+                style: TextStyle(
+                  color: AppColors.secondaryText(),
                   fontSize: 14,
                 ),
               ),
-              SizedBox(height: size.height * 0.039),
+              SizedBox(height: size.height * 0.03),
               SizedBox(
                 height: 52,
                 width: double.infinity,
                 child: OutlinedButton(
                   style: OutlinedButton.styleFrom(
-                    side: const BorderSide(
-                      color: AppColors.primary,
-                      width: 1.5,
-                    ),
+                    side: BorderSide(color: AppColors.primary(), width: 1.5),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -101,9 +97,9 @@ class PasswordResetSuccessScreen extends StatelessWidget {
                   onPressed: () =>
                       Navigator.popUntil(context, (r) => r.isFirst),
                   child: Text(
-                    tr.backToLogin,
-                    style: const TextStyle(
-                      color: AppColors.primary,
+                    back == "login" ? tr.backToLogin : "Back To Profile Page",
+                    style: TextStyle(
+                      color: AppColors.primary(),
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),

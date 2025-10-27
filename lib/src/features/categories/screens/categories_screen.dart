@@ -14,16 +14,16 @@ class CategoriesScreen extends StatelessWidget {
     final isLandscape = size.width > size.height;
 
     return Scaffold(
-      appBar: CustomAppBar(
-        title: AppLocalizations.of(context)!.our_Categories,
-        onBackPressed: () {
-          MainLayout.currentIndex = 1;
-          Navigator.pop(context);
-        },
-      ),
       body: SafeArea(
         child: Column(
           children: [
+            CustomAppBar(
+              title: AppLocalizations.of(context)!.our_Categories,
+              onBackPressed: () {
+                MainLayout.currentIndex = 1;
+                Navigator.pop(context);
+              },
+            ),
             Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(

@@ -6,11 +6,16 @@ import '../../../../core/utils/app_size.dart';
 import '../../../../generated/assets.dart';
 import '../../../shared/theme/app_colors.dart';
 
-class NewCollections extends StatelessWidget {
+class NewCollections extends StatefulWidget {
   final double horizontalPadding;
 
   const NewCollections({super.key, this.horizontalPadding = 16.0});
 
+  @override
+  State<NewCollections> createState() => _NewCollectionsState();
+}
+
+class _NewCollectionsState extends State<NewCollections> {
   @override
   Widget build(BuildContext context) {
     final h = AppSize.height(context);
@@ -25,13 +30,13 @@ class NewCollections extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: horizontalPadding,
+        horizontal: widget.horizontalPadding,
         vertical: h * 0.01,
       ),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16.0),
-          color: AppColors.cardColor,
+          color: AppColors.cardColor(),
         ),
         padding: EdgeInsets.all(isLandscape ? w * 0.015 : 16.0),
         height: containerHeight,
@@ -51,7 +56,7 @@ class NewCollections extends StatelessWidget {
                         AppLocalizations.of(context)!.new_collection,
                         style: TextStyle(
                           fontSize: titleSize,
-                          color: AppColors.mainText,
+                          color: AppColors.mainText(),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -64,7 +69,7 @@ class NewCollections extends StatelessWidget {
                         )!.elevate_your_living_room_with_timeless_sofas,
                         style: TextStyle(
                           fontSize: subtitleSize,
-                          color: AppColors.secondaryText,
+                          color: AppColors.secondaryText(),
                         ),
                         maxLines: isLandscape ? 3 : 2,
                         overflow: TextOverflow.ellipsis,
@@ -76,8 +81,8 @@ class NewCollections extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {},
                     style: ButtonStyle(
-                      backgroundColor: const WidgetStatePropertyAll<Color>(
-                        AppColors.primary,
+                      backgroundColor: WidgetStatePropertyAll<Color>(
+                        AppColors.primary(),
                       ),
                       padding: const WidgetStatePropertyAll<EdgeInsetsGeometry>(
                         EdgeInsets.symmetric(horizontal: 10.0),
@@ -107,7 +112,7 @@ class NewCollections extends StatelessWidget {
                         AppLocalizations.of(context)!.explore,
                         style: TextStyle(
                           fontSize: buttonTextSize,
-                          color: AppColors.cardColor,
+                          color: AppColors.cardColor(),
                         ),
                       ),
                     ),
@@ -124,7 +129,7 @@ class NewCollections extends StatelessWidget {
                 height: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16.0),
-                  color: AppColors.productCardColor,
+                  color: AppColors.productCardColor(),
                 ),
 
                 child: ClipRRect(

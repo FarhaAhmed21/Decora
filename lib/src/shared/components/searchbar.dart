@@ -5,7 +5,14 @@ import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomSearchBar extends StatelessWidget {
-  const CustomSearchBar({super.key});
+  final Function(String)? onSearchChanged;
+  final VoidCallback? onFilterTap;
+
+  const CustomSearchBar({
+    super.key,
+    required this.onSearchChanged,
+    this.onFilterTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,45 +24,31 @@ class CustomSearchBar extends StatelessWidget {
         children: [
           Container(
             width: w * 0.78,
-            height: h * 0.047,
+            height: h * 0.055,
             decoration: ShapeDecoration(
-              color: const Color(0xFFF6F6F6),
+              color: AppColors.cardColor(),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(w * 0.033),
               ),
             ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    height: AppSize.height(context) * 0.04,
-                    decoration: BoxDecoration(
-                      color: AppColors.cardColor,
-                      borderRadius: BorderRadius.circular(w * 0.033),
-                    ),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        prefixIcon: Image.asset(Assets.searchIcon),
-                        hintText: AppLocalizations.of(context)?.searchFurniture,
-                        hintStyle: const TextStyle(
-                          color: AppColors.secondaryText,
-                        ),
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+            child: TextField(
+              onChanged: onSearchChanged,
+              decoration: InputDecoration(
+                prefixIcon: Image.asset(Assets.searchIcon),
+                hintText: AppLocalizations.of(context)?.searchFurniture,
+                hintStyle: TextStyle(color: AppColors.secondaryText()),
+                border: InputBorder.none,
+              ),
             ),
           ),
           SizedBox(width: w * 0.01),
           InkWell(
             borderRadius: BorderRadius.circular(12),
-            onTap: () {},
+            onTap: onFilterTap,
             child: Container(
               padding: const EdgeInsets.all(9),
               decoration: BoxDecoration(
-                color: AppColors.primary,
+                color: AppColors.primary(),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Image.asset(Assets.filterIcon),

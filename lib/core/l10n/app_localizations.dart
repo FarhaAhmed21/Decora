@@ -523,6 +523,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Try Virtual'**
   String get try_virtual;
+
+  /// No description provided for @accountAlreadyExistsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Account Already Exists'**
+  String get accountAlreadyExistsTitle;
+
+  /// No description provided for @accountAlreadyExistsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'This email is already linked with another sign-in method (e.g., Google). Please sign in using that method to link your Facebook account.'**
+  String get accountAlreadyExistsDescription;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @continueWithGoogle.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Google'**
+  String get continueWithGoogle;
+
+  /// No description provided for @enterEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your email'**
+  String get enterEmail;
+
+  /// No description provided for @enterPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your password'**
+  String get enterPassword;
+
+  /// No description provided for @invalidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid email format'**
+  String get invalidEmail;
+
+  /// No description provided for @wrongCredentials.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid email or password'**
+  String get wrongCredentials;
+
+  /// No description provided for @ok.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get ok;
+
+  /// No description provided for @userNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'User not found in our system'**
+  String get userNotFound;
+
+  /// No description provided for @loginFailedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Login Failed'**
+  String get loginFailedTitle;
+
+  /// No description provided for @emailNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Email Not Found'**
+  String get emailNotFound;
+
+  /// No description provided for @emailNotFoundMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This email is not registered in our system.'**
+  String get emailNotFoundMessage;
+
+  /// No description provided for @otpIncorrect.
+  ///
+  /// In en, this message translates to:
+  /// **'OTP is incorrect'**
+  String get otpIncorrect;
+
+  /// No description provided for @otpSent.
+  ///
+  /// In en, this message translates to:
+  /// **'OTP has been sent to your email'**
+  String get otpSent;
+
+  /// No description provided for @enterUsername.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your username'**
+  String get enterUsername;
+
+  /// No description provided for @passwordTooShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 6 characters'**
+  String get passwordTooShort;
+
+  /// No description provided for @enterEmailreset.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your registered email to reset your password'**
+  String get enterEmailreset;
 }
 
 class _AppLocalizationsDelegate

@@ -151,7 +151,7 @@ class _OnboardingPageTwoState extends State<OnboardingPageTwo>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Stack(
           children: [
@@ -241,7 +241,7 @@ class _OnboardingPageTwoState extends State<OnboardingPageTwo>
                           'Wood',
                           style: TextStyle(
                             fontSize: 17,
-                            color: AppColors.mainText,
+                            color: AppColors.lightMainText,
                           ),
                         ),
                       ),
@@ -272,7 +272,7 @@ class _OnboardingPageTwoState extends State<OnboardingPageTwo>
                         'Fabtics',
                         style: TextStyle(
                           fontSize: 15,
-                          color: AppColors.mainText,
+                          color: AppColors.lightMainText,
                         ),
                       ),
                     ),
@@ -294,14 +294,14 @@ class _OnboardingPageTwoState extends State<OnboardingPageTwo>
                             '56% Cotton',
                             style: TextStyle(
                               fontSize: 12,
-                              color: AppColors.mainText,
+                              color: AppColors.lightMainText,
                             ),
                           ),
                           Text(
                             '35% Wood',
                             style: TextStyle(
                               fontSize: 12,
-                              color: AppColors.mainText,
+                              color: AppColors.lightMainText,
                             ),
                           ),
                         ],

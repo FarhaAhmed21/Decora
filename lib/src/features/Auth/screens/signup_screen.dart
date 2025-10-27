@@ -1,7 +1,9 @@
 import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/src/features/Auth/screens/otp_verification_screen.dart';
-import 'package:decora/src/features/Auth/widgets/customField.dart';
+import 'package:decora/src/features/Auth/services/auth_service.dart';
+import 'package:decora/src/features/Auth/services/sendOTPEmail.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -13,7 +15,65 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final _formKey = GlobalKey<FormState>();
   bool _obscurePassword = true;
+  bool _isLoading = false;
+
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  final _authService = AuthService();
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  String generateOtp() {
+    final random = DateTime.now().millisecondsSinceEpoch % 10000;
+    return random.toString().padLeft(4, '0');
+  }
+
+  Future<void> _signUp() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    setState(() => _isLoading = true);
+
+    try {
+      final user = await _authService.signUpWithEmail(
+        _emailController.text.trim(),
+        _passwordController.text.trim(),
+        _nameController.text.trim(),
+      );
+
+      if (user != null) {
+        final otp = generateOtp();
+        await sendOtpEmail(user.email!, otp);
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => OtpVerificationScreen(
+              otp: otp,
+              email: user.email!,
+              uid: user.uid,
+              name: _nameController.text.trim(),
+            ),
+          ),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Signup failed: $e")));
+    } finally {
+      setState(() => _isLoading = false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,131 +84,214 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Directionality(
       textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
       child: Scaffold(
-        backgroundColor: AppColors.background,
+        backgroundColor: AppColors.background(),
         body: SafeArea(
           child: SingleChildScrollView(
             padding: EdgeInsets.symmetric(
               horizontal: size.width * 0.06,
               vertical: size.height * 0.04,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                SizedBox(height: size.height * 0.002),
-
-                Align(
-                  alignment: AlignmentDirectional.topStart,
-                  child: Container(
-                    width: 45,
-                    height: 45,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFF6F6F6),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(12),
-                      onTap: () => Navigator.pop(context),
-                      child: Center(
-                        child: Icon(
-                          Directionality.of(context) == TextDirection.rtl
-                              ? FontAwesomeIcons.chevronRight
-                              : FontAwesomeIcons.chevronLeft,
-                          color: Colors.black87,
-                          size: 20,
+            child: Form(
+              key: _formKey,
+              autovalidateMode: AutovalidateMode.disabled,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Align(
+                    alignment: AlignmentDirectional.topStart,
+                    child: Container(
+                      width: 45,
+                      height: 45,
+                      decoration: BoxDecoration(
+                        color: AppColors.innerCardColor(),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(12),
+                        onTap: () => Navigator.pop(context),
+                        child: Center(
+                          child: Icon(
+                            isArabic
+                                ? FontAwesomeIcons.chevronRight
+                                : FontAwesomeIcons.chevronLeft,
+                            color: AppColors.mainText(),
+                            size: 20,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-
-                Image.asset('assets/icons/Frame1.png'),
-                SizedBox(height: size.height * 0.01),
-
-                Text(
-                  tr.createAccount,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
+                  SizedBox(height: size.height * 0.02),
+                  Image.asset('assets/icons/Frame1.png'),
+                  SizedBox(height: size.height * 0.02),
+                  Text(
+                    tr.createAccount,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.secondaryText(),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 6),
-
-                Text(
-                  tr.accessCollections,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: AppColors.secondaryText,
-                    fontSize: 13,
+                  SizedBox(height: size.height * 0.01),
+                  Text(
+                    tr.accessCollections,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: AppColors.secondaryText(),
+                      fontSize: 13,
+                    ),
                   ),
-                ),
-                SizedBox(height: size.height * 0.04),
+                  SizedBox(height: size.height * 0.04),
 
-                customField(tr.username),
-                const SizedBox(height: 15),
-                customField(tr.email),
-                const SizedBox(height: 15),
-                customPasswordField(tr.password),
-                SizedBox(height: size.height * 0.04),
-
-                SizedBox(
-                  height: 55,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                  Text(
+                    tr.username,
+                    style: TextStyle(fontSize: 16, color: AppColors.mainText()),
+                  ),
+                  SizedBox(height: size.height * 0.01),
+                  TextFormField(
+                    controller: _nameController,
+                    textDirection: TextDirection.ltr,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    style: TextStyle(color: AppColors.mainText()),
+                    cursorColor: AppColors.primary(),
+                    decoration: InputDecoration(
+                      hintText: tr.username,
+                      hintStyle: TextStyle(
+                        fontSize: 14,
+                        color: AppColors.secondaryText(),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: AppColors.primary(),
+                          width: 1.5,
+                        ),
                       ),
                     ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => const OtpVerificationScreen(),
+                    validator: (value) => (value == null || value.isEmpty)
+                        ? tr.enterUsername
+                        : null,
+                  ),
+                  SizedBox(height: size.height * 0.02),
+
+                  Text(
+                    tr.email,
+                    style: TextStyle(fontSize: 16, color: AppColors.mainText()),
+                  ),
+                  SizedBox(height: size.height * 0.01),
+                  TextFormField(
+                    controller: _emailController,
+                    textDirection: TextDirection.ltr,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    style: TextStyle(color: AppColors.mainText()),
+                    cursorColor: AppColors.primary(),
+                    decoration: InputDecoration(
+                      hintText: tr.email,
+                      hintStyle: TextStyle(
+                        fontSize: 14,
+                        color: AppColors.secondaryText(),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: AppColors.primary(),
+                          width: 1.5,
                         ),
-                      );
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) return tr.enterEmail;
+                      if (!EmailValidator.validate(value)) {
+                        return tr.invalidEmail;
+                      }
+                      return null;
                     },
-                    child: Text(
-                      tr.createAccount,
-                      style: const TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+                  SizedBox(height: size.height * 0.02),
+
+                  Text(
+                    tr.password,
+                    style: TextStyle(fontSize: 16, color: AppColors.mainText()),
+                  ),
+                  SizedBox(height: size.height * 0.01),
+                  TextFormField(
+                    controller: _passwordController,
+                    obscureText: _obscurePassword,
+                    textDirection: TextDirection.ltr,
+                    style: TextStyle(color: AppColors.mainText()),
+                    cursorColor: AppColors.primary(),
+                    decoration: InputDecoration(
+                      hintText: tr.password,
+                      hintStyle: TextStyle(
+                        fontSize: 14,
+                        color: AppColors.secondaryText(),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: AppColors.primary(),
+                          width: 1.5,
+                        ),
+                      ),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _obscurePassword
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: AppColors.secondaryText(),
+                        ),
+                        onPressed: () => setState(
+                          () => _obscurePassword = !_obscurePassword,
+                        ),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return tr.enterPassword;
+                      }
+                      if (value.length < 6) return tr.passwordTooShort;
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: size.height * 0.04),
+
+                  SizedBox(
+                    height: 55,
+                    child: ElevatedButton(
+                      onPressed: _isLoading ? null : _signUp,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primary(),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: _isLoading
+                          ? const CircularProgressIndicator(color: Colors.white)
+                          : Text(
+                              tr.createAccount,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                              ),
+                            ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
       ),
-    );
-  }
-
-  Widget customPasswordField(String label) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label, style: const TextStyle(fontSize: 16)),
-        const SizedBox(height: 6),
-        TextField(
-          cursorColor: AppColors.primary,
-          obscureText: _obscurePassword,
-          decoration: InputDecoration(
-            focusedBorder: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(12.0)),
-              borderSide: BorderSide(color: AppColors.primary, width: 1.5),
-            ),
-            hintText: label,
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-            suffixIcon: IconButton(
-              icon: Icon(
-                _obscurePassword ? Icons.visibility_off : Icons.visibility,
-              ),
-              onPressed: () {
-                setState(() => _obscurePassword = !_obscurePassword);
-              },
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

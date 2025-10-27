@@ -3,6 +3,8 @@ import 'package:decora/core/utils/app_size.dart';
 import 'package:decora/src/features/cart/pages/my_cart.dart';
 import 'package:decora/src/features/cart/pages/shared_cart.dart';
 import 'package:decora/src/features/cart/widgets/cart_app_bar.dart';
+import 'package:decora/src/payment/screen/payment-screen.dart';
+import 'package:decora/src/payment/repo/paymob-service.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +16,7 @@ class MainCartPage extends StatefulWidget {
 }
 
 class _MainCartPageState extends State<MainCartPage> {
-  bool isSheetOpen = false; 
+  bool isSheetOpen = false;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
   final double taxes = 0;
@@ -32,8 +34,8 @@ class _MainCartPageState extends State<MainCartPage> {
 
         bottomNavigationBar: Container(
           height: AppSize.height(context) * 0.13,
-          padding: const EdgeInsets.symmetric(vertical: 8,horizontal: 3),
-          color: Colors.white,
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 3),
+          color: AppColors.background(),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 20),
             child: SizedBox(
@@ -41,7 +43,7 @@ class _MainCartPageState extends State<MainCartPage> {
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
+                  backgroundColor: AppColors.primary(),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
@@ -67,8 +69,40 @@ class _MainCartPageState extends State<MainCartPage> {
     );
   }
 
-  void handlePayNow() {
-    //TODO: payment logic
+  void handlePayNow() async {
+    try {
+      final authToken = await PaymobService.getAuthToken();
+      print("🔹 Auth Token: $authToken");
+
+      final orderId = await PaymobService.createOrder(
+        authToken: authToken,
+        amountCents: ((subTotal + taxes - discount) * 100).toInt(),
+      );
+      print("🔹 Order ID: $orderId");
+
+      final paymentKey = await PaymobService.getPaymentKey(
+        authToken: authToken,
+        orderId: orderId,
+        amountCents: ((subTotal + taxes - discount) * 100).toInt(),
+      );
+      print("🔹 Payment Key: $paymentKey");
+
+      // 4️⃣ Generate payment URL
+      final paymentUrl = PaymobService.getPaymentUrl(paymentKey);
+      print("🔹 Payment URL: $paymentUrl");
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => PaymentScreen(paymentUrl: paymentUrl),
+        ),
+      );
+    } catch (e) {
+      print("❌ Payment Error: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("حدث خطأ أثناء تنفيذ عملية الدفع")),
+      );
+    }
   }
 
   void openCheckoutSheet(BuildContext context) {
@@ -91,9 +125,10 @@ class _MainCartPageState extends State<MainCartPage> {
                     ),
                     child: Text(
                       AppLocalizations.of(context)!.checkout,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w500,
+                        color: AppColors.mainText(),
                       ),
                     ),
                   ),
@@ -101,7 +136,7 @@ class _MainCartPageState extends State<MainCartPage> {
                   IconButton(
                     onPressed: () {
                       Navigator.pop(context);
-                      setState(() => isSheetOpen = false); // 👈 reset when closed
+                      setState(() => isSheetOpen = false);
                     },
                     icon: const Icon(Icons.close),
                   ),
@@ -109,7 +144,11 @@ class _MainCartPageState extends State<MainCartPage> {
               ),
               Text(
                 AppLocalizations.of(context)!.promo_code,
-                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.mainText(),
+                ),
               ),
               const SizedBox(height: 15),
               // Promo field
@@ -151,8 +190,11 @@ class _MainCartPageState extends State<MainCartPage> {
                                 ),
                               ),
                               const SizedBox(width: 4),
-                              const Icon(Icons.check_circle,
-                                  color: Colors.white, size: 16),
+                              const Icon(
+                                Icons.check_circle,
+                                color: Colors.white,
+                                size: 16,
+                              ),
                             ],
                           ),
                         ),
@@ -171,16 +213,29 @@ class _MainCartPageState extends State<MainCartPage> {
               ),
               const SizedBox(height: 10),
               sheetPaymentrRow(
-                  context, AppLocalizations.of(context)!.sub_total, subTotal),
-              const SizedBox(height: 10),
-              sheetPaymentrRow(context, AppLocalizations.of(context)!.taxes, taxes),
+                context,
+                AppLocalizations.of(context)!.sub_total,
+                subTotal,
+              ),
               const SizedBox(height: 10),
               sheetPaymentrRow(
-                  context, AppLocalizations.of(context)!.discount, -discount),
+                context,
+                AppLocalizations.of(context)!.taxes,
+                taxes,
+              ),
+              const SizedBox(height: 10),
+              sheetPaymentrRow(
+                context,
+                AppLocalizations.of(context)!.discount,
+                -discount,
+              ),
               const SizedBox(height: 10),
               Divider(color: Colors.grey[300]),
-              sheetPaymentrRow(context, AppLocalizations.of(context)!.total,
-                  taxes + subTotal - discount),
+              sheetPaymentrRow(
+                context,
+                AppLocalizations.of(context)!.total,
+                taxes + subTotal - discount,
+              ),
             ],
           ),
         ),

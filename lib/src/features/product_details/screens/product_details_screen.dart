@@ -5,82 +5,61 @@ import '../../../../core/l10n/app_localizations.dart';
 import '../../../../core/utils/app_size.dart';
 import '../../../../generated/assets.dart';
 import '../../../shared/theme/app_colors.dart';
-import '../Logic/product_color.dart';
-import '../Logic/comment.dart';
+
+import '../../vto/screens/vto_screen.dart';
+import '../models/product_model.dart';
+import '../services/product_services.dart';
 import '../widgets/add_comment_widget.dart';
 import '../widgets/build_comment_tile.dart';
 import '../widgets/buy_now_button.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
-  const ProductDetailsScreen({super.key});
+  final Product product;
+
+  const ProductDetailsScreen({super.key, required this.product});
 
   @override
   State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
-  final List<ProductColor> availableColors = [
-    ProductColor(
-      swatchColor: AppColors.orange,
-      imagePath: Assets.luxeSofa,
-      colorName: 'Terracotta',
-    ),
-    ProductColor(
-      swatchColor: AppColors.innerCardColor,
-      imagePath: Assets.luxeSofa,
-      colorName: 'Forest Green',
-    ),
-    ProductColor(
-      swatchColor: AppColors.primary,
-      imagePath: Assets.luxeSofa,
-      colorName: 'Charcoal Black',
-    ),
-    ProductColor(
-      swatchColor: AppColors.productCardColor,
-      imagePath: Assets.bedRoom,
-      colorName: 'Mustard Yellow',
-    ),
-  ];
 
-  // Dummy data for comments
-  final List<Comment> comments = [
-    Comment(
-      name: "Mona Ahmed",
-      profilePicPath:
-          Assets.decoreAccessories, // Assuming you have image paths in Assets
-      text: "Its a Verry comfortable sofa",
-      date: "10 May 2025",
-      imagePaths: [],
-    ),
-    Comment(
-      name: "Abdelrahman Mahmoud",
-      profilePicPath: Assets.couchImage,
-      text: "It is really beautiful",
-      date: "10 May 2025",
-      imagePaths: [Assets.luxeSofa, Assets.bedRoom],
-    ),
-    Comment(
-      name: "Mona Ahmed",
-      profilePicPath: Assets.diningRoom,
-      text: "Love the color and material!",
-      date: "10 May 2025",
-      imagePaths: [],
-    ),
-  ];
 
   late ProductColor _selectedColor;
-  String productName = "Rustic Charm Sofa";
-  String extraProductInfo = "Two seater";
-  String productDetails =
-      "The Rustic Charm Sofa is a cozy two-seater with timeless rustic style. Durable, comfortable, and perfect for compact spaces or welcoming guests";
-  double productPrice = 250;
-  int quantity = 1;
-  bool isFavourite = false;
+  late List<ProductColor> availableColor;
+  late String productName;
+  late String extraProductInfo;
+ late String productDetails ;
+ late double productPrice;
+  late int quantity ;
+  late bool isFavourite;
+  late List<Comment> comments;
+  late int buyQuantity;
+  final ProductService _productService = ProductService();
 
   @override
-  void initState() {
+initState()  {
     super.initState();
-    _selectedColor = availableColors.first;
+    comments= [];
+    _selectedColor = widget.product.colors.first;
+    availableColor = widget.product.colors;
+    productName = widget.product.name;
+    extraProductInfo = widget.product.extraInfo;
+    productDetails = widget.product.details;
+    productPrice = widget.product.price;
+    quantity =  widget.product.quantity;
+    isFavourite = false;
+
+    _loadComments();
+
+    buyQuantity=0;
+
+  }
+  Future<void> _loadComments() async {
+    final fetchedComments = await _productService.fetchComments(widget.product);
+    setState(() {
+      comments = fetchedComments;
+    });
   }
 
   // Helper Widget to build a single comment tile
@@ -100,7 +79,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         : h * 0.25; // Taller in landscape
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.background(),
 
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -126,8 +105,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         Expanded(
                           child: SizedBox(
                             height: mainImageHeight, // Responsive height
-                            child: Image.asset(
-                              _selectedColor.imagePath,
+                            child: Image.network(
+                              _selectedColor.imageUrl,
                               fit: BoxFit.fill,
                             ),
                           ),
@@ -135,7 +114,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         SizedBox(width: w * 0.02),
                         Column(
                           children: [
-                            // Thumbnails (Using responsive size)
                             ...List.generate(
                               3,
                               (index) => Padding(
@@ -145,10 +123,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   height: imageContainerSize,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8.0),
-                                    color: AppColors.innerCardColor,
+                                    color: AppColors.innerCardColor(),
                                     border: index == 0
                                         ? Border.all(
-                                            color: AppColors.primary,
+                                            color: AppColors.primary(),
                                             width: 2.0,
                                           )
                                         : null,
@@ -181,7 +159,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               productName,
                               style: TextStyle(
                                 fontSize: isLandscape ? w * 0.025 : 18,
-                                color: AppColors.mainText,
+                                color: AppColors.mainText(),
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -189,7 +167,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               extraProductInfo,
                               style: TextStyle(
                                 fontSize: isLandscape ? w * 0.02 : 14,
-                                color: AppColors.secondaryText,
+                                color: AppColors.secondaryText(),
                               ),
                             ),
                           ],
@@ -207,7 +185,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                         context,
                                       )!.product_added_to_favourite_successfully,
                                     ),
-                                    backgroundColor: AppColors.primary,
+                                    backgroundColor: AppColors.primary(),
                                     duration: const Duration(seconds: 1),
                                   ),
                                 );
@@ -218,7 +196,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             isFavourite
                                 ? Icons.favorite
                                 : Icons.favorite_border,
-                            color: AppColors.primary,
+                            color: AppColors.primary(),
                             size: isLandscape
                                 ? w * 0.03
                                 : 30, // Responsive icon size
@@ -226,7 +204,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: h * 0.04), // Responsive spacing
+                    SizedBox(height: h * 0.04),
                     // 3. Info Boxes (Placeholder)
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -237,7 +215,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           height: isLandscape ? w * 0.1 : 60,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8.0),
-                            color: AppColors.innerCardColor,
+                            color: AppColors.innerCardColor(),
                             boxShadow: [
                               BoxShadow(
                                 // ignore: deprecated_member_use
@@ -251,16 +229,16 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: h * 0.04), // Responsive spacing
+                    SizedBox(height: h * 0.04),
                     // 4. Product Details
                     Text(
                       productDetails,
                       style: TextStyle(
                         fontSize: isLandscape ? w * 0.02 : 16,
-                        color: AppColors.secondaryText,
+                        color: AppColors.secondaryText(),
                       ),
                     ),
-                    SizedBox(height: h * 0.02), // Responsive spacing
+                    SizedBox(height: h * 0.02),
                     // 6. Colors Selector
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -268,9 +246,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       children: [
                         Text(
                           AppLocalizations.of(context)!.colors,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 16,
-                            color: AppColors.mainText,
+                            color: AppColors.mainText(),
                           ),
                         ),
 
@@ -278,17 +256,22 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         ElevatedButton.icon(
                           onPressed: () {
                             // TODO: Implement AR/VR functionality here
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => VtoScreen( products: [widget.product])),
+                            );
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 content: Text('Starting Virtual Try-On...'),
                               ),
                             );
+
                           },
                           icon: Image.asset(
                             Assets.vrnIcon,
                             width: 20,
                             height: 20,
-                            color: AppColors.cardColor,
+                            color: AppColors.cardColor(),
                           ),
                           label: Text(
                             AppLocalizations.of(context)!.try_virtual,
@@ -298,8 +281,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.primary,
-                            foregroundColor: AppColors.cardColor,
+                            backgroundColor: AppColors.primary(),
+                            foregroundColor: AppColors.cardColor(),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12.0),
                             ),
@@ -319,9 +302,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             height: 30,
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
-                              itemCount: availableColors.length,
+                              itemCount: availableColor.length,
                               itemBuilder: (context, index) {
-                                final color = availableColors[index];
+                                final color = availableColor[index];
                                 final isSelected = _selectedColor == color;
 
                                 return GestureDetector(
@@ -336,7 +319,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     ),
                                     child: CircleAvatar(
                                       radius: 22,
-                                      backgroundColor: color.swatchColor,
+                                      backgroundColor: color.color,
                                       child: isSelected
                                           ? const CircleAvatar(
                                               radius: 10,
@@ -361,14 +344,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           children: [
                             Text(
                               AppLocalizations.of(context)!.price,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 16,
-                                color: AppColors.mainText,
+                                color: AppColors.mainText(),
                               ),
                             ),
                             Text(
                               "\$$productPrice",
-                              style: const TextStyle(fontSize: 20),
+                              style:  TextStyle(fontSize: 20,color: AppColors.secondaryText()),
                             ),
                           ],
                         ),
@@ -378,9 +361,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           children: [
                             Text(
                               AppLocalizations.of(context)!.quantity,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 16,
-                                color: AppColors.mainText,
+                                color: AppColors.mainText(),
                               ),
                             ),
                             Container(
@@ -388,7 +371,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               height: isLandscape ? h * 0.05 : 30,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8.0),
-                                color: AppColors.cardColor,
+                                color: AppColors.cardColor(),
                               ),
                               child: Row(
                                 mainAxisAlignment:
@@ -397,8 +380,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   GestureDetector(
                                     onTap: () {
                                       setState(() {
-                                        if (quantity > 1) {
-                                          quantity--;
+                                        if (buyQuantity > 1 ) {
+                                          buyQuantity--;
                                         }
                                       });
                                     },
@@ -409,14 +392,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                         borderRadius: BorderRadius.circular(
                                           8.0,
                                         ),
-                                        color: AppColors.innerCardColor,
+                                        color: AppColors.innerCardColor(),
                                       ),
-                                      child: const Center(
+                                      child: Center(
                                         child: Text(
                                           "-",
                                           style: TextStyle(
                                             fontSize: 16,
-                                            color: AppColors.mainText,
+                                            color: AppColors.mainText(),
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
@@ -424,17 +407,19 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     ),
                                   ),
                                   Text(
-                                    quantity.toString(),
-                                    style: const TextStyle(
+                                    buyQuantity.toString(),
+                                    style: TextStyle(
                                       fontSize: 16,
-                                      color: AppColors.mainText,
+                                      color: AppColors.mainText(),
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   GestureDetector(
                                     onTap: () {
                                       setState(() {
-                                        quantity++;
+                                        if ( buyQuantity<quantity) {
+                                          buyQuantity++;
+                                        }
                                       });
                                     },
                                     child: Container(
@@ -444,14 +429,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                         borderRadius: BorderRadius.circular(
                                           8.0,
                                         ),
-                                        color: AppColors.primary,
+                                        color: AppColors.primary(),
                                       ),
-                                      child: const Center(
+                                      child: Center(
                                         child: Text(
                                           "+",
                                           style: TextStyle(
                                             fontSize: 16,
-                                            color: AppColors.cardColor,
+                                            color: AppColors.cardColor(),
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
@@ -474,17 +459,17 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       children: [
                         Text(
                           "${AppLocalizations.of(context)!.reviews} (${comments.length})",
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 18,
-                            color: AppColors.mainText,
+                            color: AppColors.mainText(),
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
                           AppLocalizations.of(context)!.see_all,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 14,
-                            color: AppColors.secondaryText,
+                            color: AppColors.secondaryText(),
                           ),
                         ),
                       ],
@@ -493,9 +478,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     const AddCommentWidget(),
                     // Display comments
                     const SizedBox(height: 8),
-                    ...comments
-                        .map((comment) => BuildCommentTile(comment))
-                        .toList(),
+                    ...comments.map((comment) => BuildCommentTile(comment)),
 
                     SizedBox(
                       height: h * 0.02,

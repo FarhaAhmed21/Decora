@@ -1,25 +1,57 @@
+import 'dart:io';
+import 'package:decora/src/features/profile/widgets/address_list_section.dart';
+import 'package:decora/src/features/profile/widgets/profile_image_picker.dart';
+import 'package:decora/src/features/profile/widgets/text_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:decora/src/shared/components/appbar.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
+import 'package:decora/src/features/Auth/models/user_model.dart';
+import 'package:decora/src/features/Auth/models/address_model.dart';
+import '../service/savechanges.dart';
 
-class EditProfileUI extends StatelessWidget {
-  final String profileImagePath;
+class EditProfileUI extends StatefulWidget {
+  final UserModel user;
 
-  const EditProfileUI({super.key, required this.profileImagePath});
+  const EditProfileUI({super.key, required this.user});
+
+  @override
+  State<EditProfileUI> createState() => _EditProfileUIState();
+}
+
+class _EditProfileUIState extends State<EditProfileUI> {
+  File? _imageFile;
+  late TextEditingController nameController;
+  late TextEditingController emailController;
+  late TextEditingController phoneController;
+
+  List<AddressModel> addresses = [];
+
+  @override
+  void initState() {
+    super.initState();
+    nameController = TextEditingController(text: widget.user.name ?? '');
+    emailController = TextEditingController(text: widget.user.email ?? '');
+    phoneController = TextEditingController(text: widget.user.phone ?? '');
+    addresses = List<AddressModel>.from(widget.user.addresses ?? []);
+  }
 
   @override
   Widget build(BuildContext context) {
+    final imageProvider = _imageFile != null
+        ? FileImage(_imageFile!)
+        : (widget.user.photoUrl!.startsWith('http')
+                  ? NetworkImage(widget.user.photoUrl!)
+                  : AssetImage(widget.user.photoUrl!))
+              as ImageProvider;
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.background(),
       body: Column(
         children: [
           SizedBox(height: MediaQuery.of(context).padding.top + 5),
-
           CustomAppBar(
             title: "Edit Profile",
-            onBackPressed: () {
-              Navigator.pop(context);
-            },
+            onBackPressed: () => Navigator.pop(context),
           ),
           Expanded(
             child: SingleChildScrollView(
@@ -27,84 +59,60 @@ class EditProfileUI extends StatelessWidget {
               child: Column(
                 children: [
                   const SizedBox(height: 20),
-
-                  // ---------------- Profile Image ----------------
-                  Stack(
-                    alignment: Alignment.bottomRight,
-                    children: [
-                      CircleAvatar(
-                        backgroundColor: AppColors.primary,
-                        radius: 73,
-                        child: CircleAvatar(
-                          radius: 70,
-                          backgroundImage: AssetImage(profileImagePath),
-                        ),
-                      ),
-                      Container(
-                        width: 44,
-                        height: 44,
-                        margin: const EdgeInsets.only(bottom: 3, right: 6),
-                        decoration: const BoxDecoration(
-                          color: AppColors.primary,
-                          shape: BoxShape.circle,
-                        ),
-                        padding: const EdgeInsets.all(4),
-                        child: IconButton(
-                          icon: Image.asset(
-                            'assets/icons/edit-02.png',
-                            height: 24,
-                            width: 24,
-                            color: Colors.white,
-                          ),
-                          onPressed: () {},
-                          iconSize: 20,
-                        ),
-                      ),
-                    ],
+                  ProfileImagePicker(
+                    imageProvider: imageProvider,
+                    onPick: (file) => setState(() => _imageFile = file),
                   ),
 
                   const SizedBox(height: 20),
 
-                  _buildField("Name", "Name"),
-                  _buildField("Email", "Email"),
-                  _buildField("Phone Number", "Phone Number"),
-                  _buildField("Location", "Description.."),
-
-                  const SizedBox(height: 5),
-
-                  Row(
-                    children: [
-                      Container(
-                        decoration: const BoxDecoration(
-                          color: AppColors.primary,
-                          shape: BoxShape.circle,
-                        ),
-                        width: 30,
-                        height: 30,
-                        child: IconButton(
-                          icon: const Icon(Icons.add, color: Colors.white),
-                          onPressed: () {},
-                          iconSize: 15,
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      const Text(
-                        "Add another Location",
-                        style: TextStyle(color: Colors.black54),
-                      ),
-                    ],
+                  TextFieldWidget(
+                    label: "Name",
+                    controller: nameController,
+                    hint: "Name",
+                  ),
+                  TextFieldWidget(
+                    label: "Phone Number",
+                    controller: phoneController,
+                    hint: "Phone Number",
                   ),
 
-                  const SizedBox(height: 50),
+                  const SizedBox(height: 20),
 
-                  // ---------------- Save Button ----------------
+                  AddressListSection(
+                    addresses: addresses,
+                    onChanged: (newList) {
+                      setState(() => addresses = newList);
+                    },
+                  ),
+
+                  const SizedBox(height: 40),
                   SizedBox(
                     width: double.infinity,
                     height: 50,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        setState(() {
+                          widget.user
+                            ..name = nameController.text
+                            ..phone = phoneController.text
+                            ..addresses = List<AddressModel>.from(addresses);
+                        });
+
+                        final updatedUser = widget.user;
+
+                        await Savechanges().savechange(updatedUser, _imageFile);
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Profile updated successfully!"),
+                          ),
+                        );
+
+                        Navigator.pop(context, updatedUser);
+                      },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primary,
+                        backgroundColor: AppColors.primary(),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -119,47 +127,8 @@ class EditProfileUI extends StatelessWidget {
                       ),
                     ),
                   ),
-
                   const SizedBox(height: 20),
                 ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildField(String label, String hint) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 15),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            label,
-            style: const TextStyle(
-              fontWeight: FontWeight.w400,
-              color: AppColors.mainText,
-              fontSize: 16,
-              fontFamily: 'Montserratt',
-            ),
-          ),
-          const SizedBox(height: 5),
-          TextField(
-            maxLines: label == "Location" ? 3 : 1,
-            decoration: InputDecoration(
-              hintText: hint,
-              hintStyle: const TextStyle(
-                color: AppColors.secondaryText,
-                fontSize: 14,
-                fontFamily: 'Montserratt',
-              ),
-              filled: true,
-              fillColor: const Color(0xFFF6F6F6),
-              border: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(12),
               ),
             ),
           ),

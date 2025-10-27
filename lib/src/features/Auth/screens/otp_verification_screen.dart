@@ -1,11 +1,26 @@
 import 'package:decora/core/l10n/app_localizations.dart';
+import 'package:decora/src/features/Auth/models/user_model.dart';
 import 'package:decora/src/features/Auth/screens/verification_success_screen.dart';
+import 'package:decora/src/features/Auth/services/firestore_service.dart';
+import 'package:decora/src/features/Auth/services/sendOTPEmail.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
-  const OtpVerificationScreen({super.key});
+  final String otp;
+  final String email;
+  final String uid;
+  final String name;
+
+  const OtpVerificationScreen({
+    super.key,
+    required this.otp,
+    required this.email,
+    required this.uid,
+    required this.name,
+  });
+
   @override
   State<OtpVerificationScreen> createState() => _OtpVerificationScreenState();
 }
@@ -16,6 +31,15 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     4,
     (_) => TextEditingController(),
   );
+
+  bool _isResending = false;
+  late String _currentOtp;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentOtp = widget.otp;
+  }
 
   @override
   void dispose() {
@@ -36,6 +60,59 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     }
   }
 
+  String get _enteredOtp => controllers.map((c) => c.text.trim()).join();
+
+  Future<void> _verifyOtp() async {
+    final tr = AppLocalizations.of(context)!;
+
+    if (_enteredOtp == _currentOtp) {
+      final userModel = UserModel(
+        id: widget.uid,
+        name: widget.name,
+        email: widget.email,
+        photoUrl:
+            "https://cvhrma.org/wp-content/uploads/2015/07/default-profile-photo.jpg",
+      );
+      await FirestoreService().saveUserData(userModel);
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const VerificationSuccessScreen()),
+      );
+    } else {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(tr.otpIncorrect)));
+    }
+  }
+
+  Future<void> _resendOtp() async {
+    setState(() => _isResending = true);
+
+    final newOtp =
+        (1000 +
+                (9999 - 1000) *
+                    (DateTime.now().millisecondsSinceEpoch % 1000) /
+                    1000)
+            .floor()
+            .toString()
+            .padLeft(4, '0');
+
+    await sendOtpEmail(widget.email, newOtp);
+
+    setState(() {
+      _isResending = false;
+      _currentOtp = newOtp;
+      for (var c in controllers) {
+        c.clear();
+      }
+    });
+
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('OTP sent again')));
+  }
+
   @override
   Widget build(BuildContext context) {
     final tr = AppLocalizations.of(context)!;
@@ -45,26 +122,24 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     return Directionality(
       textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
       child: Scaffold(
-        backgroundColor: AppColors.background,
+        backgroundColor: AppColors.background(),
         appBar: AppBar(
-          backgroundColor: AppColors.background,
+          backgroundColor: AppColors.background(),
           automaticallyImplyLeading: false,
           centerTitle: true,
-
           title: Text(
             tr.emailVerification,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: Colors.black87,
+              color: AppColors.secondaryText(),
             ),
           ),
-
           leading: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 9),
+            padding: const EdgeInsets.all(8),
             child: Container(
               decoration: BoxDecoration(
-                color: const Color(0xFFF6F6F6),
+                color: AppColors.innerCardColor(),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: InkWell(
@@ -72,10 +147,10 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 onTap: () => Navigator.pop(context),
                 child: Center(
                   child: Icon(
-                    Directionality.of(context) == TextDirection.rtl
+                    isArabic
                         ? FontAwesomeIcons.chevronRight
                         : FontAwesomeIcons.chevronLeft,
-                    color: Colors.black87,
+                    color: AppColors.mainText(),
                     size: 16,
                   ),
                 ),
@@ -85,105 +160,94 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
         ),
         body: SafeArea(
           child: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: size.width * 0.05,
-                vertical: size.height * 0.04,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text(
-                    tr.verificationMessage,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      color: AppColors.secondaryText,
-                    ),
+            padding: EdgeInsets.symmetric(
+              horizontal: size.width * 0.04,
+              vertical: size.height * 0.04,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  tr.verificationMessage,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: AppColors.secondaryText(),
                   ),
-                  SizedBox(height: size.height * 0.05),
-
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: List.generate(4, (index) {
-                        return SizedBox(
-                          width: size.width * 0.14,
-                          height: size.width * 0.14,
-                          child: TextField(
-                            cursorColor: AppColors.primary,
-                            focusNode: focusNodes[index],
-                            controller: controllers[index],
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(fontSize: 20),
-                            keyboardType: TextInputType.number,
-                            onChanged: (v) => _onChanged(v, index),
-                            decoration: InputDecoration(
-                              counterText: "",
-                              filled: true,
-                              fillColor: focusNodes[index].hasFocus
-                                  ? Colors.white
-                                  : const Color(0xFFF6F6F6),
-                              focusedBorder: const OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(12),
-                                ),
-                                borderSide: BorderSide(
-                                  color: AppColors.primary,
-                                  width: 1.5,
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                borderSide: BorderSide.none,
-                              ),
+                ),
+                SizedBox(height: size.height * 0.04),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: List.generate(4, (index) {
+                    return SizedBox(
+                      width: size.width * 0.14,
+                      height: size.width * 0.14,
+                      child: TextField(
+                        textDirection: TextDirection.ltr,
+                        cursorColor: AppColors.primary(),
+                        focusNode: focusNodes[index],
+                        controller: controllers[index],
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: AppColors.mainText(),
+                        ),
+                        keyboardType: TextInputType.number,
+                        onChanged: (v) => _onChanged(v, index),
+                        decoration: InputDecoration(
+                          counterText: "",
+                          filled: true,
+                          fillColor: focusNodes[index].hasFocus
+                              ? AppColors.background()
+                              : AppColors.innerCardColor(),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide(
+                              color: AppColors.primary(),
+                              width: 1.5,
                             ),
                           ),
-                        );
-                      }),
-                    ),
-                  ),
-                  SizedBox(height: size.height * 0.05),
-
-                  SizedBox(
-                    height: 50,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primary,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => const VerificationSuccessScreen(),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide.none,
                           ),
-                        );
-                      },
-                      child: Text(
-                        tr.verify,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 15,
                         ),
                       ),
+                    );
+                  }),
+                ),
+                SizedBox(height: size.height * 0.04),
+                SizedBox(
+                  height: 50,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary(),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    onPressed: _verifyOtp,
+                    child: Text(
+                      tr.verify,
+                      style: const TextStyle(color: Colors.white, fontSize: 15),
                     ),
                   ),
-                  const SizedBox(height: 15),
-
-                  Center(
+                ),
+                SizedBox(height: size.height * 0.03),
+                Center(
+                  child: GestureDetector(
+                    onTap: _isResending ? null : _resendOtp,
                     child: Text.rich(
                       TextSpan(
                         text: tr.didNotGetOtp,
-                        style: const TextStyle(color: AppColors.secondaryText),
+                        style: TextStyle(color: AppColors.secondaryText()),
                         children: [
                           TextSpan(
                             text: " ${tr.resendOtp}",
-                            style: const TextStyle(
-                              color: AppColors.primary,
+                            style: TextStyle(
+                              color: _isResending
+                                  ? Colors.grey
+                                  : AppColors.primary(),
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -191,8 +255,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

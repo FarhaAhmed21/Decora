@@ -7,12 +7,25 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1027264268287:android:b7d11da3c182ab1fbbc9ca",
+        "mobilesdk_app_id": "1:1027264268287:android:6aab405a3be41fcbbbc9ca",
         "android_client_info": {
-          "package_name": "com.example.decora"
+          "package_name": "com.decora.app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1027264268287-gqar2kkv5sf3fo8m91cd15h26jop4h7u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.decora.app",
+            "certificate_hash": "7d90d85d0fbfcc8bfe2e0553cc2ab155c8ade660"
+          }
+        },
+        {
+          "client_id": "1027264268287-h2q6au079i5vm55kkjqpt539l6pv999u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBra70ZNg_lRfZg7lWATeSqKC0c51MPiec"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1027264268287-4ggito4tvce3krsd9nltl8i3lr8cmin4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1027264268287-jugnkq6t8oe63eo8kh9rm932sou6sf25.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.decora"
+              }
+            }
+          ]
         }
       }
     }

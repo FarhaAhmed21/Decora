@@ -72,6 +72,26 @@
    "quantity":"Quantity:",
     "colors": "Colors:",
   "reviews": "Reviews:",
-  "try_virtual": "Try Virtual"
+  "try_virtual": "Try Virtual",
+  "accountAlreadyExistsTitle": "Account Already Exists",
+  "accountAlreadyExistsDescription": "This email is already linked with another sign-in method (e.g., Google). Please sign in using that method to link your Facebook account.",
+  "cancel": "Cancel",
+  "continueWithGoogle": "Continue with Google",
+  "enterEmail": "Please enter your email",
+  "enterPassword": "Please enter your password",
+  "invalidEmail": "Invalid email format",
+  "wrongCredentials": "Invalid email or password",
+  "ok": "OK",
+  "userNotFound": "User not found in our system",
+  "loginFailedTitle": "Login Failed",
+  "emailNotFound": "Email Not Found",
+"emailNotFoundMessage": "This email is not registered in our system.",
+"otpIncorrect": "OTP is incorrect",
+  "otpSent": "OTP has been sent to your email",
+   "enterUsername": "Please enter your username",
+   "passwordTooShort": "Password must be at least 6 characters",
+       "enterEmailreset": "Enter your registered email to reset your password"
+
+
 
 }
