@@ -5,7 +5,6 @@ import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
-import 'package:decora/main.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
