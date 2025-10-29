@@ -37,8 +37,9 @@ Future<AddressModel?> showAddAddressDialog(BuildContext context) async {
           onPressed: () {
             if (cityController.text.isEmpty ||
                 streetController.text.isEmpty ||
-                buildingController.text.isEmpty)
+                buildingController.text.isEmpty) {
               return;
+            }
             final address = AddressModel(
               id: const Uuid().v4(),
               city: cityController.text,

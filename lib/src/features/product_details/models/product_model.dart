@@ -15,8 +15,14 @@ class ProductColor {
     return ProductColor(
       colorName: map['colorName'] ?? '',
       hexColor: map['hexColor'] ?? '',
-      imageUrl: map['imageUrl'] ?? '',
+      imageUrl:
+          map['imageUrl'] ??
+          'https://safainv.sa/front/assets/images/default.jpg',
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {'colorName': colorName, 'hexColor': hexColor, 'imageUrl': imageUrl};
   }
 
   Color get color => _hexToColor(hexColor);
@@ -40,6 +46,10 @@ class Comment {
       date: json['date'] ?? '',
       userid: json['userid'] ?? '',
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {'text': text, 'date': date, 'userid': userid};
   }
 }
 
@@ -92,5 +102,21 @@ class Product {
       colors: colorsList,
       comments: commentsList,
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'extraInfo': extraInfo,
+      'details': details,
+      'price': price,
+      'discount': discount,
+      'quantity': quantity,
+      'isNewCollection': isNewCollection,
+      'categories': category,
+      'colors': colors.map((c) => c.toMap()).toList(),
+      'comments': comments.map((c) => c.toMap()).toList(),
+      'id': id,
+    };
   }
 }

@@ -11,7 +11,7 @@ class CustomSettingsTile extends StatelessWidget {
   const CustomSettingsTile({
     super.key,
     required this.title,
-    required this.iconPath,
+    this.iconPath = 'assets/icons/arrow-left-01.png',
     required this.onTap,
   });
 

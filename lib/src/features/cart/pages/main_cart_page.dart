@@ -100,7 +100,7 @@ class _MainCartPageState extends State<MainCartPage> {
     } catch (e) {
       print("❌ Payment Error: $e");
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("حدث خطأ أثناء تنفيذ عملية الدفع")),
+        const SnackBar(content: Text("حدث خطأ أثناء تنفيذ عملية الدفع")),
       );
     }
   }

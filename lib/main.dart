@@ -25,7 +25,7 @@ void main() async {
         BlocProvider(create: (_) => LocaleCubit()),
         BlocProvider(create: (_) => SplashCubit()),
       ],
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }

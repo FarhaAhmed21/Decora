@@ -72,7 +72,7 @@ class _CustomCardState extends State<CustomCard> {
                         child: Image.network(
                           product.colors.isNotEmpty
                               ? product.colors.first.imageUrl
-                              : 'https://via.placeholder.com/150',
+                              : 'https://safainv.sa/front/assets/images/default.jpg',
                           height: imageHeight,
                           width: double.infinity,
                           fit: BoxFit.cover,
