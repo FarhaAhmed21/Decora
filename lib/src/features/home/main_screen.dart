@@ -62,7 +62,7 @@ class _MainLayoutState extends State<MainLayout> {
         final screens = [
           HomeScreen(products: products, specials: specials),
           const MainCartPage(),
-          FavouriteScreen(),
+          const FavouriteScreen(),
           ProfileScreen(),
         ];
 

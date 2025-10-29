@@ -1,60 +1,61 @@
+import 'package:decora/src/features/product_details/models/product_model.dart';
+import 'package:decora/src/features/product_details/services/product_services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import '../../../../core/utils/app_size.dart';
 import '../../../shared/theme/app_colors.dart';
+import 'package:intl/intl.dart';
 
-class AddCommentWidget extends StatelessWidget {
-  const AddCommentWidget({super.key});
+class AddCommentWidget extends StatefulWidget {
+  const AddCommentWidget({
+    super.key,
+    required this.productId,
+    required this.onCommentAdded,
+  });
+
+  final String productId;
+  final Function(Comment) onCommentAdded; // ✅ callback لما نضيف كومنت جديد
+
+  @override
+  State<AddCommentWidget> createState() => _AddCommentWidgetState();
+}
+
+class _AddCommentWidgetState extends State<AddCommentWidget> {
+  final TextEditingController reviewController = TextEditingController();
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
     final w = AppSize.width(context);
-    final h = AppSize.height(context); // Get height for better calculations
+    final h = AppSize.height(context);
     final isLandscape = w > h;
     final iconSize = isLandscape ? w * 0.025 : 24.0;
-
-    // Define the fixed height for the container
     final containerHeight = isLandscape ? w * 0.06 : 40.0;
-
-    // Calculate vertical offset needed to center the text
-    // A common fix is to apply a negative top padding or a small positive padding.
-    // We'll calculate a small vertical padding to push it to the middle.
-    // The exact value may require slight tweaking based on font metrics.
     final verticalPadding = isLandscape ? w * 0.005 : 5.0;
 
-    // The horizontal padding for the entire row to align with the rest of the content
-    const double paddingHorizontal = 8.0;
-
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: paddingHorizontal,
-        vertical: 8.0,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // 1. Expanded Text Field Container (White Background)
           Expanded(
             child: Container(
-              height: containerHeight, // Use the defined height
+              height: containerHeight,
               decoration: BoxDecoration(
                 color: AppColors.cardColor(),
                 borderRadius: BorderRadius.circular(12),
               ),
               padding: const EdgeInsets.symmetric(horizontal: 12.0),
               child: Center(
-                // Use Center to vertically align the entire TextField
                 child: TextField(
-                  // Use contentPadding to fine-tune vertical alignment
+                  controller: reviewController,
                   decoration: InputDecoration(
-                    hintText: 'Write Your Review',
+                    hintText: 'Write Your Review...',
                     hintStyle: TextStyle(
                       color: AppColors.secondaryText(),
                       fontSize: isLandscape ? w * 0.018 : 16,
                     ),
                     border: InputBorder.none,
                     isDense: true,
-                    // FIX: Apply minimal vertical content padding for centering.
                     contentPadding: EdgeInsets.symmetric(
                       vertical: -verticalPadding,
                     ),
@@ -64,21 +65,41 @@ class AddCommentWidget extends StatelessWidget {
               ),
             ),
           ),
+          SizedBox(width: w * 0.03),
+          IconButton(
+            icon: isLoading
+                ? const CircularProgressIndicator()
+                : Icon(
+                    Icons.send,
+                    color: AppColors.secondaryText(),
+                    size: iconSize,
+                  ),
+            onPressed: isLoading
+                ? null
+                : () async {
+                    final text = reviewController.text.trim();
+                    if (text.isEmpty) return;
 
-          SizedBox(width: w * 0.03), // Space between input and icons
-          // 2. Add Photo Icon (Image Asset) - Vertically centered by Row
-          Image.asset(
-            "assets/images/add_img.png",
-            width: iconSize,
-            height: iconSize,
-          ),
+                    setState(() => isLoading = true);
 
-          SizedBox(width: w * 0.02), // Space between icons
-          // 3. Emoji Icon - Vertically centered by Row
-          Icon(
-            Icons.sentiment_satisfied_alt_outlined,
-            color: AppColors.secondaryText(),
-            size: iconSize,
+                    final newComment = Comment(
+                      text: text,
+                      date: DateFormat('dd/MM/yyyy').format(DateTime.now()),
+                      userid: FirebaseAuth.instance.currentUser!.uid,
+                    );
+
+                    await ProductService().addComment(
+                      comment: newComment,
+                      productId: widget.productId,
+                    );
+
+                    // ✅ نرجع الكومنت للأب
+                    widget.onCommentAdded(newComment);
+
+                    // مسح الكتابة
+                    reviewController.clear();
+                    setState(() => isLoading = false);
+                  },
           ),
         ],
       ),
