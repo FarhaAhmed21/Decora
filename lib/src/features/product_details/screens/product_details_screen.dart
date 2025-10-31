@@ -23,38 +23,36 @@ class ProductDetailsScreen extends StatefulWidget {
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
-
-
   late ProductColor _selectedColor;
   late List<ProductColor> availableColor;
   late String productName;
   late String extraProductInfo;
- late String productDetails ;
- late double productPrice;
-  late int quantity ;
+  late String productDetails;
+  late double productPrice;
+  late int quantity;
   late bool isFavourite;
   late List<Comment> comments;
   late int buyQuantity;
   final ProductService _productService = ProductService();
 
   @override
-initState()  {
+  initState() {
     super.initState();
-    comments= [];
+    comments = [];
     _selectedColor = widget.product.colors.first;
     availableColor = widget.product.colors;
     productName = widget.product.name;
     extraProductInfo = widget.product.extraInfo;
     productDetails = widget.product.details;
     productPrice = widget.product.price;
-    quantity =  widget.product.quantity;
+    quantity = widget.product.quantity;
     isFavourite = false;
 
     _loadComments();
 
-    buyQuantity=0;
-
+    buyQuantity = 0;
   }
+
   Future<void> _loadComments() async {
     final fetchedComments = await _productService.fetchComments(widget.product);
     setState(() {
@@ -258,14 +256,16 @@ initState()  {
                             // TODO: Implement AR/VR functionality here
                             Navigator.pushReplacement(
                               context,
-                              MaterialPageRoute(builder: (context) => VtoScreen( products: [widget.product])),
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    VtoScreen(products: [widget.product]),
+                              ),
                             );
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 content: Text('Starting Virtual Try-On...'),
                               ),
                             );
-
                           },
                           icon: Image.asset(
                             Assets.vrnIcon,
@@ -351,7 +351,10 @@ initState()  {
                             ),
                             Text(
                               "\$$productPrice",
-                              style:  TextStyle(fontSize: 20,color: AppColors.secondaryText()),
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: AppColors.secondaryText(),
+                              ),
                             ),
                           ],
                         ),
@@ -380,7 +383,7 @@ initState()  {
                                   GestureDetector(
                                     onTap: () {
                                       setState(() {
-                                        if (buyQuantity > 1 ) {
+                                        if (buyQuantity > 1) {
                                           buyQuantity--;
                                         }
                                       });
@@ -417,7 +420,7 @@ initState()  {
                                   GestureDetector(
                                     onTap: () {
                                       setState(() {
-                                        if ( buyQuantity<quantity) {
+                                        if (buyQuantity < quantity) {
                                           buyQuantity++;
                                         }
                                       });
@@ -475,11 +478,24 @@ initState()  {
                       ],
                     ),
                     const SizedBox(height: 8),
-                    const AddCommentWidget(),
+                    AddCommentWidget(
+                      productId: widget.product.id,
+                      onCommentAdded: (newComment) {
+                        setState(() {
+                          comments.add(
+                            newComment,
+                          ); // ✅ يضيف الكومنت في نفس اللحظة
+                        });
+                      },
+                    ),
+
                     // Display comments
                     const SizedBox(height: 8),
-                    ...comments.map((comment) => BuildCommentTile(comment)),
-
+                    Column(
+                      children: comments
+                          .map((comment) => BuildCommentTile(comment))
+                          .toList(),
+                    ),
                     SizedBox(
                       height: h * 0.02,
                     ), // Bottom padding for scroll view

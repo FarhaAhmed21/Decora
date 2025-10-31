@@ -49,7 +49,11 @@ class _AdminPanelState extends State<AdminPanel> {
                           context,
                           MaterialPageRoute(
                             builder: (context) {
+<<<<<<< HEAD
                               return const AddProductScreen();
+=======
+                              return AddProductScreen();
+>>>>>>> 6501531305f0496f2e820dc8f30002dfcbfcf95f
                             },
                           ),
                         );
@@ -62,7 +66,11 @@ class _AdminPanelState extends State<AdminPanel> {
                           context,
                           MaterialPageRoute(
                             builder: (context) {
+<<<<<<< HEAD
                               return const AllProductsScreen();
+=======
+                              return AllProductsScreen();
+>>>>>>> 6501531305f0496f2e820dc8f30002dfcbfcf95f
                             },
                           ),
                         );

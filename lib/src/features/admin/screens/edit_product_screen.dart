@@ -6,6 +6,10 @@ import 'package:flutter/material.dart';
 import '../../../shared/components/appbar.dart';
 import '../../../shared/theme/app_colors.dart';
 import '../../product_details/models/product_model.dart';
+<<<<<<< HEAD
+=======
+import '../../profile/service/upload_image.dart';
+>>>>>>> 6501531305f0496f2e820dc8f30002dfcbfcf95f
 
 class EditProductScreen extends StatefulWidget {
   Product product;
@@ -93,7 +97,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
       );
       Navigator.pushReplacement(
         context,
+<<<<<<< HEAD
         MaterialPageRoute(builder: (context) => const AllProductsScreen()),
+=======
+        MaterialPageRoute(builder: (context) => AllProductsScreen()),
+>>>>>>> 6501531305f0496f2e820dc8f30002dfcbfcf95f
       );
     } catch (e) {
       ScaffoldMessenger.of(

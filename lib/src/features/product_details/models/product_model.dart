@@ -15,8 +15,14 @@ class ProductColor {
     return ProductColor(
       colorName: map['colorName'] ?? '',
       hexColor: map['hexColor'] ?? '',
-      imageUrl: map['imageUrl'] ?? '',
+      imageUrl:
+          map['imageUrl'] ??
+          'https://safainv.sa/front/assets/images/default.jpg',
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {'colorName': colorName, 'hexColor': hexColor, 'imageUrl': imageUrl};
   }
 
   Color get color => _hexToColor(hexColor);
@@ -28,33 +34,22 @@ class ProductColor {
 }
 
 class Comment {
-  final String userName;
   final String text;
   final String date;
-  final String profilePic;
-  final String email;
-  final List<String> postPics;
+  final String userid;
 
-  Comment({
-    required this.userName,
-    required this.text,
-    required this.date,
-    required this.profilePic,
-    required this.email,
-    required this.postPics,
-  });
-
+  Comment({required this.text, required this.date, required this.userid});
 
   factory Comment.fromMap(Map<String, dynamic> json) {
     return Comment(
-      userName: json['userName'] ?? '',
-      email: json['email'] ?? '',
       text: json['text'] ?? '',
       date: json['date'] ?? '',
-      profilePic: json['profilePic'] ?? '',
-      postPics: List<String>.from(json['postPics'] ?? []),
-
+      userid: json['userid'] ?? '',
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {'text': text, 'date': date, 'userid': userid};
   }
 }
 
@@ -107,5 +102,21 @@ class Product {
       colors: colorsList,
       comments: commentsList,
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'extraInfo': extraInfo,
+      'details': details,
+      'price': price,
+      'discount': discount,
+      'quantity': quantity,
+      'isNewCollection': isNewCollection,
+      'categories': category,
+      'colors': colors.map((c) => c.toMap()).toList(),
+      'comments': comments.map((c) => c.toMap()).toList(),
+      'id': id,
+    };
   }
 }
