@@ -5,7 +5,6 @@ import 'package:decora/src/features/Auth/services/auth_service.dart';
 import 'package:decora/src/features/Auth/widgets/error_dialog.dart';
 import 'package:decora/src/features/admin/screens/adminpanel.dart';
 import 'package:decora/src/features/home/main_screen.dart';
-import 'package:decora/src/features/admin/screens/add_product_screen.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     super.initState();
     _loadRememberedEmail();
+    _checkIfLoggedIn();
   }
 
   Future<void> _loadRememberedEmail() async {
@@ -55,6 +55,30 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
+  Future<void> _checkIfLoggedIn() async {
+    final user = authService.currentUser;
+    if (user != null) {
+      if (user.uid == "aEc97NihV5aCa8Zaw0w2YlzvICv2") {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const AdminPanel()),
+        );
+      } else {
+        final userDoc = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(user.uid)
+            .get();
+
+        if (userDoc.exists && mounted) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (_) => const MainLayout()),
+          );
+        }
+      }
+    }
+  }
+
   Future<void> _login() async {
     if (_formKey.currentState!.validate()) {
       await _saveEmailIfNeeded();
@@ -64,6 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
         final password = _passwordController.text.trim();
 
         final user = await authService.signInWithEmail(email, password);
+
         if (user != null && user.uid == "aEc97NihV5aCa8Zaw0w2YlzvICv2") {
           Navigator.pushReplacement(
             context,
@@ -75,13 +100,11 @@ class _LoginScreenState extends State<LoginScreen> {
               .doc(user.uid)
               .get();
 
-          if (userDoc.exists) {
-            if (mounted) {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (_) => const MainLayout()),
-              );
-            }
+          if (userDoc.exists && mounted) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (_) => const MainLayout()),
+            );
           } else {
             await showErrorDialog(
               context,
@@ -418,7 +441,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: TextStyle(
                           color: AppColors.primary(),
                           fontWeight: FontWeight.bold,
-
                           decoration: TextDecoration.underline,
                         ),
                       ),
