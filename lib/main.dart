@@ -1,6 +1,7 @@
 import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/core/l10n/local_cubit.dart';
 import 'package:decora/firebase_options.dart';
+import 'package:decora/src/features/notifications/services/notifications_services.dart';
 import 'package:decora/src/features/splash/cubit/splash_cubit.dart';
 import 'package:decora/src/features/splash/screens/splash_screen.dart';
 
@@ -17,7 +18,12 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   print('🔥 Firebase initialized successfully');
-
+  // final NotificationService _notificationService = NotificationService();
+  // await _notificationService.addNotification(
+  //     "k3UWhMBv53Z9hXgnyZ1h3CTrNaW2",
+  //     "Welcome back!",
+  //     "You just logged in again.",
+  //   );
   await dotenv.load(fileName: ".env");
   runApp(
     MultiBlocProvider(
