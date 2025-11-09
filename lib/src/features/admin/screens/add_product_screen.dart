@@ -5,6 +5,7 @@ import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import '../../../shared/components/appbar.dart';
 import '../../product_details/models/product_model.dart';
+import '../../../../core/utils/app_size.dart';
 
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({super.key});
@@ -60,6 +61,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Product added successfully!')),
       );
+
       _formKey.currentState!.reset();
       setState(() => _colors.clear());
     } catch (e) {
@@ -73,7 +75,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final w = MediaQuery.of(context).size.width;
+    final h = AppSize.height(context);
+    final w = AppSize.width(context);
+    final isLandscape = w > h;
 
     return Scaffold(
       backgroundColor: AppColors.background(),
@@ -95,50 +99,123 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ProductField(
-                        controller: _nameController,
-                        label: 'Name',
-                        validator: true,
-                      ),
-                      ProductField(
-                        controller: _extraInfoController,
-                        label: 'Extra Info',
-                      ),
-                      ProductField(
-                        controller: _detailsController,
-                        label: 'Details',
-                        lines: 3,
-                      ),
-                      ProductField(
-                        controller: _priceController,
-                        label: 'Price',
-                        type: TextInputType.number,
-                        validator: true,
-                      ),
-                      ProductField(
-                        controller: _discountController,
-                        label: 'Discount',
-                        type: TextInputType.number,
-                      ),
-                      ProductField(
-                        controller: _quantityController,
-                        label: 'Quantity',
-                        type: TextInputType.number,
-                      ),
-                      ProductField(
-                        controller: _categoryController,
-                        label: 'Category',
-                      ),
-                      SwitchListTile(
-                        title: Text(
-                          'New Collection',
-                          style: TextStyle(color: AppColors.mainText()),
+                      // =============== FORM INPUTS ===============
+                      if (isLandscape)
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  ProductField(
+                                    controller: _nameController,
+                                    label: 'Name',
+                                    validator: true,
+                                  ),
+                                  ProductField(
+                                    controller: _extraInfoController,
+                                    label: 'Extra Info',
+                                  ),
+                                  ProductField(
+                                    controller: _detailsController,
+                                    label: 'Details',
+                                    lines: 3,
+                                  ),
+                                  ProductField(
+                                    controller: _priceController,
+                                    label: 'Price',
+                                    type: TextInputType.number,
+                                    validator: true,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(width: 20),
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  ProductField(
+                                    controller: _discountController,
+                                    label: 'Discount',
+                                    type: TextInputType.number,
+                                  ),
+                                  ProductField(
+                                    controller: _quantityController,
+                                    label: 'Quantity',
+                                    type: TextInputType.number,
+                                  ),
+                                  ProductField(
+                                    controller: _categoryController,
+                                    label: 'Category',
+                                  ),
+                                  SwitchListTile(
+                                    title: Text(
+                                      'New Collection',
+                                      style: TextStyle(
+                                        color: AppColors.mainText(),
+                                      ),
+                                    ),
+                                    value: _isNewCollection,
+                                    onChanged: (val) =>
+                                        setState(() => _isNewCollection = val),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        )
+                      else
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ProductField(
+                              controller: _nameController,
+                              label: 'Name',
+                              validator: true,
+                            ),
+                            ProductField(
+                              controller: _extraInfoController,
+                              label: 'Extra Info',
+                            ),
+                            ProductField(
+                              controller: _detailsController,
+                              label: 'Details',
+                              lines: 3,
+                            ),
+                            ProductField(
+                              controller: _priceController,
+                              label: 'Price',
+                              type: TextInputType.number,
+                              validator: true,
+                            ),
+                            ProductField(
+                              controller: _discountController,
+                              label: 'Discount',
+                              type: TextInputType.number,
+                            ),
+                            ProductField(
+                              controller: _quantityController,
+                              label: 'Quantity',
+                              type: TextInputType.number,
+                            ),
+                            ProductField(
+                              controller: _categoryController,
+                              label: 'Category',
+                            ),
+                            SwitchListTile(
+                              title: Text(
+                                'New Collection',
+                                style: TextStyle(color: AppColors.mainText()),
+                              ),
+                              value: _isNewCollection,
+                              onChanged: (val) =>
+                                  setState(() => _isNewCollection = val),
+                            ),
+                          ],
                         ),
-                        value: _isNewCollection,
-                        onChanged: (val) =>
-                            setState(() => _isNewCollection = val),
-                      ),
+
                       const Divider(),
+                      // =============== COLORS SECTION ===============
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -194,6 +271,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                           ),
                         ),
                       const SizedBox(height: 20),
+                      // =============== ADD BUTTON ===============
                       ElevatedButton(
                         onPressed: _isLoading ? null : _addProduct,
                         style: ElevatedButton.styleFrom(

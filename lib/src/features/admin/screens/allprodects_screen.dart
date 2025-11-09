@@ -7,9 +7,14 @@ import '../../../shared/theme/app_colors.dart';
 import '../../product_details/models/product_model.dart';
 import 'edit_product_screen.dart';
 
-class AllProductsScreen extends StatelessWidget {
+class AllProductsScreen extends StatefulWidget {
   const AllProductsScreen({super.key});
 
+  @override
+  State<AllProductsScreen> createState() => _AllProductsScreenState();
+}
+
+class _AllProductsScreenState extends State<AllProductsScreen> {
   Future<List<Product>> _fetchProducts() async {
     final snapshot = await FirebaseFirestore.instance
         .collection('products')
@@ -22,6 +27,7 @@ class AllProductsScreen extends StatelessWidget {
   Future<void> _deleteProduct(BuildContext context, String id) async {
     try {
       await FirebaseFirestore.instance.collection('products').doc(id).delete();
+      setState(() {});
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text('Product deleted successfully'),

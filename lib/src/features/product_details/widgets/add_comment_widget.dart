@@ -92,11 +92,8 @@ class _AddCommentWidgetState extends State<AddCommentWidget> {
                       comment: newComment,
                       productId: widget.productId,
                     );
-
-                    // ✅ نرجع الكومنت للأب
                     widget.onCommentAdded(newComment);
 
-                    // مسح الكتابة
                     reviewController.clear();
                     setState(() => isLoading = false);
                   },
