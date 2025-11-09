@@ -53,7 +53,7 @@ Widget BuildCommentTile(Comment comment) {
               child: Container(
                 padding: const EdgeInsets.all(12.0),
                 decoration: BoxDecoration(
-                  color: AppColors.cardColor(),
+                  color: AppColors.cardColor(context),
                   borderRadius: BorderRadius.circular(12.0),
                 ),
                 child: Column(
@@ -69,7 +69,7 @@ Widget BuildCommentTile(Comment comment) {
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontSize: 18,
-                              color: AppColors.mainText(),
+                              color: AppColors.mainText(context),
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -78,7 +78,7 @@ Widget BuildCommentTile(Comment comment) {
                           comment.date,
                           style: TextStyle(
                             fontSize: 14,
-                            color: AppColors.secondaryText(),
+                            color: AppColors.secondaryText(context),
                           ),
                         ),
                       ],
@@ -89,7 +89,7 @@ Widget BuildCommentTile(Comment comment) {
                       comment.text,
                       style: TextStyle(
                         fontSize: 16,
-                        color: AppColors.secondaryText(),
+                        color: AppColors.secondaryText(context),
                       ),
                     ),
                   ],

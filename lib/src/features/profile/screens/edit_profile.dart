@@ -45,7 +45,7 @@ class _EditProfileUIState extends State<EditProfileUI> {
               as ImageProvider;
 
     return Scaffold(
-      backgroundColor: AppColors.background(),
+      backgroundColor: AppColors.background(context),
       body: Column(
         children: [
           SizedBox(height: MediaQuery.of(context).padding.top + 5),
@@ -112,7 +112,7 @@ class _EditProfileUIState extends State<EditProfileUI> {
                         Navigator.pop(context, updatedUser);
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primary(),
+                        backgroundColor: AppColors.primary(context),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),

@@ -37,7 +37,9 @@ class Categories extends StatelessWidget {
               margin: const EdgeInsets.symmetric(horizontal: 10),
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               decoration: BoxDecoration(
-                color: isSelected ? AppColors.primary() : AppColors.cardColor(),
+                color: isSelected
+                    ? AppColors.primary(context)
+                    : AppColors.cardColor(context),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Center(
@@ -46,8 +48,8 @@ class Categories extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 14,
                     color: isSelected
-                        ? AppColors.innerCardColor()
-                        : AppColors.mainText(),
+                        ? AppColors.innerCardColor(context)
+                        : AppColors.mainText(context),
                     fontWeight: FontWeight.bold,
                   ),
                 ),

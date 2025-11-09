@@ -135,7 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Directionality(
       textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
       child: Scaffold(
-        backgroundColor: AppColors.background(),
+        backgroundColor: AppColors.background(context),
         body: SingleChildScrollView(
           padding: EdgeInsets.symmetric(
             horizontal: size.width * 0.06,
@@ -156,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: TextStyle(
                       fontSize: size.width * 0.06,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.secondaryText(),
+                      color: AppColors.secondaryText(context),
                     ),
                   ),
                 ),
@@ -167,19 +167,22 @@ class _LoginScreenState extends State<LoginScreen> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: size.width * 0.032,
-                      color: AppColors.secondaryText(),
+                      color: AppColors.secondaryText(context),
                     ),
                   ),
                 ),
                 SizedBox(height: size.height * 0.03),
                 Text(
                   loc.email,
-                  style: TextStyle(fontSize: 16, color: AppColors.mainText()),
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: AppColors.mainText(context),
+                  ),
                 ),
                 const SizedBox(height: 6),
                 TextFormField(
                   controller: _emailController,
-                  style: TextStyle(color: AppColors.mainText()),
+                  style: TextStyle(color: AppColors.mainText(context)),
                   onChanged: (value) {
                     setState(() {
                       if (EmailValidator.validate(value.trim())) {
@@ -187,7 +190,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       }
                     });
                   },
-                  cursorColor: AppColors.primary(),
+                  cursorColor: AppColors.primary(context),
                   textDirection: TextDirection.ltr,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   decoration: InputDecoration(
@@ -196,7 +199,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Radius.circular(12.0),
                       ),
                       borderSide: BorderSide(
-                        color: AppColors.primary(),
+                        color: AppColors.primary(context),
                         width: 1.5,
                       ),
                     ),
@@ -225,7 +228,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: size.height * 0.02),
                 Text(
                   loc.password,
-                  style: TextStyle(fontSize: 16, color: AppColors.mainText()),
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: AppColors.mainText(context),
+                  ),
                 ),
                 SizedBox(height: size.height * 0.01),
                 TextFormField(
@@ -233,8 +239,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   obscureText: _obscurePassword,
                   textDirection: TextDirection.ltr,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
-                  style: TextStyle(color: AppColors.mainText()),
-                  cursorColor: AppColors.primary(),
+                  style: TextStyle(color: AppColors.mainText(context)),
+                  cursorColor: AppColors.primary(context),
                   decoration: InputDecoration(
                     hintText: loc.password,
                     errorText: _emailError,
@@ -247,7 +253,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Radius.circular(12.0),
                       ),
                       borderSide: BorderSide(
-                        color: AppColors.secondaryText(),
+                        color: AppColors.secondaryText(context),
                         width: 0.5,
                       ),
                     ),
@@ -260,7 +266,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Radius.circular(12.0),
                       ),
                       borderSide: BorderSide(
-                        color: AppColors.primary(),
+                        color: AppColors.primary(context),
                         width: 1.5,
                       ),
                     ),
@@ -298,13 +304,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               rememberMe = newValue ?? false;
                             });
                           },
-                          activeColor: AppColors.primary(),
+                          activeColor: AppColors.primary(context),
                         ),
                         Text(
                           loc.rememberMe,
                           style: TextStyle(
                             fontSize: size.width * 0.035,
-                            color: AppColors.secondaryText(),
+                            color: AppColors.secondaryText(context),
                           ),
                         ),
                       ],
@@ -321,7 +327,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Text(
                         loc.forgotPassword,
                         style: TextStyle(
-                          color: AppColors.primary(),
+                          color: AppColors.primary(context),
                           fontWeight: FontWeight.w600,
                           fontSize: size.width * 0.035,
                           decoration: TextDecoration.underline,
@@ -336,7 +342,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: ElevatedButton(
                     onPressed: _login,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary(),
+                      backgroundColor: AppColors.primary(context),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.0),
                       ),
@@ -354,15 +360,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: size.height * 0.04),
                 Row(
                   children: [
-                    Expanded(child: Divider(color: AppColors.primary())),
+                    Expanded(child: Divider(color: AppColors.primary(context))),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: Text(
                         loc.orLoginWith,
-                        style: TextStyle(color: AppColors.secondaryText()),
+                        style: TextStyle(
+                          color: AppColors.secondaryText(context),
+                        ),
                       ),
                     ),
-                    Expanded(child: Divider(color: AppColors.primary())),
+                    Expanded(child: Divider(color: AppColors.primary(context))),
                   ],
                 ),
                 SizedBox(height: size.height * 0.03),
@@ -377,7 +385,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         icon: Icon(
                           FontAwesomeIcons.google,
                           size: 30,
-                          color: AppColors.primary(),
+                          color: AppColors.primary(context),
                         ),
                         onPressed: () async {
                           final user = await authService.signInWithGoogle();
@@ -400,7 +408,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         icon: Icon(
                           FontAwesomeIcons.facebookF,
                           size: 30,
-                          color: AppColors.primary(),
+                          color: AppColors.primary(context),
                         ),
                         onPressed: () async {
                           final user = await authService.signInWithFacebook(
@@ -425,7 +433,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     Text(
                       loc.dontHaveAccount,
-                      style: TextStyle(color: AppColors.secondaryText()),
+                      style: TextStyle(color: AppColors.secondaryText(context)),
                     ),
                     InkWell(
                       onTap: () {
@@ -439,7 +447,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Text(
                         loc.createAccount,
                         style: TextStyle(
-                          color: AppColors.primary(),
+                          color: AppColors.primary(context),
                           fontWeight: FontWeight.bold,
                           decoration: TextDecoration.underline,
                         ),

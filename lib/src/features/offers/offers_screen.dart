@@ -78,7 +78,7 @@ class _OffersScreenState extends State<OffersScreen> {
     final isLandscape = w > h;
 
     return Scaffold(
-      backgroundColor: AppColors.background(),
+      backgroundColor: AppColors.background(context),
       body: SafeArea(
         child: Column(
           children: [
@@ -100,7 +100,7 @@ class _OffersScreenState extends State<OffersScreen> {
                           'No products found',
                           style: TextStyle(
                             fontSize: 16,
-                            color: AppColors.secondaryText(),
+                            color: AppColors.secondaryText(context),
                           ),
                         ),
                       )

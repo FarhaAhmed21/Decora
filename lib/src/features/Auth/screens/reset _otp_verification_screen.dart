@@ -108,16 +108,16 @@ class _OtpResetScreenState extends State<OtpResetScreen> {
     return Directionality(
       textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
       child: Scaffold(
-        backgroundColor: AppColors.background(),
+        backgroundColor: AppColors.background(context),
         appBar: AppBar(
-          backgroundColor: AppColors.background(),
+          backgroundColor: AppColors.background(context),
           centerTitle: true,
           automaticallyImplyLeading: false,
           leading: Padding(
             padding: const EdgeInsets.all(8),
             child: Container(
               decoration: BoxDecoration(
-                color: AppColors.innerCardColor(),
+                color: AppColors.innerCardColor(context),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: InkWell(
@@ -129,7 +129,7 @@ class _OtpResetScreenState extends State<OtpResetScreen> {
                         ? FontAwesomeIcons.chevronRight
                         : FontAwesomeIcons.chevronLeft,
                     size: 16,
-                    color: AppColors.mainText(),
+                    color: AppColors.mainText(context),
                   ),
                 ),
               ),
@@ -142,7 +142,7 @@ class _OtpResetScreenState extends State<OtpResetScreen> {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: AppColors.secondaryText(),
+              color: AppColors.secondaryText(context),
             ),
           ),
         ),
@@ -159,7 +159,7 @@ class _OtpResetScreenState extends State<OtpResetScreen> {
                     tr.verificationMessage,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: AppColors.secondaryText(),
+                      color: AppColors.secondaryText(context),
                       fontSize: 16,
                     ),
                   ),
@@ -171,14 +171,14 @@ class _OtpResetScreenState extends State<OtpResetScreen> {
                         width: size.width * 0.14,
                         height: size.width * 0.14,
                         child: TextField(
-                          cursorColor: AppColors.primary(),
+                          cursorColor: AppColors.primary(context),
                           textDirection: TextDirection.ltr,
                           focusNode: focusNodes[index],
                           controller: controllers[index],
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 20,
-                            color: AppColors.mainText(),
+                            color: AppColors.mainText(context),
                           ),
                           keyboardType: TextInputType.number,
                           onChanged: (v) => _onChanged(v, index),
@@ -186,12 +186,12 @@ class _OtpResetScreenState extends State<OtpResetScreen> {
                             counterText: "",
                             filled: true,
                             fillColor: focusNodes[index].hasFocus
-                                ? AppColors.background()
-                                : AppColors.innerCardColor(),
+                                ? AppColors.background(context)
+                                : AppColors.innerCardColor(context),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                               borderSide: BorderSide(
-                                color: AppColors.primary(),
+                                color: AppColors.primary(context),
                                 width: 1.5,
                               ),
                             ),
@@ -210,7 +210,7 @@ class _OtpResetScreenState extends State<OtpResetScreen> {
                     height: 50,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primary(),
+                        backgroundColor: AppColors.primary(context),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -229,12 +229,12 @@ class _OtpResetScreenState extends State<OtpResetScreen> {
                   Text.rich(
                     TextSpan(
                       text: tr.didNotGetOtp,
-                      style: TextStyle(color: AppColors.secondaryText()),
+                      style: TextStyle(color: AppColors.secondaryText(context)),
                       children: [
                         TextSpan(
                           text: " ${tr.resendOtp}",
                           style: TextStyle(
-                            color: AppColors.primary(),
+                            color: AppColors.primary(context),
                             fontWeight: FontWeight.bold,
                           ),
                           recognizer: TapGestureRecognizer()

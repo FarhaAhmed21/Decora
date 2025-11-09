@@ -59,7 +59,7 @@ class _CartAppBarState extends State<CartAppBar> {
         child: Container(
           height: 30,
           decoration: BoxDecoration(
-            color: AppColors.cardColor(),
+            color: AppColors.cardColor(context),
             borderRadius: BorderRadius.circular(8),
           ),
           child: IconButton(
@@ -92,7 +92,7 @@ class _CartAppBarState extends State<CartAppBar> {
 
       //  TabBar
       bottom: TabBar(
-        indicatorColor: AppColors.orange(),
+        indicatorColor: AppColors.orange(context),
         labelColor: Colors.black,
         indicatorSize: TabBarIndicatorSize.tab,
         indicatorWeight: 3,
@@ -112,7 +112,7 @@ class _AddPersonButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircleAvatar(
       radius: 20,
-      backgroundColor: AppColors.primary(),
+      backgroundColor: AppColors.primary(context),
       child: IconButton(
         icon: const Icon(Icons.person_add_alt, color: Colors.white),
         onPressed: () {

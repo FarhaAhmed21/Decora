@@ -98,7 +98,7 @@ class _NewCollectionScreenState extends State<NewCollectionScreen> {
     final isLandscape = w > h;
 
     return Scaffold(
-      backgroundColor: AppColors.background(),
+      backgroundColor: AppColors.background(context),
       body: SafeArea(
         child: Column(
           children: [

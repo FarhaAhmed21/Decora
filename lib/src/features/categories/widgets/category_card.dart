@@ -36,7 +36,7 @@ class CategoryCard extends StatelessWidget {
             title,
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: AppColors.mainText(),
+              color: AppColors.mainText(context),
               fontWeight: FontWeight.w800,
               fontSize: size.width * 0.04,
               height: 1,

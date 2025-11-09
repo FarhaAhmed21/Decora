@@ -43,16 +43,16 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
     return Directionality(
       textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
       child: Scaffold(
-        backgroundColor: AppColors.background(),
+        backgroundColor: AppColors.background(context),
         appBar: AppBar(
-          backgroundColor: AppColors.background(),
+          backgroundColor: AppColors.background(context),
           centerTitle: true,
           automaticallyImplyLeading: false,
           leading: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
               decoration: BoxDecoration(
-                color: AppColors.innerCardColor(),
+                color: AppColors.innerCardColor(context),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: InkWell(
@@ -64,7 +64,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                         ? FontAwesomeIcons.chevronRight
                         : FontAwesomeIcons.chevronLeft,
                     size: 16,
-                    color: AppColors.secondaryText(),
+                    color: AppColors.secondaryText(context),
                   ),
                 ),
               ),
@@ -75,7 +75,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: AppColors.secondaryText(),
+              color: AppColors.secondaryText(context),
             ),
           ),
         ),
@@ -97,7 +97,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                         tr.enterEmailreset,
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: AppColors.secondaryText(),
+                          color: AppColors.secondaryText(context),
                           fontSize: 17,
                         ),
                       ),
@@ -107,14 +107,14 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       tr.email,
                       style: TextStyle(
                         fontSize: 16,
-                        color: AppColors.mainText(),
+                        color: AppColors.mainText(context),
                       ),
                     ),
                     SizedBox(height: size.height * 0.01),
                     TextFormField(
                       controller: emailController,
                       textDirection: TextDirection.ltr,
-                      style: TextStyle(color: AppColors.mainText()),
+                      style: TextStyle(color: AppColors.mainText(context)),
                       onChanged: (value) {
                         setState(() {
                           if (EmailValidator.validate(value.trim())) {
@@ -122,14 +122,14 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                           }
                         });
                       },
-                      cursorColor: AppColors.primary(),
+                      cursorColor: AppColors.primary(context),
                       decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
                           borderRadius: const BorderRadius.all(
                             Radius.circular(12.0),
                           ),
                           borderSide: BorderSide(
-                            color: AppColors.primary(),
+                            color: AppColors.primary(context),
                             width: 1.5,
                           ),
                         ),
@@ -161,7 +161,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       height: 50,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primary(),
+                          backgroundColor: AppColors.primary(context),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),

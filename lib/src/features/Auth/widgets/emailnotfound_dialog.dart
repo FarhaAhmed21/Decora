@@ -13,7 +13,7 @@ class EmailNotFoundDialog extends StatelessWidget {
 
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      backgroundColor: AppColors.background(),
+      backgroundColor: AppColors.background(context),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
         child: Column(
@@ -21,7 +21,7 @@ class EmailNotFoundDialog extends StatelessWidget {
           children: [
             Icon(
               Icons.error_outline_rounded,
-              color: AppColors.orange(),
+              color: AppColors.orange(context),
               size: 55,
             ),
             const SizedBox(height: 15),
@@ -31,7 +31,7 @@ class EmailNotFoundDialog extends StatelessWidget {
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
-                color: AppColors.primary(),
+                color: AppColors.primary(context),
               ),
             ),
             const SizedBox(height: 10),
@@ -40,7 +40,7 @@ class EmailNotFoundDialog extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 15,
-                color: AppColors.secondaryText(),
+                color: AppColors.secondaryText(context),
                 height: 1.4,
               ),
             ),
@@ -50,7 +50,7 @@ class EmailNotFoundDialog extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () => Navigator.pop(context),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary(),
+                  backgroundColor: AppColors.primary(context),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
