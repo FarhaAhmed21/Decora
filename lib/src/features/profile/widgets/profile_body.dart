@@ -60,7 +60,10 @@ class _ProfileBodyState extends State<ProfileBody> {
     final List<Widget> navigations = [
       EditProfileUI(user: widget.user),
       const MyOrdesScreen(),
-      const ChatScreen(),
+      ChatScreen(
+        userId: widget.user.id,
+        adminId: "aEc97NihV5aCa8Zaw0w2YlzvICv2",
+      ),
       const LoginScreen(),
     ];
 

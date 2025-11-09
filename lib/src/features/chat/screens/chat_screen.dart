@@ -1,159 +1,79 @@
-import 'package:decora/generated/assets.dart';
-import 'package:decora/src/features/chat/widgets/date_widget.dart';
+import 'package:decora/src/features/chat/repository/chat_message.dart';
+import 'package:decora/src/features/chat/repository/chat_service.dart';
 import 'package:decora/src/features/chat/widgets/message_widget.dart';
-import 'package:decora/src/shared/components/appbar.dart';
-import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class ChatScreen extends StatelessWidget {
-  const ChatScreen({super.key});
+class ChatScreen extends StatefulWidget {
+  final String userId;
+  final String adminId;
+
+  const ChatScreen({super.key, required this.userId, required this.adminId});
+
+  @override
+  State<ChatScreen> createState() => _ChatScreenState();
+}
+
+class _ChatScreenState extends State<ChatScreen> {
+  final TextEditingController _controller = TextEditingController();
+  final ChatService _chatService = ChatService();
+
+  void _sendMessage() {
+    final text = _controller.text.trim();
+    if (text.isEmpty) return;
+
+    // إرسال رسالة من Admin
+    _chatService.sendMessageFromAdmin(widget.adminId, widget.userId, text);
+    _controller.clear();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final width = size.width;
-    final height = size.height;
-
     return Scaffold(
-      appBar: CustomAppBar(
-        title: "Admin",
-        onBackPressed: () {
-          Navigator.pop(context);
-        },
-      ),
-      backgroundColor: AppColors.background(context),
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView(
-                padding: const EdgeInsets.all(16),
-                children: [
-                  const DateWidget(date: "Yesterday"),
-                  const MessageWidget(text: "Hi, Decora", isSender: true),
-                  const MessageWidget(text: "Hi, Decora", isSender: false),
-                  const MessageWidget(
-                    text:
-                        "Hi, Decora , Hi, DecoraHi, DecoraHi, DecoraHi, Decora",
-                    isSender: false,
-                  ),
-                  SizedBox(height: height * 0.01),
-                  const DateWidget(date: "Today"),
-                  const MessageWidget(text: "Hi, Decora", isSender: true),
-                  const MessageWidget(text: "Hi, Decora", isSender: false),
-                  const MessageWidget(text: "Hi, Decora", isSender: false),
-                  const MessageWidget(text: "Hi, Decora", isSender: false),
-                  const MessageWidget(
-                    text:
-                        "Hi, Decora , Hi, DecoraHi, DecoraHi, DecoraHi, Decora",
-                    isSender: false,
-                  ),
-                  const MessageWidget(
-                    text:
-                        "Hi, Decora , Hi, DecoraHi, DecoraHi, DecoraHi, Decora",
-                    isSender: false,
-                  ),
-                  const MessageWidget(
-                    text:
-                        "Hi, Decora , Hi, DecoraHi, DecoraHi, DecoraHi, Decora",
-                    isSender: false,
-                  ),
-                  const MessageWidget(
-                    text:
-                        "Hi, Decora , Hi, DecoraHi, DecoraHi, DecoraHi, Decora",
-                    isSender: false,
-                  ),
-                  const MessageWidget(
-                    text:
-                        "Hi, Decora , Hi, DecoraHi, DecoraHi, DecoraHi, Decora",
-                    isSender: false,
-                  ),
-                ],
-              ),
-            ),
+      appBar: AppBar(title: const Text("Chat")),
+      body: Column(
+        children: [
+          Expanded(
+            child: StreamBuilder<List<ChatMessage>>(
+              stream: _chatService.getMessages(widget.userId, widget.adminId),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return const Center(child: CircularProgressIndicator());
+                }
 
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                padding: const EdgeInsets.only(left: 8),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                    color: AppColors.cardColor(context),
-                    width: 2.0,
+                final messages = snapshot.data!;
+                return ListView.builder(
+                  reverse: false, // من فوق لتحت
+                  itemCount: messages.length,
+                  itemBuilder: (context, index) {
+                    final msg = messages[index];
+                    final isSender = msg.senderId == widget.userId;
+                    return MessageWidget(text: msg.text, isSender: isSender);
+                  },
+                );
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: _controller,
+                    decoration: const InputDecoration(
+                      hintText: "Type a message...",
+                      border: OutlineInputBorder(),
+                    ),
                   ),
                 ),
-                child: Row(
-                  children: [
-                    InkWell(
-                      borderRadius: BorderRadius.circular(width * 0.03),
-                      onTap: () {},
-                      child: Container(
-                        padding: EdgeInsets.all(width * 0.02),
-                        decoration: BoxDecoration(
-                          color: AppColors.cardColor(context),
-                          borderRadius: BorderRadius.circular(width * 0.06),
-                        ),
-                        child: Image.asset(
-                          Assets.micIcon,
-                          color: AppColors.primary(context),
-                          width: width * 0.05,
-                          height: width * 0.05,
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: width * 0.015),
-                    InkWell(
-                      borderRadius: BorderRadius.circular(width * 0.03),
-                      onTap: () {},
-                      child: Container(
-                        padding: EdgeInsets.all(width * 0.02),
-                        decoration: BoxDecoration(
-                          color: AppColors.cardColor(context),
-                          borderRadius: BorderRadius.circular(width * 0.06),
-                        ),
-                        child: Image.asset(
-                          Assets.plusIcon,
-                          color: AppColors.primary(context),
-                          width: width * 0.05,
-                          height: width * 0.05,
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: width * 0.015),
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: "Type Something..",
-                          border: InputBorder.none,
-                          hintStyle: TextStyle(
-                            color: AppColors.secondaryText(context),
-                          ),
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {},
-                      child: Container(
-                        padding: EdgeInsets.all(width * 0.04),
-                        decoration: BoxDecoration(
-                          color: AppColors.primary(context),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Image.asset(
-                          Assets.sentIcon,
-                          color: AppColors.background(context),
-                          width: width * 0.05,
-                          height: width * 0.05,
-                        ),
-                      ),
-                    ),
-                  ],
+                IconButton(
+                  icon: const Icon(Icons.send),
+                  onPressed: _sendMessage,
                 ),
-              ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
