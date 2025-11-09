@@ -174,7 +174,7 @@ These advanced features will enhance personalization, engagement, and customer s
 - **Farha** →  in-app chat, onboarding,favourites, Splash Screen, Categories Screen.  
 - **Karen** → Home screen, product details, AR preview UI (VTO).  
 - **Othman** → Cart, shared cart, privacy policy,order cancellation.  
-- **Habiba** → Search with filters/voice ,Authentication . 
+- **Habiba** → Authentication . 
 - **Abdelaziz** → Notifications, delivery estimation(Order details Screens ), My orders Screen.  
 - **AbdElrahman** → Profile , New Collection section, Offers Screen.  
 
@@ -186,17 +186,17 @@ These advanced features will enhance personalization, engagement, and customer s
 - **Othman** → Firestore for cart, shared cart .  
 - **Habiba Basel** → Firestore for user profiles, addresses, and preferences.  Firebase Auth integration (Google, Facebook, Email).  
 - **Abdelaziz** → Firebase Cloud Messaging for notifications and All Orders Screens.  
-- **AbdElrahman Taher** →Firestore for user profiles + user reviews.  
+- **AbdElrahman Taher** →Firestore for user profiles + user reviews + Admin panel.  
 
 ---
 
 ### **Phase 5 – Unit Testing & Quality Assurance**  
-- **Farha Ahmed** → Unit tests for auth & onboarding flow.  
-- **Karen** → Widget tests for home & product details.  
+- **Farha Ahmed** → test chat.
+- **Karen** → Widget tests for home & product details + AR.
 - **Othman** → Integration tests for cart & checkout.  
-- **Habiba Basel** → Test multi-language support & dark/light mode.  
-- **Abdelaziz** → Test notification triggers & delivery estimates.  
-- **AbdElrahman Taher** → QA testing for profile & chat system.  
+- **Habiba Basel** → Test Auth & onboarding flow.
+- **Abdelaziz** → Test notification triggers & Order tracking.  
+- **AbdElrahman Taher** → QA testing for profile & favourite screen.  
 
 ---
 
