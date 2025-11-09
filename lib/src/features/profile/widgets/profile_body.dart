@@ -90,7 +90,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                     CircleAvatar(
                       key: UniqueKey(),
                       radius: 73,
-                      backgroundColor: AppColors.primary(),
+                      backgroundColor: AppColors.primary(context),
                       child: CircleAvatar(
                         radius: 70,
                         backgroundImage:
@@ -106,7 +106,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 20,
-                        color: AppColors.textColor(),
+                        color: AppColors.textColor(context),
                       ),
                     ),
                     const SizedBox(height: 5),
@@ -115,7 +115,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                       style: TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 14,
-                        color: AppColors.textColor(),
+                        color: AppColors.textColor(context),
                       ),
                     ),
                     const SizedBox(height: 20),

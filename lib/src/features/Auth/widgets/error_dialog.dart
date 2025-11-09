@@ -11,7 +11,7 @@ Future<void> showErrorDialog(BuildContext context, String message) async {
       final screenWidth = MediaQuery.of(context).size.width;
       return Dialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        backgroundColor: AppColors.background(),
+        backgroundColor: AppColors.background(context),
         child: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: screenWidth * 0.05,
@@ -22,7 +22,7 @@ Future<void> showErrorDialog(BuildContext context, String message) async {
             children: [
               Icon(
                 Icons.error_outline,
-                color: AppColors.orange(),
+                color: AppColors.orange(context),
                 size: screenWidth * 0.14,
               ),
               const SizedBox(height: 15),
@@ -31,7 +31,7 @@ Future<void> showErrorDialog(BuildContext context, String message) async {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: screenWidth * 0.05,
-                  color: AppColors.primary(),
+                  color: AppColors.primary(context),
                 ),
               ),
               const SizedBox(height: 10),
@@ -40,7 +40,7 @@ Future<void> showErrorDialog(BuildContext context, String message) async {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: screenWidth * 0.035,
-                  color: AppColors.secondaryText(),
+                  color: AppColors.secondaryText(context),
                 ),
               ),
               const SizedBox(height: 25),
@@ -48,7 +48,7 @@ Future<void> showErrorDialog(BuildContext context, String message) async {
                 width: screenWidth * 0.35,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary(),
+                    backgroundColor: AppColors.primary(context),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -58,7 +58,7 @@ Future<void> showErrorDialog(BuildContext context, String message) async {
                   child: Text(
                     lang.ok,
                     style: TextStyle(
-                      color: AppColors.background(),
+                      color: AppColors.background(context),
                       fontWeight: FontWeight.bold,
                     ),
                   ),

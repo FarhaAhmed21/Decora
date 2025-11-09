@@ -24,7 +24,7 @@ class OrderTrackingProductContainer extends StatelessWidget {
         width: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 15),
         decoration: BoxDecoration(
-          color: AppColors.cardColor(),
+          color: AppColors.cardColor(context),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Row(
@@ -33,7 +33,7 @@ class OrderTrackingProductContainer extends StatelessWidget {
               height: AppSize.height(context) * 0.1,
               width: AppSize.width(context) * 0.25,
               decoration: BoxDecoration(
-                color: AppColors.productCardColor(),
+                color: AppColors.productCardColor(context),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Image.asset(imagePath, fit: BoxFit.cover),
@@ -48,7 +48,7 @@ class OrderTrackingProductContainer extends StatelessWidget {
                     Text(
                       title,
                       style: TextStyle(
-                        color: AppColors.mainText(),
+                        color: AppColors.mainText(context),
                         fontSize: 19,
                       ),
                       maxLines: 1,
@@ -57,7 +57,7 @@ class OrderTrackingProductContainer extends StatelessWidget {
                     Text(
                       subtitle,
                       style: TextStyle(
-                        color: AppColors.primary(),
+                        color: AppColors.primary(context),
                         fontSize: 12,
                       ),
                     ),
@@ -65,7 +65,7 @@ class OrderTrackingProductContainer extends StatelessWidget {
                     Text(
                       price,
                       style: TextStyle(
-                        color: AppColors.mainText(),
+                        color: AppColors.mainText(context),
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),

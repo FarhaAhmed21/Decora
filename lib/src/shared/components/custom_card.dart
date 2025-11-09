@@ -46,14 +46,14 @@ class _CustomCardState extends State<CustomCard> {
     return LayoutBuilder(
       builder: (context, constraints) {
         final cardWidth = constraints.maxWidth;
-        final imageHeight = cardWidth * 0.8; // Responsive image height
+        final imageHeight = cardWidth * 0.8;
 
         return Card(
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          color: AppColors.cardColor(),
+          color: AppColors.cardColor(context),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -65,7 +65,7 @@ class _CustomCardState extends State<CustomCard> {
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
-                        color: AppColors.productCardColor(),
+                        color: AppColors.productCardColor(context),
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(12),
@@ -82,7 +82,7 @@ class _CustomCardState extends State<CustomCard> {
                             return Container(
                               height: imageHeight,
                               width: double.infinity,
-                              color: AppColors.productCardColor(),
+                              color: AppColors.productCardColor(context),
                               alignment: Alignment.center,
                               child: const CircularProgressIndicator(
                                 strokeWidth: 2,
@@ -95,7 +95,7 @@ class _CustomCardState extends State<CustomCard> {
                               height: imageHeight,
                               width: double.infinity,
                               decoration: BoxDecoration(
-                                color: AppColors.productCardColor(),
+                                color: AppColors.productCardColor(context),
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               alignment: Alignment.center,
@@ -122,13 +122,13 @@ class _CustomCardState extends State<CustomCard> {
                           ),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12.0),
-                            color: AppColors.orange(),
+                            color: AppColors.orange(context),
                           ),
                           child: Text(
                             '${product.discount}%',
                             style: TextStyle(
                               fontSize: 12,
-                              color: AppColors.innerCardColor(),
+                              color: AppColors.innerCardColor(context),
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -158,14 +158,14 @@ class _CustomCardState extends State<CustomCard> {
                                       )!.product_added_to_favourite_successfully
                                     : "Removed from favourites",
                               ),
-                              backgroundColor: AppColors.primary(),
+                              backgroundColor: AppColors.primary(context),
                               duration: const Duration(seconds: 1),
                             ),
                           );
                         },
                         child: Icon(
                           isFavourite ? Icons.favorite : Icons.favorite_border,
-                          color: AppColors.primary(),
+                          color: AppColors.primary(context),
                           size: cardWidth * 0.1,
                         ),
                       ),
@@ -183,7 +183,7 @@ class _CustomCardState extends State<CustomCard> {
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: cardWidth * 0.08,
-                    color: AppColors.mainText(),
+                    color: AppColors.mainText(context),
                   ),
                 ),
 
@@ -197,7 +197,7 @@ class _CustomCardState extends State<CustomCard> {
                       "\$${product.price}",
                       style: TextStyle(
                         fontSize: cardWidth * 0.08,
-                        color: AppColors.mainText(),
+                        color: AppColors.mainText(context),
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -210,7 +210,7 @@ class _CustomCardState extends State<CustomCard> {
                                 context,
                               )!.product_added_to_Cart_successfully,
                             ),
-                            backgroundColor: AppColors.primary(),
+                            backgroundColor: AppColors.primary(context),
                             duration: const Duration(seconds: 1),
                           ),
                         );
@@ -219,7 +219,7 @@ class _CustomCardState extends State<CustomCard> {
                         width: cardWidth * 0.18,
                         height: cardWidth * 0.18,
                         decoration: BoxDecoration(
-                          color: AppColors.primary(),
+                          color: AppColors.primary(context),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: const Icon(

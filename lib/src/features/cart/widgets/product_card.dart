@@ -16,7 +16,7 @@ class ProductCard extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         child: Card(
           elevation: 0,
-          color: AppColors.cardColor(),
+          color: AppColors.cardColor(context),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
@@ -31,7 +31,7 @@ class ProductCard extends StatelessWidget {
                   child: Container(
                     width: AppSize.width(context) * 0.27,
                     height: AppSize.height(context) * 0.13,
-                    color: AppColors.productCardColor(),
+                    color: AppColors.productCardColor(context),
                     child: Image.asset(Assets.couchImage),
                   ),
                 ),
@@ -75,9 +75,18 @@ class ProductCard extends StatelessWidget {
                       Wrap(
                         spacing: 6,
                         children: [
-                          _buildTag(AppLocalizations.of(context)!.dining),
-                          _buildTag(AppLocalizations.of(context)!.furniture),
-                          _buildTag(AppLocalizations.of(context)!.wood),
+                          _buildTag(
+                            AppLocalizations.of(context)!.dining,
+                            context,
+                          ),
+                          _buildTag(
+                            AppLocalizations.of(context)!.furniture,
+                            context,
+                          ),
+                          _buildTag(
+                            AppLocalizations.of(context)!.wood,
+                            context,
+                          ),
                         ],
                       ),
                       const SizedBox(height: 16),
@@ -129,7 +138,7 @@ class ProductCard extends StatelessWidget {
                                 width: AppSize.height(context) * 0.04,
                                 height: AppSize.height(context) * 0.04,
                                 decoration: BoxDecoration(
-                                  color: AppColors.primary(),
+                                  color: AppColors.primary(context),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: IconButton(
@@ -156,11 +165,11 @@ class ProductCard extends StatelessWidget {
     );
   }
 
-  Widget _buildTag(String tag) {
+  Widget _buildTag(String tag, BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 5),
       decoration: BoxDecoration(
-        border: Border.all(color: AppColors.innerProductCardBorder()),
+        border: Border.all(color: AppColors.innerProductCardBorder(context)),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Text(
@@ -169,7 +178,7 @@ class ProductCard extends StatelessWidget {
         style: TextStyle(
           fontWeight: FontWeight.w400,
           fontSize: 12,
-          color: AppColors.innerProductCardTypeText(),
+          color: AppColors.innerProductCardTypeText(context),
         ),
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
   final int selectedIndex;
@@ -13,99 +14,73 @@ class CustomBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomAppBar(
-      color: AppColors.background(),
-      elevation: 10,
-      shape: const CircularNotchedRectangle(),
-      notchMargin: 8.0,
-      child: CustomPaint(
-        painter: _TopBorderPainter(),
-        child: SizedBox(
-          height: 60,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              _buildNavItem(
-                Image.asset(
-                  'assets/icons/home-11.png',
-                  height: 26,
-                  width: 26,
-                  color: selectedIndex == 0
-                      ? (AppTheme.isDarkMode
-                            ? Colors.white
-                            : const Color.fromRGBO(255, 255, 255, 0.5))
-                      : (AppTheme.isDarkMode
-                            ? const Color.fromRGBO(255, 255, 255, 0.5)
-                            : Colors.white),
-                ),
-                'Home',
-                0,
+    // Selector هنا يراقب فقط isDarkMode ويعيد بناء الـ widget لما يتغير
+    return Selector<AppThemeProvider, bool>(
+      selector: (_, provider) => provider.isDarkMode,
+      builder: (context, isDarkMode, child) {
+        return BottomAppBar(
+          color: AppColors.background(context),
+          elevation: 10,
+          shape: const CircularNotchedRectangle(),
+          notchMargin: 8.0,
+          child: CustomPaint(
+            painter: _TopBorderPainter(isDarkMode: isDarkMode),
+            child: SizedBox(
+              height: 60,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  _buildNavItem(
+                    context,
+                    'assets/icons/home-11.png',
+                    'Home',
+                    0,
+                    isDarkMode,
+                  ),
+                  _buildNavItem(
+                    context,
+                    'assets/icons/shopping-bag-03.png',
+                    'Cart',
+                    1,
+                    isDarkMode,
+                  ),
+                  const SizedBox(width: 48),
+                  _buildNavItem(
+                    context,
+                    'assets/icons/favourite.png',
+                    'Favourites',
+                    2,
+                    isDarkMode,
+                  ),
+                  _buildNavItem(
+                    context,
+                    'assets/icons/User.png',
+                    'Profile',
+                    3,
+                    isDarkMode,
+                  ),
+                ],
               ),
-              _buildNavItem(
-                Image.asset(
-                  'assets/icons/shopping-bag-03.png',
-                  height: 26,
-                  width: 26,
-                  color: selectedIndex == 1
-                      ? (AppTheme.isDarkMode
-                            ? Colors.white
-                            : const Color.fromRGBO(255, 255, 255, 0.5))
-                      : (AppTheme.isDarkMode
-                            ? const Color.fromRGBO(255, 255, 255, 0.5)
-                            : Colors.white),
-                ),
-                'Cart',
-                1,
-              ),
-              const SizedBox(width: 48),
-              _buildNavItem(
-                Image.asset(
-                  'assets/icons/favourite.png',
-                  height: 26,
-                  width: 26,
-                  color: selectedIndex == 2
-                      ? (AppTheme.isDarkMode
-                            ? Colors.white
-                            : const Color.fromRGBO(255, 255, 255, 0.5))
-                      : (AppTheme.isDarkMode
-                            ? const Color.fromRGBO(255, 255, 255, 0.5)
-                            : Colors.white),
-                ),
-                'Favourites',
-                2,
-              ),
-              _buildNavItem(
-                Image.asset(
-                  'assets/icons/User.png',
-                  height: 26,
-                  width: 26,
-                  color: selectedIndex == 3
-                      ? (AppTheme.isDarkMode
-                            ? Colors.white
-                            : const Color.fromRGBO(255, 255, 255, 0.5))
-                      : (AppTheme.isDarkMode
-                            ? const Color.fromRGBO(255, 255, 255, 0.5)
-                            : Colors.white),
-                ),
-                'Profile',
-                3,
-              ),
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
-  Widget _buildNavItem(Widget iconWidget, String label, int index) {
+  Widget _buildNavItem(
+    BuildContext context,
+    String iconPath,
+    String label,
+    int index,
+    bool isDarkMode,
+  ) {
     final isSelected = index == selectedIndex;
     final color = isSelected
-        ? (AppTheme.isDarkMode
-              ? Colors.white
-              : const Color.fromRGBO(255, 255, 255, 0.5))
-        : (AppTheme.isDarkMode
-              ? const Color.fromRGBO(255, 255, 255, 0.5)
-              : Colors.white);
+        ? (isDarkMode ? Colors.white : Colors.black)
+        : (isDarkMode
+              ? const Color.fromARGB(128, 107, 107, 107)
+              : const Color.fromARGB(128, 52, 51, 51));
     final fontWeight = isSelected ? FontWeight.w500 : FontWeight.w400;
 
     return Expanded(
@@ -115,8 +90,8 @@ class CustomBottomNavBar extends StatelessWidget {
           padding: const EdgeInsets.only(top: 8.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              iconWidget,
+            children: [
+              Image.asset(iconPath, height: 26, width: 26, color: color),
               const SizedBox(height: 2),
               Text(
                 label,
@@ -135,15 +110,20 @@ class CustomBottomNavBar extends StatelessWidget {
 }
 
 class _TopBorderPainter extends CustomPainter {
+  final bool isDarkMode;
+
+  _TopBorderPainter({required this.isDarkMode});
+
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.white.withOpacity(0.1)
+      ..color = isDarkMode
+          ? Colors.white.withOpacity(0.1)
+          : Colors.black.withOpacity(0.05)
       ..strokeWidth = 1
       ..style = PaintingStyle.stroke;
 
     final path = Path();
-
     double notchWidth = 60;
     double notchRadius = notchWidth / 2;
     double centerX = size.width / 2;
@@ -158,10 +138,12 @@ class _TopBorderPainter extends CustomPainter {
     );
 
     path.lineTo(size.width, 0);
-
     canvas.drawPath(path, paint);
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+  bool shouldRepaint(covariant _TopBorderPainter oldDelegate) {
+    // نعيد الرسم فقط لو تغير isDarkMode
+    return oldDelegate.isDarkMode != isDarkMode;
+  }
 }

@@ -41,7 +41,7 @@ class _AddCommentWidgetState extends State<AddCommentWidget> {
             child: Container(
               height: containerHeight,
               decoration: BoxDecoration(
-                color: AppColors.cardColor(),
+                color: AppColors.cardColor(context),
                 borderRadius: BorderRadius.circular(12),
               ),
               padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -51,7 +51,7 @@ class _AddCommentWidgetState extends State<AddCommentWidget> {
                   decoration: InputDecoration(
                     hintText: 'Write Your Review...',
                     hintStyle: TextStyle(
-                      color: AppColors.secondaryText(),
+                      color: AppColors.secondaryText(context),
                       fontSize: isLandscape ? w * 0.018 : 16,
                     ),
                     border: InputBorder.none,
@@ -60,7 +60,7 @@ class _AddCommentWidgetState extends State<AddCommentWidget> {
                       vertical: -verticalPadding,
                     ),
                   ),
-                  style: TextStyle(color: AppColors.mainText()),
+                  style: TextStyle(color: AppColors.mainText(context)),
                 ),
               ),
             ),
@@ -71,7 +71,7 @@ class _AddCommentWidgetState extends State<AddCommentWidget> {
                 ? const CircularProgressIndicator()
                 : Icon(
                     Icons.send,
-                    color: AppColors.secondaryText(),
+                    color: AppColors.secondaryText(context),
                     size: iconSize,
                   ),
             onPressed: isLoading

@@ -120,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             'No products found',
                             style: TextStyle(
                               fontSize: 16,
-                              color: AppColors.secondaryText(),
+                              color: AppColors.secondaryText(context),
                             ),
                           ),
                         )
@@ -169,7 +169,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               AppLocalizations.of(context)!.decora_specials,
                               style: TextStyle(
                                 fontSize: 18,
-                                color: AppColors.mainText(),
+                                color: AppColors.mainText(context),
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -230,7 +230,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               AppLocalizations.of(context)!.categories,
                               style: TextStyle(
                                 fontSize: 18,
-                                color: AppColors.mainText(),
+                                color: AppColors.mainText(context),
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -274,7 +274,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   'No products in this category',
                                   style: TextStyle(
                                     fontSize: 16,
-                                    color: AppColors.secondaryText(),
+                                    color: AppColors.secondaryText(context),
                                   ),
                                 ),
                               )

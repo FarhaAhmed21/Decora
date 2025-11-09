@@ -17,7 +17,7 @@ void showProviderConflictDialog(BuildContext context) {
 
       return Dialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        backgroundColor: AppColors.background(),
+        backgroundColor: AppColors.background(context),
         child: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: screenWidth * 0.05,
@@ -29,7 +29,7 @@ void showProviderConflictDialog(BuildContext context) {
             children: [
               Icon(
                 Icons.warning_amber_rounded,
-                color: AppColors.orange(),
+                color: AppColors.orange(context),
                 size: screenWidth * 0.14,
               ),
               const SizedBox(height: 15),
@@ -39,7 +39,7 @@ void showProviderConflictDialog(BuildContext context) {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: screenWidth * 0.05,
-                  color: AppColors.primary(),
+                  color: AppColors.primary(context),
                 ),
               ),
               const SizedBox(height: 10),
@@ -48,7 +48,7 @@ void showProviderConflictDialog(BuildContext context) {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: screenWidth * 0.035,
-                  color: AppColors.secondaryText(),
+                  color: AppColors.secondaryText(context),
                   height: 1.4,
                 ),
               ),
@@ -62,14 +62,16 @@ void showProviderConflictDialog(BuildContext context) {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        side: BorderSide(color: AppColors.secondaryText()),
+                        side: BorderSide(
+                          color: AppColors.secondaryText(context),
+                        ),
                         padding: const EdgeInsets.symmetric(vertical: 7),
                       ),
                       onPressed: () => Navigator.pop(dialogContext),
                       child: Text(
                         lang.cancel,
                         style: TextStyle(
-                          color: AppColors.secondaryText(),
+                          color: AppColors.secondaryText(context),
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -92,7 +94,7 @@ void showProviderConflictDialog(BuildContext context) {
                         ),
                       ),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primary(),
+                        backgroundColor: AppColors.primary(context),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),

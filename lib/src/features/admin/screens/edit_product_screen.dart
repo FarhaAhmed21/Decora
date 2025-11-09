@@ -110,7 +110,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
     final w = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: AppColors.background(),
+      backgroundColor: AppColors.background(context),
       body: SafeArea(
         child: Column(
           children: [
@@ -157,7 +157,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       SwitchListTile(
                         title: Text(
                           'New Collection',
-                          style: TextStyle(color: AppColors.mainText()),
+                          style: TextStyle(color: AppColors.mainText(context)),
                         ),
                         value: _isNewCollection,
                         onChanged: (val) =>
@@ -172,7 +172,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
-                              color: AppColors.mainText(),
+                              color: AppColors.mainText(context),
                             ),
                           ),
                           ElevatedButton.icon(
@@ -181,13 +181,18 @@ class _EditProductScreenState extends State<EditProductScreen> {
                               (newColor) =>
                                   setState(() => _colors.add(newColor)),
                             ),
-                            icon: Icon(Icons.add, color: AppColors.mainText()),
+                            icon: Icon(
+                              Icons.add,
+                              color: AppColors.mainText(context),
+                            ),
                             label: Text(
                               'Add Color',
-                              style: TextStyle(color: AppColors.mainText()),
+                              style: TextStyle(
+                                color: AppColors.mainText(context),
+                              ),
                             ),
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.primary(),
+                              backgroundColor: AppColors.primary(context),
                             ),
                           ),
                         ],
@@ -243,7 +248,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       ElevatedButton(
                         onPressed: _isLoading ? null : _updateProduct,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primary(),
+                          backgroundColor: AppColors.primary(context),
                           minimumSize: const Size.fromHeight(50),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(14),
@@ -258,7 +263,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
-                                  color: AppColors.mainText(),
+                                  color: AppColors.mainText(context),
                                 ),
                               ),
                       ),
@@ -289,12 +294,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
         validator: validator
             ? (value) => value == null || value.isEmpty ? 'Required' : null
             : null,
-        style: TextStyle(color: AppColors.mainText()),
+        style: TextStyle(color: AppColors.mainText(context)),
         decoration: InputDecoration(
           labelText: label,
-          labelStyle: TextStyle(color: AppColors.mainText()),
+          labelStyle: TextStyle(color: AppColors.mainText(context)),
           filled: true,
-          fillColor: AppColors.cardColor(),
+          fillColor: AppColors.cardColor(context),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
         ),
       ),

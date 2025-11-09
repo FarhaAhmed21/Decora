@@ -16,7 +16,7 @@ class PasswordResetSuccessScreen extends StatelessWidget {
       textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: AppColors.background(),
+          backgroundColor: AppColors.background(context),
           elevation: 0,
           automaticallyImplyLeading: false,
           centerTitle: true,
@@ -25,14 +25,14 @@ class PasswordResetSuccessScreen extends StatelessWidget {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: AppColors.secondaryText(),
+              color: AppColors.secondaryText(context),
             ),
           ),
           leading: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 9),
             child: Container(
               decoration: BoxDecoration(
-                color: AppColors.innerCardColor(),
+                color: AppColors.innerCardColor(context),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: InkWell(
@@ -43,7 +43,7 @@ class PasswordResetSuccessScreen extends StatelessWidget {
                     Directionality.of(context) == TextDirection.rtl
                         ? FontAwesomeIcons.chevronRight
                         : FontAwesomeIcons.chevronLeft,
-                    color: AppColors.mainText(),
+                    color: AppColors.mainText(context),
                     size: 16,
                   ),
                 ),
@@ -51,7 +51,7 @@ class PasswordResetSuccessScreen extends StatelessWidget {
             ),
           ),
         ),
-        backgroundColor: AppColors.background(),
+        backgroundColor: AppColors.background(context),
         body: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: size.width * 0.043,
@@ -70,7 +70,7 @@ class PasswordResetSuccessScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.secondaryText(),
+                  color: AppColors.secondaryText(context),
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -79,7 +79,7 @@ class PasswordResetSuccessScreen extends StatelessWidget {
                 tr.youCanLoginNow,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: AppColors.secondaryText(),
+                  color: AppColors.secondaryText(context),
                   fontSize: 14,
                 ),
               ),
@@ -89,7 +89,10 @@ class PasswordResetSuccessScreen extends StatelessWidget {
                 width: double.infinity,
                 child: OutlinedButton(
                   style: OutlinedButton.styleFrom(
-                    side: BorderSide(color: AppColors.primary(), width: 1.5),
+                    side: BorderSide(
+                      color: AppColors.primary(context),
+                      width: 1.5,
+                    ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -99,7 +102,7 @@ class PasswordResetSuccessScreen extends StatelessWidget {
                   child: Text(
                     back == "login" ? tr.backToLogin : "Back To Profile Page",
                     style: TextStyle(
-                      color: AppColors.primary(),
+                      color: AppColors.primary(context),
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),

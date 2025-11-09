@@ -122,9 +122,9 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     return Directionality(
       textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
       child: Scaffold(
-        backgroundColor: AppColors.background(),
+        backgroundColor: AppColors.background(context),
         appBar: AppBar(
-          backgroundColor: AppColors.background(),
+          backgroundColor: AppColors.background(context),
           automaticallyImplyLeading: false,
           centerTitle: true,
           title: Text(
@@ -132,14 +132,14 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: AppColors.secondaryText(),
+              color: AppColors.secondaryText(context),
             ),
           ),
           leading: Padding(
             padding: const EdgeInsets.all(8),
             child: Container(
               decoration: BoxDecoration(
-                color: AppColors.innerCardColor(),
+                color: AppColors.innerCardColor(context),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: InkWell(
@@ -150,7 +150,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     isArabic
                         ? FontAwesomeIcons.chevronRight
                         : FontAwesomeIcons.chevronLeft,
-                    color: AppColors.mainText(),
+                    color: AppColors.mainText(context),
                     size: 16,
                   ),
                 ),
@@ -172,7 +172,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 16,
-                    color: AppColors.secondaryText(),
+                    color: AppColors.secondaryText(context),
                   ),
                 ),
                 SizedBox(height: size.height * 0.04),
@@ -184,13 +184,13 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       height: size.width * 0.14,
                       child: TextField(
                         textDirection: TextDirection.ltr,
-                        cursorColor: AppColors.primary(),
+                        cursorColor: AppColors.primary(context),
                         focusNode: focusNodes[index],
                         controller: controllers[index],
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 20,
-                          color: AppColors.mainText(),
+                          color: AppColors.mainText(context),
                         ),
                         keyboardType: TextInputType.number,
                         onChanged: (v) => _onChanged(v, index),
@@ -198,12 +198,12 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                           counterText: "",
                           filled: true,
                           fillColor: focusNodes[index].hasFocus
-                              ? AppColors.background()
-                              : AppColors.innerCardColor(),
+                              ? AppColors.background(context)
+                              : AppColors.innerCardColor(context),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(
-                              color: AppColors.primary(),
+                              color: AppColors.primary(context),
                               width: 1.5,
                             ),
                           ),
@@ -221,7 +221,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   height: 50,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary(),
+                      backgroundColor: AppColors.primary(context),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -240,14 +240,16 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     child: Text.rich(
                       TextSpan(
                         text: tr.didNotGetOtp,
-                        style: TextStyle(color: AppColors.secondaryText()),
+                        style: TextStyle(
+                          color: AppColors.secondaryText(context),
+                        ),
                         children: [
                           TextSpan(
                             text: " ${tr.resendOtp}",
                             style: TextStyle(
                               color: _isResending
                                   ? Colors.grey
-                                  : AppColors.primary(),
+                                  : AppColors.primary(context),
                               fontWeight: FontWeight.bold,
                             ),
                           ),
