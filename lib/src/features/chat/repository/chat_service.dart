@@ -1,8 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'chat_message.dart';
+import 'package:decora/src/features/chat/repository/chat_message.dart';
 
 class ChatService {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseFirestore _firestore;
+
+  // لو مش محدد، يستخدم الـ instance الحقيقي
+  ChatService({FirebaseFirestore? firestore})
+    : _firestore = firestore ?? FirebaseFirestore.instance;
 
   String getChatId(String userId, String adminId) {
     return userId.hashCode <= adminId.hashCode
@@ -33,7 +37,7 @@ class ChatService {
 
   Stream<List<ChatMessage>> getMessages(String userId, String adminId) {
     final chatId = getChatId(userId, adminId);
-    return FirebaseFirestore.instance
+    return _firestore
         .collection('chats')
         .doc(chatId)
         .collection('messages')
@@ -59,13 +63,13 @@ class ChatService {
       'isRead': false,
     };
 
-    await FirebaseFirestore.instance
+    await _firestore
         .collection('chats')
         .doc(chatId)
         .collection('messages')
         .add(message);
 
-    await FirebaseFirestore.instance.collection('chats').doc(chatId).set({
+    await _firestore.collection('chats').doc(chatId).set({
       'participants': [userId, adminId],
       'lastMessageTime': Timestamp.now(),
     }, SetOptions(merge: true));
