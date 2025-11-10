@@ -1,21 +1,46 @@
+import 'package:decora/src/features/Auth/models/user_model.dart';
+import 'package:decora/src/features/Auth/services/firestore_service.dart';
 import 'package:decora/src/features/Auth/widgets/conflictDialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import '../models/user_model.dart';
-import '../services/firestore_service.dart';
 
 class AuthService {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirestoreService _firestoreService = FirestoreService();
+  final FirebaseAuth _auth;
+  final FirestoreService _firestoreService;
+  final GoogleSignIn _googleSignIn;
+  final FacebookAuth _facebookAuth;
+
+  AuthService({
+    FirebaseAuth? firebaseAuth,
+    FirestoreService? firestoreService,
+    GoogleSignIn? googleSignIn,
+    FacebookAuth? facebookAuth,
+  }) : _auth = firebaseAuth ?? FirebaseAuth.instance,
+       _firestoreService = firestoreService ?? FirestoreService(),
+       _googleSignIn = googleSignIn ?? GoogleSignIn(),
+       _facebookAuth = facebookAuth ?? FacebookAuth.instance;
+
+  @visibleForTesting
+  AuthService.testOnly({
+    required FirebaseAuth firebaseAuth,
+    required GoogleSignIn googleSignIn,
+    required FacebookAuth facebookAuth,
+    FirestoreService? firestoreService,
+  }) : _auth = firebaseAuth,
+       _googleSignIn = googleSignIn,
+       _facebookAuth = facebookAuth,
+       _firestoreService = firestoreService ?? FirestoreService();
 
   Stream<User?> get authStateChanges => _auth.authStateChanges();
   FirestoreService get firestoreService => _firestoreService;
+  User? get currentUser => _auth.currentUser;
+
   Future<User?> signUpWithEmail(
     String email,
     String password,
-    String nameFromForm,
+    String name,
   ) async {
     final credential = await _auth.createUserWithEmailAndPassword(
       email: email,
@@ -28,12 +53,11 @@ class AuthService {
         UserModel(
           id: user.uid,
           email: user.email ?? '',
-          name: nameFromForm,
+          name: name,
           photoUrl: user.photoURL ?? '',
         ),
       );
     }
-
     return user;
   }
 
@@ -46,12 +70,13 @@ class AuthService {
   }
 
   Future<User?> signInWithGoogle() async {
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    final googleUser = await _googleSignIn.signIn();
     if (googleUser == null) return null;
 
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
-
+    final googleAuth = await googleUser.authentication;
+    if (googleAuth.accessToken == null && googleAuth.idToken == null) {
+      return null;
+    }
     final credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
@@ -70,95 +95,93 @@ class AuthService {
         ),
       );
     }
-
     return user;
   }
 
   Future<User?> signInWithFacebook(BuildContext context) async {
     try {
-      final LoginResult result = await FacebookAuth.instance.login();
+      final result = await _facebookAuth.login();
 
-      if (result.status == LoginStatus.success) {
-        final AccessToken accessToken = result.accessToken!;
-        final facebookAuthCredential = FacebookAuthProvider.credential(
-          accessToken.tokenString,
-        );
+      if (result.status != LoginStatus.success) return null;
 
-        try {
-          final userCredential = await _auth.signInWithCredential(
-            facebookAuthCredential,
+      final accessToken = result.accessToken!;
+      final credential = FacebookAuthProvider.credential(
+        accessToken.tokenString,
+      );
+
+      try {
+        final userCredential = await _auth.signInWithCredential(credential);
+        final user = userCredential.user;
+
+        if (user != null) {
+          await _firestoreService.saveUserData(
+            UserModel(
+              id: user.uid,
+              email: user.email ?? '',
+              name: user.displayName ?? '',
+              photoUrl: user.photoURL ?? '',
+            ),
           );
-          final user = userCredential.user;
+        }
+        return user;
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'account-exists-with-different-credential') {
+          final email = e.email;
+          final pendingCredential = e.credential;
 
-          if (user != null) {
-            await _firestoreService.saveUserData(
-              UserModel(
-                id: user.uid,
-                email: user.email ?? '',
-                name: user.displayName ?? '',
-                photoUrl: user.photoURL ?? '',
-              ),
-            );
+          if (email == null) return null;
+
+          final methods = await _auth.fetchSignInMethodsForEmail(email);
+
+          if (methods.contains('google.com')) {
+            showProviderConflictDialog(context);
+            return null;
           }
 
-          return user;
-        } on FirebaseAuthException catch (e) {
-          if (e.code == 'account-exists-with-different-credential') {
-            final email = e.email;
-            final pendingCredential = e.credential;
-
-            if (email == null) return null;
-
-            final signInMethods = await _auth.fetchSignInMethodsForEmail(email);
-
-            if (signInMethods.contains('google.com')) {
-              showProviderConflictDialog(context);
-              return null;
-            } else if (signInMethods.isEmpty) {
-              try {
-                final userCredential = await _auth.signInWithCredential(
-                  pendingCredential!,
+          if (methods.isEmpty && pendingCredential != null) {
+            try {
+              final userCredential = await _auth.signInWithCredential(
+                pendingCredential,
+              );
+              final user = userCredential.user;
+              if (user != null) {
+                await _firestoreService.saveUserData(
+                  UserModel(
+                    id: user.uid,
+                    email: user.email ?? '',
+                    name: user.displayName ?? '',
+                    photoUrl: user.photoURL ?? '',
+                  ),
                 );
-                final user = userCredential.user;
-
-                if (user != null) {
-                  await _firestoreService.saveUserData(
-                    UserModel(
-                      id: user.uid,
-                      email: user.email ?? '',
-                      name: user.displayName ?? '',
-                      photoUrl: user.photoURL ?? '',
-                    ),
-                  );
-                }
-                return user;
-              } on FirebaseAuthException {
-                showProviderConflictDialog(context);
-                return null;
               }
-            } else {
+              return user;
+            } on FirebaseAuthException {
               showProviderConflictDialog(context);
               return null;
             }
           } else {
+            showProviderConflictDialog(context);
             return null;
           }
         }
-      } else {
         return null;
       }
-    } catch (e) {
+    } catch (_) {
       return null;
     }
   }
 
   Future<void> signOut() async {
-    await Future.wait([
-      _auth.signOut(),
-      GoogleSignIn().signOut(),
-      FacebookAuth.instance.logOut(),
-    ]);
-  }
+    try {
+      await _auth.signOut();
+    } catch (_) {}
 
-  User? get currentUser => _auth.currentUser;
+    try {
+      await _googleSignIn.signOut();
+    } catch (_) {}
+
+    try {
+      await _facebookAuth.logOut();
+    } catch (_) {}
+  }
 }
