@@ -6,11 +6,13 @@ import 'package:decora/src/shared/theme/app_colors.dart';
 class ProfileImagePicker extends StatefulWidget {
   final ImageProvider imageProvider;
   final Function(File?) onPick;
+  final BuildContext parentContext;
 
   const ProfileImagePicker({
     super.key,
     required this.imageProvider,
     required this.onPick,
+    required this.parentContext,
   });
 
   @override
@@ -21,9 +23,10 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
   final ImagePicker _picker = ImagePicker();
 
   void _showOptions() {
+    print("Showing image source options");
     showModalBottomSheet(
-      context: context,
-      backgroundColor: AppColors.background(),
+      context: widget.parentContext,
+      backgroundColor: AppColors.background(context),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
@@ -31,18 +34,24 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
         mainAxisSize: MainAxisSize.min,
         children: [
           ListTile(
-            leading: Icon(Icons.photo_camera, color: AppColors.primary()),
+            leading: Icon(
+              Icons.photo_camera,
+              color: AppColors.primary(context),
+            ),
             title: Text(
               "Take a Photo",
-              style: TextStyle(color: AppColors.mainText()),
+              style: TextStyle(color: AppColors.mainText(context)),
             ),
             onTap: () => _pickImage(ImageSource.camera),
           ),
           ListTile(
-            leading: Icon(Icons.photo_library, color: AppColors.primary()),
+            leading: Icon(
+              Icons.photo_library,
+              color: AppColors.primary(context),
+            ),
             title: Text(
               "Choose from Gallery",
-              style: TextStyle(color: AppColors.mainText()),
+              style: TextStyle(color: AppColors.mainText(context)),
             ),
             onTap: () => _pickImage(ImageSource.gallery),
           ),
@@ -65,7 +74,7 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
       alignment: Alignment.bottomRight,
       children: [
         CircleAvatar(
-          backgroundColor: AppColors.primary(),
+          backgroundColor: AppColors.primary(context),
           radius: 73,
           child: CircleAvatar(
             radius: 70,
@@ -77,7 +86,7 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
           height: 44,
           margin: const EdgeInsets.only(bottom: 3, right: 6),
           decoration: BoxDecoration(
-            color: AppColors.primary(),
+            color: AppColors.primary(context),
             shape: BoxShape.circle,
           ),
           child: IconButton(

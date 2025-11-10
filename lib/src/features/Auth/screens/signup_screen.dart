@@ -73,7 +73,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Directionality(
       textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
       child: Scaffold(
-        backgroundColor: AppColors.background(),
+        backgroundColor: AppColors.background(context),
         body: SafeArea(
           child: SingleChildScrollView(
             padding: EdgeInsets.symmetric(
@@ -92,7 +92,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       width: 45,
                       height: 45,
                       decoration: BoxDecoration(
-                        color: AppColors.innerCardColor(),
+                        color: AppColors.innerCardColor(context),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: InkWell(
@@ -103,7 +103,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             isArabic
                                 ? FontAwesomeIcons.chevronRight
                                 : FontAwesomeIcons.chevronLeft,
-                            color: AppColors.mainText(),
+                            color: AppColors.mainText(context),
                             size: 20,
                           ),
                         ),
@@ -119,7 +119,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.secondaryText(),
+                      color: AppColors.secondaryText(context),
                     ),
                   ),
                   SizedBox(height: size.height * 0.01),
@@ -127,7 +127,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     tr.accessCollections,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: AppColors.secondaryText(),
+                      color: AppColors.secondaryText(context),
                       fontSize: 13,
                     ),
                   ),
@@ -135,7 +135,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                   Text(
                     tr.username,
-                    style: TextStyle(fontSize: 16, color: AppColors.mainText()),
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: AppColors.mainText(context),
+                    ),
                   ),
                   SizedBox(height: size.height * 0.01),
                   TextFormField(
@@ -143,13 +146,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                     textDirection: TextDirection.ltr,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    style: TextStyle(color: AppColors.mainText()),
-                    cursorColor: AppColors.primary(),
+                    style: TextStyle(color: AppColors.mainText(context)),
+                    cursorColor: AppColors.primary(context),
                     decoration: InputDecoration(
                       hintText: tr.username,
                       hintStyle: TextStyle(
                         fontSize: 14,
-                        color: AppColors.secondaryText(),
+                        color: AppColors.secondaryText(context),
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -157,7 +160,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                         borderSide: BorderSide(
-                          color: AppColors.primary(),
+                          color: AppColors.primary(context),
                           width: 1.5,
                         ),
                       ),
@@ -170,20 +173,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                   Text(
                     tr.email,
-                    style: TextStyle(fontSize: 16, color: AppColors.mainText()),
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: AppColors.mainText(context),
+                    ),
                   ),
                   SizedBox(height: size.height * 0.01),
                   TextFormField(
                     controller: _emailController,
                     textDirection: TextDirection.ltr,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    style: TextStyle(color: AppColors.mainText()),
-                    cursorColor: AppColors.primary(),
+                    style: TextStyle(color: AppColors.mainText(context)),
+                    cursorColor: AppColors.primary(context),
                     decoration: InputDecoration(
                       hintText: tr.email,
                       hintStyle: TextStyle(
                         fontSize: 14,
-                        color: AppColors.secondaryText(),
+                        color: AppColors.secondaryText(context),
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -191,7 +197,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                         borderSide: BorderSide(
-                          color: AppColors.primary(),
+                          color: AppColors.primary(context),
                           width: 1.5,
                         ),
                       ),
@@ -208,7 +214,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                   Text(
                     tr.password,
-                    style: TextStyle(fontSize: 16, color: AppColors.mainText()),
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: AppColors.mainText(context),
+                    ),
                   ),
                   SizedBox(height: size.height * 0.01),
                   TextFormField(
@@ -216,13 +225,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     obscureText: _obscurePassword,
 
                     textDirection: TextDirection.ltr,
-                    style: TextStyle(color: AppColors.mainText()),
-                    cursorColor: AppColors.primary(),
+                    style: TextStyle(color: AppColors.mainText(context)),
+                    cursorColor: AppColors.primary(context),
                     decoration: InputDecoration(
                       hintText: tr.password,
                       hintStyle: TextStyle(
                         fontSize: 14,
-                        color: AppColors.secondaryText(),
+                        color: AppColors.secondaryText(context),
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -230,7 +239,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                         borderSide: BorderSide(
-                          color: AppColors.primary(),
+                          color: AppColors.primary(context),
                           width: 1.5,
                         ),
                       ),
@@ -239,7 +248,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           _obscurePassword
                               ? Icons.visibility_off
                               : Icons.visibility,
-                          color: AppColors.secondaryText(),
+                          color: AppColors.secondaryText(context),
                         ),
                         onPressed: () => setState(
                           () => _obscurePassword = !_obscurePassword,
@@ -261,7 +270,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     child: ElevatedButton(
                       onPressed: _isLoading ? null : _signUp,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primary(),
+                        backgroundColor: AppColors.primary(context),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),

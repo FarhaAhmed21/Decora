@@ -54,7 +54,7 @@ class _SpecialCardState extends State<SpecialCard> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
-            color: AppColors.cardColor(),
+            color: AppColors.cardColor(context),
             child: Padding(
               padding: EdgeInsets.all(cardWidth * 0.04),
               child: Column(
@@ -65,7 +65,7 @@ class _SpecialCardState extends State<SpecialCard> {
                       // Product image
                       Container(
                         decoration: BoxDecoration(
-                          color: AppColors.productCardColor(),
+                          color: AppColors.productCardColor(context),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: ClipRRect(
@@ -92,7 +92,7 @@ class _SpecialCardState extends State<SpecialCard> {
                                 height: imageHeight,
                                 alignment: Alignment.center,
                                 decoration: BoxDecoration(
-                                  color: AppColors.productCardColor(),
+                                  color: AppColors.productCardColor(context),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Icon(
@@ -118,13 +118,13 @@ class _SpecialCardState extends State<SpecialCard> {
                             ),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8.0),
-                              color: AppColors.orange(),
+                              color: AppColors.orange(context),
                             ),
                             child: Text(
                               " ${product.discount}${AppLocalizations.of(context)!.discount}",
                               style: TextStyle(
                                 fontSize: fontScale * 0.8,
-                                color: AppColors.innerCardColor(),
+                                color: AppColors.innerCardColor(context),
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -152,7 +152,7 @@ class _SpecialCardState extends State<SpecialCard> {
                                         )!.product_added_to_favourite_successfully
                                       : "Removed from favourites",
                                 ),
-                                backgroundColor: AppColors.primary(),
+                                backgroundColor: AppColors.primary(context),
                                 duration: const Duration(seconds: 1),
                               ),
                             );
@@ -161,7 +161,7 @@ class _SpecialCardState extends State<SpecialCard> {
                             isFavourite
                                 ? Assets.heartIcon
                                 : Assets.heartOutline,
-                            color: AppColors.primary(),
+                            color: AppColors.primary(context),
                             width: cardWidth * 0.08,
                             height: cardWidth * 0.08,
                           ),
@@ -180,7 +180,7 @@ class _SpecialCardState extends State<SpecialCard> {
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: fontScale * 1.2,
-                      color: AppColors.mainText(),
+                      color: AppColors.mainText(context),
                     ),
                   ),
 
@@ -200,7 +200,7 @@ class _SpecialCardState extends State<SpecialCard> {
                         style: TextStyle(
                           fontSize: fontScale,
                           fontWeight: FontWeight.w500,
-                          color: AppColors.secondaryText(),
+                          color: AppColors.secondaryText(context),
                         ),
                       ),
                     ],
@@ -217,7 +217,7 @@ class _SpecialCardState extends State<SpecialCard> {
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: fontScale * 1.2,
-                          color: AppColors.mainText(),
+                          color: AppColors.mainText(context),
                         ),
                       ),
                       GestureDetector(
@@ -230,12 +230,12 @@ class _SpecialCardState extends State<SpecialCard> {
                               AppLocalizations.of(context)!.explore,
                               style: TextStyle(
                                 fontSize: fontScale,
-                                color: AppColors.primary(),
+                                color: AppColors.primary(context),
                               ),
                             ),
                             Icon(
                               Icons.arrow_forward,
-                              color: AppColors.primary(),
+                              color: AppColors.primary(context),
                               size: fontScale,
                             ),
                           ],

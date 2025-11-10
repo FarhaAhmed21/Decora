@@ -1,100 +1,136 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class AppTheme {
-  static bool isDarkMode = true;
+/// ✅ مزود الثيم
+class AppThemeProvider with ChangeNotifier {
+  bool _isDarkMode = true;
+
+  bool get isDarkMode => _isDarkMode;
+
+  void toggleTheme() {
+    _isDarkMode = !_isDarkMode;
+    notifyListeners();
+  }
+
+  ThemeData get currentTheme => _isDarkMode ? darkTheme : lightTheme;
+
+  // 🌞 الثيم الفاتح
+  ThemeData get lightTheme => ThemeData(
+    brightness: Brightness.light,
+    scaffoldBackgroundColor: AppColors.lightBackground,
+    cardColor: AppColors.lightCardColor,
+    textTheme: const TextTheme(
+      bodyLarge: TextStyle(color: AppColors.lightMainText),
+    ),
+  );
+
+  // 🌙 الثيم الداكن
+  ThemeData get darkTheme => ThemeData(
+    brightness: Brightness.dark,
+    scaffoldBackgroundColor: AppColors.darkBackground,
+    cardColor: AppColors.darkCardColor,
+    textTheme: const TextTheme(
+      bodyLarge: TextStyle(color: AppColors.darkMainText),
+    ),
+  );
 }
 
+/// 🎨 ألوان التطبيق
 class AppColors {
   AppColors._();
 
   // =========================
   // Light mode colors
   // =========================
-  static const Color lightCardColor = Color.fromRGBO(246, 246, 246, 1);
-  static const Color lightPrimary = Color.fromRGBO(68, 111, 77, 1);
-  static const Color lightMainText = Color.fromRGBO(26, 26, 26, 1);
-  static const Color lightSecondaryText = Color.fromRGBO(124, 123, 123, 1);
-  static const Color lightOrange = Color.fromRGBO(235, 145, 54, 1);
-  static const Color lightBackground = Color.fromRGBO(255, 255, 255, 1);
-  static const Color lightInnerCardColor = Color.fromRGBO(246, 246, 246, 1);
-  static const Color lightProductCardColor = Color.fromRGBO(238, 243, 239, 1);
-  static const Color lightTextColor = Color.fromARGB(255, 47, 55, 67);
-  static const Color lightOrderIconUnSelectedColor = Color.fromRGBO(
-    123,
-    135,
-    155,
-    1,
-  );
-  static const Color _lightShoppingIconColor = Color.fromRGBO(
+  static const Color lightCardColor = Color(0xFFF6F6F6);
+  static const Color lightPrimary = Color(0xFF446F4D);
+  static const Color lightMainText = Color(0xFF1A1A1A);
+  static const Color lightSecondaryText = Color(0xFF7C7B7B);
+  static const Color lightOrange = Color(0xFFEB9136);
+  static const Color lightBackground = Color(0xFFFFFFFF);
+  static const Color lightInnerCardColor = Color(0xFFF6F6F6);
+  static const Color lightProductCardColor = Color(0xFFE6F3EF);
+  static const Color lightTextColor = Color(0xFF2F3743);
+  static const Color lightOrderIconUnSelectedColor = Color(0xFF7B879B);
+  static const Color lightShoppingIconColor = Color.fromRGBO(
     195,
     255,
     208,
     0.37,
   );
-  static const Color _lightInnerProductCardBorder = Color.fromARGB(
+  static const Color lightInnerProductCardBorder = Color.fromARGB(
     76,
     68,
     111,
     77,
   );
-  static const Color _lightInnerProductCardTypeText = Color.fromARGB(
-    255,
-    68,
-    111,
-    77,
-  );
+  static const Color lightInnerProductCardTypeText = Color(0xFF446F4D);
 
   // =========================
   // Dark mode colors
   // =========================
-  static const Color _darkCardColor = Color(0xff313131);
-  static const Color _darkMainText = Color(0xFFE0E0E0);
-  static const Color _darkSecondaryText = Color(0xffDADADA);
-  static const Color _darkBackground = Color(0xff222222);
-  static const Color _darkInnerCardColor = Color(0xFF2C2C2C);
-  static const Color _darkProductCardColor = Color(0xff363836);
-  static const Color _darkTextColor = Color(0xFFEEEEEE);
-  static const Color _darkOrderIconUnSelectedColor = Color(0xFF888888);
-  static const Color _darkShoppingIconColor = Color(0xFF2E7D32);
-  static const Color _darkInnerProductCardBorder = Color(0xFF4C9C4C);
-  static const Color _darkInnerProductCardTypeText = Color(0xFF80C080);
+  static const Color darkCardColor = Color(0xFF313131);
+  static const Color darkMainText = Color(0xFFE0E0E0);
+  static const Color darkSecondaryText = Color(0xFFDADADA);
+  static const Color darkBackground = Color(0xFF222222);
+  static const Color darkInnerCardColor = Color(0xFF2C2C2C);
+  static const Color darkProductCardColor = Color(0xFF363836);
+  static const Color darkTextColor = Color(0xFFEEEEEE);
+  static const Color darkOrderIconUnSelectedColor = Color(0xFF888888);
+  static const Color darkShoppingIconColor = Color(0xFF2E7D32);
+  static const Color darkInnerProductCardBorder = Color(0xFF4C9C4C);
+  static const Color darkInnerProductCardTypeText = Color(0xFF80C080);
 
   // =========================
-  // Colors getters
+  // دوال ذكية تبع الوضع الحالي
   // =========================
-  static Color cardColor() =>
-      AppTheme.isDarkMode ? _darkCardColor : lightCardColor;
-  static Color primary() => AppTheme.isDarkMode ? lightPrimary : lightPrimary;
-  static Color mainText() =>
-      AppTheme.isDarkMode ? _darkMainText : lightMainText;
-  static Color secondaryText() =>
-      AppTheme.isDarkMode ? _darkSecondaryText : lightSecondaryText;
-  static Color orange() => AppTheme.isDarkMode ? lightOrange : lightOrange;
-  static Color background() =>
-      AppTheme.isDarkMode ? _darkBackground : lightBackground;
-  static Color innerCardColor() =>
-      AppTheme.isDarkMode ? _darkInnerCardColor : lightInnerCardColor;
-  static Color productCardColor() =>
-      AppTheme.isDarkMode ? _darkProductCardColor : lightProductCardColor;
 
-  static Color textColor() =>
-      AppTheme.isDarkMode ? _darkTextColor : lightTextColor;
+  static bool _isDark(BuildContext context) =>
+      Provider.of<AppThemeProvider>(context, listen: false).isDarkMode;
 
-  static Color orderIconUnSelectedColor() => AppTheme.isDarkMode
-      ? _darkOrderIconUnSelectedColor
+  static Color cardColor(BuildContext context) =>
+      _isDark(context) ? darkCardColor : lightCardColor;
+
+  static Color primary(BuildContext context) => lightPrimary;
+
+  static Color mainText(BuildContext context) =>
+      _isDark(context) ? darkMainText : lightMainText;
+
+  static Color secondaryText(BuildContext context) =>
+      _isDark(context) ? darkSecondaryText : lightSecondaryText;
+
+  static Color orange(BuildContext context) => lightOrange;
+
+  static Color background(BuildContext context) =>
+      _isDark(context) ? darkBackground : lightBackground;
+
+  static Color innerCardColor(BuildContext context) =>
+      _isDark(context) ? darkInnerCardColor : lightInnerCardColor;
+
+  static Color productCardColor(BuildContext context) =>
+      _isDark(context) ? darkProductCardColor : lightProductCardColor;
+
+  static Color textColor(BuildContext context) =>
+      _isDark(context) ? darkTextColor : lightTextColor;
+
+  static Color orderIconUnSelectedColor(BuildContext context) =>
+      _isDark(context)
+      ? darkOrderIconUnSelectedColor
       : lightOrderIconUnSelectedColor;
 
-  static Color shoppingIconColor({double opacity = 1.0}) {
-    Color color = AppTheme.isDarkMode
-        ? _darkShoppingIconColor
-        : _lightShoppingIconColor;
+  static Color shoppingIconColor(BuildContext context, {double opacity = 1.0}) {
+    final color = _isDark(context)
+        ? darkShoppingIconColor
+        : lightShoppingIconColor;
     return color.withOpacity(opacity);
   }
 
-  static Color innerProductCardBorder() => AppTheme.isDarkMode
-      ? _darkInnerProductCardBorder
-      : _lightInnerProductCardBorder;
-  static Color innerProductCardTypeText() => AppTheme.isDarkMode
-      ? _darkInnerProductCardTypeText
-      : _lightInnerProductCardTypeText;
+  static Color innerProductCardBorder(BuildContext context) => _isDark(context)
+      ? darkInnerProductCardBorder
+      : lightInnerProductCardBorder;
+
+  static Color innerProductCardTypeText(BuildContext context) =>
+      _isDark(context)
+      ? darkInnerProductCardTypeText
+      : lightInnerProductCardTypeText;
 }

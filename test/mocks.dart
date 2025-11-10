@@ -1,3 +1,4 @@
+
 import 'package:decora/src/features/Auth/services/firestore_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -20,4 +21,8 @@ import 'package:mockito/mockito.dart';
 ])
 class MockBuildContext extends Mock implements BuildContext {}
 
+import 'package:mockito/annotations.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+@GenerateMocks([FirebaseFirestore, CollectionReference, DocumentReference])
 void main() {}

@@ -22,31 +22,31 @@ Future<void> showEditColorDialog(
       return StatefulBuilder(
         builder: (context, setDialogState) {
           return AlertDialog(
-            backgroundColor: AppColors.background(),
+            backgroundColor: AppColors.background(context),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
             ),
             title: Text(
               "Edit Color",
-              style: TextStyle(color: AppColors.mainText()),
+              style: TextStyle(color: AppColors.mainText(context)),
             ),
             content: SingleChildScrollView(
               child: Column(
                 children: [
                   TextField(
-                    style: TextStyle(color: AppColors.mainText()),
+                    style: TextStyle(color: AppColors.mainText(context)),
                     controller: colorNameController,
                     decoration: InputDecoration(
                       labelText: 'Color Name',
-                      labelStyle: TextStyle(color: AppColors.mainText()),
+                      labelStyle: TextStyle(color: AppColors.mainText(context)),
                     ),
                   ),
                   TextField(
-                    style: TextStyle(color: AppColors.mainText()),
+                    style: TextStyle(color: AppColors.mainText(context)),
                     controller: hexColorController,
                     decoration: InputDecoration(
                       labelText: 'Hex Color',
-                      labelStyle: TextStyle(color: AppColors.mainText()),
+                      labelStyle: TextStyle(color: AppColors.mainText(context)),
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -86,7 +86,7 @@ Future<void> showEditColorDialog(
                       height: 150,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: AppColors.cardColor(),
+                        color: AppColors.cardColor(context),
                         borderRadius: BorderRadius.circular(12),
                         image: newImageFile != null
                             ? DecorationImage(
@@ -122,13 +122,13 @@ Future<void> showEditColorDialog(
               TextButton(
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(
-                    AppColors.cardColor(),
+                    AppColors.cardColor(context),
                   ),
                 ),
                 onPressed: () => Navigator.pop(context),
                 child: Text(
                   "Cancel",
-                  style: TextStyle(color: AppColors.mainText()),
+                  style: TextStyle(color: AppColors.mainText(context)),
                 ),
               ),
               ElevatedButton(
@@ -169,11 +169,11 @@ Future<void> showEditColorDialog(
                   Navigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary(),
+                  backgroundColor: AppColors.primary(context),
                 ),
                 child: Text(
                   "Save",
-                  style: TextStyle(color: AppColors.mainText()),
+                  style: TextStyle(color: AppColors.mainText(context)),
                 ),
               ),
             ],

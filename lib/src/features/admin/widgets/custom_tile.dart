@@ -27,7 +27,7 @@ class ProductTailTile extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-          color: AppColors.cardColor(),
+          color: AppColors.cardColor(context),
           borderRadius: BorderRadius.circular(14),
           boxShadow: [
             BoxShadow(
@@ -79,7 +79,7 @@ class ProductTailTile extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        color: AppColors.mainText(),
+                        color: AppColors.mainText(context),
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                       ),
@@ -93,7 +93,7 @@ class ProductTailTile extends StatelessWidget {
                           ? product.category
                           : "Unknown category",
                       style: TextStyle(
-                        color: AppColors.mainText().withOpacity(0.7),
+                        color: AppColors.mainText(context).withOpacity(0.7),
                         fontSize: 13,
                       ),
                     ),
@@ -104,7 +104,7 @@ class ProductTailTile extends StatelessWidget {
                     Text(
                       "\$${product.price.toStringAsFixed(2)}",
                       style: TextStyle(
-                        color: AppColors.primary(),
+                        color: AppColors.primary(context),
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
                       ),

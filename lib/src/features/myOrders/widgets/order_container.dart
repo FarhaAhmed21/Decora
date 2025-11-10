@@ -12,7 +12,7 @@ class OrderContainer extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: AppColors.cardColor(),
+          color: AppColors.cardColor(context),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Column(
@@ -22,7 +22,7 @@ class OrderContainer extends StatelessWidget {
                 Text(
                   'Order ID #12345',
                   style: TextStyle(
-                    color: AppColors.mainText(),
+                    color: AppColors.mainText(context),
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                   ),
@@ -31,7 +31,7 @@ class OrderContainer extends StatelessWidget {
                 Text(
                   '1120 EGP',
                   style: TextStyle(
-                    color: AppColors.mainText(),
+                    color: AppColors.mainText(context),
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
@@ -43,7 +43,7 @@ class OrderContainer extends StatelessWidget {
                 Text(
                   '14 Jun, 2025',
                   style: TextStyle(
-                    color: AppColors.secondaryText(),
+                    color: AppColors.secondaryText(context),
                     fontSize: 14,
                   ),
                 ),
@@ -57,7 +57,7 @@ class OrderContainer extends StatelessWidget {
                   width: 97,
                   padding: const EdgeInsets.symmetric(horizontal: 5),
                   decoration: BoxDecoration(
-                    color: AppColors.shoppingIconColor(),
+                    color: AppColors.shoppingIconColor(context),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Row(
@@ -66,13 +66,13 @@ class OrderContainer extends StatelessWidget {
                     children: [
                       Image.asset(
                         Assets.trackingIcon3,
-                        color: AppColors.primary(),
+                        color: AppColors.primary(context),
                         height: 14,
                       ),
                       Text(
                         "Shipping",
                         style: TextStyle(
-                          color: AppColors.primary(),
+                          color: AppColors.primary(context),
                           fontWeight: FontWeight.bold,
                           fontSize: 12,
                         ),
@@ -80,12 +80,11 @@ class OrderContainer extends StatelessWidget {
                     ],
                   ),
                 ),
-                //Image.asset(Assets.shippingIcon, height: 27),
                 const Spacer(),
                 Text(
                   "Details  ",
                   style: TextStyle(
-                    color: AppColors.primary(),
+                    color: AppColors.primary(context),
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
                   ),

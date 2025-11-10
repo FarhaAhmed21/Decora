@@ -30,8 +30,7 @@ class _VtoScreenState extends State<VtoScreen> {
   CameraController? _cameraController;
   bool _isLive = true; // Start with live camera on as a common VTO pattern
   String _selectedFurniture = _kChairAssetName;
-   final List<String> images= [];
-
+  final List<String> images = [];
 
   @override
   void initState() {
@@ -42,8 +41,6 @@ class _VtoScreenState extends State<VtoScreen> {
         images.add(color.imageUrl);
       }
     }
-
-
   }
 
   @override
@@ -139,7 +136,9 @@ class _VtoScreenState extends State<VtoScreen> {
                   gap: 5.0,
                 ),
               ),
-              Center(child: Image.network(_selectedFurniture, fit: BoxFit.fill)),
+              Center(
+                child: Image.network(_selectedFurniture, fit: BoxFit.fill),
+              ),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
@@ -177,9 +176,9 @@ class _VtoScreenState extends State<VtoScreen> {
           width: 60,
           child: ListView.builder(
             shrinkWrap: true,
-            itemCount:images.length,
+            itemCount: images.length,
             itemBuilder: (context, index) {
-              final item =images[index];
+              final item = images[index];
               final isSelected = item == _selectedFurniture;
               return Padding(
                 padding: const EdgeInsets.only(bottom: 15.0),
@@ -231,7 +230,7 @@ class _VtoScreenState extends State<VtoScreen> {
       right: 0,
       child: Container(
         height: AppSize.height(context) * 0.2,
-        color: AppColors.background(), // Dark background for contrast
+        color: AppColors.background(context), // Dark background for contrast
         padding: const EdgeInsets.only(bottom: 20),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -240,7 +239,10 @@ class _VtoScreenState extends State<VtoScreen> {
             // Video / Toggle Live
             GestureDetector(
               onTap: _toggleLiveCamera,
-              child: Image.asset(Assets.videoIcon, color: AppColors.mainText()),
+              child: Image.asset(
+                Assets.videoIcon,
+                color: AppColors.mainText(context),
+              ),
             ),
             // Main Shutter Button
             GestureDetector(
@@ -274,7 +276,7 @@ class _VtoScreenState extends State<VtoScreen> {
                 width: 100,
                 height: 100,
                 decoration: BoxDecoration(
-                  color: AppColors.shoppingIconColor(),
+                  color: AppColors.shoppingIconColor(context),
                   shape: BoxShape.circle,
                 ),
                 child: Center(
@@ -282,8 +284,9 @@ class _VtoScreenState extends State<VtoScreen> {
                     width: 70,
                     height: 70,
                     decoration: BoxDecoration(
-                      color:
-                          AppColors.primary(), // Green center like in the image
+                      color: AppColors.primary(
+                        context,
+                      ), // Green center like in the image
                       shape: BoxShape.circle,
                     ),
                   ),
@@ -293,7 +296,10 @@ class _VtoScreenState extends State<VtoScreen> {
             // Gallery / Pick Image
             GestureDetector(
               onTap: _pickImage,
-              child: Image.asset(Assets.imageIcon, color: AppColors.mainText()),
+              child: Image.asset(
+                Assets.imageIcon,
+                color: AppColors.mainText(context),
+              ),
             ),
           ],
         ),

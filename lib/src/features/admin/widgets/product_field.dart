@@ -25,12 +25,12 @@ class ProductField extends StatelessWidget {
         controller: controller,
         keyboardType: type,
         maxLines: lines,
-        style: TextStyle(color: AppColors.mainText()),
+        style: TextStyle(color: AppColors.mainText(context)),
         decoration: InputDecoration(
           labelText: label,
-          labelStyle: TextStyle(color: AppColors.mainText()),
+          labelStyle: TextStyle(color: AppColors.mainText(context)),
           filled: true,
-          fillColor: AppColors.cardColor(),
+          fillColor: AppColors.cardColor(context),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
         ),
         validator: validator

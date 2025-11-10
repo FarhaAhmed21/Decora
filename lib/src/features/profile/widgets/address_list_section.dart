@@ -63,14 +63,17 @@ class _AddressListSectionState extends State<AddressListSection> {
             Text(
               "Addresses",
               style: TextStyle(
-                color: AppColors.mainText(),
+                color: AppColors.mainText(context),
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
               ),
             ),
             IconButton(
               onPressed: _addAddress,
-              icon: Icon(Icons.add_location_alt, color: AppColors.primary()),
+              icon: Icon(
+                Icons.add_location_alt,
+                color: AppColors.primary(context),
+              ),
             ),
           ],
         ),
@@ -80,24 +83,24 @@ class _AddressListSectionState extends State<AddressListSection> {
         if (_addresses.isEmpty)
           Text(
             "No addresses added yet.",
-            style: TextStyle(color: AppColors.secondaryText()),
+            style: TextStyle(color: AppColors.secondaryText(context)),
           )
         else
           Column(
             children: _addresses.map((addr) {
               return Card(
-                color: AppColors.cardColor(),
+                color: AppColors.cardColor(context),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: ListTile(
                   title: Text(
                     "${addr.city}, ${addr.street}",
-                    style: TextStyle(color: AppColors.mainText()),
+                    style: TextStyle(color: AppColors.mainText(context)),
                   ),
                   subtitle: Text(
                     "Building: ${addr.building}",
-                    style: TextStyle(color: AppColors.secondaryText()),
+                    style: TextStyle(color: AppColors.secondaryText(context)),
                   ),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,

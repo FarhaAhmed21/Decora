@@ -1,3 +1,5 @@
+import 'package:decora/core/l10n/app_localizations.dart';
+import 'package:decora/core/l10n/app_localizations_ar.dart';
 import 'package:decora/src/features/Auth/models/user_model.dart';
 import 'package:decora/src/features/Auth/screens/login_screen.dart';
 import 'package:decora/src/features/Auth/screens/reset%20_otp_verification_screen.dart';
@@ -50,17 +52,22 @@ class _ProfileBodyState extends State<ProfileBody> {
   @override
   Widget build(BuildContext context) {
     final List<String> settingsItems = [
-      'Edit Profile',
-      'Change Password',
-      'Transaction History',
-      'Help & Support',
-      'Logout',
+      AppLocalizations.of(context)!.edit_profile,
+      AppLocalizations.of(context)!.change_password,
+      AppLocalizations.of(context)!.transaction_history,
+      AppLocalizations.of(context)!.help_support,
+      AppLocalizations.of(context)!.logout,
     ];
 
     final List<Widget> navigations = [
       EditProfileUI(user: widget.user),
       const MyOrdesScreen(),
-      const ChatScreen(),
+      ChatScreen(
+        userId: widget.user.id,
+        adminId: "aEc97NihV5aCa8Zaw0w2YlzvICv2",
+        currentUserId: widget.user.id,
+      ),
+
       const LoginScreen(),
     ];
 
@@ -70,7 +77,7 @@ class _ProfileBodyState extends State<ProfileBody> {
           children: [
             SizedBox(height: MediaQuery.of(context).padding.top + 5),
             CustomAppBar(
-              title: 'Profile',
+              title: AppLocalizations.of(context)!.profile,
               onBackPressed: () {
                 Navigator.push(
                   context,
@@ -90,7 +97,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                     CircleAvatar(
                       key: UniqueKey(),
                       radius: 73,
-                      backgroundColor: AppColors.primary(),
+                      backgroundColor: AppColors.primary(context),
                       child: CircleAvatar(
                         radius: 70,
                         backgroundImage:
@@ -106,7 +113,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 20,
-                        color: AppColors.textColor(),
+                        color: AppColors.textColor(context),
                       ),
                     ),
                     const SizedBox(height: 5),
@@ -115,7 +122,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                       style: TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 14,
-                        color: AppColors.textColor(),
+                        color: AppColors.textColor(context),
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -130,9 +137,14 @@ class _ProfileBodyState extends State<ProfileBody> {
                             onTap: () async {
                               setState(() => _isLoading = true);
 
-                              if (title == 'Logout') {
+                              if (title ==
+                                  AppLocalizations.of(context)!.logout) {
                                 _logout(context);
-                              } else if (title == 'Edit Profile') {
+                              } else if (title ==
+                                      AppLocalizations.of(
+                                        context,
+                                      )!.edit_profile ||
+                                  title == 'تعديل الملف الشخصي') {
                                 final updatedUser =
                                     await Navigator.push<UserModel?>(
                                       context,
@@ -152,7 +164,10 @@ class _ProfileBodyState extends State<ProfileBody> {
                                     );
                                   }
                                 }
-                              } else if (title == 'Change Password') {
+                              } else if (title ==
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.change_password) {
                                 final otp = generateOtp();
                                 await sendOtpEmail(widget.user.email!, otp);
                                 if (!mounted) return;
@@ -191,7 +206,6 @@ class _ProfileBodyState extends State<ProfileBody> {
           ],
         ),
 
-        // ✅ Loading Overlay
         if (_isLoading)
           AnimatedOpacity(
             opacity: _isLoading ? 1 : 0,

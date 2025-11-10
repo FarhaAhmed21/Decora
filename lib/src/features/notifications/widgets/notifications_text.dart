@@ -12,7 +12,7 @@ class NotificationsText extends StatelessWidget {
       style: TextStyle(
         fontSize: 19,
         fontWeight: FontWeight.bold,
-        color: AppColors.mainText(),
+        color: AppColors.mainText(context),
       ),
     );
   }

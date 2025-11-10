@@ -285,4 +285,31 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get enterEmailreset =>
       'Enter your registered email to reset your password';
+
+  @override
+  String get profile => 'Profile';
+
+  @override
+  String get edit_profile => 'Edit Profile';
+
+  @override
+  String get change_password => 'Change Password';
+
+  @override
+  String get transaction_history => 'Transaction History';
+
+  @override
+  String get help_support => 'Help & Support';
+
+  @override
+  String get logout => 'Logout';
+
+  @override
+  String get offers => 'Decora Specials';
+
+  @override
+  String get favourite => 'Favourites';
+
+  @override
+  String get home => 'Home';
 }

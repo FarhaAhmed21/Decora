@@ -107,6 +107,7 @@ packages:
     version: "4.1.0"
   build_runner:
     dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: build_runner
       sha256: a9461b8e586bf018dd4afd2e13b49b08c6a844a4b226c8d1d10f3a723cdd78c3
@@ -950,6 +951,8 @@ packages:
     version: "0.8.2"
   mockito:
     dependency: "direct main"
+  mockito:
+    dependency: "direct dev"
     description:
       name: mockito
       sha256: "4feb43bc4eb6c03e832f5fcd637d1abb44b98f9cfa245c58e27382f58859f8f6"
@@ -1085,7 +1088,16 @@ packages:
     source: hosted
     version: "5.0.5"
   provider:
+  pool:
     dependency: transitive
+    description:
+      name: pool
+      sha256: "978783255c543aa3586a1b3c21f6e9d720eb315376a915872c61ef8b5c20177d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.5.2"
+  provider:
+    dependency: "direct main"
     description:
       name: provider
       sha256: "4e82183fa20e5ca25703ead7e05de9e4cceed1fbd1eadc1ac3cb6f565a09f272"
@@ -1397,10 +1409,10 @@ packages:
     dependency: transitive
     description:
       name: webview_flutter_wkwebview
-      sha256: fea63576b3b7e02b2df8b78ba92b48ed66caec2bb041e9a0b1cbd586d5d80bfd
+      sha256: "5de608fdea144d4370c21d4c80f0528135529e0180aa129790064c345e457a43"
       url: "https://pub.dev"
     source: hosted
-    version: "3.23.1"
+    version: "3.23.2"
   win32:
     dependency: transitive
     description:

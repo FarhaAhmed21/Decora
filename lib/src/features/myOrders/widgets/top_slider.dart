@@ -14,13 +14,15 @@ class TopSlider extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.primary() : AppColors.cardColor(),
+          color: isSelected
+              ? AppColors.primary(context)
+              : AppColors.cardColor(context),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Text(
           text,
           style: TextStyle(
-            color: isSelected ? Colors.white : AppColors.mainText(),
+            color: isSelected ? Colors.white : AppColors.mainText(context),
             fontWeight: FontWeight.bold,
           ),
         ),

@@ -1,3 +1,4 @@
+import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/src/shared/components/filter_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:decora/src/features/home/main_screen.dart';
@@ -98,13 +99,13 @@ class _NewCollectionScreenState extends State<NewCollectionScreen> {
     final isLandscape = w > h;
 
     return Scaffold(
-      backgroundColor: AppColors.background(),
+      backgroundColor: AppColors.background(context),
       body: SafeArea(
         child: Column(
           children: [
             //SizedBox(height: MediaQuery.of(context).padding.top + 5),
             CustomAppBar(
-              title: 'New Collection',
+              title: AppLocalizations.of(context)!.new_collection,
               onBackPressed: () {
                 MainLayout.currentIndex = 1;
                 Navigator.pop(context);
