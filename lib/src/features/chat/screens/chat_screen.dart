@@ -6,8 +6,14 @@ import 'package:flutter/material.dart';
 class ChatScreen extends StatefulWidget {
   final String userId;
   final String adminId;
+  final String currentUserId;
 
-  const ChatScreen({super.key, required this.userId, required this.adminId});
+  const ChatScreen({
+    super.key,
+    required this.userId,
+    required this.adminId,
+    required this.currentUserId,
+  });
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -21,8 +27,12 @@ class _ChatScreenState extends State<ChatScreen> {
     final text = _controller.text.trim();
     if (text.isEmpty) return;
 
-    // إرسال رسالة من Admin
-    _chatService.sendMessageFromAdmin(widget.adminId, widget.userId, text);
+    if (widget.currentUserId == widget.adminId) {
+      _chatService.sendMessageFromAdmin(widget.adminId, widget.userId, text);
+    } else {
+      _chatService.sendMessage(widget.userId, widget.adminId, text);
+    }
+
     _controller.clear();
   }
 
@@ -42,11 +52,11 @@ class _ChatScreenState extends State<ChatScreen> {
 
                 final messages = snapshot.data!;
                 return ListView.builder(
-                  reverse: false, // من فوق لتحت
+                  reverse: false,
                   itemCount: messages.length,
                   itemBuilder: (context, index) {
                     final msg = messages[index];
-                    final isSender = msg.senderId == widget.userId;
+                    final isSender = msg.senderId == widget.currentUserId;
                     return MessageWidget(text: msg.text, isSender: isSender);
                   },
                 );

@@ -60,8 +60,11 @@ class AdminDashboard extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) =>
-                              ChatScreen(userId: userId, adminId: adminId),
+                          builder: (_) => ChatScreen(
+                            userId: userId,
+                            adminId: adminId,
+                            currentUserId: adminId,
+                          ),
                         ),
                       );
                     },

@@ -63,7 +63,9 @@ class _ProfileBodyState extends State<ProfileBody> {
       ChatScreen(
         userId: widget.user.id,
         adminId: "aEc97NihV5aCa8Zaw0w2YlzvICv2",
+        currentUserId: widget.user.id,
       ),
+
       const LoginScreen(),
     ];
 
@@ -194,7 +196,6 @@ class _ProfileBodyState extends State<ProfileBody> {
           ],
         ),
 
-        // ✅ Loading Overlay
         if (_isLoading)
           AnimatedOpacity(
             opacity: _isLoading ? 1 : 0,
