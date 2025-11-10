@@ -6,11 +6,13 @@ import 'package:decora/src/shared/theme/app_colors.dart';
 class ProfileImagePicker extends StatefulWidget {
   final ImageProvider imageProvider;
   final Function(File?) onPick;
+  final BuildContext parentContext;
 
   const ProfileImagePicker({
     super.key,
     required this.imageProvider,
     required this.onPick,
+    required this.parentContext,
   });
 
   @override
@@ -21,8 +23,9 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
   final ImagePicker _picker = ImagePicker();
 
   void _showOptions() {
+    print("Showing image source options");
     showModalBottomSheet(
-      context: context,
+      context: widget.parentContext,
       backgroundColor: AppColors.background(context),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),

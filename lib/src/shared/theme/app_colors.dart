@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+/// ✅ مزود الثيم
 class AppThemeProvider with ChangeNotifier {
-  bool _isDarkMode = true; // ممكن تبدأ بالوضع الداكن
+  bool _isDarkMode = true;
 
   bool get isDarkMode => _isDarkMode;
 
@@ -34,6 +35,7 @@ class AppThemeProvider with ChangeNotifier {
   );
 }
 
+/// 🎨 ألوان التطبيق
 class AppColors {
   AppColors._();
 
@@ -82,64 +84,53 @@ class AppColors {
   // =========================
   // دوال ذكية تبع الوضع الحالي
   // =========================
+
+  static bool _isDark(BuildContext context) =>
+      Provider.of<AppThemeProvider>(context, listen: false).isDarkMode;
+
   static Color cardColor(BuildContext context) =>
-      context.watch<AppThemeProvider>().isDarkMode
-      ? darkCardColor
-      : lightCardColor;
+      _isDark(context) ? darkCardColor : lightCardColor;
 
   static Color primary(BuildContext context) => lightPrimary;
 
   static Color mainText(BuildContext context) =>
-      context.watch<AppThemeProvider>().isDarkMode
-      ? darkMainText
-      : lightMainText;
+      _isDark(context) ? darkMainText : lightMainText;
 
   static Color secondaryText(BuildContext context) =>
-      context.watch<AppThemeProvider>().isDarkMode
-      ? darkSecondaryText
-      : lightSecondaryText;
+      _isDark(context) ? darkSecondaryText : lightSecondaryText;
 
   static Color orange(BuildContext context) => lightOrange;
 
   static Color background(BuildContext context) =>
-      context.watch<AppThemeProvider>().isDarkMode
-      ? darkBackground
-      : lightBackground;
+      _isDark(context) ? darkBackground : lightBackground;
 
   static Color innerCardColor(BuildContext context) =>
-      context.watch<AppThemeProvider>().isDarkMode
-      ? darkInnerCardColor
-      : lightInnerCardColor;
+      _isDark(context) ? darkInnerCardColor : lightInnerCardColor;
 
   static Color productCardColor(BuildContext context) =>
-      context.watch<AppThemeProvider>().isDarkMode
-      ? darkProductCardColor
-      : lightProductCardColor;
+      _isDark(context) ? darkProductCardColor : lightProductCardColor;
 
   static Color textColor(BuildContext context) =>
-      context.watch<AppThemeProvider>().isDarkMode
-      ? darkTextColor
-      : lightTextColor;
+      _isDark(context) ? darkTextColor : lightTextColor;
 
   static Color orderIconUnSelectedColor(BuildContext context) =>
-      context.watch<AppThemeProvider>().isDarkMode
+      _isDark(context)
       ? darkOrderIconUnSelectedColor
       : lightOrderIconUnSelectedColor;
 
   static Color shoppingIconColor(BuildContext context, {double opacity = 1.0}) {
-    final color = context.watch<AppThemeProvider>().isDarkMode
+    final color = _isDark(context)
         ? darkShoppingIconColor
         : lightShoppingIconColor;
     return color.withOpacity(opacity);
   }
 
-  static Color innerProductCardBorder(BuildContext context) =>
-      context.watch<AppThemeProvider>().isDarkMode
+  static Color innerProductCardBorder(BuildContext context) => _isDark(context)
       ? darkInnerProductCardBorder
       : lightInnerProductCardBorder;
 
   static Color innerProductCardTypeText(BuildContext context) =>
-      context.watch<AppThemeProvider>().isDarkMode
+      _isDark(context)
       ? darkInnerProductCardTypeText
       : lightInnerProductCardTypeText;
 }

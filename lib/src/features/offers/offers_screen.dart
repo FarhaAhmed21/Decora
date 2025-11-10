@@ -1,3 +1,4 @@
+import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/src/shared/components/filter_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
@@ -83,7 +84,7 @@ class _OffersScreenState extends State<OffersScreen> {
         child: Column(
           children: [
             CustomAppBar(
-              title: 'Decora Specials',
+              title: AppLocalizations.of(context)!.offers,
               onBackPressed: () => Navigator.pop(context),
             ),
             CustomSearchBar(

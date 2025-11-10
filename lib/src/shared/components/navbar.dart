@@ -1,3 +1,4 @@
+import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -33,14 +34,14 @@ class CustomBottomNavBar extends StatelessWidget {
                   _buildNavItem(
                     context,
                     'assets/icons/home-11.png',
-                    'Home',
+                    AppLocalizations.of(context)!.home,
                     0,
                     isDarkMode,
                   ),
                   _buildNavItem(
                     context,
                     'assets/icons/shopping-bag-03.png',
-                    'Cart',
+                    AppLocalizations.of(context)!.cart,
                     1,
                     isDarkMode,
                   ),
@@ -48,14 +49,14 @@ class CustomBottomNavBar extends StatelessWidget {
                   _buildNavItem(
                     context,
                     'assets/icons/favourite.png',
-                    'Favourites',
+                    AppLocalizations.of(context)!.favourite,
                     2,
                     isDarkMode,
                   ),
                   _buildNavItem(
                     context,
                     'assets/icons/User.png',
-                    'Profile',
+                    AppLocalizations.of(context)!.profile,
                     3,
                     isDarkMode,
                   ),

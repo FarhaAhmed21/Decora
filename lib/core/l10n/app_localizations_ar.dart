@@ -38,7 +38,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get our_Categories => 'فئاتنا';
 
   @override
-  String get cart => 'سلة تسوق';
+  String get cart => 'السلة';
 
   @override
   String get my_cart => 'سلة التسوق الخاصة بي';
@@ -285,4 +285,31 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get enterEmailreset =>
       'أدخل بريدك الإلكتروني لإعادة تعيين كلمة المرور';
+
+  @override
+  String get profile => 'الملف الشخصي';
+
+  @override
+  String get edit_profile => 'تعديل الملف الشخصي';
+
+  @override
+  String get change_password => 'تغيير كلمة المرور';
+
+  @override
+  String get transaction_history => 'سجل المعاملات';
+
+  @override
+  String get help_support => 'المساعدة والدعم';
+
+  @override
+  String get logout => 'تسجيل الخروج';
+
+  @override
+  String get offers => 'خصومات ديكورا';
+
+  @override
+  String get favourite => 'المفضلة';
+
+  @override
+  String get home => 'الرئيسية';
 }

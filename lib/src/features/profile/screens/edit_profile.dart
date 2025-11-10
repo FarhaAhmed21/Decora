@@ -62,6 +62,7 @@ class _EditProfileUIState extends State<EditProfileUI> {
                   ProfileImagePicker(
                     imageProvider: imageProvider,
                     onPick: (file) => setState(() => _imageFile = file),
+                    parentContext: context,
                   ),
 
                   const SizedBox(height: 20),
