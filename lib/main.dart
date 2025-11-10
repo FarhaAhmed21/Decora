@@ -57,31 +57,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-// class HomePage extends StatelessWidget {
-//   const HomePage({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final l10n = AppLocalizations.of(context)!;
-//     return Scaffold(
-//       appBar: AppBar(title: Text(l10n.helloWorld)),
-//       body: Center(
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             //SearchBarWithFilter(),
-//             Text(l10n.welcome),
-//             const SizedBox(height: 20),
-//             ElevatedButton(
-//               onPressed: () {
-//                 context.read<LocaleCubit>().toggleLocale();
-//               },
-//               child: Text(l10n.changeLanguage),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
