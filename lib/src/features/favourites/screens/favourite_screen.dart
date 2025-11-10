@@ -114,7 +114,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                         itemCount: filteredProducts.length,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: isLandscape ? 4 : 2,
-                          childAspectRatio: isLandscape ? 1.3 : 0.75,
+                          childAspectRatio: isLandscape ? 1.3 : 0.7,
                           mainAxisSpacing: 0.010 * w,
                           crossAxisSpacing: 0.010 * w,
                         ),

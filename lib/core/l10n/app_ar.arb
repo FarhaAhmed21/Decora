@@ -7,6 +7,7 @@
     "searchFurniture": "ابحث عن الأثاث",
     "cairoEgypt": "مصر , القاهرة",
     "product_added_to_favourite_successfully": "تمت إضافة المنتج إلى المفضلة بنجاح",
+    "product_removed_from_favourite": "تم حذف المنتج من المفضلة ",
     "product_added_to_Cart_successfully": "تمت إضافة المنتج إلى السلة بنجاح",
     "our_Categories": "فئاتنا",
     "cart":"سلة تسوق",
@@ -103,7 +104,11 @@
 "offers":"خصومات ديكورا",
 "favourite":"المفضلة",
 "cart":"السلة",
-"home":"الرئيسية"
+"home":"الرئيسية",
+"reset":"اعادة تعيين",
+"filter_by_price":"تصفية حسب السعر",
+"apply":"تطبيق",
+"price_range":"نطاق السعر"
 
 
 }

@@ -140,6 +140,12 @@ abstract class AppLocalizations {
   /// **'Product added to Favourite successfully'**
   String get product_added_to_favourite_successfully;
 
+  /// No description provided for @product_removed_from_favourite.
+  ///
+  /// In en, this message translates to:
+  /// **'Product removed from Favourite'**
+  String get product_removed_from_favourite;
+
   /// No description provided for @product_added_to_Cart_successfully.
   ///
   /// In en, this message translates to:
@@ -685,6 +691,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Home'**
   String get home;
+
+  /// No description provided for @reset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get reset;
+
+  /// No description provided for @filter_by_price.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter by Price'**
+  String get filter_by_price;
+
+  /// No description provided for @apply.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply'**
+  String get apply;
+
+  /// No description provided for @price_range.
+  ///
+  /// In en, this message translates to:
+  /// **'Price Range'**
+  String get price_range;
 }
 
 class _AppLocalizationsDelegate

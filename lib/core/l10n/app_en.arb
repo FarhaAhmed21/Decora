@@ -7,6 +7,7 @@
     "searchFurniture": "Search Furniture",
     "cairoEgypt": "Cairo, Egypt",
     "product_added_to_favourite_successfully": "Product added to Favourite successfully",
+    "product_removed_from_favourite": "Product removed from Favourite",
     "product_added_to_Cart_successfully": "Product added to Cart successfully",
     "our_Categories": "Our Categories",
     "cart":"Cart",
@@ -101,7 +102,10 @@
 "offers":"Decora Specials",
 "favourite":"Favourites",
 "cart":"Cart",
-"home":"Home"
-
+"home":"Home",
+"reset":"Reset",
+"filter_by_price":"Filter by Price",
+"apply":"Apply",
+"price_range":"Price Range"
 
 }

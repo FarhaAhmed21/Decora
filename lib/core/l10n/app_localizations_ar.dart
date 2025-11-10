@@ -31,6 +31,9 @@ class AppLocalizationsAr extends AppLocalizations {
       'تمت إضافة المنتج إلى المفضلة بنجاح';
 
   @override
+  String get product_removed_from_favourite => 'تم حذف المنتج من المفضلة ';
+
+  @override
   String get product_added_to_Cart_successfully =>
       'تمت إضافة المنتج إلى السلة بنجاح';
 
@@ -312,4 +315,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get home => 'الرئيسية';
+
+  @override
+  String get reset => 'اعادة تعيين';
+
+  @override
+  String get filter_by_price => 'تصفية حسب السعر';
+
+  @override
+  String get apply => 'تطبيق';
+
+  @override
+  String get price_range => 'نطاق السعر';
 }
