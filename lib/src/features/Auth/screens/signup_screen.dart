@@ -1,6 +1,5 @@
 import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/src/features/Auth/screens/otp_verification_screen.dart';
-import 'package:decora/src/features/Auth/services/auth_service.dart';
 import 'package:decora/src/features/Auth/services/sendOTPEmail.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:email_validator/email_validator.dart';
@@ -23,8 +22,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  final _authService = AuthService();
-
   @override
   void dispose() {
     _nameController.dispose();
@@ -44,28 +41,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
     setState(() => _isLoading = true);
 
     try {
-      final user = await _authService.signUpWithEmail(
-        _emailController.text.trim(),
-        _passwordController.text.trim(),
-        _nameController.text.trim(),
-      );
+      final otp = generateOtp();
+      await sendOtpEmail(_emailController.text.trim(), otp);
 
-      if (user != null) {
-        final otp = generateOtp();
-        await sendOtpEmail(user.email!, otp);
-
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => OtpVerificationScreen(
-              otp: otp,
-              email: user.email!,
-              uid: user.uid,
-              name: _nameController.text.trim(),
-            ),
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => OtpVerificationScreen(
+            otp: otp,
+            email: _emailController.text.trim(),
+            password: _passwordController.text.trim(),
+            name: _nameController.text.trim(),
           ),
-        );
-      }
+        ),
+      );
     } catch (e) {
       ScaffoldMessenger.of(
         context,
@@ -154,6 +143,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   SizedBox(height: size.height * 0.01),
                   TextFormField(
                     controller: _nameController,
+
                     textDirection: TextDirection.ltr,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     style: TextStyle(color: AppColors.mainText(context)),
@@ -233,6 +223,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   TextFormField(
                     controller: _passwordController,
                     obscureText: _obscurePassword,
+
                     textDirection: TextDirection.ltr,
                     style: TextStyle(color: AppColors.mainText(context)),
                     cursorColor: AppColors.primary(context),

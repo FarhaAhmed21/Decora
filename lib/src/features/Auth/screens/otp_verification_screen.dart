@@ -1,6 +1,7 @@
 import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/src/features/Auth/models/user_model.dart';
 import 'package:decora/src/features/Auth/screens/verification_success_screen.dart';
+import 'package:decora/src/features/Auth/services/auth_service.dart';
 import 'package:decora/src/features/Auth/services/firestore_service.dart';
 import 'package:decora/src/features/Auth/services/sendOTPEmail.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
@@ -10,14 +11,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class OtpVerificationScreen extends StatefulWidget {
   final String otp;
   final String email;
-  final String uid;
+  final String password;
   final String name;
 
   const OtpVerificationScreen({
     super.key,
     required this.otp,
     required this.email,
-    required this.uid,
+    required this.password,
     required this.name,
   });
 
@@ -34,10 +35,12 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
   bool _isResending = false;
   late String _currentOtp;
+  final _authService = AuthService();
 
   @override
   void initState() {
     super.initState();
+
     _currentOtp = widget.otp;
   }
 
@@ -66,15 +69,22 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     final tr = AppLocalizations.of(context)!;
 
     if (_enteredOtp == _currentOtp) {
-      final userModel = UserModel(
-        id: widget.uid,
-        name: widget.name,
-        email: widget.email,
-        photoUrl:
-            "https://cvhrma.org/wp-content/uploads/2015/07/default-profile-photo.jpg",
+      final user = await _authService.signUpWithEmail(
+        widget.email,
+        widget.password,
+        widget.name,
       );
-      await FirestoreService().saveUserData(userModel);
+      if (user != null) {
+        final userModel = UserModel(
+          id: user.uid,
+          name: widget.name,
+          email: widget.email,
+          photoUrl:
+              "https://cvhrma.org/wp-content/uploads/2015/07/default-profile-photo.jpg",
+        );
 
+        await FirestoreService().saveUserData(userModel);
+      }
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const VerificationSuccessScreen()),
@@ -86,17 +96,15 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     }
   }
 
+  String _generateOtp() {
+    final random = DateTime.now().millisecondsSinceEpoch % 10000;
+    return random.toString().padLeft(4, '0');
+  }
+
   Future<void> _resendOtp() async {
     setState(() => _isResending = true);
 
-    final newOtp =
-        (1000 +
-                (9999 - 1000) *
-                    (DateTime.now().millisecondsSinceEpoch % 1000) /
-                    1000)
-            .floor()
-            .toString()
-            .padLeft(4, '0');
+    final newOtp = _generateOtp();
 
     await sendOtpEmail(widget.email, newOtp);
 
