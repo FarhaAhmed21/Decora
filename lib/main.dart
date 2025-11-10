@@ -1,11 +1,9 @@
 import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/core/l10n/local_cubit.dart';
 import 'package:decora/firebase_options.dart';
-import 'package:decora/src/features/cart/pages/main_cart_page.dart';
 import 'package:decora/src/features/splash/cubit/splash_cubit.dart';
 import 'package:decora/src/features/splash/screens/splash_screen.dart';
 
-import 'package:decora/src/payment/repo/paymob-service.dart';
 
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -48,7 +46,7 @@ class MyApp extends StatelessWidget {
           ],
           supportedLocales: const [Locale('en'), Locale('ar')],
 
-          home: const MainCartPage(),
+          home: const SplashScreen(),
 
           theme: ThemeData(
             fontFamily: 'Montserratt',
@@ -87,3 +85,4 @@ class MyApp extends StatelessWidget {
 //     );
 //   }
 // }
+

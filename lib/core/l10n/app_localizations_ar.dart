@@ -199,7 +199,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get decora_specials => 'خصومات ديكورا';
 
   @override
-  String get categories => 'Categories';
+  String get categories => 'الفئات';
 
   @override
   String get new_collection => 'مجموعة جديدة';
@@ -288,4 +288,14 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get enter_promo_code => 'أدخل رمز العرض الترويجي';
+
+  @override
+  String get an_error_occurred_while_processing_the_payment =>
+      'حدث خطأ أثناء تنفيذ عملية الدفع';
+
+  @override
+  String get your_cart_is_empty => 'عربتك فارغة';
+
+  @override
+  String get no_products => 'لا يوجد منتجات';
 }

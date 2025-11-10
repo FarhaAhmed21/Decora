@@ -13,88 +13,90 @@ class CustomBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomAppBar(
-      color: AppColors.background(),
-      elevation: 10,
-      shape: const CircularNotchedRectangle(),
-      notchMargin: 8.0,
-      child: CustomPaint(
-        painter: _TopBorderPainter(),
-        child: SizedBox(
-          height: 60,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              _buildNavItem(
-                Image.asset(
-                  'assets/icons/home-11.png',
-                  height: 26,
-                  width: 26,
-                  color: selectedIndex == 0
-                      ? (AppTheme.isDarkMode
-                            ? Colors.white
-                            : const Color.fromRGBO(255, 255, 255, 0.5))
-                      : (AppTheme.isDarkMode
-                            ? const Color.fromRGBO(255, 255, 255, 0.5)
-                            : Colors.white),
+    return selectedIndex != 1
+        ? BottomAppBar(
+            color: AppColors.background(),
+            elevation: 10,
+            shape: const CircularNotchedRectangle(),
+            notchMargin: 8.0,
+            child: CustomPaint(
+              painter: _TopBorderPainter(),
+              child: SizedBox(
+                height: 60,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    _buildNavItem(
+                      Image.asset(
+                        'assets/icons/home-11.png',
+                        height: 26,
+                        width: 26,
+                        color: selectedIndex == 0
+                            ? (AppTheme.isDarkMode
+                                  ? Colors.white
+                                  : const Color.fromRGBO(255, 255, 255, 0.5))
+                            : (AppTheme.isDarkMode
+                                  ? const Color.fromRGBO(255, 255, 255, 0.5)
+                                  : Colors.white),
+                      ),
+                      'Home',
+                      0,
+                    ),
+                    _buildNavItem(
+                      Image.asset(
+                        'assets/icons/shopping-bag-03.png',
+                        height: 26,
+                        width: 26,
+                        color: selectedIndex == 1
+                            ? (AppTheme.isDarkMode
+                                  ? Colors.white
+                                  : const Color.fromRGBO(255, 255, 255, 0.5))
+                            : (AppTheme.isDarkMode
+                                  ? const Color.fromRGBO(255, 255, 255, 0.5)
+                                  : Colors.white),
+                      ),
+                      'Cart',
+                      1,
+                    ),
+                    const SizedBox(width: 48),
+                    _buildNavItem(
+                      Image.asset(
+                        'assets/icons/favourite.png',
+                        height: 26,
+                        width: 26,
+                        color: selectedIndex == 2
+                            ? (AppTheme.isDarkMode
+                                  ? Colors.white
+                                  : const Color.fromRGBO(255, 255, 255, 0.5))
+                            : (AppTheme.isDarkMode
+                                  ? const Color.fromRGBO(255, 255, 255, 0.5)
+                                  : Colors.white),
+                      ),
+                      'Favourites',
+                      2,
+                    ),
+                    _buildNavItem(
+                      Image.asset(
+                        'assets/icons/User.png',
+                        height: 26,
+                        width: 26,
+                        color: selectedIndex == 3
+                            ? (AppTheme.isDarkMode
+                                  ? Colors.white
+                                  : const Color.fromRGBO(255, 255, 255, 0.5))
+                            : (AppTheme.isDarkMode
+                                  ? const Color.fromRGBO(255, 255, 255, 0.5)
+                                  : Colors.white),
+                      ),
+                      'Profile',
+                      3,
+                    ),
+                  ],
                 ),
-                'Home',
-                0,
               ),
-              _buildNavItem(
-                Image.asset(
-                  'assets/icons/shopping-bag-03.png',
-                  height: 26,
-                  width: 26,
-                  color: selectedIndex == 1
-                      ? (AppTheme.isDarkMode
-                            ? Colors.white
-                            : const Color.fromRGBO(255, 255, 255, 0.5))
-                      : (AppTheme.isDarkMode
-                            ? const Color.fromRGBO(255, 255, 255, 0.5)
-                            : Colors.white),
-                ),
-                'Cart',
-                1,
-              ),
-              const SizedBox(width: 48),
-              _buildNavItem(
-                Image.asset(
-                  'assets/icons/favourite.png',
-                  height: 26,
-                  width: 26,
-                  color: selectedIndex == 2
-                      ? (AppTheme.isDarkMode
-                            ? Colors.white
-                            : const Color.fromRGBO(255, 255, 255, 0.5))
-                      : (AppTheme.isDarkMode
-                            ? const Color.fromRGBO(255, 255, 255, 0.5)
-                            : Colors.white),
-                ),
-                'Favourites',
-                2,
-              ),
-              _buildNavItem(
-                Image.asset(
-                  'assets/icons/User.png',
-                  height: 26,
-                  width: 26,
-                  color: selectedIndex == 3
-                      ? (AppTheme.isDarkMode
-                            ? Colors.white
-                            : const Color.fromRGBO(255, 255, 255, 0.5))
-                      : (AppTheme.isDarkMode
-                            ? const Color.fromRGBO(255, 255, 255, 0.5)
-                            : Colors.white),
-                ),
-                'Profile',
-                3,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          )
+        : const SizedBox.shrink();
   }
 
   Widget _buildNavItem(Widget iconWidget, String label, int index) {

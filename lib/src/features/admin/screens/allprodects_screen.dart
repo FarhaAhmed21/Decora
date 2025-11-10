@@ -133,11 +133,9 @@ class AllProductsScreen extends StatelessWidget {
               onBackPressed: () {
                 Navigator.pushReplacement(
                   context,
-<<<<<<< HEAD
+
                   MaterialPageRoute(builder: (context) => const AdminPanel()),
-=======
-                  MaterialPageRoute(builder: (context) => AdminPanel()),
->>>>>>> 6501531305f0496f2e820dc8f30002dfcbfcf95f
+
                 );
               },
             ),

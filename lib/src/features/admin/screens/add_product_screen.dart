@@ -25,11 +25,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   bool _isNewCollection = false;
   bool _isLoading = false;
-<<<<<<< HEAD
   final List<ProductColor> _colors = [];
-=======
-  List<ProductColor> _colors = [];
->>>>>>> 6501531305f0496f2e820dc8f30002dfcbfcf95f
 
   Future<void> _addProduct() async {
     if (!_formKey.currentState!.validate()) return;

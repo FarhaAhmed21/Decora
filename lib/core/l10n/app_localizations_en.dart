@@ -288,4 +288,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get enter_promo_code => 'Enter promo code';
+
+  @override
+  String get an_error_occurred_while_processing_the_payment =>
+      'An error occurred while processing the payment';
+
+  @override
+  String get your_cart_is_empty => 'Your cart is empty';
+
+  @override
+  String get no_products => 'No Products';
 }

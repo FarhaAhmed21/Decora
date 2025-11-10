@@ -1,5 +1,10 @@
+import 'package:decora/src/features/cart/bloc/cart_bloc.dart';
+import 'package:decora/src/features/cart/bloc/cart_event.dart';
+import 'package:decora/src/features/cart/bloc/cart_state.dart';
+import 'package:decora/src/features/cart/service/service.dart';
 import 'package:decora/src/shared/components/appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/l10n/app_localizations.dart';
 import '../../../../core/utils/app_size.dart';
@@ -506,7 +511,23 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           ),
 
           // 8. Fixed Buy Now Button (Bottom Bar)
-          BuyNowButton(h: h, isLandscape: isLandscape, w: w, onpressed: () {}),
+          BlocProvider(
+            create: (context) => CartBloc(CartRepository()),
+            child: BlocBuilder<CartBloc, CartState>(
+              builder: (context, state) {
+                return BuyNowButton(
+                  h: h,
+                  isLandscape: isLandscape,
+                  w: w,
+                  onpressed: () {
+                    context.read<CartBloc>().add(
+                      AddProductToCartEvent(productId: widget.product.id),
+                    );
+                  },
+                );
+              },
+            ),
+          ),
         ],
       ),
     );

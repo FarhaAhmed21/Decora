@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 
-=======
->>>>>>> 6501531305f0496f2e820dc8f30002dfcbfcf95f
 import 'package:decora/core/utils/app_size.dart';
 import 'package:decora/src/features/favourites/services/fav_service.dart';
 import 'package:decora/src/features/product_details/screens/product_details_screen.dart';

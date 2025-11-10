@@ -62,7 +62,7 @@
     "checkYourEmail": "تحقق من بريدك الإلكتروني",
     "see_all": "انظر المزيد ",
     "decora_specials" :"خصومات ديكورا",
-    "Categories":   "الفئات",
+    "categories":   "الفئات",
     "new_collection": "مجموعة جديدة",
     "elevate_your_living_room_with_timeless_sofas": "ارتقي بغرفة معيشتك مع أرائك خالدة",
     "explore": "استكشف",
@@ -90,6 +90,9 @@
   "otpSent": "تم إرسال الرمز إلى بريدك الإلكتروني",
   "passwordTooShort": "كلمة المرور يجب أن تكون 6 أحرف على الأقل",
       "enterEmailreset": "أدخل بريدك الإلكتروني لإعادة تعيين كلمة المرور",
-      "enter_promo_code":"أدخل رمز العرض الترويجي"
+      "enter_promo_code":"أدخل رمز العرض الترويجي",
+      "an_error_occurred_while_processing_the_payment":"حدث خطأ أثناء تنفيذ عملية الدفع",
+      "your_cart_is_empty":"عربتك فارغة",
+      "no_products":"لا يوجد منتجات"
 
 }
