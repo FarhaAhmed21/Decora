@@ -9,7 +9,7 @@ class InvitationDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: AppColors.background(),
+      backgroundColor: AppColors.background(context),
       insetPadding: const EdgeInsets.symmetric(horizontal: 24),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       child: Padding(
@@ -27,7 +27,7 @@ class InvitationDialog extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
-                    color: AppColors.textColor(),
+                    color: AppColors.textColor(context),
                   ),
                 ),
                 IconButton(
@@ -71,7 +71,7 @@ class InvitationDialog extends StatelessWidget {
                 AppLocalizations.of(context)!.enter_user_name,
                 style:  TextStyle(
                   fontSize: 16,
-                  color: AppColors.textColor(),
+                  color: AppColors.textColor(context),
                   fontWeight: FontWeight.w500,
                 ),
               ),

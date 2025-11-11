@@ -71,7 +71,7 @@ class _SharedCartState extends State<SharedCart>
             return Center(
               child: Text(
                 AppLocalizations.of(context)!.no_products,
-                style: TextStyle(color: AppColors.textColor()),
+                style: TextStyle(color: AppColors.textColor(context)),
               ),
             );
           }
@@ -104,7 +104,7 @@ class _SharedCartState extends State<SharedCart>
                               style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 16,
-                                color: AppColors.textColor(),
+                                color: AppColors.textColor(context),
                               ),
                             ),
                             const SizedBox(width: 8),
@@ -136,7 +136,7 @@ class _SharedCartState extends State<SharedCart>
                             style: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 14,
-                              color: AppColors.textColor(),
+                              color: AppColors.textColor(context),
                             ),
                           ),
                         ),
