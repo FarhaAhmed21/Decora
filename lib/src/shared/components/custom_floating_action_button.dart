@@ -6,7 +6,7 @@ import '../../features/product_details/models/product_model.dart';
 
 class CustomFloatingActionButton extends StatelessWidget {
   List<Product> products;
-   CustomFloatingActionButton({super.key, required this.products});
+  CustomFloatingActionButton({super.key, required this.products});
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +14,12 @@ class CustomFloatingActionButton extends StatelessWidget {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => VtoScreen( products:products)),
+          MaterialPageRoute(
+            builder: (context) => VtoScreen(products: products),
+          ),
         );
       },
-      backgroundColor: AppColors.primary(),
+      backgroundColor: AppColors.primary(context),
       shape: const CircleBorder(),
       child: Image.asset(
         'assets/icons/VTO.png',

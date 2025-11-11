@@ -140,6 +140,12 @@ abstract class AppLocalizations {
   /// **'Product added to Favourite successfully'**
   String get product_added_to_favourite_successfully;
 
+  /// No description provided for @product_removed_from_favourite.
+  ///
+  /// In en, this message translates to:
+  /// **'Product removed from Favourite'**
+  String get product_removed_from_favourite;
+
   /// No description provided for @product_added_to_Cart_successfully.
   ///
   /// In en, this message translates to:
@@ -655,6 +661,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No Products'**
   String get no_products;
+
+  /// No description provided for @profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profile;
+
+  /// No description provided for @edit_profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Profile'**
+  String get edit_profile;
+
+  /// No description provided for @change_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Password'**
+  String get change_password;
+
+  /// No description provided for @transaction_history.
+  ///
+  /// In en, this message translates to:
+  /// **'Transaction History'**
+  String get transaction_history;
+
+  /// No description provided for @help_support.
+  ///
+  /// In en, this message translates to:
+  /// **'Help & Support'**
+  String get help_support;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get logout;
+
+  /// No description provided for @offers.
+  ///
+  /// In en, this message translates to:
+  /// **'Decora Specials'**
+  String get offers;
+
+  /// No description provided for @favourite.
+  ///
+  /// In en, this message translates to:
+  /// **'Favourites'**
+  String get favourite;
+
+  /// No description provided for @home.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get home;
+
+  /// No description provided for @reset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get reset;
+
+  /// No description provided for @filter_by_price.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter by Price'**
+  String get filter_by_price;
+
+  /// No description provided for @apply.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply'**
+  String get apply;
+
+  /// No description provided for @price_range.
+  ///
+  /// In en, this message translates to:
+  /// **'Price Range'**
+  String get price_range;
 }
 
 class _AppLocalizationsDelegate

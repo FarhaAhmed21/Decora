@@ -13,7 +13,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background(),
+      backgroundColor: AppColors.background(context),
       body: FutureBuilder<UserModel>(
         future: FirestoreService().getUserData(user!.uid),
         builder: (context, snapshot) {

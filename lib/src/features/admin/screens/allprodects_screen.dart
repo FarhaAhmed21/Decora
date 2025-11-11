@@ -25,7 +25,7 @@ class AllProductsScreen extends StatelessWidget {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text('Product deleted successfully'),
-          backgroundColor: AppColors.primary(),
+          backgroundColor: AppColors.primary(context),
         ),
       );
     } catch (e) {
@@ -91,7 +91,7 @@ class AllProductsScreen extends StatelessWidget {
             child: Center(
               child: Text(
                 'Error loading products',
-                style: TextStyle(color: AppColors.mainText()),
+                style: TextStyle(color: AppColors.mainText(context)),
               ),
             ),
           );
@@ -100,7 +100,7 @@ class AllProductsScreen extends StatelessWidget {
             child: Center(
               child: Text(
                 'No products found',
-                style: TextStyle(color: AppColors.mainText()),
+                style: TextStyle(color: AppColors.mainText(context)),
               ),
             ),
           );
@@ -124,7 +124,7 @@ class AllProductsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background(),
+      backgroundColor: AppColors.background(context),
       body: SafeArea(
         child: Column(
           children: [

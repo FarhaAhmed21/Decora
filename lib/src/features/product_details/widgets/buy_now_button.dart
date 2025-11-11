@@ -27,7 +27,7 @@ class BuyNowButton extends StatelessWidget {
         ), // Adjusted padding to match screenshot's button width
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.primary(),
+            backgroundColor: AppColors.primary(context),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12.0),
             ),
@@ -40,7 +40,7 @@ class BuyNowButton extends StatelessWidget {
             "Buy Now",
             style: TextStyle(
               fontSize: isLandscape ? w * 0.025 : 16, // Responsive font size
-              color: AppColors.cardColor(),
+              color: AppColors.cardColor(context),
             ),
           ),
         ),

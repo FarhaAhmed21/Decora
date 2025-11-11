@@ -31,6 +31,9 @@ class AppLocalizationsAr extends AppLocalizations {
       'تمت إضافة المنتج إلى المفضلة بنجاح';
 
   @override
+  String get product_removed_from_favourite => 'تم حذف المنتج من المفضلة ';
+
+  @override
   String get product_added_to_Cart_successfully =>
       'تمت إضافة المنتج إلى السلة بنجاح';
 
@@ -298,4 +301,43 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get no_products => 'لا يوجد منتجات';
+
+  @override
+  String get profile => 'الملف الشخصي';
+
+  @override
+  String get edit_profile => 'تعديل الملف الشخصي';
+
+  @override
+  String get change_password => 'تغيير كلمة المرور';
+
+  @override
+  String get transaction_history => 'سجل المعاملات';
+
+  @override
+  String get help_support => 'المساعدة والدعم';
+
+  @override
+  String get logout => 'تسجيل الخروج';
+
+  @override
+  String get offers => 'خصومات ديكورا';
+
+  @override
+  String get favourite => 'المفضلة';
+
+  @override
+  String get home => 'الرئيسية';
+
+  @override
+  String get reset => 'اعادة تعيين';
+
+  @override
+  String get filter_by_price => 'تصفية حسب السعر';
+
+  @override
+  String get apply => 'تطبيق';
+
+  @override
+  String get price_range => 'نطاق السعر';
 }

@@ -1,3 +1,4 @@
+import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
 
@@ -23,7 +24,7 @@ void showFilterBottomSheet({
           return Container(
             padding: const EdgeInsets.all(22),
             decoration: BoxDecoration(
-              color: AppColors.cardColor(),
+              color: AppColors.cardColor(context),
               borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(25),
               ),
@@ -45,11 +46,11 @@ void showFilterBottomSheet({
                 ),
                 Center(
                   child: Text(
-                    "Filter by Price",
+                    AppLocalizations.of(context)!.filter_by_price,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
-                      color: AppColors.mainText(),
+                      color: AppColors.mainText(context),
                     ),
                   ),
                 ),
@@ -57,9 +58,9 @@ void showFilterBottomSheet({
                 Divider(color: Colors.grey.withOpacity(0.3), thickness: 1),
                 const SizedBox(height: 20),
                 Text(
-                  "Price Range: \$${tempMin.round()} - \$${tempMax.round()}",
+                  "${AppLocalizations.of(context)!.price_range}: \$${tempMin.round()} - \$${tempMax.round()}",
                   style: TextStyle(
-                    color: AppColors.secondaryText(),
+                    color: AppColors.secondaryText(context),
                     fontSize: 15,
                   ),
                 ),
@@ -69,7 +70,7 @@ void showFilterBottomSheet({
                   min: 0,
                   max: 2000,
                   divisions: 40,
-                  activeColor: AppColors.primary(),
+                  activeColor: AppColors.primary(context),
                   inactiveColor: Colors.grey[300],
                   labels: RangeLabels(
                     "\$${tempMin.round()}",
@@ -94,16 +95,16 @@ void showFilterBottomSheet({
                           });
                         },
                         style: OutlinedButton.styleFrom(
-                          side: BorderSide(color: AppColors.primary()),
+                          side: BorderSide(color: AppColors.primary(context)),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
                           padding: const EdgeInsets.symmetric(vertical: 12),
                         ),
                         child: Text(
-                          "Reset",
+                          AppLocalizations.of(context)!.reset,
                           style: TextStyle(
-                            color: AppColors.primary(),
+                            color: AppColors.primary(context),
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -117,17 +118,17 @@ void showFilterBottomSheet({
                           onApply(tempMin, tempMax);
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primary(),
+                          backgroundColor: AppColors.primary(context),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
                           padding: const EdgeInsets.symmetric(vertical: 12),
                         ),
                         child: Text(
-                          "Apply",
+                          AppLocalizations.of(context)!.apply,
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
-                            color: AppColors.mainText(),
+                            color: AppColors.mainText(context),
                           ),
                         ),
                       ),

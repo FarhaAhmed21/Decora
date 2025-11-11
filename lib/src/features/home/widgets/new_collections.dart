@@ -36,7 +36,7 @@ class _NewCollectionsState extends State<NewCollections> {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16.0),
-          color: AppColors.cardColor(),
+          color: AppColors.cardColor(context),
         ),
         padding: EdgeInsets.all(isLandscape ? w * 0.015 : 16.0),
         height: containerHeight,
@@ -56,7 +56,7 @@ class _NewCollectionsState extends State<NewCollections> {
                         AppLocalizations.of(context)!.new_collection,
                         style: TextStyle(
                           fontSize: titleSize,
-                          color: AppColors.mainText(),
+                          color: AppColors.mainText(context),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -69,7 +69,7 @@ class _NewCollectionsState extends State<NewCollections> {
                         )!.elevate_your_living_room_with_timeless_sofas,
                         style: TextStyle(
                           fontSize: subtitleSize,
-                          color: AppColors.secondaryText(),
+                          color: AppColors.secondaryText(context),
                         ),
                         maxLines: isLandscape ? 3 : 2,
                         overflow: TextOverflow.ellipsis,
@@ -82,7 +82,7 @@ class _NewCollectionsState extends State<NewCollections> {
                     onPressed: () {},
                     style: ButtonStyle(
                       backgroundColor: WidgetStatePropertyAll<Color>(
-                        AppColors.primary(),
+                        AppColors.primary(context),
                       ),
                       padding: const WidgetStatePropertyAll<EdgeInsetsGeometry>(
                         EdgeInsets.symmetric(horizontal: 10.0),
@@ -112,7 +112,7 @@ class _NewCollectionsState extends State<NewCollections> {
                         AppLocalizations.of(context)!.explore,
                         style: TextStyle(
                           fontSize: buttonTextSize,
-                          color: AppColors.cardColor(),
+                          color: AppColors.cardColor(context),
                         ),
                       ),
                     ),
@@ -129,7 +129,7 @@ class _NewCollectionsState extends State<NewCollections> {
                 height: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16.0),
-                  color: AppColors.productCardColor(),
+                  color: AppColors.productCardColor(context),
                 ),
 
                 child: ClipRRect(

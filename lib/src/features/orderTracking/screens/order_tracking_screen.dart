@@ -38,7 +38,7 @@ class OrderTrackingScreen extends StatelessWidget {
                     Text(
                       "Order Details",
                       style: TextStyle(
-                        color: AppColors.mainText(),
+                        color: AppColors.mainText(context),
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
@@ -49,7 +49,7 @@ class OrderTrackingScreen extends StatelessWidget {
                         Text(
                           "Expected Delivery Date",
                           style: TextStyle(
-                            color: AppColors.secondaryText(),
+                            color: AppColors.secondaryText(context),
                             fontSize: 16,
                           ),
                         ),
@@ -57,7 +57,7 @@ class OrderTrackingScreen extends StatelessWidget {
                         Text(
                           "10 Dec 2024",
                           style: TextStyle(
-                            color: AppColors.mainText(),
+                            color: AppColors.mainText(context),
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
@@ -69,7 +69,7 @@ class OrderTrackingScreen extends StatelessWidget {
                         Text(
                           "Order ID",
                           style: TextStyle(
-                            color: AppColors.secondaryText(),
+                            color: AppColors.secondaryText(context),
                             fontSize: 16,
                           ),
                         ),
@@ -77,7 +77,7 @@ class OrderTrackingScreen extends StatelessWidget {
                         Text(
                           "#GR47",
                           style: TextStyle(
-                            color: AppColors.mainText(),
+                            color: AppColors.mainText(context),
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
@@ -88,7 +88,7 @@ class OrderTrackingScreen extends StatelessWidget {
                     Text(
                       "Order Status",
                       style: TextStyle(
-                        color: AppColors.mainText(),
+                        color: AppColors.mainText(context),
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),

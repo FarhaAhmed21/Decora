@@ -165,7 +165,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                   height: 6,
                   decoration: BoxDecoration(
                     color: currentIndex == index
-                        ? AppColors.primary()
+                        ? AppColors.primary(context)
                         : Colors.grey.shade400,
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -182,7 +182,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                     icon: const Icon(Icons.arrow_back_ios_new),
                     color: currentIndex == 0
                         ? Colors.grey.shade400
-                        : AppColors.primary(),
+                        : AppColors.primary(context),
                   ),
                   InkWell(
                     onTap: _nextPage,
@@ -193,7 +193,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                         vertical: 12,
                       ),
                       decoration: BoxDecoration(
-                        color: AppColors.primary(),
+                        color: AppColors.primary(context),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: currentIndex == 2

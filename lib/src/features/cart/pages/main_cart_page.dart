@@ -39,7 +39,7 @@ class _MainCartPageState extends State<MainCartPage> {
           bottomNavigationBar: Container(
             height: AppSize.height(context) * 0.13,
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 3),
-            color: AppColors.background(),
+            color: AppColors.background(context),
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 8.0,
@@ -50,7 +50,7 @@ class _MainCartPageState extends State<MainCartPage> {
                 width: double.infinity,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary(),
+                    backgroundColor: AppColors.primary(context),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -139,7 +139,7 @@ class _MainCartPageState extends State<MainCartPage> {
 
     scaffoldKey.currentState!.showBottomSheet(
       (context) => Container(
-        color: AppColors.background(),
+        color: AppColors.background(context),
         width: AppSize.width(context),
         height: AppSize.height(context) * 0.43,
         child: Padding(
@@ -158,7 +158,7 @@ class _MainCartPageState extends State<MainCartPage> {
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w500,
-                        color: AppColors.mainText(),
+                        color: AppColors.mainText(context),
                       ),
                     ),
                   ),
@@ -177,7 +177,7 @@ class _MainCartPageState extends State<MainCartPage> {
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
-                  color: AppColors.mainText(),
+                  color: AppColors.mainText(context),
                 ),
               ),
               const SizedBox(height: 15),
@@ -189,7 +189,7 @@ class _MainCartPageState extends State<MainCartPage> {
                   decoration: InputDecoration(
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: AppColors.textColor(),
+                        color: AppColors.textColor(context),
                         width: 2,
                       ),
                       borderRadius: BorderRadius.circular(12),
@@ -197,7 +197,7 @@ class _MainCartPageState extends State<MainCartPage> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    hintStyle: TextStyle(color: AppColors.textColor()),
+                    hintStyle: TextStyle(color: AppColors.textColor(context)),
                     hintText: AppLocalizations.of(context)!.enter_promo_code,
                     suffixIcon: SizedBox(
                       width: 110,
@@ -239,7 +239,7 @@ class _MainCartPageState extends State<MainCartPage> {
               Text(
                 AppLocalizations.of(context)!.payment_summary,
                 style: TextStyle(
-                  color: AppColors.textColor(),
+                  color: AppColors.textColor(context),
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
                 ),
@@ -301,7 +301,7 @@ class _MainCartPageState extends State<MainCartPage> {
         Text(
           name,
           style: TextStyle(
-            color: AppColors.textColor(),
+            color: AppColors.textColor(context),
             fontSize: 16,
             fontWeight: name == AppLocalizations.of(context)!.total
                 ? FontWeight.w600
@@ -311,7 +311,7 @@ class _MainCartPageState extends State<MainCartPage> {
         Text(
           "$amount \$",
           style: TextStyle(
-            color: AppColors.textColor(),
+            color: AppColors.textColor(context),
 
             fontSize: 16,
             fontWeight: name == AppLocalizations.of(context)!.total

@@ -9,43 +9,45 @@ class MyOrdesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        title: "My Orders",
-        onBackPressed: () {
-          Navigator.pop(context);
-        },
-      ),
-      body: Column(
-        children: [
-          const SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Padding(
-              padding: EdgeInsets.only(left: 20),
-              child: Row(
-                children: [
-                  TopSlider(text: "All", isSelected: true),
-                  TopSlider(text: "Delivered"),
-                  TopSlider(text: "Shipping"),
-                  TopSlider(text: "In Progress"),
-                ],
-              ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            CustomAppBar(
+              title: "My Orders",
+              onBackPressed: () {
+                Navigator.pop(context);
+              },
             ),
-          ),
-          const SizedBox(height: 8),
-          Expanded(
-            child: SingleChildScrollView(
+            const SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
               child: Padding(
-                padding: const EdgeInsets.only(top: 10),
-                child: Column(
+                padding: EdgeInsets.only(left: 20),
+                child: Row(
                   children: [
-                    for (int i = 0; i < 7; i++) const OrderContainer(),
+                    TopSlider(text: "All", isSelected: true),
+                    TopSlider(text: "Delivered"),
+                    TopSlider(text: "Shipping"),
+                    TopSlider(text: "In Progress"),
                   ],
                 ),
               ),
             ),
-          ),
-          const SizedBox(height: 4),
-        ],
+            const SizedBox(height: 8),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Column(
+                    children: [
+                      for (int i = 0; i < 7; i++) const OrderContainer(),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 4),
+          ],
+        ),
       ),
     );
   }

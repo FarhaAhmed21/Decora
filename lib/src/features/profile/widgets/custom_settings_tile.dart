@@ -30,7 +30,7 @@ class CustomSettingsTile extends StatelessWidget {
           child: Container(
             height: 62,
             width: double.infinity,
-            decoration: BoxDecoration(color: AppColors.cardColor()),
+            decoration: BoxDecoration(color: AppColors.cardColor(context)),
 
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -42,7 +42,7 @@ class CustomSettingsTile extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 16,
-                      color: AppColors.mainText(),
+                      color: AppColors.mainText(context),
                       fontFamily: 'Montserratt',
                     ),
                   ),

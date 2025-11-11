@@ -7,6 +7,7 @@
     "searchFurniture": "Search Furniture",
     "cairoEgypt": "Cairo, Egypt",
     "product_added_to_favourite_successfully": "Product added to Favourite successfully",
+    "product_removed_from_favourite": "Product removed from Favourite",
     "product_added_to_Cart_successfully": "Product added to Cart successfully",
     "our_Categories": "Our Categories",
     "cart":"Cart",
@@ -85,6 +86,7 @@
   "emailNotFound": "Email Not Found",
 "emailNotFoundMessage": "This email is not registered in our system.",
 "otpIncorrect": "OTP is incorrect",
+
 "otpSent": "OTP has been sent to your email",
 "enterUsername": "Please enter your username",
 "passwordTooShort": "Password must be at least 6 characters",
@@ -92,8 +94,20 @@
 "enter_promo_code":"Enter promo code",
 "an_error_occurred_while_processing_the_payment":"An error occurred while processing the payment",
 "your_cart_is_empty":"Your cart is empty",
-"no_products":"No Products"
-
+"no_products":"No Products",
+"profile": "Profile",
+"edit_profile": "Edit Profile",
+"change_password": "Change Password",
+"transaction_history": "Transaction History",
+"help_support": "Help & Support",
+"logout": "Logout",
+"offers":"Decora Specials",
+"favourite":"Favourites",
+"home":"Home",
+"reset":"Reset",
+"filter_by_price":"Filter by Price",
+"apply":"Apply",
+"price_range":"Price Range"
 
 
 }

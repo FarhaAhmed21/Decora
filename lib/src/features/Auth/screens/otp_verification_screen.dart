@@ -1,6 +1,7 @@
 import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/src/features/Auth/models/user_model.dart';
 import 'package:decora/src/features/Auth/screens/verification_success_screen.dart';
+import 'package:decora/src/features/Auth/services/auth_service.dart';
 import 'package:decora/src/features/Auth/services/firestore_service.dart';
 import 'package:decora/src/features/Auth/services/sendOTPEmail.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
@@ -10,14 +11,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class OtpVerificationScreen extends StatefulWidget {
   final String otp;
   final String email;
-  final String uid;
+  final String password;
   final String name;
 
   const OtpVerificationScreen({
     super.key,
     required this.otp,
     required this.email,
-    required this.uid,
+    required this.password,
     required this.name,
   });
 
@@ -34,10 +35,12 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
   bool _isResending = false;
   late String _currentOtp;
+  final _authService = AuthService();
 
   @override
   void initState() {
     super.initState();
+
     _currentOtp = widget.otp;
   }
 
@@ -66,15 +69,22 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     final tr = AppLocalizations.of(context)!;
 
     if (_enteredOtp == _currentOtp) {
-      final userModel = UserModel(
-        id: widget.uid,
-        name: widget.name,
-        email: widget.email,
-        photoUrl:
-            "https://cvhrma.org/wp-content/uploads/2015/07/default-profile-photo.jpg",
+      final user = await _authService.signUpWithEmail(
+        widget.email,
+        widget.password,
+        widget.name,
       );
-      await FirestoreService().saveUserData(userModel);
+      if (user != null) {
+        final userModel = UserModel(
+          id: user.uid,
+          name: widget.name,
+          email: widget.email,
+          photoUrl:
+              "https://cvhrma.org/wp-content/uploads/2015/07/default-profile-photo.jpg",
+        );
 
+        await FirestoreService().saveUserData(userModel);
+      }
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const VerificationSuccessScreen()),
@@ -86,17 +96,15 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     }
   }
 
+  String _generateOtp() {
+    final random = DateTime.now().millisecondsSinceEpoch % 10000;
+    return random.toString().padLeft(4, '0');
+  }
+
   Future<void> _resendOtp() async {
     setState(() => _isResending = true);
 
-    final newOtp =
-        (1000 +
-                (9999 - 1000) *
-                    (DateTime.now().millisecondsSinceEpoch % 1000) /
-                    1000)
-            .floor()
-            .toString()
-            .padLeft(4, '0');
+    final newOtp = _generateOtp();
 
     await sendOtpEmail(widget.email, newOtp);
 
@@ -122,9 +130,9 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     return Directionality(
       textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
       child: Scaffold(
-        backgroundColor: AppColors.background(),
+        backgroundColor: AppColors.background(context),
         appBar: AppBar(
-          backgroundColor: AppColors.background(),
+          backgroundColor: AppColors.background(context),
           automaticallyImplyLeading: false,
           centerTitle: true,
           title: Text(
@@ -132,14 +140,14 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: AppColors.secondaryText(),
+              color: AppColors.secondaryText(context),
             ),
           ),
           leading: Padding(
             padding: const EdgeInsets.all(8),
             child: Container(
               decoration: BoxDecoration(
-                color: AppColors.innerCardColor(),
+                color: AppColors.innerCardColor(context),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: InkWell(
@@ -150,7 +158,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     isArabic
                         ? FontAwesomeIcons.chevronRight
                         : FontAwesomeIcons.chevronLeft,
-                    color: AppColors.mainText(),
+                    color: AppColors.mainText(context),
                     size: 16,
                   ),
                 ),
@@ -172,7 +180,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 16,
-                    color: AppColors.secondaryText(),
+                    color: AppColors.secondaryText(context),
                   ),
                 ),
                 SizedBox(height: size.height * 0.04),
@@ -184,13 +192,13 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       height: size.width * 0.14,
                       child: TextField(
                         textDirection: TextDirection.ltr,
-                        cursorColor: AppColors.primary(),
+                        cursorColor: AppColors.primary(context),
                         focusNode: focusNodes[index],
                         controller: controllers[index],
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 20,
-                          color: AppColors.mainText(),
+                          color: AppColors.mainText(context),
                         ),
                         keyboardType: TextInputType.number,
                         onChanged: (v) => _onChanged(v, index),
@@ -198,12 +206,12 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                           counterText: "",
                           filled: true,
                           fillColor: focusNodes[index].hasFocus
-                              ? AppColors.background()
-                              : AppColors.innerCardColor(),
+                              ? AppColors.background(context)
+                              : AppColors.innerCardColor(context),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(
-                              color: AppColors.primary(),
+                              color: AppColors.primary(context),
                               width: 1.5,
                             ),
                           ),
@@ -221,7 +229,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   height: 50,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary(),
+                      backgroundColor: AppColors.primary(context),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -240,14 +248,16 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     child: Text.rich(
                       TextSpan(
                         text: tr.didNotGetOtp,
-                        style: TextStyle(color: AppColors.secondaryText()),
+                        style: TextStyle(
+                          color: AppColors.secondaryText(context),
+                        ),
                         children: [
                           TextSpan(
                             text: " ${tr.resendOtp}",
                             style: TextStyle(
                               color: _isResending
                                   ? Colors.grey
-                                  : AppColors.primary(),
+                                  : AppColors.primary(context),
                               fontWeight: FontWeight.bold,
                             ),
                           ),

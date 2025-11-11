@@ -24,7 +24,7 @@ class TextFieldWidget extends StatelessWidget {
             label,
             style: TextStyle(
               fontWeight: FontWeight.w400,
-              color: AppColors.mainText(),
+              color: AppColors.mainText(context),
               fontSize: 16,
               fontFamily: 'Montserratt',
             ),
@@ -32,15 +32,15 @@ class TextFieldWidget extends StatelessWidget {
           const SizedBox(height: 5),
           TextField(
             controller: controller,
-            style: TextStyle(color: AppColors.secondaryText()),
+            style: TextStyle(color: AppColors.secondaryText(context)),
             decoration: InputDecoration(
               hintText: hint,
               hintStyle: TextStyle(
-                color: AppColors.secondaryText(),
+                color: AppColors.secondaryText(context),
                 fontSize: 14,
               ),
               filled: true,
-              fillColor: AppColors.cardColor(),
+              fillColor: AppColors.cardColor(context),
               border: OutlineInputBorder(
                 borderSide: BorderSide.none,
                 borderRadius: BorderRadius.circular(12),

@@ -1,5 +1,6 @@
 import 'package:decora/src/features/Auth/screens/login_screen.dart';
 import 'package:decora/src/features/admin/screens/add_product_screen.dart';
+import 'package:decora/src/features/admin/screens/admin_dashboard.dart';
 import 'package:decora/src/features/admin/screens/allprodects_screen.dart';
 import 'package:decora/src/features/profile/widgets/custom_settings_tile.dart';
 import 'package:decora/src/shared/components/appbar.dart';
@@ -14,7 +15,6 @@ class AdminPanel extends StatefulWidget {
 }
 
 class _AdminPanelState extends State<AdminPanel> {
-  // ignore: unused_field
   bool _isLoading = false;
 
   void _logout(BuildContext context) async {
@@ -50,7 +50,6 @@ class _AdminPanelState extends State<AdminPanel> {
                           MaterialPageRoute(
                             builder: (context) {
                               return const AddProductScreen();
-
                             },
                           ),
                         );
@@ -63,14 +62,26 @@ class _AdminPanelState extends State<AdminPanel> {
                           context,
                           MaterialPageRoute(
                             builder: (context) {
-
                               return const AllProductsScreen();
-
                             },
                           ),
                         );
                       },
                     ),
+                    CustomSettingsTile(
+                      title: "User Chats",
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const AdminDashboard(
+                              adminId: "aEc97NihV5aCa8Zaw0w2YlzvICv2",
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+
                     CustomSettingsTile(
                       title: "LogOut",
                       onTap: () => _logout(context),

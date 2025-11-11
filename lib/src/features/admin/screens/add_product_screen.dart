@@ -76,7 +76,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
     final w = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: AppColors.background(),
+      backgroundColor: AppColors.background(context),
       body: SafeArea(
         child: Column(
           children: [
@@ -132,7 +132,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       SwitchListTile(
                         title: Text(
                           'New Collection',
-                          style: TextStyle(color: AppColors.mainText()),
+                          style: TextStyle(color: AppColors.mainText(context)),
                         ),
                         value: _isNewCollection,
                         onChanged: (val) =>
@@ -147,7 +147,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
-                              color: AppColors.mainText(),
+                              color: AppColors.mainText(context),
                             ),
                           ),
                           ElevatedButton.icon(
@@ -156,13 +156,18 @@ class _AddProductScreenState extends State<AddProductScreen> {
                               (newColor) =>
                                   setState(() => _colors.add(newColor)),
                             ),
-                            icon: Icon(Icons.add, color: AppColors.mainText()),
+                            icon: Icon(
+                              Icons.add,
+                              color: AppColors.mainText(context),
+                            ),
                             label: Text(
                               'Add Color',
-                              style: TextStyle(color: AppColors.mainText()),
+                              style: TextStyle(
+                                color: AppColors.mainText(context),
+                              ),
                             ),
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.primary(),
+                              backgroundColor: AppColors.primary(context),
                             ),
                           ),
                         ],
@@ -197,7 +202,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       ElevatedButton(
                         onPressed: _isLoading ? null : _addProduct,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primary(),
+                          backgroundColor: AppColors.primary(context),
                           minimumSize: const Size.fromHeight(50),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(14),
@@ -212,7 +217,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
-                                  color: AppColors.mainText(),
+                                  color: AppColors.mainText(context),
                                 ),
                               ),
                       ),

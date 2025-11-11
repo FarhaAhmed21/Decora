@@ -15,7 +15,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 72,
-      color: AppColors.background(),
+      color: AppColors.background(context),
       child: Row(
         children: [
           Padding(
@@ -26,12 +26,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               child: Container(
                 padding: const EdgeInsets.all(8.89),
                 decoration: BoxDecoration(
-                  color: AppColors.cardColor(),
+                  color: AppColors.cardColor(context),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Icon(
                   Icons.arrow_back_ios_new,
-                  color: AppTheme.isDarkMode ? Colors.white : Colors.black,
+                  color: AppColors.textColor(context),
                   size: 18,
                 ),
               ),
@@ -43,7 +43,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               child: Text(
                 title,
                 style: TextStyle(
-                  color: AppTheme.isDarkMode ? Colors.white : Colors.black,
+                  color: AppColors.textColor(context),
                   fontWeight: FontWeight.w500,
                   fontSize: 18,
                   fontFamily: 'Montserratt',

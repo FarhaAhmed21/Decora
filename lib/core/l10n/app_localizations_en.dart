@@ -31,6 +31,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'Product added to Favourite successfully';
 
   @override
+  String get product_removed_from_favourite => 'Product removed from Favourite';
+
+  @override
   String get product_added_to_Cart_successfully =>
       'Product added to Cart successfully';
 
@@ -298,4 +301,43 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get no_products => 'No Products';
+
+  @override
+  String get profile => 'Profile';
+
+  @override
+  String get edit_profile => 'Edit Profile';
+
+  @override
+  String get change_password => 'Change Password';
+
+  @override
+  String get transaction_history => 'Transaction History';
+
+  @override
+  String get help_support => 'Help & Support';
+
+  @override
+  String get logout => 'Logout';
+
+  @override
+  String get offers => 'Decora Specials';
+
+  @override
+  String get favourite => 'Favourites';
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get reset => 'Reset';
+
+  @override
+  String get filter_by_price => 'Filter by Price';
+
+  @override
+  String get apply => 'Apply';
+
+  @override
+  String get price_range => 'Price Range';
 }

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/core/utils/app_size.dart';
+import 'package:decora/generated/assets.dart';
 import 'package:decora/src/features/favourites/services/fav_service.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,24 +18,25 @@ class CustomCard extends StatefulWidget {
 }
 
 class _CustomCardState extends State<CustomCard> {
-  late bool isFavourite;
+  bool isFavourite = false;
 
   @override
   void initState() {
     super.initState();
-    isFavourite = false; // initial default
+    _checkIfFavourite();
+  }
 
+  Future<void> _checkIfFavourite() async {
     User user = FirebaseAuth.instance.currentUser!;
     final userDoc = FirebaseFirestore.instance
         .collection('users')
         .doc(user.uid);
-    userDoc.get().then((doc) {
-      if (doc.exists && doc.data()!.containsKey('favourites')) {
-        setState(() {
-          isFavourite = (doc['favourites'] as List).contains(widget.product.id);
-        });
-      }
-    });
+    final doc = await userDoc.get();
+    if (doc.exists && doc.data()!.containsKey('favourites')) {
+      setState(() {
+        isFavourite = (doc['favourites'] as List).contains(widget.product.id);
+      });
+    }
   }
 
   @override
@@ -42,199 +44,183 @@ class _CustomCardState extends State<CustomCard> {
     // final h = AppSize.height(context);
     // final w = AppSize.width(context);
     final product = widget.product;
+    final isDiscount = product.discount > 0;
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final cardWidth = constraints.maxWidth;
-        final imageHeight = cardWidth * 0.8; // Responsive image height
-
-        return Card(
-          elevation: 0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          color: AppColors.cardColor(),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+    return Card(
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(w * 0.02),
+      ),
+      color: AppColors.cardColor(context),
+      child: Container(
+        width: w * 0.20,
+        padding: EdgeInsets.all(w * 0.025),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(w * 0.02),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
               children: [
-                Stack(
-                  children: [
-                    // Product Image
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: AppColors.productCardColor(),
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: Image.network(
-                          product.colors.isNotEmpty
-                              ? product.colors.first.imageUrl
-                              : 'https://safainv.sa/front/assets/images/default.jpg',
-                          height: imageHeight,
-                          width: double.infinity,
-                          fit: BoxFit.cover,
-                          loadingBuilder: (context, child, loadingProgress) {
-                            if (loadingProgress == null) return child;
-                            // While image is loading, show a placeholder
-                            return Container(
-                              height: imageHeight,
-                              width: double.infinity,
-                              color: AppColors.productCardColor(),
-                              alignment: Alignment.center,
-                              child: const CircularProgressIndicator(
-                                strokeWidth: 2,
-                              ),
-                            );
-                          },
-                          errorBuilder: (context, error, stackTrace) {
-                            // If image fails to load, show fallback placeholder
-                            return Container(
-                              height: imageHeight,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: AppColors.productCardColor(),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              alignment: Alignment.center,
-                              child: Icon(
-                                Icons.broken_image,
-                                size: imageHeight * 0.4,
-                                color: Colors.grey[400],
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ),
-
-                    // Discount Badge
-                    if (product.discount > 0)
-                      Positioned(
-                        left: 8,
-                        top: 8,
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 4,
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12.0),
-                            color: AppColors.orange(),
-                          ),
-                          child: Text(
-                            '${product.discount}%',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: AppColors.innerCardColor(),
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-
-                    // Favourite Icon
-                    Positioned(
-                      top: 8,
-                      right: 8,
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            isFavourite = !isFavourite;
-                          });
-                          if (isFavourite) {
-                            FavService().addfavtolist(product.id);
-                          } else {
-                            FavService().deletefavfromlist(product.id);
-                          }
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                isFavourite
-                                    ? AppLocalizations.of(
-                                        context,
-                                      )!.product_added_to_favourite_successfully
-                                    : "Removed from favourites",
-                              ),
-                              backgroundColor: AppColors.primary(),
-                              duration: const Duration(seconds: 1),
-                            ),
-                          );
-                        },
+                // ✅ Product image
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(w * 0.02),
+                    color: AppColors.productCardColor(context),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(w * 0.02),
+                    child: Image.network(
+                      product.colors.isNotEmpty
+                          ? product.colors.first.imageUrl
+                          : 'https://safainv.sa/front/assets/images/default.jpg',
+                      height: h * 0.18,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, __, ___) => Container(
+                        height: h * 0.18,
+                        color: AppColors.productCardColor(context),
                         child: Icon(
-                          isFavourite ? Icons.favorite : Icons.favorite_border,
-                          color: AppColors.primary(),
-                          size: cardWidth * 0.1,
+                          Icons.broken_image,
+                          size: w * 0.12,
+                          color: Colors.grey[400],
                         ),
                       ),
                     ),
-                  ],
-                ),
-
-                const SizedBox(height: 8),
-
-                // Product Title
-                Text(
-                  product.name,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: cardWidth * 0.08,
-                    color: AppColors.mainText(),
                   ),
                 ),
 
-                const SizedBox(height: 4),
+                // ✅ Discount badge
+                if (isDiscount)
+                  Positioned(
+                    left: 10,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      margin: const EdgeInsets.all(10),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16.0),
+                        color: AppColors.orange(context),
+                      ),
+                      child: Text(
+                        '${product.discount}%',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: AppColors.innerCardColor(context),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
 
-                // Price + Cart button
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "\$${product.price}",
-                      style: TextStyle(
-                        fontSize: cardWidth * 0.08,
-                        color: AppColors.mainText(),
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              AppLocalizations.of(
-                                context,
-                              )!.product_added_to_Cart_successfully,
-                            ),
-                            backgroundColor: AppColors.primary(),
-                            duration: const Duration(seconds: 1),
+                // ✅ Favourite icon
+                Positioned(
+                  top: h * 0.015,
+                  right: w * 0.020,
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isFavourite = !isFavourite;
+                      });
+                      if (isFavourite) {
+                        FavService().addfavtolist(product.id);
+                      } else {
+                        FavService().deletefavfromlist(product.id);
+                      }
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            isFavourite
+                                ? AppLocalizations.of(
+                                    context,
+                                  )!.product_added_to_favourite_successfully
+                                : "Removed from favourites",
                           ),
-                        );
-                      },
-                      child: Container(
-                        width: cardWidth * 0.18,
-                        height: cardWidth * 0.18,
-                        decoration: BoxDecoration(
-                          color: AppColors.primary(),
-                          borderRadius: BorderRadius.circular(8),
+                          backgroundColor: AppColors.primary(context),
+                          duration: const Duration(seconds: 1),
                         ),
-                        child: const Icon(
-                          Icons.shopping_bag,
-                          color: Colors.white,
-                        ),
-                      ),
+                      );
+                    },
+                    child: Image.asset(
+                      isFavourite ? Assets.heartIcon : Assets.heartOutline,
+                      color: AppColors.primary(context),
+                      width: w * 0.05,
+                      height: h * 0.018,
                     ),
-                  ],
+                  ),
                 ),
               ],
             ),
-          ),
-        );
-      },
+
+            SizedBox(height: h * 0.008),
+
+            // ✅ Product name
+            Text(
+              product.name,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: w * 0.04,
+                color: AppColors.mainText(context),
+                fontFamily: 'Montserrat',
+              ),
+            ),
+
+            // ✅ Rating placeholder (optional)
+
+            // ✅ Price + Add to cart
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "\$${product.price}",
+                  style: TextStyle(
+                    fontSize: w * 0.045,
+                    color: AppColors.mainText(context),
+
+                    fontFamily: 'Montserrat',
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          AppLocalizations.of(
+                            context,
+                          )!.product_added_to_Cart_successfully,
+                        ),
+                        backgroundColor: AppColors.primary(context),
+                        duration: const Duration(seconds: 1),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    width: w * 0.09,
+                    height: h * 0.040,
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: AppColors.primary(context),
+                      borderRadius: BorderRadius.circular(w * 0.02),
+                    ),
+                    child: Image.asset(
+                      Assets.shoppingBagIcon,
+                      color: Colors.white,
+                      width: w * 0.30,
+                      height: h * 0.030,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

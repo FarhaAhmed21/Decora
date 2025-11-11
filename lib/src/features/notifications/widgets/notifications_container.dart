@@ -23,7 +23,7 @@ class NoificationsContainer extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
         decoration: BoxDecoration(
           border: Border.all(
-            color: AppColors.primary(),
+            color: AppColors.primary(context),
             width: 1,
           ), // CHECK THIS: Looks pixely
           borderRadius: BorderRadius.circular(16),
@@ -38,13 +38,13 @@ class NoificationsContainer extends StatelessWidget {
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: icon == 0
-                      ? AppColors.primary()
-                      : AppColors.cardColor(),
+                      ? AppColors.primary(context)
+                      : AppColors.cardColor(context),
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Image.asset(
                   "assets/icons/notification-icon.png",
-                  color: icon == 0 ? Colors.white : AppColors.primary(),
+                  color: icon == 0 ? Colors.white : AppColors.primary(context),
                   fit: BoxFit.contain,
                 ),
               ),
@@ -59,7 +59,7 @@ class NoificationsContainer extends StatelessWidget {
                       title,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: AppColors.mainText(),
+                        color: AppColors.mainText(context),
                         fontSize:
                             15, // CHECK THIS: Check the font with the device
                         letterSpacing: -0.2,
@@ -71,7 +71,7 @@ class NoificationsContainer extends StatelessWidget {
                         fontWeight: FontWeight.bold,
 
                         fontSize: 12,
-                        color: AppColors.secondaryText(),
+                        color: AppColors.secondaryText(context),
                         letterSpacing: -0.2,
                       ),
                     ),
@@ -88,7 +88,7 @@ class NoificationsContainer extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 10,
-                      color: AppColors.secondaryText(),
+                      color: AppColors.secondaryText(context),
                     ),
                   ),
                 ],
