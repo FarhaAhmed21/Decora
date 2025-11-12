@@ -64,6 +64,7 @@
     "see_all": "انظر المزيد ",
     "decora_specials" :"خصومات ديكورا",
     "categories":   "الفئات",
+    "categories": "الفئات",
     "new_collection": "مجموعة جديدة",
     "elevate_your_living_room_with_timeless_sofas": "ارتقي بغرفة معيشتك مع أرائك خالدة",
     "explore": "استكشف",
@@ -108,9 +109,13 @@
 "reset":"اعادة تعيين",
 "filter_by_price":"تصفية حسب السعر",
 "apply":"تطبيق",
-"price_range":"نطاق السعر"
-
-
+"price_range":"نطاق السعر",
+    "categoryAll": "الكل",
+    "categoryLivingroom": "غرفة المعيشة",
+    "categoryBedroom": "غرفة النوم",
+    "categoryOffice": "المكتب",
+    "categoryDining": "غرفة الطعام",
+    "categoryOutdoor": "خارجي"
 
 
 }

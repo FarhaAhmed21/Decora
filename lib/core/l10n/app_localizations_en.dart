@@ -340,4 +340,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get price_range => 'Price Range';
+
+  @override
+  String get categoryAll => 'All';
+
+  @override
+  String get categoryLivingroom => 'Living Room';
+
+  @override
+  String get categoryBedroom => 'Bedroom';
+
+  @override
+  String get categoryOffice => 'Office';
+
+  @override
+  String get categoryDining => 'Dining';
+
+  @override
+  String get categoryOutdoor => 'Outdoor';
 }
