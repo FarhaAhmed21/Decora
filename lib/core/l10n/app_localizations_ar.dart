@@ -202,7 +202,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get decora_specials => 'خصومات ديكورا';
 
   @override
-  String get categories => 'Categories';
+  String get categories => 'الفئات';
 
   @override
   String get new_collection => 'مجموعة جديدة';

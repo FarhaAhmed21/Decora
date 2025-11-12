@@ -4,7 +4,10 @@ import 'package:decora/src/features/admin/widgets/product_field.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import '../../../shared/components/appbar.dart';
+import '../../../shared/components/list_of_categories.dart';
 import '../../product_details/models/product_model.dart';
+
+
 
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({super.key});
@@ -21,11 +24,22 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final _priceController = TextEditingController();
   final _discountController = TextEditingController();
   final _quantityController = TextEditingController();
-  final _categoryController = TextEditingController();
 
   bool _isNewCollection = false;
   bool _isLoading = false;
   List<ProductColor> _colors = [];
+
+  List<CategoryItem> _categories = [];
+  CategoryItem? _selectedCategory;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_categories.isEmpty) {
+      _categories = getTranslatedCategories(context);
+      _selectedCategory ??= _categories.first; // default to 'All'
+    }
+  }
 
   Future<void> _addProduct() async {
     if (!_formKey.currentState!.validate()) return;
@@ -49,7 +63,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
         discount: int.tryParse(_discountController.text) ?? 0,
         quantity: int.tryParse(_quantityController.text) ?? 0,
         isNewCollection: _isNewCollection,
-        category: _categoryController.text,
+        category: _selectedCategory!.key, // store English key
         colors: _colors,
         comments: [],
       );
@@ -63,9 +77,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
       _formKey.currentState!.reset();
       setState(() => _colors.clear());
     } catch (e) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('Error: $e')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: $e')),
+      );
     } finally {
       setState(() => _isLoading = false);
     }
@@ -125,18 +139,41 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         label: 'Quantity',
                         type: TextInputType.number,
                       ),
-                      ProductField(
-                        controller: _categoryController,
-                        label: 'Category',
+                      const SizedBox(height: 10),
+                      Text(
+                        'Category',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: AppColors.mainText(context),
+                        ),
                       ),
+                      const SizedBox(height: 6),
+                      DropdownButtonFormField<CategoryItem>(
+                        value: _selectedCategory,
+                        items: _categories.map((c) {
+                          return DropdownMenuItem(
+                            value: c,
+                            child: Text(c.label),
+                          );
+                        }).toList(),
+                        onChanged: (val) => setState(() => _selectedCategory = val),
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          contentPadding:
+                          const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
                       SwitchListTile(
                         title: Text(
                           'New Collection',
                           style: TextStyle(color: AppColors.mainText(context)),
                         ),
                         value: _isNewCollection,
-                        onChanged: (val) =>
-                            setState(() => _isNewCollection = val),
+                        onChanged: (val) => setState(() => _isNewCollection = val),
                       ),
                       const Divider(),
                       Row(
@@ -153,8 +190,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                           ElevatedButton.icon(
                             onPressed: () => showAddColorDialog(
                               context,
-                              (newColor) =>
-                                  setState(() => _colors.add(newColor)),
+                                  (newColor) => setState(() => _colors.add(newColor)),
                             ),
                             icon: Icon(
                               Icons.add,
@@ -175,7 +211,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       const SizedBox(height: 10),
                       if (_colors.isNotEmpty)
                         ..._colors.map(
-                          (c) => Card(
+                              (c) => Card(
                             color: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
@@ -192,8 +228,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                   Icons.delete,
                                   color: Colors.redAccent,
                                 ),
-                                onPressed: () =>
-                                    setState(() => _colors.remove(c)),
+                                onPressed: () => setState(() => _colors.remove(c)),
                               ),
                             ),
                           ),
@@ -209,17 +244,15 @@ class _AddProductScreenState extends State<AddProductScreen> {
                           ),
                         ),
                         child: _isLoading
-                            ? const CircularProgressIndicator(
-                                color: Colors.white,
-                              )
+                            ? const CircularProgressIndicator(color: Colors.white)
                             : Text(
-                                'Add Product',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.mainText(context),
-                                ),
-                              ),
+                          'Add Product',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.mainText(context),
+                          ),
+                        ),
                       ),
                     ],
                   ),

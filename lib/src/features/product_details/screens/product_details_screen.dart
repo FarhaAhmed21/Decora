@@ -85,13 +85,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     final w = AppSize.width(context);
     final isLandscape = w > h;
 
-    // Determine the size for image containers and spacing based on screen size
+
     final imageContainerSize = isLandscape
         ? w * 0.08
-        : w * 0.15; // Smaller in landscape
+        : w * 0.15;
     final mainImageHeight = isLandscape
         ? h * 0.5
-        : h * 0.25; // Taller in landscape
+        : h * 0.25;
 
     return Scaffold(
       backgroundColor: AppColors.background(context),
@@ -120,7 +120,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // 1. Images Section (Main Image + Thumbnails)
+                      // 1. Images Section
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -133,40 +133,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               ),
                             ),
                           ),
-                          SizedBox(width: w * 0.02),
-                          Column(
-                            children: [
-                              ...List.generate(
-                                3,
-                                (index) => Padding(
-                                  padding: EdgeInsets.only(bottom: h * 0.01),
-                                  child: Container(
-                                    width: imageContainerSize,
-                                    height: imageContainerSize,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      color: AppColors.innerCardColor(context),
-                                      border: index == 0
-                                          ? Border.all(
-                                              color: AppColors.primary(context),
-                                              width: 2.0,
-                                            )
-                                          : null,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          // ignore: deprecated_member_use
-                                          color: Colors.grey.withOpacity(0.3),
-                                          spreadRadius: 1,
-                                          blurRadius: 2,
-                                          offset: const Offset(0, 1),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+
                         ],
                       ),
                       SizedBox(height: h * 0.02),
@@ -247,31 +214,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         ],
                       ),
                       SizedBox(height: h * 0.04),
-                      // 3. Info Boxes (Placeholder)
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: List.generate(
-                          4,
-                          (index) => Container(
-                            width: isLandscape ? w * 0.1 : 60,
-                            height: isLandscape ? w * 0.1 : 60,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.0),
-                              color: AppColors.innerCardColor(context),
-                              boxShadow: [
-                                BoxShadow(
-                                  // ignore: deprecated_member_use
-                                  color: Colors.grey.withOpacity(0.8),
-                                  spreadRadius: 0,
-                                  blurRadius: 4,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: h * 0.04),
+
                       // 4. Product Details
                       Text(
                         productDetails,
