@@ -24,10 +24,10 @@ void main() async {
   //   message: "You have a new friend request!",
   // );
 
-  await NotificationService.addNotification(
-      "Welcome back!",
-      "You just logged in again.",
-    );
+  // await NotificationService.addNotification(
+  //     "Welcome back!",
+  //     "You just logged in again.",
+  //   );
 
   runApp(
     MultiProvider(
