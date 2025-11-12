@@ -27,7 +27,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   bool _isNewCollection = false;
   bool _isLoading = false;
-  List<ProductColor> _colors = [];
+  final List<ProductColor> _colors = [];
 
   List<CategoryItem> _categories = [];
   CategoryItem? _selectedCategory;

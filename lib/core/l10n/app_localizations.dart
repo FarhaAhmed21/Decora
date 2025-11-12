@@ -389,7 +389,7 @@ abstract class AppLocalizations {
   /// No description provided for @resetPassword.
   ///
   /// In en, this message translates to:
-  /// **'Reset your password'**
+  /// **'Reset Your Password'**
   String get resetPassword;
 
   /// No description provided for @enterEmailOrPhone.
@@ -637,6 +637,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter your registered email to reset your password'**
   String get enterEmailreset;
+
+  /// No description provided for @enter_promo_code.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter promo code'**
+  String get enter_promo_code;
+
+  /// No description provided for @an_error_occurred_while_processing_the_payment.
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred while processing the payment'**
+  String get an_error_occurred_while_processing_the_payment;
+
+  /// No description provided for @your_cart_is_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'Your cart is empty'**
+  String get your_cart_is_empty;
+
+  /// No description provided for @no_products.
+  ///
+  /// In en, this message translates to:
+  /// **'No Products'**
+  String get no_products;
 
   /// No description provided for @profile.
   ///

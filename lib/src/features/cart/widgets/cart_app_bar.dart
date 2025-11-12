@@ -46,10 +46,14 @@ class _CartAppBarState extends State<CartAppBar> {
     );
 
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.background(context),
       title: Text(
         l10n.cart,
-        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+        style: TextStyle(
+          color: AppColors.textColor(context),
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+        ),
       ),
       centerTitle: true,
 
@@ -71,7 +75,10 @@ class _CartAppBarState extends State<CartAppBar> {
               MainLayout.currentIndex = 0;
             },
 
-            icon: const Icon(Icons.arrow_back_ios_new),
+            icon: Icon(
+              Icons.arrow_back_ios_new,
+              color: AppColors.textColor(context),
+            ),
           ),
         ),
       ),
@@ -93,7 +100,7 @@ class _CartAppBarState extends State<CartAppBar> {
       //  TabBar
       bottom: TabBar(
         indicatorColor: AppColors.orange(context),
-        labelColor: Colors.black,
+        labelColor: AppColors.textColor(context),
         indicatorSize: TabBarIndicatorSize.tab,
         indicatorWeight: 3,
         tabs: [
