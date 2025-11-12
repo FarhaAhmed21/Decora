@@ -80,10 +80,13 @@ class _CustomCardState extends State<CustomCard> {
                       fit: BoxFit.cover,
                       errorBuilder: (_, __, ___) => Container(
                         height: h * 0.18,
+                        width: double.infinity,
                         color: AppColors.productCardColor(context),
                         child: Icon(
                           Icons.broken_image,
+
                           size: w * 0.12,
+
                           color: Colors.grey[400],
                         ),
                       ),
