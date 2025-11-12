@@ -100,7 +100,6 @@ class _CartAppBarState extends State<CartAppBar> {
       //  TabBar
       bottom: TabBar(
         indicatorColor: AppColors.orange(context),
-        labelColor: Colors.black,
         indicatorSize: TabBarIndicatorSize.tab,
         indicatorWeight: 3,
         tabs: [
