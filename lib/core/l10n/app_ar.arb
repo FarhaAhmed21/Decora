@@ -108,7 +108,13 @@
 "reset":"اعادة تعيين",
 "filter_by_price":"تصفية حسب السعر",
 "apply":"تطبيق",
-"price_range":"نطاق السعر"
+"price_range":"نطاق السعر",
+    "categoryAll": "الكل",
+    "categoryLivingroom": "غرفة المعيشة",
+    "categoryBedroom": "غرفة النوم",
+    "categoryOffice": "المكتب",
+    "categoryDining": "غرفة الطعام",
+    "categoryOutdoor": "خارجي"
 
 
 }

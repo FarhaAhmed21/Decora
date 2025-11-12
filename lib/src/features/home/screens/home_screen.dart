@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/l10n/app_localizations.dart';
 import '../../../../core/utils/app_size.dart';
 import '../../../shared/components/custom_card.dart';
+import '../../../shared/components/list_of_categories.dart';
 import '../../../shared/components/searchbar.dart';
 import '../../../shared/components/special_card.dart';
 import '../../../shared/components/top_location_bar.dart';
@@ -28,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late List<Product> filteredProducts;
   bool isSearching = false;
   late String selectedCategory = 'All';
+  late List<CategoryItem> categories;
 
   double _minPrice = 0;
   double _maxPrice = 2000;
@@ -36,8 +38,15 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     filteredProducts = widget.products;
-  }
 
+  }
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+
+    categories = getTranslatedCategories(context);
+  }
   void _onSearchChanged(String query) {
     setState(() {
       if (query.isEmpty) {
@@ -263,7 +272,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             selectedCategory = category;
                             _applyPriceFilter(_minPrice, _maxPrice);
                           });
-                        },
+                        }, categories:categories,
                       ),
                       SizedBox(height: h * 0.015),
                       Padding(

@@ -715,6 +715,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Price Range'**
   String get price_range;
+
+  /// No description provided for @categoryAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get categoryAll;
+
+  /// No description provided for @categoryLivingroom.
+  ///
+  /// In en, this message translates to:
+  /// **'Living Room'**
+  String get categoryLivingroom;
+
+  /// No description provided for @categoryBedroom.
+  ///
+  /// In en, this message translates to:
+  /// **'Bedroom'**
+  String get categoryBedroom;
+
+  /// No description provided for @categoryOffice.
+  ///
+  /// In en, this message translates to:
+  /// **'Office'**
+  String get categoryOffice;
+
+  /// No description provided for @categoryDining.
+  ///
+  /// In en, this message translates to:
+  /// **'Dining'**
+  String get categoryDining;
+
+  /// No description provided for @categoryOutdoor.
+  ///
+  /// In en, this message translates to:
+  /// **'Outdoor'**
+  String get categoryOutdoor;
 }
 
 class _AppLocalizationsDelegate

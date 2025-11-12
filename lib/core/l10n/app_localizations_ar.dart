@@ -327,4 +327,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get price_range => 'نطاق السعر';
+
+  @override
+  String get categoryAll => 'الكل';
+
+  @override
+  String get categoryLivingroom => 'غرفة المعيشة';
+
+  @override
+  String get categoryBedroom => 'غرفة النوم';
+
+  @override
+  String get categoryOffice => 'المكتب';
+
+  @override
+  String get categoryDining => 'غرفة الطعام';
+
+  @override
+  String get categoryOutdoor => 'خارجي';
 }

@@ -106,6 +106,13 @@
 "reset":"Reset",
 "filter_by_price":"Filter by Price",
 "apply":"Apply",
-"price_range":"Price Range"
+"price_range":"Price Range",
+  "categoryAll": "All",
+  "categoryLivingroom": "Living Room",
+  "categoryBedroom": "Bedroom",
+  "categoryOffice": "Office",
+  "categoryDining": "Dining",
+  "categoryOutdoor": "Outdoor"
+
 
 }
