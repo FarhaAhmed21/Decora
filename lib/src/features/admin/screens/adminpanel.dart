@@ -28,6 +28,7 @@ class _AdminPanelState extends State<AdminPanel> {
     );
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(

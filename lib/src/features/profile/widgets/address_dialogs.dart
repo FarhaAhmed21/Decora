@@ -1,3 +1,5 @@
+import 'package:decora/core/l10n/app_localizations.dart';
+import 'package:decora/core/l10n/app_localizations_ar.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 import 'package:decora/src/features/Auth/models/address_model.dart';
@@ -10,28 +12,34 @@ Future<AddressModel?> showAddAddressDialog(BuildContext context) async {
   return showDialog<AddressModel>(
     context: context,
     builder: (context) => AlertDialog(
-      title: const Text("Add New Address"),
+      title: Text(AppLocalizations.of(context)!.add_new_address),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           TextField(
             controller: cityController,
-            decoration: const InputDecoration(labelText: "City"),
+            decoration: InputDecoration(
+              labelText: AppLocalizations.of(context)!.city,
+            ),
           ),
           TextField(
             controller: streetController,
-            decoration: const InputDecoration(labelText: "Street"),
+            decoration: InputDecoration(
+              labelText: AppLocalizations.of(context)!.street,
+            ),
           ),
           TextField(
             controller: buildingController,
-            decoration: const InputDecoration(labelText: "Building"),
+            decoration: InputDecoration(
+              labelText: AppLocalizations.of(context)!.building,
+            ),
           ),
         ],
       ),
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text("Cancel"),
+          child: Text(AppLocalizations.of(context)!.cancel),
         ),
         ElevatedButton(
           onPressed: () {
@@ -49,7 +57,7 @@ Future<AddressModel?> showAddAddressDialog(BuildContext context) async {
             );
             Navigator.pop(context, address);
           },
-          child: const Text("Add"),
+          child: Text(AppLocalizations.of(context)!.add),
         ),
       ],
     ),

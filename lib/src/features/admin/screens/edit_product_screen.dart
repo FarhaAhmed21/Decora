@@ -94,7 +94,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
       );
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => AllProductsScreen()),
+        MaterialPageRoute(builder: (context) => const AllProductsScreen()),
       );
     } catch (e) {
       ScaffoldMessenger.of(

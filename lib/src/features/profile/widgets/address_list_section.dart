@@ -1,3 +1,4 @@
+import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:decora/src/features/Auth/models/address_model.dart';
@@ -61,7 +62,7 @@ class _AddressListSectionState extends State<AddressListSection> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Addresses",
+              AppLocalizations.of(context)!.addresses,
               style: TextStyle(
                 color: AppColors.mainText(context),
                 fontSize: 16,
@@ -82,7 +83,7 @@ class _AddressListSectionState extends State<AddressListSection> {
         // القائمة
         if (_addresses.isEmpty)
           Text(
-            "No addresses added yet.",
+            AppLocalizations.of(context)!.no_addresses,
             style: TextStyle(color: AppColors.secondaryText(context)),
           )
         else

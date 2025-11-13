@@ -345,4 +345,40 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get categoryOutdoor => 'Outdoor';
+
+  @override
+  String get name => 'Name';
+
+  @override
+  String get phone_number => 'Phone Number';
+
+  @override
+  String get addresses => 'Addresses';
+
+  @override
+  String get city => 'City';
+
+  @override
+  String get street => 'Street';
+
+  @override
+  String get building => 'Building';
+
+  @override
+  String get add_new_address => 'Add New Address';
+
+  @override
+  String get add => 'Add';
+
+  @override
+  String get no_addresses => 'No addresses found';
+
+  @override
+  String get save_changes => 'Save Changes';
+
+  @override
+  String get take_photo => 'Take Photo';
+
+  @override
+  String get choose_from_gallery => 'Choose from Gallery';
 }

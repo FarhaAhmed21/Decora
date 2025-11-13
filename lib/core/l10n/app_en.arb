@@ -112,7 +112,21 @@
   "categoryBedroom": "Bedroom",
   "categoryOffice": "Office",
   "categoryDining": "Dining",
-  "categoryOutdoor": "Outdoor"
+  "categoryOutdoor": "Outdoor",
+  "name": "Name",
+"phone_number": "Phone Number",
+"addresses": "Addresses",
+"city": "City",
+"street": "Street",
+"building": "Building",
+"add_new_address": "Add New Address",
+"add": "Add",
+"cancel": "Cancel",
+"no_addresses": "No addresses found",
+"save_changes": "Save Changes",
+"take_photo": "Take Photo",
+"choose_from_gallery": "Choose from Gallery"
+
 
 
 }
