@@ -3,8 +3,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:decora/src/features/product_details/models/product_model.dart';
 
 class CartRepository {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore;
+  final FirebaseAuth _auth;
+
+  CartRepository({
+    FirebaseFirestore? firestore,
+    FirebaseAuth? auth,
+  })  : _firestore = firestore ?? FirebaseFirestore.instance,
+        _auth = auth ?? FirebaseAuth.instance;
 
   /// ✅ Fetch personal (non-shared) cart products with product details
   Future<List<Map<String, dynamic>>> getPersonalCartProducts() async {
