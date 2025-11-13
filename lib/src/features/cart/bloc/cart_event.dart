@@ -1,13 +1,9 @@
 
 abstract class CartEvent {
   const CartEvent();
-
-  @override
-  List<Object?> get props => [];
 }
 
 class LoadPersonalCart extends CartEvent {}
-
 class AddProductToCartEvent extends CartEvent {
   final String productId;
   final int quantity;
@@ -19,7 +15,6 @@ class AddProductToCartEvent extends CartEvent {
 }
 
 class LoadSharedCart extends CartEvent{}
-
 class MinusProductToCartEvent extends CartEvent {
   final String productId;
   final int quantity;
@@ -29,7 +24,6 @@ class MinusProductToCartEvent extends CartEvent {
   @override
   List<Object?> get props => [productId, quantity];
 }
-
 class LoadCartTotalsEvent extends CartEvent {
 
 }

@@ -358,4 +358,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get categoryOutdoor => 'Outdoor';
+
+  @override
+  String get shared_cart_users => 'Shared Cart Users';
 }

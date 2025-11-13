@@ -62,6 +62,8 @@ dependencies:
   firebase_auth_mocks: ^0.14.2
   provider: ^6.1.2
   bloc_test: ^9.1.0
+  
+  flutter_local_notifications: ^17.2.1
 
 
 

@@ -1,5 +1,6 @@
 import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/core/utils/app_size.dart';
+import 'package:decora/src/features/cart/pages/view_all_page.dart';
 import 'package:decora/src/features/cart/widgets/product_card.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -130,7 +131,14 @@ class _SharedCartState extends State<SharedCart>
                         curve: Curves.easeInOut,
                         offset: _isVisible ? Offset.zero : const Offset(1.5, 0),
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => ViewAllPage(usersId: userIds),
+                              ),
+                            );
+                          },
                           child: Text(
                             AppLocalizations.of(context)!.view_all,
                             style: TextStyle(
