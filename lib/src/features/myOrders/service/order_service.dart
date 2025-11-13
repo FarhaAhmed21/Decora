@@ -36,7 +36,6 @@ class OrderService {
 
     final today = DateFormat('dd MMM, yyyy').format(DateTime.now());
 
-    // 1. FIND CART OUTSIDE TRANSACTION (we need the doc ID)
     final cartQuery = _firestore
         .collection('carts')
         .where('isShared', isEqualTo: isShared)
@@ -111,7 +110,6 @@ class OrderService {
         );
       }
 
-      // DELETE CART
       transaction.delete(cartRef);
     });
   }

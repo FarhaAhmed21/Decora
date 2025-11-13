@@ -1,3 +1,4 @@
+import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/generated/assets.dart';
 import 'package:decora/src/features/orderTracking/service/add_days.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
@@ -13,25 +14,25 @@ class OrderStatus extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<Map<String, dynamic>> orderStatusList = [
       {
-        'title': "Order Placed",
+        'title': AppLocalizations.of(context)!.orderPlaced,
         'date': date,
         'isCompleted': true,
         'iconPath': Assets.trackingIcon1,
       },
       {
-        'title': "In Progress",
+        'title': AppLocalizations.of(context)!.inProgress,
         'date': addDays(date, 2),
         'isCompleted': oStatus == 1 || oStatus == 2 || oStatus == 3,
         'iconPath': Assets.trackingIcon2,
       },
       {
-        'title': "Shipped",
+        'title': AppLocalizations.of(context)!.shipped,
         'date': addDays(date, 4),
         'isCompleted': oStatus == 2 || oStatus == 3,
         'iconPath': Assets.trackingIcon3,
       },
       {
-        'title': "Delivered",
+        'title': AppLocalizations.of(context)!.delivered,
         'date': addDays(date, 5),
         'isCompleted': oStatus == 3,
         'iconPath': Assets.trackingIcon4,
@@ -86,7 +87,15 @@ class OrderStatusIcons extends StatelessWidget {
       children: [
         if (showLine)
           Padding(
-            padding: const EdgeInsets.only(left: 20, top: 35),
+            padding: EdgeInsets.only(
+              left: Localizations.localeOf(context).languageCode == 'en'
+                  ? 20
+                  : 0,
+              right: Localizations.localeOf(context).languageCode == 'en'
+                  ? 0
+                  : 20,
+              top: 35,
+            ),
             child: Container(
               height: 60,
               width: 3,
@@ -139,7 +148,7 @@ class OrderStatusIcons extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  isCompleted ? date : "Unknown",
+                  isCompleted ? date : AppLocalizations.of(context)!.unknown,
                   style: TextStyle(
                     color: AppColors.secondaryText(context),
                     fontSize: 14,
@@ -150,7 +159,9 @@ class OrderStatusIcons extends StatelessWidget {
 
             const Spacer(),
             Text(
-              isCompleted ? "Completed" : "Pending",
+              isCompleted
+                  ? AppLocalizations.of(context)!.completed
+                  : AppLocalizations.of(context)!.pending,
               style: TextStyle(
                 color: AppColors.secondaryText(context),
                 fontSize: 14,

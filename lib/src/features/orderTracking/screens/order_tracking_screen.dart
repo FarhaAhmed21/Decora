@@ -1,3 +1,4 @@
+import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/generated/assets.dart';
 import 'package:decora/src/features/home/main_screen.dart';
 import 'package:decora/src/features/myOrders/service/order_service.dart';
@@ -30,7 +31,9 @@ class OrderTrackingScreen extends StatelessWidget {
             return const Center(child: CircularProgressIndicator());
           }
           if (!orderSnapshot.hasData || orderSnapshot.data!.isEmpty) {
-            return const Center(child: Text("Order not found"));
+            return Center(
+              child: Text(AppLocalizations.of(context)!.orderNotFound),
+            );
           }
 
           final order = orderSnapshot.data!;
@@ -45,7 +48,9 @@ class OrderTrackingScreen extends StatelessWidget {
                 return const Center(child: CircularProgressIndicator());
               }
               if (!productsSnapshot.hasData || productsSnapshot.data!.isEmpty) {
-                return const Center(child: Text("No products found"));
+                return Center(
+                  child: Text(AppLocalizations.of(context)!.noProductsFound),
+                );
               }
 
               final orderProducts = productsSnapshot.data!
@@ -57,7 +62,7 @@ class OrderTrackingScreen extends StatelessWidget {
                 children: [
                   SizedBox(height: MediaQuery.of(context).padding.top + 5),
                   CustomAppBar(
-                    title: 'Order Tracking',
+                    title: AppLocalizations.of(context)!.orderTracking,
                     onBackPressed: () {
                       Navigator.pop(context);
                     },
@@ -78,7 +83,7 @@ class OrderTrackingScreen extends StatelessWidget {
                               ),
                             const SizedBox(height: 10),
                             Text(
-                              "Order Details",
+                              AppLocalizations.of(context)!.orderDetails,
                               style: TextStyle(
                                 color: AppColors.mainText(context),
                                 fontSize: 18,
@@ -89,7 +94,9 @@ class OrderTrackingScreen extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  "Expected Delivery Date",
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.expectedDeliveryDate,
                                   style: TextStyle(
                                     color: AppColors.secondaryText(context),
                                     fontSize: 16,
@@ -109,7 +116,7 @@ class OrderTrackingScreen extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  "Order ID",
+                                  AppLocalizations.of(context)!.orderID,
                                   style: TextStyle(
                                     color: AppColors.secondaryText(context),
                                     fontSize: 16,
@@ -128,7 +135,7 @@ class OrderTrackingScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 25),
                             Text(
-                              "Order Status",
+                              AppLocalizations.of(context)!.orderStatus,
                               style: TextStyle(
                                 color: AppColors.mainText(context),
                                 fontSize: 18,
@@ -150,6 +157,7 @@ class OrderTrackingScreen extends StatelessWidget {
                                   ? 2
                                   : 1,
                             ),
+                            const SizedBox(height: 100),
                           ],
                         ),
                       ),

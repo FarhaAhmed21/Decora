@@ -16,7 +16,14 @@ class TopSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(right: AppSize.width(context) * 0.027),
+      padding: EdgeInsets.only(
+        left: Localizations.localeOf(context).languageCode == 'en'
+            ? 0
+            : AppSize.width(context) * 0.027,
+        right: Localizations.localeOf(context).languageCode == 'en'
+            ? AppSize.width(context) * 0.027
+            : 0,
+      ),
       child: GestureDetector(
         onTap: onTap,
         child: Container(

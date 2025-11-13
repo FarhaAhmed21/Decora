@@ -19,7 +19,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: Row(
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 20),
+            padding: EdgeInsets.only(
+              left: Localizations.localeOf(context).languageCode == 'ar' ? 0 : 20,
+              right: Localizations.localeOf(context).languageCode == 'ar' ? 20 : 0,
+            ),
             child: InkWell(
               borderRadius: BorderRadius.circular(12),
               onTap: onBackPressed ?? () => Navigator.pop(context),

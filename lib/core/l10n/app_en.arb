@@ -113,8 +113,25 @@
   "categoryBedroom": "Bedroom",
   "categoryOffice": "Office",
   "categoryDining": "Dining",
-  "categoryOutdoor": "Outdoor"
-
+  "categoryOutdoor": "Outdoor",
+  "myOrders": "My Orders",
+  "all": "All",
+  "delivered": "Delivered",
+  "shipped": "Shipped",
+  "inProgress": "In Progress",
+  "none": "None",
+  "orderID": "Order ID",
+  "pending": "Pending",
+  "details": "Details",
+  "orderNotFound": "Order not found",
+  "orderTracking": "Order Tracking",
+  "orderDetails": "Order Details",
+  "expectedDeliveryDate": "Expected Delivery Date",
+  "orderStatus": "Order Status",
+  "noProductsFound": "No products found",
+  "orderPlaced": "Order Placed",
+"completed": "Completed",
+"unknown": "Unknown"
 
 
 }

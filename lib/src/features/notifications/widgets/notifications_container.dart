@@ -63,7 +63,7 @@ class NoificationsContainer extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             color: AppColors.mainText(context),
                             fontSize:
-                                15, // CHECK THIS: Check the font with the device
+                                15,
                             letterSpacing: -0.2,
                           ),
                         ),

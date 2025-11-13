@@ -114,7 +114,25 @@
     "categoryBedroom": "غرفة النوم",
     "categoryOffice": "المكتب",
     "categoryDining": "غرفة الطعام",
-    "categoryOutdoor": "خارجي"
+    "categoryOutdoor": "خارجي",
+  "myOrders": "طلباتي",
+  "all": "الكل",
+  "delivered": "تم التوصيل",
+  "shipped": "تم الشحن",
+  "inProgress": "قيد التنفيذ",
+  "none": "لا يوجد",
+  "orderID": "رقم الطلب",
+"pending": "قيد التنفيذ", 
+"details": "التفاصيل", 
+"orderNotFound": "لم يتم العثور على الطلب",
+"orderTracking": "تتبع الطلب",
+"orderDetails": "تفاصيل الطلب",
+"expectedDeliveryDate": "تاريخ التسليم المتوقع",
+"orderStatus": "حالة الطلب",
+"noProductsFound": "لم يتم العثور على منتجات",
+"orderPlaced": "تم تقديم الطلب",
+"completed": "مكتمل",
+"unknown": "غير معروف"
 
 
 }

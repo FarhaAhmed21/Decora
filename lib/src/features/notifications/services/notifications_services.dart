@@ -7,7 +7,7 @@ class NotificationService {
   static final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   static final userId = AuthService().currentUser?.uid;
 
-  /// Add a new notification (auto-creates a Firestore doc for new users)
+  /// Add a new notification
   static Future<void> addNotification(String title, String body) async {
     final formattedTime = DateFormat(
       'yyyy-MM-dd HH:mm:ss',
@@ -44,7 +44,7 @@ class NotificationService {
     NotificationMessage.showNotification(title: title, message: body);
   }
 
-  /// Get all notifications for a user
+  // Get all notifications for a user
   Future<List<Map<String, dynamic>>> getUserNotifications() async {
     final query = await _firestore
         .collection('notifications')
@@ -73,7 +73,7 @@ class NotificationService {
     return notifications;
   }
 
-  /// Get the number of unread notifications for a user
+  // Get the number of unread notifications for a user
   Future<int> getUnreadNotificationsCount() async {
     final query = await _firestore
         .collection('notifications')

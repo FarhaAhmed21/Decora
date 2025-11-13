@@ -1,3 +1,4 @@
+import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/generated/assets.dart';
 import 'package:decora/src/features/orderTracking/screens/order_tracking_screen.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
@@ -43,7 +44,7 @@ class OrderContainer extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    'Order ID #$orderId',
+                    AppLocalizations.of(context)!.orderID + ' #$orderId',
                     style: TextStyle(
                       color: AppColors.mainText(context),
                       fontWeight: FontWeight.bold,
@@ -88,12 +89,20 @@ class OrderContainer extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Image.asset(
-                          Assets.trackingIcon3,
+                          orderStatus == "Shipped"
+                              ? Assets.trackingIcon2
+                              : orderStatus == "Delivered"
+                              ? Assets.trackingIcon4
+                              : Assets.trackingIcon3,
                           color: AppColors.primary(context),
                           height: 14,
                         ),
                         Text(
-                          orderStatus,
+                          orderStatus == "Shipped"
+                              ? AppLocalizations.of(context)!.shipped
+                              : orderStatus == "Delivered"
+                              ? AppLocalizations.of(context)!.delivered
+                              : AppLocalizations.of(context)!.pending,
                           style: TextStyle(
                             color: AppColors.primary(context),
                             fontWeight: FontWeight.bold,
@@ -105,14 +114,22 @@ class OrderContainer extends StatelessWidget {
                   ),
                   const Spacer(),
                   Text(
-                    "Details  ",
+                    AppLocalizations.of(context)!.details + "  ",
                     style: TextStyle(
                       color: AppColors.primary(context),
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
                     ),
                   ),
-                  Image.asset(Assets.sideArrowIcon, height: 11.5),
+                  Transform(
+                    alignment: Alignment.center,
+                    transform: Matrix4.rotationY(
+                      Localizations.localeOf(context).languageCode == 'ar'
+                          ? 3.1416
+                          : 0,
+                    ),
+                    child: Image.asset(Assets.sideArrowIcon, height: 11.5),
+                  ),
                 ],
               ),
             ],

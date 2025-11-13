@@ -1,3 +1,4 @@
+import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/src/features/myOrders/service/order_service.dart';
 import 'package:decora/src/features/myOrders/widgets/order_container.dart';
 import 'package:decora/src/features/myOrders/widgets/top_slider.dart';
@@ -15,8 +16,8 @@ class MyOrdesScreen extends StatefulWidget {
 
 class _MyOrdesScreenState extends State<MyOrdesScreen> {
   String selectedStatus = "All";
-  List<Map<String, dynamic>> allOrders = []; // start empty
-  bool isLoading = true; // for progress indicator
+  List<Map<String, dynamic>> allOrders = [];
+  bool isLoading = true;
 
   @override
   void initState() {
@@ -64,7 +65,6 @@ class _MyOrdesScreenState extends State<MyOrdesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Filter orders based on selected status
     final filteredOrders = selectedStatus == "All"
         ? allOrders
         : allOrders
@@ -80,37 +80,44 @@ class _MyOrdesScreenState extends State<MyOrdesScreen> {
               children: [
                 SizedBox(height: MediaQuery.of(context).padding.top + 5),
                 CustomAppBar(
-                  title: "My Orders",
+                  title: AppLocalizations.of(context)!.myOrders,
                   onBackPressed: () {
                     Navigator.pop(context);
                   },
                 ),
-                // 🔽 Top Slider Filters
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 20),
+                    padding: EdgeInsets.only(
+                      left: Localizations.localeOf(context).languageCode == 'ar'
+                          ? 0
+                          : 20,
+                      right:
+                          Localizations.localeOf(context).languageCode == 'ar'
+                          ? 20
+                          : 0,
+                    ),
                     child: Row(
                       children: [
                         TopSlider(
-                          text: "All",
+                          text: AppLocalizations.of(context)!.all,
                           isSelected: selectedStatus == "All",
                           onTap: () => setState(() => selectedStatus = "All"),
                         ),
                         TopSlider(
-                          text: "Delivered",
+                          text: AppLocalizations.of(context)!.delivered,
                           isSelected: selectedStatus == "Delivered",
                           onTap: () =>
                               setState(() => selectedStatus = "Delivered"),
                         ),
                         TopSlider(
-                          text: "Shipped",
+                          text: AppLocalizations.of(context)!.shipped,
                           isSelected: selectedStatus == "Shipped",
                           onTap: () =>
                               setState(() => selectedStatus = "Shipped"),
                         ),
                         TopSlider(
-                          text: "In Progress",
+                          text: AppLocalizations.of(context)!.inProgress,
                           isSelected: selectedStatus == "Pending",
                           onTap: () =>
                               setState(() => selectedStatus = "Pending"),
@@ -132,7 +139,7 @@ class _MyOrdesScreenState extends State<MyOrdesScreen> {
                                   padding: const EdgeInsets.only(top: 40),
                                   child: Center(
                                     child: Text(
-                                      "None",
+                                      AppLocalizations.of(context)!.none,
                                       style: TextStyle(
                                         fontSize: 16,
                                         color: AppColors.mainText(
