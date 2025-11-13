@@ -1,35 +1,39 @@
 import 'package:decora/generated/assets.dart';
+import 'package:decora/src/features/orderTracking/service/add_days.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class OrderStatus extends StatelessWidget {
-  const OrderStatus({super.key});
+  final String date;
+  final int oStatus;
+
+  const OrderStatus({super.key, required this.date, this.oStatus = 0});
 
   @override
   Widget build(BuildContext context) {
     final List<Map<String, dynamic>> orderStatusList = [
       {
         'title': "Order Placed",
-        'date': "28 Jul, 2025",
+        'date': date,
         'isCompleted': true,
         'iconPath': Assets.trackingIcon1,
       },
       {
         'title': "In Progress",
-        'date': "28 Jul, 2025",
-        'isCompleted': true,
+        'date': addDays(date, 2),
+        'isCompleted': oStatus == 1 || oStatus == 2 || oStatus == 3,
         'iconPath': Assets.trackingIcon2,
       },
       {
         'title': "Shipped",
-        'date': "28 Jul, 2025",
-        'isCompleted': true,
+        'date': addDays(date, 4),
+        'isCompleted': oStatus == 2 || oStatus == 3,
         'iconPath': Assets.trackingIcon3,
       },
       {
         'title': "Delivered",
-        'date': "28 Jul, 2025",
-        'isCompleted': false,
+        'date': addDays(date, 5),
+        'isCompleted': oStatus == 3,
         'iconPath': Assets.trackingIcon4,
       },
     ];

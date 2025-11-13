@@ -9,6 +9,7 @@ class NotificationMessage {
   static final FlutterLocalNotificationsPlugin _plugin =
       FlutterLocalNotificationsPlugin();
 
+
   /// Call this once (usually in main.dart before runApp)
   static Future<void> initialize() async {
     const AndroidInitializationSettings android =

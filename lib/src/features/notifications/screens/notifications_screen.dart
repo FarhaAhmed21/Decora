@@ -154,7 +154,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                     child: Text(
                       "No notifications yet.",
                       style: TextStyle(
-                        color: AppColors.mainText(context),
+                        color: AppColors.mainText(
+                          context,
+                        ).withValues(alpha: 0.5),
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),

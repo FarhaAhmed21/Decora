@@ -22,7 +22,9 @@ class TopSlider extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           decoration: BoxDecoration(
-            color: isSelected ? AppColors.primary(context) : AppColors.cardColor(context),
+            color: isSelected
+                ? AppColors.primary(context)
+                : AppColors.cardColor(context),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Text(
