@@ -3,7 +3,17 @@ import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class OrderContainer extends StatelessWidget {
-  const OrderContainer({super.key});
+  final String orderId;
+  final String orderDate;
+  final String orderAmount;
+  final String orderStatus;
+  const OrderContainer({
+    super.key,
+    this.orderId = 'XXXXX',
+    this.orderDate = 'XX XXX, 20XX',
+    this.orderAmount = 'XXXX',
+    this.orderStatus = 'XXXXX',
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +30,7 @@ class OrderContainer extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  'Order ID #12345',
+                  'Order ID #$orderId',
                   style: TextStyle(
                     color: AppColors.mainText(context),
                     fontWeight: FontWeight.bold,
@@ -29,7 +39,7 @@ class OrderContainer extends StatelessWidget {
                 ),
                 const Spacer(),
                 Text(
-                  '1120 EGP',
+                  '$orderAmount EGP',
                   style: TextStyle(
                     color: AppColors.mainText(context),
                     fontWeight: FontWeight.bold,
@@ -41,7 +51,7 @@ class OrderContainer extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  '14 Jun, 2025',
+                  orderDate,
                   style: TextStyle(
                     color: AppColors.secondaryText(context),
                     fontSize: 14,
@@ -70,7 +80,7 @@ class OrderContainer extends StatelessWidget {
                         height: 14,
                       ),
                       Text(
-                        "Shipping",
+                        orderStatus,
                         style: TextStyle(
                           color: AppColors.primary(context),
                           fontWeight: FontWeight.bold,

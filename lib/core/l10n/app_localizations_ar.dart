@@ -41,7 +41,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get our_Categories => 'فئاتنا';
 
   @override
-  String get cart => 'السلة';
+  String get cart => 'سلة تسوق';
 
   @override
   String get my_cart => 'سلة التسوق الخاصة بي';
@@ -113,7 +113,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get rememberMe => 'تذكرني';
 
   @override
-  String get forgotPassword => 'نسيت كلمة المرور';
+  String get forgotPassword => 'نسيت كلمة المرور؟';
 
   @override
   String get orLoginWith => 'أو سجل باستخدام';
@@ -288,6 +288,19 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get enterEmailreset =>
       'أدخل بريدك الإلكتروني لإعادة تعيين كلمة المرور';
+
+  @override
+  String get enter_promo_code => 'أدخل رمز العرض الترويجي';
+
+  @override
+  String get an_error_occurred_while_processing_the_payment =>
+      'حدث خطأ أثناء تنفيذ عملية الدفع';
+
+  @override
+  String get your_cart_is_empty => 'عربتك فارغة';
+
+  @override
+  String get no_products => 'لا يوجد منتجات';
 
   @override
   String get profile => 'الملف الشخصي';
