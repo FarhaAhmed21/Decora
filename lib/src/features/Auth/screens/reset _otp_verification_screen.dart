@@ -86,9 +86,9 @@ class _OtpResetScreenState extends State<OtpResetScreen> {
       Widget targetScreen;
 
       if (widget.usePurpose == "change") {
-        targetScreen = NewPasswordScreen();
+        targetScreen = const NewPasswordScreen();
       } else {
-        targetScreen = NewPasswordScreen();
+        targetScreen = const NewPasswordScreen();
       }
 
       Navigator.push(context, MaterialPageRoute(builder: (_) => targetScreen));

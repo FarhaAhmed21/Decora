@@ -59,7 +59,7 @@ void main() {
             body: Column(
               children: [
                 for (int i = 0; i < 4; i++) TextField(key: Key('otp_$i')),
-                TextButton(onPressed: () {}, child: Text('Verify')),
+                TextButton(onPressed: () {}, child:const Text('Verify')),
               ],
             ),
           ),
@@ -74,7 +74,7 @@ void main() {
       await tester.pumpAndSettle();
 
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             body: Text(
               'Verification Successful',
@@ -119,7 +119,7 @@ void main() {
             body: Column(
               children: [
                 TextFormField(key: const Key('forgot_email')),
-                TextButton(onPressed: () {}, child: Text('Continue')),
+                TextButton(onPressed: () {}, child:const Text('Continue')),
               ],
             ),
           ),
@@ -140,7 +140,7 @@ void main() {
             body: Column(
               children: [
                 for (int i = 0; i < 4; i++) TextField(key: Key('reset_otp_$i')),
-                TextButton(onPressed: () {}, child: Text('Verify')),
+                TextButton(onPressed: () {}, child:const Text('Verify')),
               ],
             ),
           ),
@@ -160,7 +160,7 @@ void main() {
             body: Column(
               children: [
                 TextFormField(key: const Key('new_password')),
-                TextButton(onPressed: () {}, child: Text('Save New Password')),
+                TextButton(onPressed: () {}, child:const Text('Save New Password')),
               ],
             ),
           ),
@@ -176,9 +176,9 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: TextButton(
-              key: Key('back_to_login'),
+              key:const Key('back_to_login'),
               onPressed: () {},
-              child: Text('Back to Login'),
+              child:const Text('Back to Login'),
             ),
           ),
         ),
