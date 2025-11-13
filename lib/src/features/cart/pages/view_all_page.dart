@@ -32,7 +32,7 @@ class ViewAllPage extends StatelessWidget {
           });
         }
       } catch (e) {
-        print('⚠️ Error loading user $id: $e');
+        debugPrint("Error loading user $id: $e");
       }
     }
     return users;
@@ -88,14 +88,13 @@ class ViewAllPage extends StatelessWidget {
             return const Center(child: Text('No user details found.'));
           }
           return ListView.builder(
-
             itemCount: users.length,
             itemBuilder: (_, index) {
               final user = users[index];
               return Card(
                 margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 9),
                 child: ListTile(
-                    leading: CircleAvatar(
+                  leading: CircleAvatar(
                     backgroundImage: NetworkImage(user['photoUrl']),
                   ),
                   title: Text(user['name']),

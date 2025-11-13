@@ -32,7 +32,6 @@ class _SharedCartState extends State<SharedCart>
       _controller?.addListener(_handleTabChange);
     }
 
-    // Load shared cart when tab is visible
     if (_isVisible) {
       context.read<CartBloc>().add(LoadSharedCart());
     }
@@ -46,7 +45,6 @@ class _SharedCartState extends State<SharedCart>
         _isVisible = _controller!.index == 1;
       });
 
-      // Load shared cart when tab becomes visible
       if (_isVisible) {
         context.read<CartBloc>().add(LoadSharedCart());
       }
@@ -77,7 +75,6 @@ class _SharedCartState extends State<SharedCart>
             );
           }
 
-          // We can just take the first shared cart for now
           final sharedCart = state.items.first;
           final products = sharedCart['products'] as List<Map<String, dynamic>>;
           final userIds = sharedCart['userIds'] as List<String>? ?? [];
@@ -87,7 +84,7 @@ class _SharedCartState extends State<SharedCart>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // 🔹 Owners Row
+                // Owners Row
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15.0),
                   child: Row(
@@ -113,7 +110,6 @@ class _SharedCartState extends State<SharedCart>
                               width: AppSize.width(context) * 0.3,
                               child: OverlappingImages(
                                 images: userIds.map((id) {
-                                  // Replace with actual user image URLs if you have them
                                   return NetworkImage(
                                     'https://i.pravatar.cc/150?u=$id',
                                   );
@@ -153,7 +149,6 @@ class _SharedCartState extends State<SharedCart>
                   ),
                 ),
 
-                // 🔹 Product List
                 ListView.builder(
                   itemCount: products.length,
                   shrinkWrap: true,

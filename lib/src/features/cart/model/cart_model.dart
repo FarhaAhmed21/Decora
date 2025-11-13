@@ -3,7 +3,7 @@ class Cart {
   final String cartId;
   final List<String> userIds;
   final bool isShared;
-  final Map<String, int> products; // productId → quantity
+  final Map<String, int> products; 
 
   Cart({
     required this.cartId,
