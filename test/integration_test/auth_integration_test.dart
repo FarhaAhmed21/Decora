@@ -59,7 +59,7 @@ void main() {
             body: Column(
               children: [
                 for (int i = 0; i < 4; i++) TextField(key: Key('otp_$i')),
-                TextButton(onPressed: () {}, child: const Text('Verify')),
+                TextButton(onPressed: () {}, child:const Text('Verify')),
               ],
             ),
           ),
@@ -119,7 +119,7 @@ void main() {
             body: Column(
               children: [
                 TextFormField(key: const Key('forgot_email')),
-                TextButton(onPressed: () {}, child: const Text('Continue')),
+                TextButton(onPressed: () {}, child:const Text('Continue')),
               ],
             ),
           ),
@@ -140,7 +140,7 @@ void main() {
             body: Column(
               children: [
                 for (int i = 0; i < 4; i++) TextField(key: Key('reset_otp_$i')),
-                TextButton(onPressed: () {}, child: const Text('Verify')),
+                TextButton(onPressed: () {}, child:const Text('Verify')),
               ],
             ),
           ),
@@ -160,10 +160,7 @@ void main() {
             body: Column(
               children: [
                 TextFormField(key: const Key('new_password')),
-                TextButton(
-                  onPressed: () {},
-                  child: const Text('Save New Password'),
-                ),
+                TextButton(onPressed: () {}, child:const Text('Save New Password')),
               ],
             ),
           ),
@@ -179,9 +176,9 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: TextButton(
-              key: const Key('back_to_login'),
+              key:const Key('back_to_login'),
               onPressed: () {},
-              child: const Text('Back to Login'),
+              child:const Text('Back to Login'),
             ),
           ),
         ),

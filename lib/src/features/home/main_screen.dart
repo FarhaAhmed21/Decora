@@ -72,9 +72,12 @@ class _MainLayoutState extends State<MainLayout> {
             selectedIndex: MainLayout.currentIndex,
             onItemTapped: onTabTapped,
           ),
-          floatingActionButton: CustomFloatingActionButton(products: products),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
+          floatingActionButton: MainLayout.currentIndex != 1
+              ? CustomFloatingActionButton(products: products)
+              : null,
+          floatingActionButtonLocation: MainLayout.currentIndex != 1
+              ? FloatingActionButtonLocation.centerDocked
+              : null,
         );
       },
     );

@@ -158,7 +158,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get backToLogin => 'Back To Login';
 
   @override
-  String get resetPassword => 'Reset your password';
+  String get resetPassword => 'Reset Your Password';
 
   @override
   String get enterEmailOrPhone =>
@@ -290,6 +290,19 @@ class AppLocalizationsEn extends AppLocalizations {
       'Enter your registered email to reset your password';
 
   @override
+  String get enter_promo_code => 'Enter promo code';
+
+  @override
+  String get an_error_occurred_while_processing_the_payment =>
+      'An error occurred while processing the payment';
+
+  @override
+  String get your_cart_is_empty => 'Your cart is empty';
+
+  @override
+  String get no_products => 'No Products';
+
+  @override
   String get profile => 'Profile';
 
   @override
@@ -381,4 +394,5 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get choose_from_gallery => 'Choose from Gallery';
+  String get shared_cart_users => 'Shared Cart Users';
 }

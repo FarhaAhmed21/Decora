@@ -60,8 +60,6 @@
     "saveNewPassword": "Save New Password",
     "passwordResetSuccess": "Password Reset\nSuccessfully!",
     "youCanLoginNow": "You can now log in with your new password",
-    "resetPassword": "Reset your password",
-    "invite":"Invite",
     "see_all": "See all",
    "decora_specials" :"Decora Specials",
     "categories": "Categories",
@@ -88,20 +86,23 @@
   "emailNotFound": "Email Not Found",
 "emailNotFoundMessage": "This email is not registered in our system.",
 "otpIncorrect": "OTP is incorrect",
-  "otpSent": "OTP has been sent to your email",
-   "enterUsername": "Please enter your username",
-   "passwordTooShort": "Password must be at least 6 characters",
-       "enterEmailreset": "Enter your registered email to reset your password",
-       "profile": "Profile",
+
+"otpSent": "OTP has been sent to your email",
+"enterUsername": "Please enter your username",
+"passwordTooShort": "Password must be at least 6 characters",
+"enterEmailreset": "Enter your registered email to reset your password",
+"enter_promo_code":"Enter promo code",
+"an_error_occurred_while_processing_the_payment":"An error occurred while processing the payment",
+"your_cart_is_empty":"Your cart is empty",
+"no_products":"No Products",
+"profile": "Profile",
 "edit_profile": "Edit Profile",
 "change_password": "Change Password",
 "transaction_history": "Transaction History",
 "help_support": "Help & Support",
 "logout": "Logout",
-"new_collection": "New Collection",
 "offers":"Decora Specials",
 "favourite":"Favourites",
-"cart":"Cart",
 "home":"Home",
 "reset":"Reset",
 "filter_by_price":"Filter by Price",
@@ -126,6 +127,8 @@
 "save_changes": "Save Changes",
 "take_photo": "Take Photo",
 "choose_from_gallery": "Choose from Gallery"
+
+  "shared_cart_users":"Shared Cart Users"
 
 
 

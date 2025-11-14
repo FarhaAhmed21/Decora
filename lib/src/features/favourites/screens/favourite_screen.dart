@@ -1,3 +1,4 @@
+
 import 'package:decora/core/utils/app_size.dart';
 import 'package:decora/src/features/favourites/services/fav_service.dart';
 import 'package:decora/src/features/product_details/screens/product_details_screen.dart';
@@ -44,7 +45,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
         filteredProducts = favs;
       });
     } catch (e) {
-      print("Error loading favourites: $e");
+      // print("Error loading favourites: $e");
     } finally {
       setState(() => isLoading = false);
     }

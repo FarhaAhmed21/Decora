@@ -1,4 +1,5 @@
 import 'package:decora/core/l10n/app_localizations.dart';
+import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -8,7 +9,7 @@ class InvitationDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.background(context),
       insetPadding: const EdgeInsets.symmetric(horizontal: 24),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       child: Padding(
@@ -23,10 +24,10 @@ class InvitationDialog extends StatelessWidget {
                 const SizedBox(width: 30),
                 Text(
                   AppLocalizations.of(context)!.invitation,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
-                    color: Colors.black87,
+                    color: AppColors.textColor(context),
                   ),
                 ),
                 IconButton(
@@ -38,7 +39,7 @@ class InvitationDialog extends StatelessWidget {
 
             const SizedBox(height: 20),
 
-            // 🔹 Icons row
+            // Icons row
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -63,14 +64,14 @@ class InvitationDialog extends StatelessWidget {
 
             const SizedBox(height: 30),
 
-            // 🔹 Label
+            // Label
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
                 AppLocalizations.of(context)!.enter_user_name,
-                style: const TextStyle(
+                style:  TextStyle(
                   fontSize: 16,
-                  color: Colors.black,
+                  color: AppColors.textColor(context),
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -78,7 +79,7 @@ class InvitationDialog extends StatelessWidget {
 
             const SizedBox(height: 10),
 
-            // 🔹 Text Field
+            // text Field
             TextField(
               decoration: InputDecoration(
                 hintText: AppLocalizations.of(context)!.enter_user_name,
@@ -100,7 +101,7 @@ class InvitationDialog extends StatelessWidget {
 
             const SizedBox(height: 20),
 
-            // 🔹 Invite Button
+            //Invite Button
             SizedBox(
               width: double.infinity,
               height: 48,

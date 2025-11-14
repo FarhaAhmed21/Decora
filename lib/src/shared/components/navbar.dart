@@ -19,7 +19,7 @@ class CustomBottomNavBar extends StatelessWidget {
     return Selector<AppThemeProvider, bool>(
       selector: (_, provider) => provider.isDarkMode,
       builder: (context, isDarkMode, child) {
-        return BottomAppBar(
+        return selectedIndex !=1 ? BottomAppBar(
           color: AppColors.background(context),
           elevation: 10,
           shape: const CircularNotchedRectangle(),
@@ -64,7 +64,7 @@ class CustomBottomNavBar extends StatelessWidget {
               ),
             ),
           ),
-        );
+        ): const SizedBox.shrink();
       },
     );
   }

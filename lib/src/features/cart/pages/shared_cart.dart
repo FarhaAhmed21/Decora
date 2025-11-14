@@ -1,8 +1,14 @@
 import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/core/utils/app_size.dart';
+import 'package:decora/src/features/cart/pages/view_all_page.dart';
 import 'package:decora/src/features/cart/widgets/product_card.dart';
+import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_image_overlap/flutter_image_overlap.dart';
+import '../bloc/cart_bloc.dart';
+import '../bloc/cart_event.dart';
+import '../bloc/cart_state.dart';
 
 class SharedCart extends StatefulWidget {
   const SharedCart({super.key});
@@ -19,23 +25,29 @@ class _SharedCartState extends State<SharedCart>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
     final controller = DefaultTabController.of(context);
     if (_controller != controller) {
       _controller?.removeListener(_handleTabChange);
       _controller = controller;
       _controller?.addListener(_handleTabChange);
     }
+
+    if (_isVisible) {
+      context.read<CartBloc>().add(LoadSharedCart());
+    }
   }
 
   void _handleTabChange() {
     if (!mounted || _controller == null) return;
 
-
     if (!_controller!.indexIsChanging) {
       setState(() {
         _isVisible = _controller!.index == 1;
       });
+
+      if (_isVisible) {
+        context.read<CartBloc>().add(LoadSharedCart());
+      }
     }
   }
 
@@ -48,88 +60,118 @@ class _SharedCartState extends State<SharedCart>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.only(top: 5.0, bottom: 8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // 🔹 Owners Row
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
-              child: Row(
-                children: [
-                  // Slide owners row in/out
-                  AnimatedSlide(
-                    duration: const Duration(milliseconds: 500),
-                    curve: Curves.easeInOut,
-                    offset: _isVisible ? Offset.zero : const Offset(-1.5, 0),
-                    child: Row(
-                      children: [
-                        Text(
-                          "${AppLocalizations.of(context)!.owners}: ",
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16,
-                            color: Colors.black,
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        SizedBox(
-                          width: AppSize.width(context) * 0.3,
-                          child: const OverlappingImages(
-                            images: [
-                              NetworkImage(
-                                'https://tse4.mm.bing.net/th/id/OIP.PVLm8FPquyPaETrn3OHvuwHaEK?cb=12',
-                              ),
-                              NetworkImage(
-                                'https://tse2.mm.bing.net/th/id/OIP.Erb0ExAqXl5-gVYmqBv_uAHaE8',
-                              ),
-                              NetworkImage(
-                                'https://cdn.pixabay.com/photo/2017/07/12/17/17/sunset-2497594_960_720.png',
-                              ),
-                            ],
-                            imageRadius: 18.0,
-                            overlapOffset: 20.0,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+      body: BlocBuilder<CartBloc, CartState>(
+        builder: (context, state) {
+          if (state.loading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state.error != null) {
+            return Center(child: Text('Error: ${state.error}'));
+          } else if (state.items.isEmpty) {
+            return Center(
+              child: Text(
+                AppLocalizations.of(context)!.no_products,
+                style: TextStyle(color: AppColors.textColor(context)),
+              ),
+            );
+          }
 
-                  const Spacer(),
+          final sharedCart = state.items.first;
+          final products = sharedCart['products'] as List<Map<String, dynamic>>;
+          final userIds = sharedCart['userIds'] as List<String>? ?? [];
 
-                  //  Slide View All in/out
-                  AnimatedSlide(
-                    duration: const Duration(milliseconds: 500),
-                    curve: Curves.easeInOut,
-                    offset: _isVisible ? Offset.zero : const Offset(1.5, 0),
-                    child: TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        AppLocalizations.of(context)!.view_all,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14,
-                          color: Colors.black,
+          return SingleChildScrollView(
+            padding: const EdgeInsets.only(top: 5.0, bottom: 8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Owners Row
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                  child: Row(
+                    children: [
+                      AnimatedSlide(
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.easeInOut,
+                        offset: _isVisible
+                            ? Offset.zero
+                            : const Offset(-1.5, 0),
+                        child: Row(
+                          children: [
+                            Text(
+                              "${AppLocalizations.of(context)!.owners}: ",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                                color: AppColors.textColor(context),
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            SizedBox(
+                              width: AppSize.width(context) * 0.3,
+                              child: OverlappingImages(
+                                images: userIds.map((id) {
+                                  return NetworkImage(
+                                    'https://i.pravatar.cc/150?u=$id',
+                                  );
+                                }).toList(),
+                                imageRadius: 18.0,
+                                overlapOffset: 20.0,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ),
+                      const Spacer(),
+                      AnimatedSlide(
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.easeInOut,
+                        offset: _isVisible ? Offset.zero : const Offset(1.5, 0),
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => ViewAllPage(usersId: userIds),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            AppLocalizations.of(context)!.view_all,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 14,
+                              color: AppColors.textColor(context),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
+                ),
 
-            // 🔹 Product List
-            ListView.builder(
-              itemCount: 10,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                return const ProductCard();
-              },
+                ListView.builder(
+                  itemCount: products.length,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    final item = products[index];
+                    final product = item['product'];
+                    final quantity = item['quantity'] ?? 1;
+
+                    return ProductCard(
+                      id: product.id,
+                      imageUrl: product.colors.first.imageUrl,
+                      title: product.name,
+                      category: product.category,
+                      price: product.price,
+                      quantity: quantity,
+                    );
+                  },
+                ),
+              ],
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
