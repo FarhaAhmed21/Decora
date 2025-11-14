@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/src/features/Auth/screens/otp_verification_screen.dart';
 import 'package:decora/src/features/Auth/services/sendOTPEmail.dart';
@@ -17,6 +18,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
   bool _obscurePassword = true;
   bool _isLoading = false;
+  String? _emailError;
 
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
@@ -35,12 +37,38 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return random.toString().padLeft(4, '0');
   }
 
+  Future<bool> _checkEmailExists(String email) async {
+    try {
+      final userDoc = await FirebaseFirestore.instance
+          .collection('users')
+          .where('email', isEqualTo: email)
+          .limit(1)
+          .get();
+
+      return userDoc.docs.isNotEmpty;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Future<void> _signUp() async {
     if (!_formKey.currentState!.validate()) return;
 
     setState(() => _isLoading = true);
 
     try {
+      final tr = AppLocalizations.of(context)!;
+      final emailExists = await _checkEmailExists(_emailController.text.trim());
+      if (emailExists) {
+        setState(() {
+          _emailError = tr.emailAlreadyRegistered;
+        });
+        _formKey.currentState!.validate();
+        return;
+      } else {
+        _emailError = null;
+      }
+
       final otp = generateOtp();
       await sendOtpEmail(_emailController.text.trim(), otp);
 
@@ -207,6 +235,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       if (!EmailValidator.validate(value)) {
                         return tr.invalidEmail;
                       }
+                      if (_emailError != null) return _emailError;
+
                       return null;
                     },
                   ),

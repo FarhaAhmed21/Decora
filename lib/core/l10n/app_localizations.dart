@@ -859,6 +859,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Redirecting to Payment Gateway'**
   String get redirecting_to_payment_gateway;
+
+  /// No description provided for @emailAlreadyRegistered.
+  ///
+  /// In en, this message translates to:
+  /// **'Email Already Registered'**
+  String get emailAlreadyRegistered;
 }
 
 class _AppLocalizationsDelegate
