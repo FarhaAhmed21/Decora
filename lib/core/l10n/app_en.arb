@@ -114,7 +114,8 @@
   "categoryOffice": "Office",
   "categoryDining": "Dining",
   "categoryOutdoor": "Outdoor",
-  "shared_cart_users":"Shared Cart Users"
+  "shared_cart_users":"Shared Cart Users",
+  "redirecting_to_payment_gateway":"Redirecting to Payment Gateway"
 
 
 

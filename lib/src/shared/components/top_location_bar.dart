@@ -1,5 +1,3 @@
-import 'package:decora/core/l10n/app_localizations.dart';
-import 'package:decora/generated/assets.dart';
 import 'package:decora/src/features/Auth/services/auth_service.dart';
 import 'package:decora/src/features/notifications/screens/notifications_screen.dart';
 import 'package:decora/src/features/notifications/services/notifications_services.dart';

@@ -361,4 +361,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get shared_cart_users => 'Shared Cart Users';
+
+  @override
+  String get redirecting_to_payment_gateway => 'Redirecting to Payment Gateway';
 }

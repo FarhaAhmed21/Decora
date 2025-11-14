@@ -113,7 +113,15 @@ class _MainCartPageState extends State<MainCartPage> {
       );
 
       final paymentUrl = PaymobService.getPaymentUrl(paymentKey);
-
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            AppLocalizations.of(
+              context,
+            )!.redirecting_to_payment_gateway,
+          ),
+        ),
+      );
       Navigator.push(
         context,
         MaterialPageRoute(

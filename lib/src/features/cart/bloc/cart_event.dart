@@ -10,8 +10,6 @@ class AddProductToCartEvent extends CartEvent {
 
   const AddProductToCartEvent( {this.quantity = 1, required this.productId});
 
-  @override
-  List<Object?> get props => [productId, quantity];
 }
 
 class LoadSharedCart extends CartEvent{}
@@ -21,8 +19,7 @@ class MinusProductToCartEvent extends CartEvent {
 
   const MinusProductToCartEvent({this.quantity = 1, required this.productId});
 
-  @override
-  List<Object?> get props => [productId, quantity];
+
 }
 class LoadCartTotalsEvent extends CartEvent {
 

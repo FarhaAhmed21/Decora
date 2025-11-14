@@ -1,5 +1,4 @@
 import 'package:decora/core/l10n/app_localizations.dart';
-import 'package:decora/core/l10n/app_localizations_ar.dart';
 import 'package:decora/src/features/Auth/models/user_model.dart';
 import 'package:decora/src/features/Auth/screens/login_screen.dart';
 import 'package:decora/src/features/Auth/screens/reset%20_otp_verification_screen.dart';

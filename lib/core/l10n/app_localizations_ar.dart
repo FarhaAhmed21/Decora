@@ -361,4 +361,8 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get shared_cart_users => 'المستخدمون في العربة المشتركة';
+
+  @override
+  String get redirecting_to_payment_gateway =>
+      'جارٍ إعادة التوجيه إلى بوابة الدفع';
 }

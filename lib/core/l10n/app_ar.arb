@@ -115,7 +115,8 @@
     "categoryOffice": "المكتب",
     "categoryDining": "غرفة الطعام",
     "categoryOutdoor": "خارجي",
-    "shared_cart_users":"المستخدمون في العربة المشتركة"
+    "shared_cart_users":"المستخدمون في العربة المشتركة",
+    "redirecting_to_payment_gateway":"جارٍ إعادة التوجيه إلى بوابة الدفع"
 
 
 }
