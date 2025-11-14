@@ -2,6 +2,7 @@ import 'package:decora/src/features/cart/bloc/cart_bloc.dart';
 import 'package:decora/src/features/cart/bloc/cart_event.dart';
 import 'package:decora/src/features/cart/bloc/cart_state.dart';
 import 'package:decora/src/features/cart/service/service.dart';
+import 'package:decora/src/features/favourites/services/fav_service.dart';
 import 'package:decora/src/shared/components/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,10 +53,15 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     productPrice = widget.product.price;
     quantity = widget.product.quantity;
     isFavourite = false;
-
     _loadComments();
+    _checkFavourite();
 
     buyQuantity = 0;
+  }
+
+  Future<void> _checkFavourite() async {
+    isFavourite = await FavService().checkIfFavourite(widget.product.id);
+    setState(() {});
   }
 
   Future<void> _loadComments() async {
@@ -181,6 +187,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             setState(() {
                               isFavourite = !isFavourite;
                               if (isFavourite) {
+                                FavService().addfavtolist(widget.product.id);
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(
@@ -191,6 +198,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     backgroundColor: AppColors.primary(context),
                                     duration: const Duration(seconds: 1),
                                   ),
+                                );
+                              } else {
+                                FavService().deletefavfromlist(
+                                  widget.product.id,
                                 );
                               }
                             });
@@ -400,7 +411,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                         borderRadius: BorderRadius.circular(
                                           8.0,
                                         ),
-                                        color: AppColors.innerCardColor(context),
+                                        color: AppColors.innerCardColor(
+                                          context,
+                                        ),
                                       ),
                                       child: Center(
                                         child: Text(

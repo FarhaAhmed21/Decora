@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/core/utils/app_size.dart';
 import 'package:decora/generated/assets.dart';
@@ -8,7 +7,6 @@ import 'package:decora/src/features/cart/bloc/cart_state.dart';
 import 'package:decora/src/features/cart/service/service.dart';
 import 'package:decora/src/features/favourites/services/fav_service.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/product_details/models/product_model.dart';
@@ -32,16 +30,8 @@ class _CustomCardState extends State<CustomCard> {
   }
 
   Future<void> _checkIfFavourite() async {
-    User user = FirebaseAuth.instance.currentUser!;
-    final userDoc = FirebaseFirestore.instance
-        .collection('users')
-        .doc(user.uid);
-    final doc = await userDoc.get();
-    if (doc.exists && doc.data()!.containsKey('favourites')) {
-      setState(() {
-        isFavourite = (doc['favourites'] as List).contains(widget.product.id);
-      });
-    }
+    isFavourite = await FavService().checkIfFavourite(widget.product.id);
+    setState(() {});
   }
 
   @override

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../features/product_details/models/product_model.dart';
 
+// ignore: must_be_immutable
 class CustomFloatingActionButton extends StatelessWidget {
   List<Product> products;
   CustomFloatingActionButton({super.key, required this.products});
