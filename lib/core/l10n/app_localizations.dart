@@ -847,6 +847,11 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Choose from Gallery'**
   String get choose_from_gallery;
+  /// No description provided for @shared_cart_users.
+  ///
+  /// In en, this message translates to:
+  /// **'Shared Cart Users'**
+  String get shared_cart_users;
 }
 
 class _AppLocalizationsDelegate

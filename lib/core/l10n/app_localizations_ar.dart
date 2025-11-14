@@ -394,4 +394,5 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get choose_from_gallery => 'اختيار من المعرض';
+  String get shared_cart_users => 'المستخدمون في العربة المشتركة';
 }

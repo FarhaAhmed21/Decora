@@ -3,10 +3,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:decora/src/features/product_details/models/product_model.dart';
 
 class CartRepository {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore;
+  final FirebaseAuth _auth;
 
-  /// ✅ Fetch personal (non-shared) cart products with product details
+  CartRepository({FirebaseFirestore? firestore, FirebaseAuth? auth})
+    : _firestore = firestore ?? FirebaseFirestore.instance,
+      _auth = auth ?? FirebaseAuth.instance;
+
+  /// Fetch personal cart products
   Future<List<Map<String, dynamic>>> getPersonalCartProducts() async {
     try {
       final user = _auth.currentUser;
@@ -47,11 +51,11 @@ class CartRepository {
 
       return result;
     } catch (e) {
-      print('❌ Error in getPersonalCartProducts: $e');
       rethrow;
     }
   }
 
+  /// Add product to cart or increment quantity if already present
   Future<void> addProductToCart(String productId) async {
     try {
       final user = _auth.currentUser;
@@ -70,7 +74,6 @@ class CartRepository {
           'isShared': false,
           'products': {productId: 1},
         });
-        print("✅ Created new cart with product.");
         return;
       }
 
@@ -87,20 +90,17 @@ class CartRepository {
 
         transaction.update(cartRef, {'products': products});
       });
-
-      print("✅ Product safely added to existing cart (transaction).");
     } catch (e) {
-      print("❌ Error adding product to cart: $e");
       rethrow;
     }
   }
 
+  /// Fetch shared carts involving the current user
   Future<List<Map<String, dynamic>>> getSharedCarts() async {
     try {
       final user = _auth.currentUser;
       if (user == null) throw Exception('User not logged in.');
 
-      // Query carts where the current user is part of and the cart is shared
       final query = await _firestore
           .collection('carts')
           .where('userIds', arrayContains: user.uid)
@@ -146,11 +146,11 @@ class CartRepository {
 
       return sharedCarts;
     } catch (e) {
-      print('❌ Error in getSharedCarts: $e');
       rethrow;
     }
   }
 
+  /// Decrease product quantity in cart or remove if quantity reaches zero
   Future<void> decreaseProductQuantityCart(String productId) async {
     try {
       final user = _auth.currentUser;
@@ -183,11 +183,11 @@ class CartRepository {
         }
       });
     } catch (e) {
-      print("❌ Error decreasing product quantity in cart: $e");
       rethrow;
     }
   }
 
+  /// Calculate total and discounted total for personal cart
   Future<Map<String, double>> getCartTotals() async {
     try {
       final user = _auth.currentUser;
@@ -239,7 +239,6 @@ class CartRepository {
 
       return {'initialTotal': initialTotal, 'discountedTotal': discountedTotal};
     } catch (e) {
-      print('❌ Error in getCartTotals: $e');
       rethrow;
     }
   }

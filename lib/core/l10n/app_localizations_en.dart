@@ -394,4 +394,5 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get choose_from_gallery => 'Choose from Gallery';
+  String get shared_cart_users => 'Shared Cart Users';
 }

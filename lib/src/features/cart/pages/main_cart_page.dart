@@ -120,8 +120,7 @@ class _MainCartPageState extends State<MainCartPage> {
           builder: (context) => PaymentScreen(paymentUrl: paymentUrl),
         ),
       );
-    } catch (e, st) {
-      print("❌ Payment Error: $e\n$st");
+    } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
@@ -181,7 +180,7 @@ class _MainCartPageState extends State<MainCartPage> {
                 ),
               ),
               const SizedBox(height: 15),
-              // Promo field
+
               SizedBox(
                 width: AppSize.width(context) * 0.96,
                 height: 60,
@@ -256,7 +255,6 @@ class _MainCartPageState extends State<MainCartPage> {
               ),
               const SizedBox(height: 10),
 
-              // 🧾 Taxes
               sheetPaymentRow(
                 context,
                 AppLocalizations.of(context)!.taxes,
@@ -264,7 +262,6 @@ class _MainCartPageState extends State<MainCartPage> {
               ),
               const SizedBox(height: 10),
 
-              // 🧾 Discount
               BlocBuilder<CartBloc, CartState>(
                 builder: (context, state) {
                   return sheetPaymentRow(
@@ -277,7 +274,6 @@ class _MainCartPageState extends State<MainCartPage> {
               const SizedBox(height: 10),
               Divider(color: Colors.grey[300]),
 
-              // 🧾 Total
               BlocBuilder<CartBloc, CartState>(
                 builder: (context, state) {
                   return sheetPaymentRow(
