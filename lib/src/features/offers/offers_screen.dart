@@ -111,7 +111,7 @@ class _OffersScreenState extends State<OffersScreen> {
                           crossAxisCount: isLandscape ? 4 : 2,
                           childAspectRatio: isLandscape
                               ? w / (h * 1.6)
-                              : w / (h / 1.48),
+                              : w / (h / 1.6),
                           mainAxisSpacing: 0.010 * w,
                           crossAxisSpacing: 0.010 * w,
                         ),

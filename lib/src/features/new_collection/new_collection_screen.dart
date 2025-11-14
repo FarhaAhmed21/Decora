@@ -148,7 +148,7 @@ class _NewCollectionScreenState extends State<NewCollectionScreen> {
                     crossAxisCount: isLandscape ? 4 : 2,
                     childAspectRatio: isLandscape
                         ? w / (h * 1.6)
-                        : w / (h / 1.48),
+                        : w / (h / 1.7),
                     mainAxisSpacing: 0.010 * w,
                     crossAxisSpacing: 0.010 * w,
                   ),

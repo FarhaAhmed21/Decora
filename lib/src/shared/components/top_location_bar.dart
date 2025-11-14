@@ -1,5 +1,4 @@
 import 'package:decora/core/l10n/app_localizations.dart';
-import 'package:decora/generated/assets.dart';
 import 'package:decora/src/features/Auth/services/auth_service.dart';
 import 'package:decora/src/features/notifications/screens/notifications_screen.dart';
 import 'package:decora/src/features/notifications/services/notifications_services.dart';
@@ -36,7 +35,7 @@ class _TopLocationBarState extends State<TopLocationBar> {
         height: height * 0.06,
         child: ListTile(
           title: Text(
-            "Location",
+            AppLocalizations.of(context)!.location,
             style: TextStyle(
               color: isDark ? Colors.grey[300] : Colors.grey[700],
               fontWeight: FontWeight.w400,
@@ -52,7 +51,7 @@ class _TopLocationBarState extends State<TopLocationBar> {
               ),
               SizedBox(width: width * 0.015),
               Text(
-                "Cairo, Egypt",
+                AppLocalizations.of(context)!.cairoEgypt,
                 style: TextStyle(
                   color: isDark ? Colors.white : Colors.black,
                   fontWeight: FontWeight.w600,

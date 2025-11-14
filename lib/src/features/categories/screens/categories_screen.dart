@@ -33,7 +33,7 @@ class CategoriesScreen extends StatelessWidget {
                 child: LayoutBuilder(
                   builder: (context, constraints) {
                     return buildGridView(
-                      categories: CategoriyRepo.categories,
+                      categories: CategoriyRepo(context: context).categories,
                       context: context,
                       size: size,
                       isLandscape: isLandscape,

@@ -187,26 +187,6 @@ class _SpecialCardState extends State<SpecialCard> {
                   SizedBox(height: cardWidth * 0.02),
 
                   // Rating
-                  Row(
-                    children: [
-                      Image.asset(
-                        Assets.starIcon,
-                        width: cardWidth * 0.05,
-                        height: cardWidth * 0.05,
-                      ),
-                      SizedBox(width: cardWidth * 0.02),
-                      Text(
-                        "4.9",
-                        style: TextStyle(
-                          fontSize: fontScale,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.secondaryText(context),
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  SizedBox(height: cardWidth * 0.03),
 
                   // Price & Explore button
                   Row(
