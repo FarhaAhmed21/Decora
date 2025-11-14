@@ -2,15 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decora/src/features/Auth/services/auth_service.dart';
 import 'package:decora/src/features/notifications/services/notifications_services.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter/foundation.dart'; // Required for @visibleForTesting
 
 class OrderService {
   static final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   static final String? _currentUid = AuthService().currentUser?.uid;
-
-  // TEST-ONLY: Public override — does NOT affect real app
-  @visibleForTesting
-  static Future<Map<String, dynamic>?> Function(String)? testGetOrderByIdOverride;
 
   // =========================================================================
   // 1. GET USER ORDERS
@@ -122,14 +117,7 @@ class OrderService {
   // =========================================================================
   // 3. GET SPECIFIC ORDER BY ID FOR CURRENT USER
   // =========================================================================
-  @visibleForTesting
   static Future<Map<String, dynamic>?> getOrderById(String orderId) async {
-    // TEST OVERRIDE — ONLY ACTIVE IN TESTS
-    if (testGetOrderByIdOverride != null) {
-      return testGetOrderByIdOverride!(orderId);
-    }
-
-    // ORIGINAL LOGIC — UNCHANGED
     if (_currentUid == null) return null;
 
     final snap = await _firestore
