@@ -401,4 +401,7 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get redirecting_to_payment_gateway =>
       'جارٍ إعادة التوجيه إلى بوابة الدفع';
+
+  @override
+  String get emailAlreadyRegistered => 'هذا الإيميل مسجل مسبقًا';
 }

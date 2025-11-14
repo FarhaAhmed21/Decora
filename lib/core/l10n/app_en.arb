@@ -128,6 +128,8 @@
 "take_photo": "Take Photo",
 "choose_from_gallery": "Choose from Gallery",
   "shared_cart_users" : "Shared Cart Users",
-  "redirecting_to_payment_gateway":"Redirecting to Payment Gateway"
+  "redirecting_to_payment_gateway":"Redirecting to Payment Gateway",
+    "emailAlreadyRegistered":"Email Already Registered"
+
 
 }
