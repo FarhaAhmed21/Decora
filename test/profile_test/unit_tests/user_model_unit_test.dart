@@ -1,8 +1,6 @@
 // test/features/auth/models/user_model_unit_test.dart
 import 'package:flutter_test/flutter_test.dart';
 import 'package:decora/src/features/Auth/models/user_model.dart';
-import 'package:decora/src/features/Auth/models/address_model.dart';
-import 'package:decora/src/features/Auth/models/preferences_model.dart';
 
 void main() {
   group('UserModel Unit Tests', () {

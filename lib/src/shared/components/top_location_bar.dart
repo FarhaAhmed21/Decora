@@ -27,7 +27,7 @@ class _TopLocationBarState extends State<TopLocationBar> {
     final size = MediaQuery.of(context).size;
     final width = size.width;
     final height = size.height;
-    final NotificationService _notificationService = NotificationService();
+    final NotificationService notificationService = NotificationService();
     final userId = AuthService().currentUser?.uid;
 
     return Padding(
@@ -169,7 +169,7 @@ class _TopLocationBarState extends State<TopLocationBar> {
                     child: FutureBuilder<int>(
                       future: userId == null
                           ? Future.value(0)
-                          : _notificationService.getUnreadNotificationsCount(),
+                          : notificationService.getUnreadNotificationsCount(),
                       builder: (context, snapshot) {
                         final count = snapshot.data ?? 0;
                         if (count == 0) return const SizedBox.shrink();

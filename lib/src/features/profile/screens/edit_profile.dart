@@ -121,7 +121,7 @@ class _EditProfileUIState extends State<EditProfileUI> {
                       ),
                       child: Text(
                         AppLocalizations.of(context)!.save_changes,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
                           color: Colors.white,

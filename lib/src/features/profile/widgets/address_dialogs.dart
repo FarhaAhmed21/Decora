@@ -1,5 +1,4 @@
 import 'package:decora/core/l10n/app_localizations.dart';
-import 'package:decora/core/l10n/app_localizations_ar.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 import 'package:decora/src/features/Auth/models/address_model.dart';
