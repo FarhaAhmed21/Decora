@@ -7,6 +7,7 @@ import 'package:decora/src/features/cart/pages/my_cart.dart';
 import 'package:decora/src/features/cart/pages/shared_cart.dart';
 import 'package:decora/src/features/cart/service/service.dart';
 import 'package:decora/src/features/cart/widgets/cart_app_bar.dart';
+import 'package:decora/src/features/myOrders/service/order_service.dart';
 import 'package:decora/src/payment/screen/payment-screen.dart';
 import 'package:decora/src/payment/repo/paymob-service.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
@@ -93,6 +94,13 @@ class _MainCartPageState extends State<MainCartPage> {
         return;
       }
 
+      // Add order from cart with correct amount
+      await OrderService.addOrderFromCart(
+        amount: finalTotal.toString(), // use finalTotal here
+        isShared: false,
+        context: context
+      );
+
       // Get Paymob token
       final authToken = await PaymobService.getAuthToken();
       if (authToken.isEmpty) {
@@ -113,6 +121,9 @@ class _MainCartPageState extends State<MainCartPage> {
       );
 
       final paymentUrl = PaymobService.getPaymentUrl(paymentKey);
+
+      print("✅ Order created successfully");
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
@@ -137,6 +148,12 @@ class _MainCartPageState extends State<MainCartPage> {
         ),
       );
     }
+    await OrderService.addOrderFromCart( //TODO: FOR TESTING ONLY
+        amount: "1000",
+        isShared: false,
+        context: context
+      );
+
   }
 
   void openCheckoutSheet(BuildContext context) {

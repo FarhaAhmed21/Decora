@@ -17,11 +17,12 @@ class MainLayout extends StatefulWidget {
   State<MainLayout> createState() => _MainLayoutState();
 }
 
+late Future<List<Product>> mainProductsFuture;
+
 class _MainLayoutState extends State<MainLayout> {
   final ProductService _productService = ProductService();
 
   late Future<List<Product>> specialsFuture;
-  late Future<List<Product>> mainProductsFuture;
 
   @override
   void initState() {

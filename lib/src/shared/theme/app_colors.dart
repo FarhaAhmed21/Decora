@@ -116,7 +116,7 @@ class AppColors {
 
   static Color shoppingIconColor(BuildContext context, {double opacity = 1.0}) {
     final color = _isDark(context)
-        ? darkShoppingIconColor
+        ? darkMainText
         : lightShoppingIconColor;
     return color.withOpacity(opacity);
   }

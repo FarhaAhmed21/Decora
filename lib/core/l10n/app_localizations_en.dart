@@ -360,6 +360,60 @@ class AppLocalizationsEn extends AppLocalizations {
   String get categoryOutdoor => 'Outdoor';
 
   @override
+  String get myOrders => 'My Orders';
+
+  @override
+  String get all => 'All';
+
+  @override
+  String get delivered => 'Delivered';
+
+  @override
+  String get shipped => 'Shipped';
+
+  @override
+  String get inProgress => 'In Progress';
+
+  @override
+  String get none => 'None';
+
+  @override
+  String get orderID => 'Order ID';
+
+  @override
+  String get pending => 'Pending';
+
+  @override
+  String get details => 'Details';
+
+  @override
+  String get orderNotFound => 'Order not found';
+
+  @override
+  String get orderTracking => 'Order Tracking';
+
+  @override
+  String get orderDetails => 'Order Details';
+
+  @override
+  String get expectedDeliveryDate => 'Expected Delivery Date';
+
+  @override
+  String get orderStatus => 'Order Status';
+
+  @override
+  String get noProductsFound => 'No products found';
+
+  @override
+  String get orderPlaced => 'Order Placed';
+
+  @override
+  String get completed => 'Completed';
+
+  @override
+  String get unknown => 'Unknown';
+
+  @override
   String get name => 'Name';
 
   @override
@@ -403,4 +457,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get emailAlreadyRegistered => 'Email Already Registered';
+
+  @override
+  String get order_placed_successfully => 'Order Placed Successfully';
+
+  @override
+  String get order_received_message =>
+      'Your order has been received and is being processed. Thank you for shopping with us!';
 }

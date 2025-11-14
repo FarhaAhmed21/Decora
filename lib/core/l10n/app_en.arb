@@ -114,6 +114,24 @@
   "categoryOffice": "Office",
   "categoryDining": "Dining",
   "categoryOutdoor": "Outdoor",
+  "myOrders": "My Orders",
+  "all": "All",
+  "delivered": "Delivered",
+  "shipped": "Shipped",
+  "inProgress": "In Progress",
+  "none": "None",
+  "orderID": "Order ID",
+  "pending": "Pending",
+  "details": "Details",
+  "orderNotFound": "Order not found",
+  "orderTracking": "Order Tracking",
+  "orderDetails": "Order Details",
+  "expectedDeliveryDate": "Expected Delivery Date",
+  "orderStatus": "Order Status",
+  "noProductsFound": "No products found",
+  "orderPlaced": "Order Placed",
+"completed": "Completed",
+"unknown": "Unknown",
   "name": "Name",
 "phone_number": "Phone Number",
 "addresses": "Addresses",
@@ -129,7 +147,10 @@
 "choose_from_gallery": "Choose from Gallery",
   "shared_cart_users" : "Shared Cart Users",
   "redirecting_to_payment_gateway":"Redirecting to Payment Gateway",
-    "emailAlreadyRegistered":"Email Already Registered"
+    "emailAlreadyRegistered":"Email Already Registered",
+    "order_placed_successfully": "Order Placed Successfully",
+"order_received_message": "Your order has been received and is being processed. Thank you for shopping with us!"
+
 
 
 }

@@ -1,7 +1,6 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class NotificationMessage {
-  // Singleton
   static final NotificationMessage _instance = NotificationMessage._internal();
   factory NotificationMessage() => _instance;
   NotificationMessage._internal();
@@ -9,7 +8,8 @@ class NotificationMessage {
   static final FlutterLocalNotificationsPlugin _plugin =
       FlutterLocalNotificationsPlugin();
 
-  /// Call this once (usually in main.dart before runApp)
+
+  /// (main.dart)
   static Future<void> initialize() async {
     const AndroidInitializationSettings android =
         AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -26,7 +26,6 @@ class NotificationMessage {
     await _plugin.initialize(settings);
   }
 
-  /// **Ready-to-use function** – just call it anywhere
   static Future<void> showNotification({
     required String title,
     required String message,
@@ -34,8 +33,8 @@ class NotificationMessage {
   }) async {
     const AndroidNotificationDetails androidDetails =
         AndroidNotificationDetails(
-      'default_channel', // channel id
-      'Default Channel', // channel name
+      'default_channel',
+      'Default Channel',
       channelDescription: 'Main notification channel',
       importance: Importance.max,
       priority: Priority.high,

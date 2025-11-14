@@ -360,6 +360,60 @@ class AppLocalizationsAr extends AppLocalizations {
   String get categoryOutdoor => 'خارجي';
 
   @override
+  String get myOrders => 'طلباتي';
+
+  @override
+  String get all => 'الكل';
+
+  @override
+  String get delivered => 'تم التوصيل';
+
+  @override
+  String get shipped => 'تم الشحن';
+
+  @override
+  String get inProgress => 'قيد التنفيذ';
+
+  @override
+  String get none => 'لا يوجد';
+
+  @override
+  String get orderID => 'رقم الطلب';
+
+  @override
+  String get pending => 'قيد التنفيذ';
+
+  @override
+  String get details => 'التفاصيل';
+
+  @override
+  String get orderNotFound => 'لم يتم العثور على الطلب';
+
+  @override
+  String get orderTracking => 'تتبع الطلب';
+
+  @override
+  String get orderDetails => 'تفاصيل الطلب';
+
+  @override
+  String get expectedDeliveryDate => 'تاريخ التسليم المتوقع';
+
+  @override
+  String get orderStatus => 'حالة الطلب';
+
+  @override
+  String get noProductsFound => 'لم يتم العثور على منتجات';
+
+  @override
+  String get orderPlaced => 'تم تقديم الطلب';
+
+  @override
+  String get completed => 'مكتمل';
+
+  @override
+  String get unknown => 'غير معروف';
+
+  @override
   String get name => 'الاسم';
 
   @override
@@ -404,4 +458,11 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get emailAlreadyRegistered => 'هذا الإيميل مسجل مسبقًا';
+
+  @override
+  String get order_placed_successfully => 'تم تقديم الطلب بنجاح';
+
+  @override
+  String get order_received_message =>
+      'لقد تم استلام طلبك وهو قيد المعالجة. شكرًا لتسوقك معنا!';
 }
