@@ -853,6 +853,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Shared Cart Users'**
   String get shared_cart_users;
+
+  /// No description provided for @redirecting_to_payment_gateway.
+  ///
+  /// In en, this message translates to:
+  /// **'Redirecting to Payment Gateway'**
+  String get redirecting_to_payment_gateway;
 }
 
 class _AppLocalizationsDelegate
