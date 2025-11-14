@@ -126,10 +126,8 @@
 "no_addresses": "No addresses found",
 "save_changes": "Save Changes",
 "take_photo": "Take Photo",
-"choose_from_gallery": "Choose from Gallery"
-
-  "shared_cart_users":"Shared Cart Users"
-
-
+"choose_from_gallery": "Choose from Gallery",
+  "shared_cart_users" : "Shared Cart Users",
+  "redirecting_to_payment_gateway":"Redirecting to Payment Gateway"
 
 }
