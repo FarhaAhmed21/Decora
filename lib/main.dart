@@ -2,7 +2,6 @@ import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/core/l10n/local_cubit.dart';
 import 'package:decora/firebase_options.dart';
 import 'package:decora/src/features/notifications/services/notification.dart';
-import 'package:decora/src/features/notifications/services/notifications_services.dart';
 import 'package:decora/src/features/splash/cubit/splash_cubit.dart';
 import 'package:decora/src/features/splash/screens/splash_screen.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
@@ -18,7 +17,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await dotenv.load(fileName: ".env");
   await NotificationMessage.initialize();
-  
+
   // NotificationMessage.showNotification(
   //   title: "New Message",
   //   message: "You have a new friend request!",
@@ -70,4 +69,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

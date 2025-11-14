@@ -27,15 +27,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cairoEgypt => 'مصر , القاهرة';
 
   @override
-  String get product_added_to_favourite_successfully =>
-      'تمت إضافة المنتج إلى المفضلة بنجاح';
+  String get product_added_to_favourite_successfully => 'تمت إضافة المنتج إلى المفضلة بنجاح';
 
   @override
   String get product_removed_from_favourite => 'تم حذف المنتج من المفضلة ';
 
   @override
-  String get product_added_to_Cart_successfully =>
-      'تمت إضافة المنتج إلى السلة بنجاح';
+  String get product_added_to_Cart_successfully => 'تمت إضافة المنتج إلى السلة بنجاح';
 
   @override
   String get our_Categories => 'فئاتنا';
@@ -134,8 +132,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get emailVerification => 'التحقق من البريد الإلكتروني';
 
   @override
-  String get verificationMessage =>
-      'لقد أرسلنا رسالة تحقق إلى بريدك الإلكتروني المسجل';
+  String get verificationMessage => 'لقد أرسلنا رسالة تحقق إلى بريدك الإلكتروني المسجل';
 
   @override
   String get verify => 'تحقق';
@@ -150,8 +147,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get verificationSuccess => 'تم التحقق بنجاح!';
 
   @override
-  String get verificationSuccessMessage =>
-      'تم التحقق من حسابك بنجاح. مرحبًا بك في مجموعات ديكورا المميزة';
+  String get verificationSuccessMessage => 'تم التحقق من حسابك بنجاح. مرحبًا بك في مجموعات ديكورا المميزة';
 
   @override
   String get backToLogin => 'العودة لتسجيل الدخول';
@@ -160,15 +156,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get resetPassword => 'إعادة تعيين كلمة المرور';
 
   @override
-  String get enterEmailOrPhone =>
-      'أدخل بريدك الإلكتروني أو رقم هاتفك المسجل لإعادة تعيين كلمة المرور';
+  String get enterEmailOrPhone => 'أدخل بريدك الإلكتروني أو رقم هاتفك المسجل لإعادة تعيين كلمة المرور';
 
   @override
   String get continueButton => 'متابعة';
 
   @override
-  String get otpSentMessage =>
-      'لقد أرسلنا رمز تحقق إلى بريدك الإلكتروني المسجل';
+  String get otpSentMessage => 'لقد أرسلنا رمز تحقق إلى بريدك الإلكتروني المسجل';
 
   @override
   String get didNotReceiveOtp => 'لم تستلم رمز التحقق؟';
@@ -192,8 +186,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get passwordResetSuccess => 'تمت إعادة تعيين كلمة المرور بنجاح!';
 
   @override
-  String get youCanLoginNow =>
-      'يمكنك الآن تسجيل الدخول باستخدام كلمة المرور الجديدة';
+  String get youCanLoginNow => 'يمكنك الآن تسجيل الدخول باستخدام كلمة المرور الجديدة';
 
   @override
   String get see_all => 'انظر المزيد ';
@@ -208,8 +201,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get new_collection => 'مجموعة جديدة';
 
   @override
-  String get elevate_your_living_room_with_timeless_sofas =>
-      'ارتقي بغرفة معيشتك مع أرائك خالدة';
+  String get elevate_your_living_room_with_timeless_sofas => 'ارتقي بغرفة معيشتك مع أرائك خالدة';
 
   @override
   String get explore => 'استكشف';
@@ -236,8 +228,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get accountAlreadyExistsTitle => 'الحساب موجود بالفعل';
 
   @override
-  String get accountAlreadyExistsDescription =>
-      'هذا البريد الإلكتروني مرتبط بطريقة تسجيل دخول أخرى (مثل Google). يُرجى تسجيل الدخول بتلك الطريقة لربط حسابك في فيسبوك.';
+  String get accountAlreadyExistsDescription => 'هذا البريد الإلكتروني مرتبط بطريقة تسجيل دخول أخرى (مثل Google). يُرجى تسجيل الدخول بتلك الطريقة لربط حسابك في فيسبوك.';
 
   @override
   String get cancel => 'الغاء';
@@ -270,8 +261,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get emailNotFound => 'البريد الإلكتروني غير موجود';
 
   @override
-  String get emailNotFoundMessage =>
-      'هذا البريد الإلكتروني غير مسجّل في النظام.';
+  String get emailNotFoundMessage => 'هذا البريد الإلكتروني غير مسجّل في النظام.';
 
   @override
   String get otpIncorrect => 'الرمز غير صحيح';
@@ -286,15 +276,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get passwordTooShort => 'كلمة المرور يجب أن تكون 6 أحرف على الأقل';
 
   @override
-  String get enterEmailreset =>
-      'أدخل بريدك الإلكتروني لإعادة تعيين كلمة المرور';
+  String get enterEmailreset => 'أدخل بريدك الإلكتروني لإعادة تعيين كلمة المرور';
 
   @override
   String get enter_promo_code => 'أدخل رمز العرض الترويجي';
 
   @override
-  String get an_error_occurred_while_processing_the_payment =>
-      'حدث خطأ أثناء تنفيذ عملية الدفع';
+  String get an_error_occurred_while_processing_the_payment => 'حدث خطأ أثناء تنفيذ عملية الدفع';
 
   @override
   String get your_cart_is_empty => 'عربتك فارغة';
@@ -394,5 +382,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get choose_from_gallery => 'اختيار من المعرض';
+
+  @override
   String get shared_cart_users => 'المستخدمون في العربة المشتركة';
 }

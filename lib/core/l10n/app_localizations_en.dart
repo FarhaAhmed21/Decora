@@ -27,15 +27,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cairoEgypt => 'Cairo, Egypt';
 
   @override
-  String get product_added_to_favourite_successfully =>
-      'Product added to Favourite successfully';
+  String get product_added_to_favourite_successfully => 'Product added to Favourite successfully';
 
   @override
   String get product_removed_from_favourite => 'Product removed from Favourite';
 
   @override
-  String get product_added_to_Cart_successfully =>
-      'Product added to Cart successfully';
+  String get product_added_to_Cart_successfully => 'Product added to Cart successfully';
 
   @override
   String get our_Categories => 'Our Categories';
@@ -125,8 +123,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get createAccount => 'Create Account';
 
   @override
-  String get accessCollections =>
-      'Access exclusive collections and personalized ideas';
+  String get accessCollections => 'Access exclusive collections and personalized ideas';
 
   @override
   String get username => 'Username';
@@ -135,8 +132,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get emailVerification => 'Email Verification';
 
   @override
-  String get verificationMessage =>
-      'We’ve sent a verification email to your Registered email address';
+  String get verificationMessage => 'We’ve sent a verification email to your Registered email address';
 
   @override
   String get verify => 'Verify';
@@ -151,8 +147,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get verificationSuccess => 'Verification Successful!';
 
   @override
-  String get verificationSuccessMessage =>
-      'Your account has been verified successfully. Welcome to Decora’s curated collections';
+  String get verificationSuccessMessage => 'Your account has been verified successfully. Welcome to Decora’s curated collections';
 
   @override
   String get backToLogin => 'Back To Login';
@@ -161,15 +156,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get resetPassword => 'Reset Your Password';
 
   @override
-  String get enterEmailOrPhone =>
-      'Enter your registered email or phone number to reset your password';
+  String get enterEmailOrPhone => 'Enter your registered email or phone number to reset your password';
 
   @override
   String get continueButton => 'Continue';
 
   @override
-  String get otpSentMessage =>
-      'We’ve sent a verification email to your Registered email address';
+  String get otpSentMessage => 'We’ve sent a verification email to your Registered email address';
 
   @override
   String get didNotReceiveOtp => 'Didn’t Get OTP?';
@@ -208,8 +201,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get new_collection => 'New Collection';
 
   @override
-  String get elevate_your_living_room_with_timeless_sofas =>
-      'Elevate your living room with timeless sofas';
+  String get elevate_your_living_room_with_timeless_sofas => 'Elevate your living room with timeless sofas';
 
   @override
   String get explore => 'Explore';
@@ -236,8 +228,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get accountAlreadyExistsTitle => 'Account Already Exists';
 
   @override
-  String get accountAlreadyExistsDescription =>
-      'This email is already linked with another sign-in method (e.g., Google). Please sign in using that method to link your Facebook account.';
+  String get accountAlreadyExistsDescription => 'This email is already linked with another sign-in method (e.g., Google). Please sign in using that method to link your Facebook account.';
 
   @override
   String get cancel => 'Cancel';
@@ -270,8 +261,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get emailNotFound => 'Email Not Found';
 
   @override
-  String get emailNotFoundMessage =>
-      'This email is not registered in our system.';
+  String get emailNotFoundMessage => 'This email is not registered in our system.';
 
   @override
   String get otpIncorrect => 'OTP is incorrect';
@@ -286,15 +276,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get passwordTooShort => 'Password must be at least 6 characters';
 
   @override
-  String get enterEmailreset =>
-      'Enter your registered email to reset your password';
+  String get enterEmailreset => 'Enter your registered email to reset your password';
 
   @override
   String get enter_promo_code => 'Enter promo code';
 
   @override
-  String get an_error_occurred_while_processing_the_payment =>
-      'An error occurred while processing the payment';
+  String get an_error_occurred_while_processing_the_payment => 'An error occurred while processing the payment';
 
   @override
   String get your_cart_is_empty => 'Your cart is empty';
@@ -394,5 +382,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get choose_from_gallery => 'Choose from Gallery';
+
+  @override
   String get shared_cart_users => 'Shared Cart Users';
 }
