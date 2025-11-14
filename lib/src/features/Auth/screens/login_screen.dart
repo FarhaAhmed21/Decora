@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
+import 'package:decora/core/l10n/local_cubit.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -131,7 +133,10 @@ class _LoginScreenState extends State<LoginScreen> {
     final loc = AppLocalizations.of(context)!;
     final size = MediaQuery.of(context).size;
     final isArabic = Localizations.localeOf(context).languageCode == 'ar';
-
+    final themeProvider = Provider.of<AppThemeProvider>(context);
+    final isDark = themeProvider.isDarkMode;
+    final localeCubit = context.read<LocaleCubit>();
+    final currentLocale = context.watch<LocaleCubit>().state;
     return Directionality(
       textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
       child: Scaffold(
@@ -147,7 +152,89 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SizedBox(height: size.height * 0.05),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    InkWell(
+                      borderRadius: BorderRadius.circular(size.width * 0.03),
+                      onTap: () {
+                        showMenu(
+                          context: context,
+                          position: const RelativeRect.fromLTRB(100, 80, 0, 0),
+                          items: [
+                            PopupMenuItem(
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text("Dark Mode"),
+                                  Switch(
+                                    value: isDark,
+                                    onChanged: (val) {
+                                      themeProvider.toggleTheme();
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                            PopupMenuItem(
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text("Language"),
+                                  DropdownButton<Locale>(
+                                    value: currentLocale,
+                                    items: const [
+                                      DropdownMenuItem(
+                                        value: Locale('en'),
+                                        child: Text("English"),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: Locale('ar'),
+                                        child: Text("Arabic"),
+                                      ),
+                                    ],
+                                    onChanged: (locale) {
+                                      if (locale != null) {
+                                        localeCubit.setLocale(locale);
+                                        Navigator.pop(context);
+                                      }
+                                    },
+                                    underline: const SizedBox(),
+                                    icon: const SizedBox.shrink(),
+                                    style: TextStyle(
+                                      color: isDark
+                                          ? Colors.white
+                                          : Colors.black,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                      child: Container(
+                        width: size.width * 0.1,
+                        height: size.width * 0.1,
+                        decoration: BoxDecoration(
+                          color: isDark ? Colors.grey[800] : Colors.grey[200],
+                          borderRadius: BorderRadius.circular(
+                            size.width * 0.05,
+                          ),
+                        ),
+                        child: Icon(
+                          Icons.settings,
+                          color: isDark ? Colors.white : Colors.black,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+                SizedBox(height: size.height * 0.02),
                 Image.asset('assets/icons/Frame1.png'),
                 SizedBox(height: size.height * 0.015),
                 Center(
