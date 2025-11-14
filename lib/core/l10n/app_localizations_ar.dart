@@ -240,7 +240,7 @@ class AppLocalizationsAr extends AppLocalizations {
       'هذا البريد الإلكتروني مرتبط بطريقة تسجيل دخول أخرى (مثل Google). يُرجى تسجيل الدخول بتلك الطريقة لربط حسابك في فيسبوك.';
 
   @override
-  String get cancel => 'إلغاء';
+  String get cancel => 'الغاء';
 
   @override
   String get continueWithGoogle => 'المتابعة باستخدام Google';
@@ -358,6 +358,42 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get categoryOutdoor => 'خارجي';
+
+  @override
+  String get name => 'الاسم';
+
+  @override
+  String get phone_number => 'رقم الهاتف';
+
+  @override
+  String get addresses => 'العناوين';
+
+  @override
+  String get city => 'المدينة';
+
+  @override
+  String get street => 'الشارع';
+
+  @override
+  String get building => 'البناء';
+
+  @override
+  String get add_new_address => 'اضافة عنوان جديد';
+
+  @override
+  String get add => 'اضافة';
+
+  @override
+  String get no_addresses => 'لا يوجد عناوين';
+
+  @override
+  String get save_changes => 'حفظ التغييرات';
+
+  @override
+  String get take_photo => 'استخدام الكاميرا';
+
+  @override
+  String get choose_from_gallery => 'اختيار من المعرض';
 
   @override
   String get shared_cart_users => 'المستخدمون في العربة المشتركة';

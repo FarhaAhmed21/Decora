@@ -115,6 +115,18 @@
     "categoryOffice": "المكتب",
     "categoryDining": "غرفة الطعام",
     "categoryOutdoor": "خارجي",
+"name": "الاسم",
+"phone_number": "رقم الهاتف",
+"addresses": "العناوين",
+"city": "المدينة",
+"street": "الشارع",
+"building": "البناء",
+"add_new_address": "اضافة عنوان جديد",
+"add": "اضافة",
+"no_addresses": "لا يوجد عناوين",
+"save_changes": "حفظ التغييرات",
+"take_photo": "استخدام الكاميرا",
+"choose_from_gallery": "اختيار من المعرض",
     "shared_cart_users":"المستخدمون في العربة المشتركة",
     "redirecting_to_payment_gateway":"جارٍ إعادة التوجيه إلى بوابة الدفع"
 

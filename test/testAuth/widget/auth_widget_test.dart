@@ -10,9 +10,9 @@ void main() {
             body: Column(
               children: [
                 const Text('Login'),
-                TextFormField(key:const  Key('email')),
-                TextFormField(key:const Key('password')),
-                ElevatedButton(onPressed: () {}, child:const Text('Login')),
+                TextFormField(key: const Key('email')),
+                TextFormField(key: const Key('password')),
+                ElevatedButton(onPressed: () {}, child: const Text('Login')),
               ],
             ),
           ),
@@ -122,7 +122,10 @@ void main() {
                 TextFormField(key: const Key('username')),
                 TextFormField(key: const Key('email')),
                 TextFormField(key: const Key('password')),
-                ElevatedButton(onPressed: () {}, child: const Text('Create Account')),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('Create Account'),
+                ),
               ],
             ),
           ),
@@ -143,7 +146,10 @@ void main() {
             body: Column(
               children: [
                 const Text('Password reset successfully!'),
-                ElevatedButton(onPressed: () {}, child: const Text('Back to Login')),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('Back to Login'),
+                ),
               ],
             ),
           ),
@@ -161,7 +167,10 @@ void main() {
             body: Column(
               children: [
                 const Text('Verification successful!'),
-                ElevatedButton(onPressed: () {}, child: const Text('Back to Login')),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('Back to Login'),
+                ),
               ],
             ),
           ),

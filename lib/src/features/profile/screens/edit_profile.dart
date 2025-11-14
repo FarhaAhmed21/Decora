@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/src/features/profile/widgets/address_list_section.dart';
 import 'package:decora/src/features/profile/widgets/profile_image_picker.dart';
 import 'package:decora/src/features/profile/widgets/text_field_widget.dart';
@@ -50,7 +51,7 @@ class _EditProfileUIState extends State<EditProfileUI> {
         children: [
           SizedBox(height: MediaQuery.of(context).padding.top + 5),
           CustomAppBar(
-            title: "Edit Profile",
+            title: AppLocalizations.of(context)!.edit_profile,
             onBackPressed: () => Navigator.pop(context),
           ),
           Expanded(
@@ -68,14 +69,14 @@ class _EditProfileUIState extends State<EditProfileUI> {
                   const SizedBox(height: 20),
 
                   TextFieldWidget(
-                    label: "Name",
+                    label: AppLocalizations.of(context)!.name,
                     controller: nameController,
-                    hint: "Name",
+                    hint: AppLocalizations.of(context)!.name,
                   ),
                   TextFieldWidget(
-                    label: "Phone Number",
+                    label: AppLocalizations.of(context)!.phone_number,
                     controller: phoneController,
-                    hint: "Phone Number",
+                    hint: AppLocalizations.of(context)!.phone_number,
                   ),
 
                   const SizedBox(height: 20),
@@ -118,8 +119,8 @@ class _EditProfileUIState extends State<EditProfileUI> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      child: const Text(
-                        "Save Changes",
+                      child: Text(
+                        AppLocalizations.of(context)!.save_changes,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,

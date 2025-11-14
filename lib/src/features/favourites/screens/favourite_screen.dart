@@ -10,7 +10,8 @@ import 'package:flutter/material.dart';
 import '../../product_details/models/product_model.dart';
 
 class FavouriteScreen extends StatefulWidget {
-  const FavouriteScreen({super.key});
+  final FavService? favService; // ✅ دعم injection
+  const FavouriteScreen({super.key, this.favService});
 
   @override
   State<FavouriteScreen> createState() => _FavouriteScreenState();
@@ -22,7 +23,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   bool isSearching = false;
   bool isLoading = true;
 
-  final favService = FavService();
+  late final FavService favService;
 
   double _minPrice = 0;
   double _maxPrice = 2000;
@@ -30,6 +31,8 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   @override
   void initState() {
     super.initState();
+    favService =
+        widget.favService ?? FavService(); // ✅ استخدام الممرر أو الافتراضي
     _loadFavs();
   }
 
@@ -103,7 +106,6 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
               onFilterTap: _openFilterSheet,
             ),
             SizedBox(height: h * 0.015),
-
             Expanded(
               child: isLoading
                   ? const Center(child: CircularProgressIndicator())

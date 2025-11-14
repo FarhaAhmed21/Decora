@@ -116,9 +116,7 @@ class _MainCartPageState extends State<MainCartPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            AppLocalizations.of(
-              context,
-            )!.redirecting_to_payment_gateway,
+            AppLocalizations.of(context)!.redirecting_to_payment_gateway,
           ),
         ),
       );
