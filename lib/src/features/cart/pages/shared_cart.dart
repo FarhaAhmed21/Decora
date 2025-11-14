@@ -1,5 +1,6 @@
 import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/core/utils/app_size.dart';
+import 'package:decora/src/features/cart/pages/view_all_page.dart';
 import 'package:decora/src/features/cart/widgets/product_card.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,6 @@ class _SharedCartState extends State<SharedCart>
       _controller?.addListener(_handleTabChange);
     }
 
-    // Load shared cart when tab is visible
     if (_isVisible) {
       context.read<CartBloc>().add(LoadSharedCart());
     }
@@ -45,7 +45,6 @@ class _SharedCartState extends State<SharedCart>
         _isVisible = _controller!.index == 1;
       });
 
-      // Load shared cart when tab becomes visible
       if (_isVisible) {
         context.read<CartBloc>().add(LoadSharedCart());
       }
@@ -76,7 +75,6 @@ class _SharedCartState extends State<SharedCart>
             );
           }
 
-          // We can just take the first shared cart for now
           final sharedCart = state.items.first;
           final products = sharedCart['products'] as List<Map<String, dynamic>>;
           final userIds = sharedCart['userIds'] as List<String>? ?? [];
@@ -86,7 +84,7 @@ class _SharedCartState extends State<SharedCart>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // 🔹 Owners Row
+                // Owners Row
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15.0),
                   child: Row(
@@ -112,7 +110,6 @@ class _SharedCartState extends State<SharedCart>
                               width: AppSize.width(context) * 0.3,
                               child: OverlappingImages(
                                 images: userIds.map((id) {
-                                  // Replace with actual user image URLs if you have them
                                   return NetworkImage(
                                     'https://i.pravatar.cc/150?u=$id',
                                   );
@@ -130,7 +127,14 @@ class _SharedCartState extends State<SharedCart>
                         curve: Curves.easeInOut,
                         offset: _isVisible ? Offset.zero : const Offset(1.5, 0),
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => ViewAllPage(usersId: userIds),
+                              ),
+                            );
+                          },
                           child: Text(
                             AppLocalizations.of(context)!.view_all,
                             style: TextStyle(
@@ -145,7 +149,6 @@ class _SharedCartState extends State<SharedCart>
                   ),
                 ),
 
-                // 🔹 Product List
                 ListView.builder(
                   itemCount: products.length,
                   shrinkWrap: true,

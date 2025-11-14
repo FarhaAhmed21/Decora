@@ -358,4 +358,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get categoryOutdoor => 'خارجي';
+
+  @override
+  String get shared_cart_users => 'المستخدمون في العربة المشتركة';
 }

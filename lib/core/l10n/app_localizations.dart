@@ -775,6 +775,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Outdoor'**
   String get categoryOutdoor;
+
+  /// No description provided for @shared_cart_users.
+  ///
+  /// In en, this message translates to:
+  /// **'Shared Cart Users'**
+  String get shared_cart_users;
 }
 
 class _AppLocalizationsDelegate

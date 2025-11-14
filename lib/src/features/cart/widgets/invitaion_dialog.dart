@@ -39,7 +39,7 @@ class InvitationDialog extends StatelessWidget {
 
             const SizedBox(height: 20),
 
-            // 🔹 Icons row
+            // Icons row
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -64,7 +64,7 @@ class InvitationDialog extends StatelessWidget {
 
             const SizedBox(height: 30),
 
-            // 🔹 Label
+            // Label
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
@@ -79,7 +79,7 @@ class InvitationDialog extends StatelessWidget {
 
             const SizedBox(height: 10),
 
-            // 🔹 Text Field
+            // text Field
             TextField(
               decoration: InputDecoration(
                 hintText: AppLocalizations.of(context)!.enter_user_name,
@@ -101,7 +101,7 @@ class InvitationDialog extends StatelessWidget {
 
             const SizedBox(height: 20),
 
-            // 🔹 Invite Button
+            //Invite Button
             SizedBox(
               width: double.infinity,
               height: 48,

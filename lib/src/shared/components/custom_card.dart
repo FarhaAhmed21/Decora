@@ -2,10 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/core/utils/app_size.dart';
 import 'package:decora/generated/assets.dart';
+import 'package:decora/src/features/cart/bloc/cart_bloc.dart';
+import 'package:decora/src/features/cart/bloc/cart_event.dart';
+import 'package:decora/src/features/cart/bloc/cart_state.dart';
+import 'package:decora/src/features/cart/service/service.dart';
 import 'package:decora/src/features/favourites/services/fav_service.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/product_details/models/product_model.dart';
 
 class CustomCard extends StatefulWidget {
@@ -41,8 +46,8 @@ class _CustomCardState extends State<CustomCard> {
 
   @override
   Widget build(BuildContext context) {
-     final h = AppSize.height(context);
-     final w = AppSize.width(context);
+    final h = AppSize.height(context);
+    final w = AppSize.width(context);
     final product = widget.product;
     final isDiscount = product.discount > 0;
 
@@ -189,34 +194,44 @@ class _CustomCardState extends State<CustomCard> {
                     fontFamily: 'Montserrat',
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          AppLocalizations.of(
-                            context,
-                          )!.product_added_to_Cart_successfully,
+                BlocProvider(
+                  create: (context) => CartBloc(CartRepository()),
+                  child: BlocBuilder<CartBloc, CartState>(
+                    builder: (context, state) {
+                      return GestureDetector(
+                        onTap: () {
+                          context.read<CartBloc>().add(
+                            AddProductToCartEvent(productId: widget.product.id),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                AppLocalizations.of(
+                                  context,
+                                )!.product_added_to_Cart_successfully,
+                              ),
+                              backgroundColor: AppColors.primary(context),
+                              duration: const Duration(seconds: 1),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: w * 0.09,
+                          height: h * 0.040,
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: AppColors.primary(context),
+                            borderRadius: BorderRadius.circular(w * 0.02),
+                          ),
+                          child: Image.asset(
+                            Assets.shoppingBagIcon,
+                            color: Colors.white,
+                            width: w * 0.30,
+                            height: h * 0.030,
+                          ),
                         ),
-                        backgroundColor: AppColors.primary(context),
-                        duration: const Duration(seconds: 1),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    width: w * 0.09,
-                    height: h * 0.040,
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: AppColors.primary(context),
-                      borderRadius: BorderRadius.circular(w * 0.02),
-                    ),
-                    child: Image.asset(
-                      Assets.shoppingBagIcon,
-                      color: Colors.white,
-                      width: w * 0.30,
-                      height: h * 0.030,
-                    ),
+                      );
+                    },
                   ),
                 ),
               ],

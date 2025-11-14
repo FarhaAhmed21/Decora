@@ -14,6 +14,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     on<LoadSharedCart>(_onLoadSharedCart);
   }
 
+  /// load personal cart 
   Future<void> _onLoadPersonalCart(
     LoadPersonalCart event,
     Emitter<CartState> emit,
@@ -26,6 +27,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       emit(state.copyWith(loading: false, error: e.toString()));
     }
   }
+  /// increase product quantity in cart
 
   Future<void> _onAddProductToCart(
     AddProductToCartEvent event,
@@ -41,6 +43,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     }
   }
 
+  /// decrease product quantity in cart
   Future<void> _onMinusProductToCart(
     MinusProductToCartEvent event,
     Emitter<CartState> emit,
@@ -55,7 +58,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     }
   }
 
-  /// 🧮 Load total prices (initial and discounted)
+  /// Load total prices (initial and discounted)
   Future<void> _onLoadCartTotals(
     LoadCartTotalsEvent event,
     Emitter<CartState> emit,
@@ -72,6 +75,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       emit(state.copyWith(error: e.toString()));
     }
   }
+  /// Load shared Cart Products
 
   Future<void> _onLoadSharedCart(
     LoadSharedCart event,

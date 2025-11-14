@@ -70,7 +70,7 @@ class _TopLocationBarState extends State<TopLocationBar> {
                 onTap: () {
                   showMenu(
                     context: context,
-                    position: RelativeRect.fromLTRB(100, 80, 0, 0),
+                    position: const RelativeRect.fromLTRB(100, 80, 0, 0),
                     items: [
                       PopupMenuItem(
                         child: Row(
