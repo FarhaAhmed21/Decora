@@ -6,4 +6,37 @@ class Assets {
   static String livingRoom = 'assets/images/living-room.png';
   static String office = 'assets/images/office.png';
   static String outdoorRoom = 'assets/images/outdoor-room.png';
+  static String luxeSofa = 'assets/images/luxe-sofa.png';
+  static String heartIcon = 'assets/icons/heart-icon.png';
+  static String heartOutline = 'assets/icons/heart-outline.png';
+  static String locationIcon = 'assets/icons/location-icon.png';
+  static String notificationIcon = 'assets/icons/notification-icon.png';
+  static String starIcon = "assets/icons/star-icon.png";
+  static String shoppingBagIcon = "assets/icons/shopping-bag.png";
+  static String searchIcon = "assets/icons/search-icon.png";
+  static String filterIcon = "assets/icons/fliter-icon.png";
+  static String couchImage = "assets/images/couch.png";
+  static String micIcon = "assets/icons/mic-icon.png";
+  static String plusIcon = "assets/icons/plus-sign-icon.png";
+  static String sentIcon = "assets/icons/sent-icon.png";
+  static String settingsIcon = "assets/icons/settings-icon.png";
+  static String onboarding2 = 'assets/images/onboarding2.png';
+  static String rectangle1 = 'assets/images/Top-Rectangle.png';
+  static String rectangle2 = 'assets/images/bottom-Rectangle.png';
+  static String woodImg = 'assets/images/wood.png';
+  static String fabric = 'assets/images/fabrics.png';
+  static String onBoarding3 = 'assets/images/onboarding3.png';
+  static String shippingIcon = "assets/icons/shipping-icon.png";
+  static String sideArrowIcon = "assets/icons/side-arrow.png";
+  static String vrnIcon = "assets/images/vr_icon.png";
+  static String addImg = "assets/images/add_img.png";
+
+  static String trackingIcon1 = "assets/icons/icon-one.png";
+  static String trackingIcon2 = "assets/icons/icon-two.png";
+  static String trackingIcon3 = "assets/icons/icon-three.png";
+  static String trackingIcon4 = "assets/icons/icon-four.png";
+  static String imageIcon = "assets/icons/import_image_icon.png";
+  static String videoIcon = "assets/icons/video_icon.png";
+
+
 }

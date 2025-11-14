@@ -1,31 +1,40 @@
+import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class CustomAppBar extends StatelessWidget {
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final VoidCallback? onBackPressed;
 
-  const CustomAppBar({super.key, required this.title});
+  const CustomAppBar({
+    super.key,
+    required this.title,
+    required this.onBackPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40,
-      color: Colors.white,
+      height: 72,
+      color: AppColors.background(context),
       child: Row(
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 24),
+            padding: EdgeInsets.only(
+              left: Localizations.localeOf(context).languageCode == 'ar' ? 0 : 20,
+              right: Localizations.localeOf(context).languageCode == 'ar' ? 20 : 0,
+            ),
             child: InkWell(
               borderRadius: BorderRadius.circular(12),
-              onTap: () => Navigator.pop(context),
+              onTap: onBackPressed ?? () => Navigator.pop(context),
               child: Container(
                 padding: const EdgeInsets.all(8.89),
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade200,
+                  color: AppColors.cardColor(context),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.arrow_back_ios_new,
-                  color: Colors.black,
+                  color: AppColors.textColor(context),
                   size: 18,
                 ),
               ),
@@ -36,17 +45,21 @@ class CustomAppBar extends StatelessWidget {
             child: Center(
               child: Text(
                 title,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400,
+                style: TextStyle(
+                  color: AppColors.textColor(context),
+                  fontWeight: FontWeight.w500,
                   fontSize: 18,
+                  fontFamily: 'Montserratt',
                 ),
               ),
             ),
           ),
-          const SizedBox(width: 48), // balance right side
+          const SizedBox(width: 48),
         ],
       ),
     );
   }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(72);
 }

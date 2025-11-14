@@ -16,4 +16,453 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get changeLanguage => 'تغيير اللغة';
+
+  @override
+  String get location => 'الموقع';
+
+  @override
+  String get searchFurniture => 'ابحث عن الأثاث';
+
+  @override
+  String get cairoEgypt => 'مصر , القاهرة';
+
+  @override
+  String get product_added_to_favourite_successfully =>
+      'تمت إضافة المنتج إلى المفضلة بنجاح';
+
+  @override
+  String get product_removed_from_favourite => 'تم حذف المنتج من المفضلة ';
+
+  @override
+  String get product_added_to_Cart_successfully =>
+      'تمت إضافة المنتج إلى السلة بنجاح';
+
+  @override
+  String get our_Categories => 'فئاتنا';
+
+  @override
+  String get cart => 'سلة تسوق';
+
+  @override
+  String get my_cart => 'سلة التسوق الخاصة بي';
+
+  @override
+  String get shared_cart => 'عربة التسوق المشتركة';
+
+  @override
+  String get dining => 'تناول الطعام';
+
+  @override
+  String get furniture => 'أثاث';
+
+  @override
+  String get wood => 'خشب';
+
+  @override
+  String get owners => 'المالكين';
+
+  @override
+  String get view_all => 'عرض الكل';
+
+  @override
+  String get checkout => 'الدفع';
+
+  @override
+  String get promo_code => 'هل لديك رمز ترويجي؟';
+
+  @override
+  String get avilable => 'متاح';
+
+  @override
+  String get payment_summary => 'ملخص الدفع';
+
+  @override
+  String get sub_total => 'المجموع الفرعي';
+
+  @override
+  String get taxes => 'الضرائب';
+
+  @override
+  String get discount => 'تخفيض';
+
+  @override
+  String get total => 'إجمالي';
+
+  @override
+  String get pay_now => 'ادفع الأن';
+
+  @override
+  String get invitation => 'دعوه';
+
+  @override
+  String get enter_user_name => 'ادخل اسم المستخدم';
+
+  @override
+  String get invite => 'أدعو';
+
+  @override
+  String get login => 'تسجيل الدخول';
+
+  @override
+  String get email => 'البريد الإلكتروني';
+
+  @override
+  String get password => 'كلمة المرور';
+
+  @override
+  String get rememberMe => 'تذكرني';
+
+  @override
+  String get forgotPassword => 'نسيت كلمة المرور؟';
+
+  @override
+  String get orLoginWith => 'أو سجل باستخدام';
+
+  @override
+  String get dontHaveAccount => 'ليس لديك حساب؟ ';
+
+  @override
+  String get createAccount => 'أنشئ حساب جديد';
+
+  @override
+  String get accessCollections => 'تمتع بالمجموعات الحصرية والأفكار المخصصة لك';
+
+  @override
+  String get username => 'اسم المستخدم';
+
+  @override
+  String get emailVerification => 'التحقق من البريد الإلكتروني';
+
+  @override
+  String get verificationMessage =>
+      'لقد أرسلنا رسالة تحقق إلى بريدك الإلكتروني المسجل';
+
+  @override
+  String get verify => 'تحقق';
+
+  @override
+  String get didNotGetOtp => 'لم تستلم رمز التحقق؟';
+
+  @override
+  String get resendOtp => 'أعد الإرسال';
+
+  @override
+  String get verificationSuccess => 'تم التحقق بنجاح!';
+
+  @override
+  String get verificationSuccessMessage =>
+      'تم التحقق من حسابك بنجاح. مرحبًا بك في مجموعات ديكورا المميزة';
+
+  @override
+  String get backToLogin => 'العودة لتسجيل الدخول';
+
+  @override
+  String get resetPassword => 'إعادة تعيين كلمة المرور';
+
+  @override
+  String get enterEmailOrPhone =>
+      'أدخل بريدك الإلكتروني أو رقم هاتفك المسجل لإعادة تعيين كلمة المرور';
+
+  @override
+  String get continueButton => 'متابعة';
+
+  @override
+  String get otpSentMessage =>
+      'لقد أرسلنا رمز تحقق إلى بريدك الإلكتروني المسجل';
+
+  @override
+  String get didNotReceiveOtp => 'لم تستلم رمز التحقق؟';
+
+  @override
+  String get resend => 'إعادة الإرسال';
+
+  @override
+  String get createNewPassword => 'إنشاء كلمة مرور جديدة';
+
+  @override
+  String get enterNewPassword => 'يرجى إدخال كلمة المرور الجديدة أدناه';
+
+  @override
+  String get newPassword => 'كلمة المرور الجديدة';
+
+  @override
+  String get saveNewPassword => 'حفظ كلمة المرور الجديدة';
+
+  @override
+  String get passwordResetSuccess => 'تمت إعادة تعيين كلمة المرور بنجاح!';
+
+  @override
+  String get youCanLoginNow =>
+      'يمكنك الآن تسجيل الدخول باستخدام كلمة المرور الجديدة';
+
+  @override
+  String get see_all => 'انظر المزيد ';
+
+  @override
+  String get decora_specials => 'خصومات ديكورا';
+
+  @override
+  String get categories => 'الفئات';
+
+  @override
+  String get new_collection => 'مجموعة جديدة';
+
+  @override
+  String get elevate_your_living_room_with_timeless_sofas =>
+      'ارتقي بغرفة معيشتك مع أرائك خالدة';
+
+  @override
+  String get explore => 'استكشف';
+
+  @override
+  String get product_details => 'تفاصيل المنتج';
+
+  @override
+  String get price => 'السعر:';
+
+  @override
+  String get quantity => 'الكمية:';
+
+  @override
+  String get colors => 'الالوان المتاحة :';
+
+  @override
+  String get reviews => 'التعليقات:';
+
+  @override
+  String get try_virtual => 'جربها';
+
+  @override
+  String get accountAlreadyExistsTitle => 'الحساب موجود بالفعل';
+
+  @override
+  String get accountAlreadyExistsDescription =>
+      'هذا البريد الإلكتروني مرتبط بطريقة تسجيل دخول أخرى (مثل Google). يُرجى تسجيل الدخول بتلك الطريقة لربط حسابك في فيسبوك.';
+
+  @override
+  String get cancel => 'الغاء';
+
+  @override
+  String get continueWithGoogle => 'المتابعة باستخدام Google';
+
+  @override
+  String get enterEmail => 'من فضلك أدخل البريد الإلكتروني';
+
+  @override
+  String get enterPassword => 'من فضلك أدخل كلمة المرور';
+
+  @override
+  String get invalidEmail => 'صيغة البريد الإلكتروني غير صحيحة';
+
+  @override
+  String get wrongCredentials => 'البريد الإلكتروني أو كلمة المرور غير صحيحة';
+
+  @override
+  String get ok => 'حسنًا';
+
+  @override
+  String get userNotFound => 'المستخدم غير موجود في النظام';
+
+  @override
+  String get loginFailedTitle => 'فشل تسجيل الدخول';
+
+  @override
+  String get emailNotFound => 'البريد الإلكتروني غير موجود';
+
+  @override
+  String get emailNotFoundMessage =>
+      'هذا البريد الإلكتروني غير مسجّل في النظام.';
+
+  @override
+  String get otpIncorrect => 'الرمز غير صحيح';
+
+  @override
+  String get otpSent => 'تم إرسال الرمز إلى بريدك الإلكتروني';
+
+  @override
+  String get enterUsername => 'الرجاء إدخال اسم المستخدم';
+
+  @override
+  String get passwordTooShort => 'كلمة المرور يجب أن تكون 6 أحرف على الأقل';
+
+  @override
+  String get enterEmailreset =>
+      'أدخل بريدك الإلكتروني لإعادة تعيين كلمة المرور';
+
+  @override
+  String get enter_promo_code => 'أدخل رمز العرض الترويجي';
+
+  @override
+  String get an_error_occurred_while_processing_the_payment =>
+      'حدث خطأ أثناء تنفيذ عملية الدفع';
+
+  @override
+  String get your_cart_is_empty => 'عربتك فارغة';
+
+  @override
+  String get no_products => 'لا يوجد منتجات';
+
+  @override
+  String get profile => 'الملف الشخصي';
+
+  @override
+  String get edit_profile => 'تعديل الملف الشخصي';
+
+  @override
+  String get change_password => 'تغيير كلمة المرور';
+
+  @override
+  String get transaction_history => 'سجل المعاملات';
+
+  @override
+  String get help_support => 'المساعدة والدعم';
+
+  @override
+  String get logout => 'تسجيل الخروج';
+
+  @override
+  String get offers => 'خصومات ديكورا';
+
+  @override
+  String get favourite => 'المفضلة';
+
+  @override
+  String get home => 'الرئيسية';
+
+  @override
+  String get reset => 'اعادة تعيين';
+
+  @override
+  String get filter_by_price => 'تصفية حسب السعر';
+
+  @override
+  String get apply => 'تطبيق';
+
+  @override
+  String get price_range => 'نطاق السعر';
+
+  @override
+  String get categoryAll => 'الكل';
+
+  @override
+  String get categoryLivingroom => 'غرفة المعيشة';
+
+  @override
+  String get categoryBedroom => 'غرفة النوم';
+
+  @override
+  String get categoryOffice => 'المكتب';
+
+  @override
+  String get categoryDining => 'غرفة الطعام';
+
+  @override
+  String get categoryOutdoor => 'خارجي';
+
+  @override
+  String get myOrders => 'طلباتي';
+
+  @override
+  String get all => 'الكل';
+
+  @override
+  String get delivered => 'تم التوصيل';
+
+  @override
+  String get shipped => 'تم الشحن';
+
+  @override
+  String get inProgress => 'قيد التنفيذ';
+
+  @override
+  String get none => 'لا يوجد';
+
+  @override
+  String get orderID => 'رقم الطلب';
+
+  @override
+  String get pending => 'قيد التنفيذ';
+
+  @override
+  String get details => 'التفاصيل';
+
+  @override
+  String get orderNotFound => 'لم يتم العثور على الطلب';
+
+  @override
+  String get orderTracking => 'تتبع الطلب';
+
+  @override
+  String get orderDetails => 'تفاصيل الطلب';
+
+  @override
+  String get expectedDeliveryDate => 'تاريخ التسليم المتوقع';
+
+  @override
+  String get orderStatus => 'حالة الطلب';
+
+  @override
+  String get noProductsFound => 'لم يتم العثور على منتجات';
+
+  @override
+  String get orderPlaced => 'تم تقديم الطلب';
+
+  @override
+  String get completed => 'مكتمل';
+
+  @override
+  String get unknown => 'غير معروف';
+
+  @override
+  String get name => 'الاسم';
+
+  @override
+  String get phone_number => 'رقم الهاتف';
+
+  @override
+  String get addresses => 'العناوين';
+
+  @override
+  String get city => 'المدينة';
+
+  @override
+  String get street => 'الشارع';
+
+  @override
+  String get building => 'البناء';
+
+  @override
+  String get add_new_address => 'اضافة عنوان جديد';
+
+  @override
+  String get add => 'اضافة';
+
+  @override
+  String get no_addresses => 'لا يوجد عناوين';
+
+  @override
+  String get save_changes => 'حفظ التغييرات';
+
+  @override
+  String get take_photo => 'استخدام الكاميرا';
+
+  @override
+  String get choose_from_gallery => 'اختيار من المعرض';
+
+  @override
+  String get shared_cart_users => 'المستخدمون في العربة المشتركة';
+
+  @override
+  String get redirecting_to_payment_gateway =>
+      'جارٍ إعادة التوجيه إلى بوابة الدفع';
+
+  @override
+  String get emailAlreadyRegistered => 'هذا الإيميل مسجل مسبقًا';
+
+  @override
+  String get order_placed_successfully => 'تم تقديم الطلب بنجاح';
+
+  @override
+  String get order_received_message =>
+      'لقد تم استلام طلبك وهو قيد المعالجة. شكرًا لتسوقك معنا!';
 }
