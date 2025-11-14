@@ -61,6 +61,7 @@ dependencies:
   google_sign_in_mocks: ^0.3.0
   firebase_auth_mocks: ^0.14.2
   provider: ^6.1.2
+  mocktail: ^1.0.4
   bloc_test: ^9.1.0
   
   flutter_local_notifications: ^17.2.1

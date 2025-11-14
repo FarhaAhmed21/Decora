@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
@@ -39,7 +40,7 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
               color: AppColors.primary(context),
             ),
             title: Text(
-              "Take a Photo",
+              AppLocalizations.of(context)!.take_photo,
               style: TextStyle(color: AppColors.mainText(context)),
             ),
             onTap: () => _pickImage(ImageSource.camera),
@@ -50,7 +51,7 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
               color: AppColors.primary(context),
             ),
             title: Text(
-              "Choose from Gallery",
+              AppLocalizations.of(context)!.choose_from_gallery,
               style: TextStyle(color: AppColors.mainText(context)),
             ),
             onTap: () => _pickImage(ImageSource.gallery),

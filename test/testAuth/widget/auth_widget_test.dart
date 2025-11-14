@@ -10,6 +10,9 @@ void main() {
             body: Column(
               children: [
                 const Text('Login'),
+                TextFormField(key: const Key('email')),
+                TextFormField(key: const Key('password')),
+                ElevatedButton(onPressed: () {}, child: const Text('Login')),
                 TextFormField(key:const  Key('email')),
                 TextFormField(key:const Key('password')),
                 ElevatedButton(onPressed: () {}, child:const Text('Login')),

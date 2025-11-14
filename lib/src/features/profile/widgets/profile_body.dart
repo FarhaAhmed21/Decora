@@ -1,5 +1,4 @@
 import 'package:decora/core/l10n/app_localizations.dart';
-import 'package:decora/core/l10n/app_localizations_ar.dart';
 import 'package:decora/src/features/Auth/models/user_model.dart';
 import 'package:decora/src/features/Auth/screens/login_screen.dart';
 import 'package:decora/src/features/Auth/screens/reset%20_otp_verification_screen.dart';
@@ -52,11 +51,12 @@ class _ProfileBodyState extends State<ProfileBody> {
   @override
   Widget build(BuildContext context) {
     final List<String> settingsItems = [
-      AppLocalizations.of(context)!.edit_profile,
-      AppLocalizations.of(context)!.change_password,
-      AppLocalizations.of(context)!.transaction_history,
-      AppLocalizations.of(context)!.help_support,
-      AppLocalizations.of(context)!.logout,
+      AppLocalizations.of(context)?.edit_profile ?? 'Edit Profile',
+      AppLocalizations.of(context)?.change_password ?? 'Change Password',
+      AppLocalizations.of(context)?.transaction_history ??
+          'Transaction History',
+      AppLocalizations.of(context)?.help_support ?? 'Help & Support',
+      AppLocalizations.of(context)?.logout ?? 'Logout',
     ];
 
     final List<Widget> navigations = [
@@ -67,7 +67,6 @@ class _ProfileBodyState extends State<ProfileBody> {
         adminId: "aEc97NihV5aCa8Zaw0w2YlzvICv2",
         currentUserId: widget.user.id,
       ),
-
       const LoginScreen(),
     ];
 
@@ -77,7 +76,7 @@ class _ProfileBodyState extends State<ProfileBody> {
           children: [
             SizedBox(height: MediaQuery.of(context).padding.top + 5),
             CustomAppBar(
-              title: AppLocalizations.of(context)!.profile,
+              title: AppLocalizations.of(context)?.profile ?? 'Profile',
               onBackPressed: () {
                 Navigator.push(
                   context,
@@ -104,7 +103,9 @@ class _ProfileBodyState extends State<ProfileBody> {
                             widget.user.photoUrl != null &&
                                 widget.user.photoUrl!.isNotEmpty
                             ? NetworkImage(widget.user.photoUrl!)
-                            : NetworkImage(default_url) as ImageProvider,
+                            : const AssetImage(
+                                'assets/images/default-profile-photo.jpg',
+                              ),
                       ),
                     ),
                     const SizedBox(height: 15),
@@ -138,12 +139,14 @@ class _ProfileBodyState extends State<ProfileBody> {
                               setState(() => _isLoading = true);
 
                               if (title ==
-                                  AppLocalizations.of(context)!.logout) {
+                                  (AppLocalizations.of(context)?.logout ??
+                                      'Logout')) {
                                 _logout(context);
                               } else if (title ==
-                                      AppLocalizations.of(
-                                        context,
-                                      )!.edit_profile ||
+                                      (AppLocalizations.of(
+                                            context,
+                                          )?.edit_profile ??
+                                          'Edit Profile') ||
                                   title == 'تعديل الملف الشخصي') {
                                 final updatedUser =
                                     await Navigator.push<UserModel?>(
@@ -165,22 +168,25 @@ class _ProfileBodyState extends State<ProfileBody> {
                                   }
                                 }
                               } else if (title ==
-                                  AppLocalizations.of(
-                                    context,
-                                  )!.change_password) {
+                                  (AppLocalizations.of(
+                                        context,
+                                      )?.change_password ??
+                                      'Change Password')) {
                                 final otp = generateOtp();
-                                await sendOtpEmail(widget.user.email!, otp);
-                                if (!mounted) return;
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => OtpResetScreen(
-                                      otp: otp,
-                                      email: widget.user.email!,
-                                      usePurpose: "change",
+                                if (widget.user.email != null) {
+                                  await sendOtpEmail(widget.user.email!, otp);
+                                  if (!mounted) return;
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => OtpResetScreen(
+                                        otp: otp,
+                                        email: widget.user.email!,
+                                        usePurpose: "change",
+                                      ),
                                     ),
-                                  ),
-                                );
+                                  );
+                                }
                               } else {
                                 Navigator.push(
                                   context,

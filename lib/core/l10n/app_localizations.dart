@@ -776,6 +776,77 @@ abstract class AppLocalizations {
   /// **'Outdoor'**
   String get categoryOutdoor;
 
+  /// No description provided for @name.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get name;
+
+  /// No description provided for @phone_number.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone Number'**
+  String get phone_number;
+
+  /// No description provided for @addresses.
+  ///
+  /// In en, this message translates to:
+  /// **'Addresses'**
+  String get addresses;
+
+  /// No description provided for @city.
+  ///
+  /// In en, this message translates to:
+  /// **'City'**
+  String get city;
+
+  /// No description provided for @street.
+  ///
+  /// In en, this message translates to:
+  /// **'Street'**
+  String get street;
+
+  /// No description provided for @building.
+  ///
+  /// In en, this message translates to:
+  /// **'Building'**
+  String get building;
+
+  /// No description provided for @add_new_address.
+  ///
+  /// In en, this message translates to:
+  /// **'Add New Address'**
+  String get add_new_address;
+
+  /// No description provided for @add.
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get add;
+
+  /// No description provided for @no_addresses.
+  ///
+  /// In en, this message translates to:
+  /// **'No addresses found'**
+  String get no_addresses;
+
+  /// No description provided for @save_changes.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Changes'**
+  String get save_changes;
+
+  /// No description provided for @take_photo.
+  ///
+  /// In en, this message translates to:
+  /// **'Take Photo'**
+  String get take_photo;
+
+  /// No description provided for @choose_from_gallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose from Gallery'**
+  String get choose_from_gallery;
   /// No description provided for @shared_cart_users.
   ///
   /// In en, this message translates to:
