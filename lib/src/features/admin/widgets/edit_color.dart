@@ -121,7 +121,7 @@ Future<void> showEditColorDialog(
             actions: [
               TextButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(
+                  backgroundColor: WidgetStateProperty.all(
                     AppColors.cardColor(context),
                   ),
                 ),

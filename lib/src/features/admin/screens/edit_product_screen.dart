@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import '../../../shared/components/appbar.dart';
 import '../../../shared/theme/app_colors.dart';
 import '../../product_details/models/product_model.dart';
-import '../../profile/service/upload_image.dart';
 
 class EditProductScreen extends StatefulWidget {
   Product product;
@@ -95,7 +94,6 @@ class _EditProductScreenState extends State<EditProductScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const AllProductsScreen()),
-
       );
     } catch (e) {
       ScaffoldMessenger.of(

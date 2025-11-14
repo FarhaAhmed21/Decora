@@ -9,10 +9,10 @@ void main() {
           home: Scaffold(
             body: Column(
               children: [
-                Text('Login'),
-                TextFormField(key: Key('email')),
-                TextFormField(key: Key('password')),
-                ElevatedButton(onPressed: () {}, child: Text('Login')),
+                const Text('Login'),
+                TextFormField(key: const Key('email')),
+                TextFormField(key: const Key('password')),
+                ElevatedButton(onPressed: () {}, child: const Text('Login')),
               ],
             ),
           ),
@@ -20,8 +20,8 @@ void main() {
       );
 
       expect(find.text('Login'), findsWidgets);
-      expect(find.byKey(Key('email')), findsOneWidget);
-      expect(find.byKey(Key('password')), findsOneWidget);
+      expect(find.byKey(const Key('email')), findsOneWidget);
+      expect(find.byKey(const Key('password')), findsOneWidget);
       expect(find.text('Login'), findsWidgets);
     });
 
@@ -31,9 +31,9 @@ void main() {
           home: Scaffold(
             body: Column(
               children: [
-                Text('Forget Password'),
-                TextFormField(key: Key('email')),
-                ElevatedButton(onPressed: () {}, child: Text('Continue')),
+                const Text('Forget Password'),
+                TextFormField(key: const Key('email')),
+                ElevatedButton(onPressed: () {}, child: const Text('Continue')),
               ],
             ),
           ),
@@ -41,7 +41,7 @@ void main() {
       );
 
       expect(find.text('Forget Password'), findsOneWidget);
-      expect(find.byKey(Key('email')), findsOneWidget);
+      expect(find.byKey(const Key('email')), findsOneWidget);
       expect(find.text('Continue'), findsOneWidget);
     });
 
@@ -95,11 +95,11 @@ void main() {
           home: Scaffold(
             body: Column(
               children: [
-                Text('New Password'),
-                TextFormField(key: Key('newPassword')),
+                const Text('New Password'),
+                TextFormField(key: const Key('newPassword')),
                 ElevatedButton(
                   onPressed: () {},
-                  child: Text('Save New Password'),
+                  child: const Text('Save New Password'),
                 ),
               ],
             ),
@@ -108,7 +108,7 @@ void main() {
       );
 
       expect(find.text('New Password'), findsOneWidget);
-      expect(find.byKey(Key('newPassword')), findsOneWidget);
+      expect(find.byKey(const Key('newPassword')), findsOneWidget);
       expect(find.text('Save New Password'), findsOneWidget);
     });
 
@@ -118,11 +118,14 @@ void main() {
           home: Scaffold(
             body: Column(
               children: [
-                Text('Sign Up'),
-                TextFormField(key: Key('username')),
-                TextFormField(key: Key('email')),
-                TextFormField(key: Key('password')),
-                ElevatedButton(onPressed: () {}, child: Text('Create Account')),
+                const Text('Sign Up'),
+                TextFormField(key: const Key('username')),
+                TextFormField(key: const Key('email')),
+                TextFormField(key: const Key('password')),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('Create Account'),
+                ),
               ],
             ),
           ),
@@ -130,9 +133,9 @@ void main() {
       );
 
       expect(find.text('Sign Up'), findsOneWidget);
-      expect(find.byKey(Key('username')), findsOneWidget);
-      expect(find.byKey(Key('email')), findsOneWidget);
-      expect(find.byKey(Key('password')), findsOneWidget);
+      expect(find.byKey(const Key('username')), findsOneWidget);
+      expect(find.byKey(const Key('email')), findsOneWidget);
+      expect(find.byKey(const Key('password')), findsOneWidget);
       expect(find.text('Create Account'), findsOneWidget);
     });
 
@@ -142,8 +145,11 @@ void main() {
           home: Scaffold(
             body: Column(
               children: [
-                Text('Password reset successfully!'),
-                ElevatedButton(onPressed: () {}, child: Text('Back to Login')),
+                const Text('Password reset successfully!'),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('Back to Login'),
+                ),
               ],
             ),
           ),
@@ -160,8 +166,11 @@ void main() {
           home: Scaffold(
             body: Column(
               children: [
-                Text('Verification successful!'),
-                ElevatedButton(onPressed: () {}, child: Text('Back to Login')),
+                const Text('Verification successful!'),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('Back to Login'),
+                ),
               ],
             ),
           ),

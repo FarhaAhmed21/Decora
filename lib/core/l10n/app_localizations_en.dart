@@ -412,4 +412,56 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get unknown => 'Unknown';
+
+  @override
+  String get name => 'Name';
+
+  @override
+  String get phone_number => 'Phone Number';
+
+  @override
+  String get addresses => 'Addresses';
+
+  @override
+  String get city => 'City';
+
+  @override
+  String get street => 'Street';
+
+  @override
+  String get building => 'Building';
+
+  @override
+  String get add_new_address => 'Add New Address';
+
+  @override
+  String get add => 'Add';
+
+  @override
+  String get no_addresses => 'No addresses found';
+
+  @override
+  String get save_changes => 'Save Changes';
+
+  @override
+  String get take_photo => 'Take Photo';
+
+  @override
+  String get choose_from_gallery => 'Choose from Gallery';
+
+  @override
+  String get shared_cart_users => 'Shared Cart Users';
+
+  @override
+  String get redirecting_to_payment_gateway => 'Redirecting to Payment Gateway';
+
+  @override
+  String get emailAlreadyRegistered => 'Email Already Registered';
+
+  @override
+  String get order_placed_successfully => 'Order Placed Successfully';
+
+  @override
+  String get order_received_message =>
+      'Your order has been received and is being processed. Thank you for shopping with us!';
 }

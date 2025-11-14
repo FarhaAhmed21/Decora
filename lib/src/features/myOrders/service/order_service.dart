@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/src/features/Auth/services/auth_service.dart';
 import 'package:decora/src/features/notifications/services/notifications_services.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class OrderService {
@@ -31,6 +33,7 @@ class OrderService {
   static Future<void> addOrderFromCart({
     required String amount,
     required bool isShared,
+    required BuildContext context,
   }) async {
     if (_currentUid == null) throw Exception("No user logged in");
 
@@ -105,8 +108,9 @@ class OrderService {
 
       if (lastOrderId != null) {
         await NotificationService.addNotification(
-          "Order Placed Successfully #$lastOrderId",
-          "Your order has been received and is being processed. Thank you for shopping with us!",
+          AppLocalizations.of(context)!.order_placed_successfully +
+              " #$lastOrderId",
+          AppLocalizations.of(context)!.order_received_message,
         );
       }
 

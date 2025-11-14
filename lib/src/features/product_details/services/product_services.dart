@@ -2,8 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/product_model.dart';
 
 class ProductService {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseFirestore _firestore;
 
+  ProductService({FirebaseFirestore? firestore})
+    : _firestore = firestore ?? FirebaseFirestore.instance;
+
+  // Named constructor for tests
+  factory ProductService.forTest(FirebaseFirestore fakeFirestore) {
+    return ProductService(firestore: fakeFirestore);
+  }
   Future<List<Product>> getProducts() async {
     final snapshot = await _firestore.collection('products').get();
     print("there is  ${snapshot.docs.length} products karen");
@@ -39,9 +46,8 @@ class ProductService {
     return products;
   }
 
-  /// ✅ تحميل التعليقات الخاصة بمنتج معين
   Future<List<Comment>> fetchComments(Product product) async {
-    final snapshot = await FirebaseFirestore.instance
+    final snapshot = await _firestore
         .collection('products')
         .doc(product.id)
         .get();

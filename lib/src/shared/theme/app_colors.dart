@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-/// ✅ مزود الثيم
 class AppThemeProvider with ChangeNotifier {
   bool _isDarkMode = true;
 
@@ -14,7 +13,6 @@ class AppThemeProvider with ChangeNotifier {
 
   ThemeData get currentTheme => _isDarkMode ? darkTheme : lightTheme;
 
-  // 🌞 الثيم الفاتح
   ThemeData get lightTheme => ThemeData(
     brightness: Brightness.light,
     scaffoldBackgroundColor: AppColors.lightBackground,
@@ -24,7 +22,6 @@ class AppThemeProvider with ChangeNotifier {
     ),
   );
 
-  // 🌙 الثيم الداكن
   ThemeData get darkTheme => ThemeData(
     brightness: Brightness.dark,
     scaffoldBackgroundColor: AppColors.darkBackground,
@@ -35,7 +32,6 @@ class AppThemeProvider with ChangeNotifier {
   );
 }
 
-/// 🎨 ألوان التطبيق
 class AppColors {
   AppColors._();
 

@@ -27,7 +27,7 @@ class _TopLocationBarState extends State<TopLocationBar> {
     final size = MediaQuery.of(context).size;
     final width = size.width;
     final height = size.height;
-    final NotificationService _notificationService = NotificationService();
+    final NotificationService notificationService = NotificationService();
     final userId = AuthService().currentUser?.uid;
 
     return Padding(
@@ -70,7 +70,7 @@ class _TopLocationBarState extends State<TopLocationBar> {
                 onTap: () {
                   showMenu(
                     context: context,
-                    position: RelativeRect.fromLTRB(100, 80, 0, 0),
+                    position: const RelativeRect.fromLTRB(100, 80, 0, 0),
                     items: [
                       PopupMenuItem(
                         child: Row(
@@ -169,7 +169,7 @@ class _TopLocationBarState extends State<TopLocationBar> {
                     child: FutureBuilder<int>(
                       future: userId == null
                           ? Future.value(0)
-                          : _notificationService.getUnreadNotificationsCount(),
+                          : notificationService.getUnreadNotificationsCount(),
                       builder: (context, snapshot) {
                         final count = snapshot.data ?? 0;
                         if (count == 0) return const SizedBox.shrink();

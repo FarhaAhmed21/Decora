@@ -3,12 +3,16 @@ import 'package:decora/src/features/product_details/models/product_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FavService {
+  final FirebaseAuth auth;
+  final FirebaseFirestore firestore;
+
+  FavService({FirebaseAuth? auth, FirebaseFirestore? firestore})
+    : auth = auth ?? FirebaseAuth.instance,
+      firestore = firestore ?? FirebaseFirestore.instance;
+
   Future<List<Product>> getFavs() async {
-    final user = FirebaseAuth.instance.currentUser!;
-    final userDoc = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(user.uid)
-        .get();
+    final user = auth.currentUser!;
+    final userDoc = await firestore.collection('users').doc(user.uid).get();
 
     if (!userDoc.exists) return [];
 
@@ -19,11 +23,10 @@ class FavService {
 
     List<Product> allFavProducts = [];
 
-    // نقسم الليست كل 10 IDs
     for (int i = 0; i < favourites.length; i += 10) {
       final chunk = favourites.skip(i).take(10).toList();
 
-      final snapshot = await FirebaseFirestore.instance
+      final snapshot = await firestore
           .collection('products')
           .where(FieldPath.documentId, whereIn: chunk)
           .get();
@@ -36,22 +39,18 @@ class FavService {
     return allFavProducts;
   }
 
-  void addfavtolist(String id) {
-    final user = FirebaseAuth.instance.currentUser!;
-    final userDoc = FirebaseFirestore.instance
-        .collection('users')
-        .doc(user.uid);
-    userDoc.update({
+  Future<void> addfavtolist(String id) async {
+    final user = auth.currentUser!;
+    final userDoc = firestore.collection('users').doc(user.uid);
+    await userDoc.update({
       'favourites': FieldValue.arrayUnion([id]),
     });
   }
 
-  void deletefavfromlist(String id) {
-    final user = FirebaseAuth.instance.currentUser!;
-    final userDoc = FirebaseFirestore.instance
-        .collection('users')
-        .doc(user.uid);
-    userDoc.update({
+  Future<void> deletefavfromlist(String id) async {
+    final user = auth.currentUser!;
+    final userDoc = firestore.collection('users').doc(user.uid);
+    await userDoc.update({
       'favourites': FieldValue.arrayRemove([id]),
     });
   }

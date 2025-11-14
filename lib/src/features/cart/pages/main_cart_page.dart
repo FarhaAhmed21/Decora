@@ -98,6 +98,7 @@ class _MainCartPageState extends State<MainCartPage> {
       await OrderService.addOrderFromCart(
         amount: finalTotal.toString(), // use finalTotal here
         isShared: false,
+        context: context
       );
 
       // Get Paymob token
@@ -123,14 +124,20 @@ class _MainCartPageState extends State<MainCartPage> {
 
       print("✅ Order created successfully");
 
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            AppLocalizations.of(context)!.redirecting_to_payment_gateway,
+          ),
+        ),
+      );
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => PaymentScreen(paymentUrl: paymentUrl),
         ),
       );
-    } catch (e, st) {
-      print("❌ Payment Error: $e\n$st");
+    } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
@@ -144,6 +151,7 @@ class _MainCartPageState extends State<MainCartPage> {
     await OrderService.addOrderFromCart( //TODO: FOR TESTING ONLY
         amount: "1000",
         isShared: false,
+        context: context
       );
 
   }
@@ -195,7 +203,7 @@ class _MainCartPageState extends State<MainCartPage> {
                 ),
               ),
               const SizedBox(height: 15),
-              // Promo field
+
               SizedBox(
                 width: AppSize.width(context) * 0.96,
                 height: 60,
@@ -270,7 +278,6 @@ class _MainCartPageState extends State<MainCartPage> {
               ),
               const SizedBox(height: 10),
 
-              // 🧾 Taxes
               sheetPaymentRow(
                 context,
                 AppLocalizations.of(context)!.taxes,
@@ -278,7 +285,6 @@ class _MainCartPageState extends State<MainCartPage> {
               ),
               const SizedBox(height: 10),
 
-              // 🧾 Discount
               BlocBuilder<CartBloc, CartState>(
                 builder: (context, state) {
                   return sheetPaymentRow(
@@ -291,7 +297,6 @@ class _MainCartPageState extends State<MainCartPage> {
               const SizedBox(height: 10),
               Divider(color: Colors.grey[300]),
 
-              // 🧾 Total
               BlocBuilder<CartBloc, CartState>(
                 builder: (context, state) {
                   return sheetPaymentRow(
