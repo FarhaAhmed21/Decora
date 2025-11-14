@@ -18,16 +18,6 @@ void main() async {
   await dotenv.load(fileName: ".env");
   await NotificationMessage.initialize();
 
-  // NotificationMessage.showNotification(
-  //   title: "New Message",
-  //   message: "You have a new friend request!",
-  // );
-
-  // await NotificationService.addNotification(
-  //     "Welcome back!",
-  //     "You just logged in again.",
-  //   );
-
   runApp(
     MultiProvider(
       providers: [

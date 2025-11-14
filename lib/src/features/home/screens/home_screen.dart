@@ -38,15 +38,15 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     filteredProducts = widget.products;
-
   }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-
     categories = getTranslatedCategories(context);
   }
+
   void _onSearchChanged(String query) {
     setState(() {
       if (query.isEmpty) {
@@ -195,9 +195,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                               child: Text(
                                 AppLocalizations.of(context)!.see_all,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 14,
-                                  color: Colors.black,
+                                  color: AppColors.mainText(context),
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -206,10 +206,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: isLandscape ? h * 0.6 : h * 0.25,
+                        height: isLandscape ? h * 0.5 : h * 0.225,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: widget.specials.length,
+
                           itemBuilder: (context, index) {
                             final product = widget.specials[index];
                             return Padding(
@@ -232,7 +233,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.only(
+                          left: 16.0,
+                          right: 16.0,
+                          bottom: 8.0,
+                          top: 8.0,
+                        ),
                         child: Row(
                           children: [
                             Text(
@@ -255,9 +261,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                               child: Text(
                                 AppLocalizations.of(context)!.see_all,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 14,
-                                  color: Colors.black,
+                                  color: AppColors.mainText(context),
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -265,14 +271,18 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                       ),
-                      Categories(
-                        selectedCategory: selectedCategory,
-                        onCategorySelected: (category) {
-                          setState(() {
-                            selectedCategory = category;
-                            _applyPriceFilter(_minPrice, _maxPrice);
-                          });
-                        }, categories:categories,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Categories(
+                          selectedCategory: selectedCategory,
+                          onCategorySelected: (category) {
+                            setState(() {
+                              selectedCategory = category;
+                              _applyPriceFilter(_minPrice, _maxPrice);
+                            });
+                          },
+                          categories: categories,
+                        ),
                       ),
                       SizedBox(height: h * 0.015),
                       Padding(
