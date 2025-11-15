@@ -465,4 +465,7 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get order_received_message =>
       'لقد تم استلام طلبك وهو قيد المعالجة. شكرًا لتسوقك معنا!';
+
+  @override
+  String get copied_to_clipboard => 'تم النسخ إلى الحافظة';
 }
