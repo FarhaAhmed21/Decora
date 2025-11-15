@@ -6,8 +6,6 @@ import 'package:decora/src/features/cart/service/service.dart';
 import 'package:decora/src/features/cart/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:decora/src/shared/theme/app_colors.dart';
-import 'package:decora/core/utils/app_size.dart';
 
 class MyCart extends StatelessWidget {
   const MyCart({super.key});

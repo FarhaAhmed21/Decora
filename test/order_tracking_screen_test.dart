@@ -17,8 +17,11 @@ void main() {
       supportedLocales: AppLocalizations.supportedLocales,
       home: ChangeNotifierProvider(
         create: (_) => AppThemeProvider(),
-        child: Scaffold(
-          body: OrderTrackingScreen(orderId: testOrderId, iconStatus: 'Shipped'),
+        child: const Scaffold(
+          body: OrderTrackingScreen(
+            orderId: testOrderId,
+            iconStatus: 'Shipped',
+          ),
         ),
       ),
     );

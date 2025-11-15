@@ -44,7 +44,7 @@ class OrderContainer extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    AppLocalizations.of(context)!.orderID + ' #$orderId',
+                    '${AppLocalizations.of(context)!.orderID} #$orderId',
                     style: TextStyle(
                       color: AppColors.mainText(context),
                       fontWeight: FontWeight.bold,
@@ -114,7 +114,7 @@ class OrderContainer extends StatelessWidget {
                   ),
                   const Spacer(),
                   Text(
-                    AppLocalizations.of(context)!.details + "  ",
+                    "${AppLocalizations.of(context)!.details}  ",
                     style: TextStyle(
                       color: AppColors.primary(context),
                       fontWeight: FontWeight.bold,
