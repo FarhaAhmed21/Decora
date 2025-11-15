@@ -50,7 +50,7 @@ class OrderService {
 
     final cartDoc = cartSnap.docs.first;
     final cartRef = cartDoc.reference;
-    final cartData = cartDoc.data() as Map<String, dynamic>;
+    final cartData = cartDoc.data();
 
     final productsMap =
         (cartData['products'] as Map?)?.cast<String, dynamic>() ?? {};
@@ -72,7 +72,7 @@ class OrderService {
             : orderSnap.docs.first.reference;
 
         int maxNum = 0;
-        if (!orderSnap.docs.isEmpty) {
+        if (orderSnap.docs.isNotEmpty) {
           final list =
               orderSnap.docs.first['orderList'] as List<dynamic>? ?? [];
           for (var o in list) {
@@ -108,8 +108,7 @@ class OrderService {
 
       if (lastOrderId != null) {
         await NotificationService.addNotification(
-          AppLocalizations.of(context)!.order_placed_successfully +
-              " #$lastOrderId",
+          "${AppLocalizations.of(context)!.order_placed_successfully} #$lastOrderId",
           AppLocalizations.of(context)!.order_received_message,
         );
       }

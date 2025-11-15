@@ -49,13 +49,11 @@ Decora aims to bridge the gap between **digital browsing and real-life home styl
 - Logo design (modern + elegant with furniture element)  
 - Define color palette (light & dark themes)  
 - Define typography (headings + body fonts)  
-- Create design system (buttons, cards, icons, spacing rules)  
-- Poster + branding assets (mockups, banners)  
+- Create design system (buttons, cards, icons, spacing rules)   
 
 **Deliverables:**  
 - Logo package (PNG, SVG)  
 - Style guide (colors, typography, components)  
-- Posters & social media banners  
 
 ---
 
@@ -107,7 +105,6 @@ Decora aims to bridge the gap between **digital browsing and real-life home styl
 
 **Deliverables:**  
 - Firebase connected with Flutter app  
-- Backend APIs working for all core features  
 
 ---
 
@@ -126,7 +123,7 @@ Decora aims to bridge the gap between **digital browsing and real-life home styl
 ## **Phase 6 – Finalization & Deployment**  
 **Tasks:**  
 - Prepare final presentation (slides, demo video)  
-- Deploy to Google Play Store & Apple App Store  
+- Make APK 
 
 **Deliverables:**  
 - Final presentation deck  
@@ -177,52 +174,39 @@ These advanced features will enhance personalization, engagement, and customer s
 - **Farha** →  in-app chat, onboarding,favourites, Splash Screen, Categories Screen.  
 - **Karen** → Home screen, product details, AR preview UI (VTO).  
 - **Othman** → Cart, shared cart, privacy policy,order cancellation.  
-- **Habiba** → Search with filters/voice ,Authentication . 
-- **Abdelaziz** → Notifications, delivery estimation, stock alerts.  
-- **AbdElrahman** → Profile , best sellers section, Offers Screen.  
+- **Habiba** → Authentication . 
+- **Abdelaziz** → Notifications, delivery estimation(Order details Screens ), My orders Screen.  
+- **AbdElrahman** → Profile , New Collection section, Offers Screen.  
 
 ---
 
 ### **Phase 4 – Backend Development & Integration**  
-- **Farha Ahmed** → Firestore for support chat 
-- **Karen** → Firestore integration for product catalog + AR data.  
-- **Othman** → Firestore for cart, shared cart, and orders.  
-- **Habiba Basel** → Firestore for user profiles, addresses, and preferences.  Firebase Auth integration (Google, Facebook, Email).  
-- **Abdelaziz** → Firebase Cloud Messaging for notifications.  
-- **AbdElrahman Taher** →Firestore for user profiles + user reviews.  
+- **Farha Ahmed** → Apply Dark mode in all Screens ,Firestore for support chat , Integrate with paymob.
+- **Karen** → Firestore integration for product catalog + AR data .  
+- **Othman** → Firestore for cart, shared cart .  
+- **Habiba Basel** → Firestore for user profiles (creation). Firebase Auth integration (Google, Facebook, Email).  
+- **Abdelaziz** → Firebase Cloud Messaging for notifications and All Orders Screens.  
+- **AbdElrahman Taher** →Firestore for user profiles (editing) + user reviews + Admin panel.  
 
 ---
 
 ### **Phase 5 – Unit Testing & Quality Assurance**  
-- **Farha Ahmed** → Unit tests for auth & onboarding flow.  
-- **Karen** → Widget tests for home & product details.  
+- **Farha Ahmed** → test chat.
+- **Karen** → Widget tests for home & product details + AR.
 - **Othman** → Integration tests for cart & checkout.  
-- **Habiba Basel** → Test multi-language support & dark/light mode.  
-- **Abdelaziz** → Test notification triggers & delivery estimates.  
-- **AbdElrahman Taher** → QA testing for profile & chat system.  
+- **Habiba Basel** → Test Auth & onboarding flow.
+- **Abdelaziz** → Test notification triggers & Order tracking.  
+- **AbdElrahman Taher** → QA testing for profile & favourite screen.  
 
 ---
 
 ### **Phase 6 – Finalization & Deployment**  
-- **Farha Ahmed** → Android build + Play Store submission.  
-- **Karen** → Documentation & app descriptions for stores.  
-- **Othman** → iOS build + App Store submission.  
-- **Habiba Basel** → Demo video + screenshots for marketing.  
-- **Abdelaziz** → Visual assets for store banners.  
-- **AbdElrahman Taher** → Final presentation (slides & pitch).  
+- **Farha Ahmed** → Android build.
+- **Karen** → Documentation & app descriptions for stores.
+- **Othman** & **Abdelaziz**  &  **AbdElrahman Taher** → Final presentation (slides & pitch).
+- **Habiba Basel** → Demo video + screenshots .
 
 ---
-
-### **Phase 7 – Maintenance & Future Updates**  
-- **Farha Ahmed** → Manage bug fixes & performance monitoring.  
-- **Karen** → Collect user feedback & update content.  
-- **Othman** → Backend optimization & Firestore cost monitoring.  
-- **Habiba Basel** → UX improvements for accessibility.  
-- **Abdelaziz** → Update branding visuals for new features.  
-- **AbdElrahman Taher** → Prepare update presentations & reports.  
-
----
-
 ### **Bones Phase – Innovation & AI Features (Quiz & LLM Integration)**  
 - **Farha Ahmed** → Build quiz UI & AI assistant entry point.  
 - **Karen** → Design quiz questions & train LLM with product data.  

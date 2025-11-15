@@ -1,5 +1,4 @@
 import 'package:decora/core/l10n/app_localizations.dart';
-import 'package:decora/generated/assets.dart';
 import 'package:decora/src/features/home/main_screen.dart';
 import 'package:decora/src/features/myOrders/service/order_service.dart';
 import 'package:decora/src/features/orderTracking/service/add_days.dart';

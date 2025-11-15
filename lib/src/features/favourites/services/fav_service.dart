@@ -10,6 +10,19 @@ class FavService {
     : auth = auth ?? FirebaseAuth.instance,
       firestore = firestore ?? FirebaseFirestore.instance;
 
+  Future<bool> checkIfFavourite(String id) async {
+    bool isFavourite = false;
+    User user = FirebaseAuth.instance.currentUser!;
+    final userDoc = FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid);
+    final doc = await userDoc.get();
+    if (doc.exists && doc.data()!.containsKey('favourites')) {
+      isFavourite = (doc['favourites'] as List).contains(id);
+    }
+    return isFavourite;
+  }
+
   Future<List<Product>> getFavs() async {
     final user = auth.currentUser!;
     final userDoc = await firestore.collection('users').doc(user.uid).get();
