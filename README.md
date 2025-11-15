@@ -184,9 +184,9 @@ These advanced features will enhance personalization, engagement, and customer s
 - **Farha Ahmed** → Apply Dark mode in all Screens ,Firestore for support chat , Integrate with paymob.
 - **Karen** → Firestore integration for product catalog + AR data .  
 - **Othman** → Firestore for cart, shared cart .  
-- **Habiba Basel** → Firestore for user profiles. Firebase Auth integration (Google, Facebook, Email).  
+- **Habiba Basel** → Firestore for user profiles (creation). Firebase Auth integration (Google, Facebook, Email).  
 - **Abdelaziz** → Firebase Cloud Messaging for notifications and All Orders Screens.  
-- **AbdElrahman Taher** →Firestore for user profiles + user reviews + Admin panel.  
+- **AbdElrahman Taher** →Firestore for user profiles (editing) + user reviews + Admin panel.  
 
 ---
 
