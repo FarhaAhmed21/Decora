@@ -36,7 +36,7 @@ class MainCartPage extends StatefulWidget {
 class _MainCartPageState extends State<MainCartPage> {
   bool isSheetOpen = false;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
-  double taxes = 0.2; // 20% tax
+  double taxes = 0.2;
 
   @override
   Widget build(BuildContext context) {
@@ -163,15 +163,11 @@ class _MainCartPageState extends State<MainCartPage> {
         ),
       );
 
-      // ✅ This code runs after returning from PaymentScreen
       if (result != null && result == true) {
-        // For example, trigger a notification or refresh the cart
         ScaffoldMessenger.of(ctx).showSnackBar(
           const SnackBar(content: Text("Payment completed successfully!")),
         );
 
-        // Here you can also call your notification service
-        // NotificationService.sendPaymentSuccessNotification();
       } else {
         ScaffoldMessenger.of(ctx).showSnackBar(
           const SnackBar(content: Text("Payment cancelled or failed")),
@@ -300,7 +296,6 @@ class _MainCartPageState extends State<MainCartPage> {
               ),
               const SizedBox(height: 10),
 
-              // **Important fix: Wrap the rows in BlocBuilder to auto-update**
               Expanded(
                 child: BlocBuilder<CartBloc, CartState>(
                   builder: (context, state) {

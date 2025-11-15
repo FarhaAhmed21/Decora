@@ -95,60 +95,59 @@ class CartRepository {
     }
   }
 
-  /// Fetch shared carts involving the current user
   Future<List<Map<String, dynamic>>> getSharedCarts() async {
-    try {
-      final user = _auth.currentUser;
-      if (user == null) throw Exception('User not logged in.');
+  try {
+    final query = await _firestore.collection('carts').get();
+    if (query.docs.isEmpty) return [];
 
-      final query = await _firestore
-          .collection('carts')
-          .where('userIds', arrayContains: user.uid)
-          .where('isShared', isEqualTo: true)
-          .get();
+    final Map<String, int> allProductsMap = {};
+    final Set<String> allUserIds = {};
 
-      if (query.docs.isEmpty) return [];
+    for (final cartDoc in query.docs) {
+      final data = cartDoc.data();
 
-      final List<Map<String, dynamic>> sharedCarts = [];
+      final productsData = data['products'];
+      final userIds = (data['userIds'] as List<dynamic>?) ?? [];
+      allUserIds.addAll(userIds.cast<String>());
 
-      for (final cartDoc in query.docs) {
-        final data = cartDoc.data();
-        final Map<String, dynamic> productsMap = Map<String, dynamic>.from(
-          data['products'] ?? {},
-        );
+      if (productsData == null) continue;
 
-        final List<Map<String, dynamic>> productsList = [];
+      final productsMap = Map<String, dynamic>.from(productsData);
 
-        for (final entry in productsMap.entries) {
-          final productId = entry.key;
-          final quantity = entry.value ?? 1;
+      for (final entry in productsMap.entries) {
+        final productId = entry.key;
+        final quantity = (entry.value as num?)?.toInt() ?? 1;
 
-          final productSnap = await _firestore
-              .collection('products')
-              .doc(productId)
-              .get();
+        allProductsMap[productId] = (allProductsMap[productId] ?? 0) + quantity;
+      }
+    }
 
-          if (productSnap.exists && productSnap.data() != null) {
-            final product = Product.fromMap(
-              productSnap.data()!,
-              productSnap.id,
-            );
-            productsList.add({'product': product, 'quantity': quantity});
-          }
-        }
+    final List<Map<String, dynamic>> productsList = [];
 
-        sharedCarts.add({
-          'cartId': cartDoc.id,
-          'products': productsList,
-          'userIds': List<String>.from(data['userIds'] ?? []),
+    for (final entry in allProductsMap.entries) {
+      final productSnap =
+          await _firestore.collection('products').doc(entry.key).get();
+
+      if (productSnap.exists && productSnap.data() != null) {
+        final product = Product.fromMap(productSnap.data()!, productSnap.id);
+        productsList.add({
+          'product': product,
+          'quantity': entry.value,
         });
       }
-
-      return sharedCarts;
-    } catch (e) {
-      rethrow;
     }
+
+    // Return in the format UI expects
+    return [
+      {
+        'products': productsList,
+        'userIds': allUserIds.toList(),
+      }
+    ];
+  } catch (e) {
+    rethrow;
   }
+}
 
   /// Decrease product quantity in cart or remove if quantity reaches zero
   Future<void> decreaseProductQuantityCart(String productId) async {

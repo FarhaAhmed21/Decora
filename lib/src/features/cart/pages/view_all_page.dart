@@ -21,7 +21,7 @@ class ViewAllPage extends StatelessWidget {
             'email': doc.data()!['email'] ?? 'No email',
             'photoUrl':
                 doc.data()!['photoUrl'] ??
-                'https://i.pravatar.cc/150?u=$id', // fallback image
+                'https://i.pravatar.cc/150?u=$id',
           });
         } else {
           users.add({

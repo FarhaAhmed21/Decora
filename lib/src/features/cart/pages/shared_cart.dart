@@ -6,6 +6,7 @@ import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_image_overlap/flutter_image_overlap.dart';
+
 import '../bloc/cart_bloc.dart';
 import '../bloc/cart_event.dart';
 import '../bloc/cart_state.dart';
@@ -75,9 +76,38 @@ class _SharedCartState extends State<SharedCart>
             );
           }
 
-          final sharedCart = state.items.first;
-          final products = sharedCart['products'] as List<Map<String, dynamic>>;
-          final userIds = sharedCart['userIds'] as List<String>? ?? [];
+          // Merge all products from all carts
+          final Map<String, Map<String, dynamic>> allProductsMap = {};
+
+          final Set<String> allUserIds = {};
+
+          for (final cart in state.items) {
+            final products = (cart['products'] as List<dynamic>?) ?? [];
+            final userIds = (cart['userIds'] as List<dynamic>?) ?? [];
+
+            // Collect all userIds
+            allUserIds.addAll(userIds.cast<String>());
+
+            // Merge products
+            for (final item in products) {
+              final mapItem = item as Map<String, dynamic>;
+              final product = mapItem['product'];
+              final quantity = (mapItem['quantity'] as int?) ?? 1;
+
+              if (product != null) {
+                if (allProductsMap.containsKey(product.id)) {
+                  allProductsMap[product.id]!['quantity'] += quantity;
+                } else {
+                  allProductsMap[product.id] = {
+                    'product': product,
+                    'quantity': quantity,
+                  };
+                }
+              }
+            }
+          }
+
+          final productsList = allProductsMap.values.toList();
 
           return SingleChildScrollView(
             padding: const EdgeInsets.only(top: 5.0, bottom: 8),
@@ -92,9 +122,7 @@ class _SharedCartState extends State<SharedCart>
                       AnimatedSlide(
                         duration: const Duration(milliseconds: 500),
                         curve: Curves.easeInOut,
-                        offset: _isVisible
-                            ? Offset.zero
-                            : const Offset(-1.5, 0),
+                        offset: _isVisible ? Offset.zero : const Offset(-1.5, 0),
                         child: Row(
                           children: [
                             Text(
@@ -109,7 +137,7 @@ class _SharedCartState extends State<SharedCart>
                             SizedBox(
                               width: AppSize.width(context) * 0.3,
                               child: OverlappingImages(
-                                images: userIds.map((id) {
+                                images: allUserIds.map((id) {
                                   return NetworkImage(
                                     'https://i.pravatar.cc/150?u=$id',
                                   );
@@ -131,7 +159,8 @@ class _SharedCartState extends State<SharedCart>
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (_) => ViewAllPage(usersId: userIds),
+                                builder: (_) =>
+                                    ViewAllPage(usersId: allUserIds.toList()),
                               ),
                             );
                           },
@@ -149,14 +178,15 @@ class _SharedCartState extends State<SharedCart>
                   ),
                 ),
 
+                // Products List
                 ListView.builder(
-                  itemCount: products.length,
+                  itemCount: productsList.length,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
-                    final item = products[index];
-                    final product = item['product'];
-                    final quantity = item['quantity'] ?? 1;
+                    final item = productsList[index];
+                    final product = item['product'] as dynamic;
+                    final quantity = item['quantity'] as int;
 
                     return ProductCard(
                       id: product.id,
