@@ -19,7 +19,6 @@ class NotificationService {
       'isRead': false,
     };
 
-    // Find if user already has a document
     final query = await _firestore
         .collection('notifications')
         .where('id', isEqualTo: userId)
@@ -27,19 +26,16 @@ class NotificationService {
         .get();
 
     if (query.docs.isEmpty) {
-      // Create a new document for the user
       await _firestore.collection('notifications').add({
         'id': userId,
         'notifications': [newNotification],
       });
-      print("✅ Created new user doc and added first notification.");
     } else {
       // Update the existing user's notifications array
       final docRef = query.docs.first.reference;
       await docRef.update({
         'notifications': FieldValue.arrayUnion([newNotification]),
       });
-      print("✅ Added new notification to existing user.");
     }
     NotificationMessage.showNotification(title: title, message: body);
   }
@@ -53,13 +49,13 @@ class NotificationService {
         .get();
 
     if (query.docs.isEmpty) {
-      print("⚠️ User not found in Firestore.");
+      print("User not found in Firestore");
       return [];
     }
 
     final data = query.docs.first.data();
     if (data['notifications'] == null) {
-      print("ℹ️ No notifications found for this user.");
+      print("No notifications found for this user");
       return [];
     }
 
@@ -82,13 +78,13 @@ class NotificationService {
         .get();
 
     if (query.docs.isEmpty) {
-      print("⚠️ User not found in Firestore.");
+      print("User not found in Firestore");
       return 0;
     }
 
     final data = query.docs.first.data();
     if (data['notifications'] == null) {
-      print("ℹ️ No notifications found for this user.");
+      print("No notifications found for this user");
       return 0;
     }
 
@@ -106,7 +102,7 @@ class NotificationService {
         .get();
 
     if (query.docs.isEmpty) {
-      print("⚠️ User not found in Firestore.");
+      print("User not found in Firestore");
       return;
     }
 
@@ -114,7 +110,7 @@ class NotificationService {
     final data = query.docs.first.data();
 
     if (data['notifications'] == null) {
-      print("ℹ️ No notifications found for this user.");
+      print("No notifications found for this user");
       return;
     }
 
@@ -124,40 +120,6 @@ class NotificationService {
     }
 
     await docRef.update({'notifications': notifications});
-    print("✅ All notifications marked as read for user $userId.");
+    print("All notifications marked as read for user $userId");
   }
-
-  /// Delete a specific notification by index
-  // Future<void> deleteNotification(int index) async {
-  //   final query = await _firestore
-  //       .collection('notifications')
-  //       .where('id', isEqualTo: userId)
-  //       .limit(1)
-  //       .get();
-
-  //   if (query.docs.isEmpty) {
-  //     print("⚠️ User not found in Firestore.");
-  //     return;
-  //   }
-
-  //   final docRef = query.docs.first.reference;
-  //   final data = query.docs.first.data();
-
-  //   if (data['notifications'] == null) {
-  //     print("ℹ️ No notifications found for this user.");
-  //     return;
-  //   }
-
-  //   List notifications = List.from(data['notifications']);
-
-  //   if (index < 0 || index >= notifications.length) {
-  //     print("⚠️ Invalid notification index: $index");
-  //     return;
-  //   }
-
-  //   final removed = notifications.removeAt(index);
-  //   await docRef.update({'notifications': notifications});
-
-  //   print("🗑️ Deleted notification #$index → ${removed['title']}");
-  // }
 }

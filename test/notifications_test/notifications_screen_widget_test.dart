@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-// A fake version of the NotificationsScreen that takes notifications as a parameter
 class TestNotificationsScreen extends StatelessWidget {
   final List<Map<String, dynamic>> notifications;
   final bool isLoading;

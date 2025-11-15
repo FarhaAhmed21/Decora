@@ -9,9 +9,7 @@ class OrderService {
   static final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   static final String? _currentUid = AuthService().currentUser?.uid;
 
-  // =========================================================================
-  // 1. GET USER ORDERS
-  // =========================================================================
+  // GET USER ORDERS
   static Future<List<Map<String, dynamic>>> getUserOrders() async {
     if (_currentUid == null) return [];
 
@@ -27,9 +25,7 @@ class OrderService {
     return orderList.map((e) => Map<String, dynamic>.from(e as Map)).toList();
   }
 
-  // =========================================================================
-  // 2. ADD ORDER FROM CART — FIXED FOREVER
-  // =========================================================================
+  // ADD ORDER FROM CART — FIXED FOREVER
   static Future<void> addOrderFromCart({
     required String amount,
     required bool isShared,
@@ -117,9 +113,7 @@ class OrderService {
     });
   }
 
-  // =========================================================================
-  // 3. GET SPECIFIC ORDER BY ID FOR CURRENT USER
-  // =========================================================================
+  // GET SPECIFIC ORDER BY ID FOR CURRENT USER
   static Future<Map<String, dynamic>?> getOrderById(String orderId) async {
     if (_currentUid == null) return null;
 

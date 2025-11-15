@@ -8,7 +8,6 @@ class InvitationDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Example invitation URL
     final invitationUrl = "https://decora.app/invite?code=ABC123";
 
     return Dialog(
@@ -20,7 +19,6 @@ class InvitationDialog extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Title
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -42,7 +40,6 @@ class InvitationDialog extends StatelessWidget {
 
             const SizedBox(height: 20),
 
-            // URL display container
             Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
