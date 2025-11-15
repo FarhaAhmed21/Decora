@@ -81,49 +81,42 @@ class _MainCartPageState extends State<MainCartPage> {
   void handlePayNow() async {
     try {
       final cartState = context.read<CartBloc>().state;
-      final subtotal = cartState.initialTotal;
-      final discounted = cartState.discountedTotal;
-      final taxes = 30;
 
-      final finalTotal = subtotal - discounted + taxes;
+      // احساب الإجمالي النهائي: subtotal - discount + taxes
+      final double finalTotal = cartState.discountedTotal + taxes;
 
       if (finalTotal <= 0) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Total amount must be greater than 0")),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text("Invalid total amount")));
         return;
       }
 
-      // Add order from cart with correct amount
-      await OrderService.addOrderFromCart(
-        amount: finalTotal.toString(), // use finalTotal here
-        isShared: false,
-        context: context
-      );
+      // 1️⃣ Add order to your backend
 
-      // Get Paymob token
+      // 2️⃣ Get Paymob Auth Token
       final authToken = await PaymobService.getAuthToken();
       if (authToken.isEmpty) {
-        throw Exception("Failed to get Paymob auth token");
+        throw Exception("Failed to get Paymob Auth Token");
       }
 
-      // Create order
+      // 3️⃣ Create Paymob order
       final orderId = await PaymobService.createOrder(
         authToken: authToken,
         amountCents: (finalTotal * 100).toInt(),
       );
 
-      // Get payment key
+      // 4️⃣ Get payment key
       final paymentKey = await PaymobService.getPaymentKey(
         authToken: authToken,
         orderId: orderId,
         amountCents: (finalTotal * 100).toInt(),
       );
 
+      // 5️⃣ Get final payment URL
       final paymentUrl = PaymobService.getPaymentUrl(paymentKey);
 
-      print("✅ Order created successfully");
-
+      // Success message
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
@@ -131,6 +124,8 @@ class _MainCartPageState extends State<MainCartPage> {
           ),
         ),
       );
+
+      // 6️⃣ Navigate to gateway WebView
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -138,6 +133,7 @@ class _MainCartPageState extends State<MainCartPage> {
         ),
       );
     } catch (e) {
+      debugPrint("PAYMENT ERROR: $e");
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
@@ -148,12 +144,13 @@ class _MainCartPageState extends State<MainCartPage> {
         ),
       );
     }
-    await OrderService.addOrderFromCart( //TODO: FOR TESTING ONLY
-        amount: "1000",
-        isShared: false,
-        context: context
-      );
 
+    // 🔴 FOR TESTING ONLY — احذفيها بعد الاختبار
+    await OrderService.addOrderFromCart(
+      amount: "1000",
+      isShared: false,
+      context: context,
+    );
   }
 
   void openCheckoutSheet(BuildContext context) {

@@ -137,8 +137,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           itemCount: filteredProducts.length,
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: isLandscape ? 3 : 2,
-                                childAspectRatio: isLandscape ? 0.8 : 0.75,
+                                crossAxisCount: isLandscape ? 4 : 2,
+                                childAspectRatio: isLandscape ? 0.8 : 0.7,
                                 mainAxisSpacing: 0.010 * w,
                                 crossAxisSpacing: 0.010 * w,
                               ),
