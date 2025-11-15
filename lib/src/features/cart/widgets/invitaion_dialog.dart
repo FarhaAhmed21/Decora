@@ -1,13 +1,16 @@
 import 'package:decora/core/l10n/app_localizations.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter/services.dart';
 
 class InvitationDialog extends StatelessWidget {
   const InvitationDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Example invitation URL
+    final invitationUrl = "https://decora.app/invite?code=ABC123";
+
     return Dialog(
       backgroundColor: AppColors.background(context),
       insetPadding: const EdgeInsets.symmetric(horizontal: 24),
@@ -17,7 +20,7 @@ class InvitationDialog extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            //  Title
+            // Title
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -39,69 +42,45 @@ class InvitationDialog extends StatelessWidget {
 
             const SizedBox(height: 20),
 
-            // Icons row
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _SocialIconButton(
-                  icon: FontAwesomeIcons.link,
-                  color: Color(0xFF1976D2),
-                ),
-                _SocialIconButton(
-                  icon: FontAwesomeIcons.whatsapp,
-                  color: Color(0xFF25D366),
-                ),
-                _SocialIconButton(
-                  icon: FontAwesomeIcons.telegram,
-                  color: Color(0xFF26A4E3),
-                ),
-                _SocialIconButton(
-                  icon: FontAwesomeIcons.facebookMessenger,
-                  color: Color(0xFF9C27B0),
-                ),
-              ],
-            ),
-
-            const SizedBox(height: 30),
-
-            // Label
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                AppLocalizations.of(context)!.enter_user_name,
-                style:  TextStyle(
-                  fontSize: 16,
-                  color: AppColors.textColor(context),
-                  fontWeight: FontWeight.w500,
-                ),
+            // URL display container
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              decoration: BoxDecoration(
+                color: AppColors.background(context).withOpacity(0.1),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Colors.grey.shade300),
               ),
-            ),
-
-            const SizedBox(height: 10),
-
-            // text Field
-            TextField(
-              decoration: InputDecoration(
-                hintText: AppLocalizations.of(context)!.enter_user_name,
-                hintStyle: TextStyle(color: Colors.grey[500]),
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 14,
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: Colors.grey[300]!, width: 1.2),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(color: Colors.green, width: 1.5),
-                ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      invitationUrl,
+                      style: TextStyle(
+                        color: AppColors.textColor(context),
+                        fontSize: 16,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      Clipboard.setData(ClipboardData(text: invitationUrl));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(AppLocalizations.of(context)!.copied_to_clipboard),
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.copy, size: 20),
+                  ),
+                ],
               ),
             ),
 
             const SizedBox(height: 20),
 
-            //Invite Button
+            // Invite Button
             SizedBox(
               width: double.infinity,
               height: 48,
@@ -113,7 +92,12 @@ class InvitationDialog extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  Navigator.pop(context);
+                  Clipboard.setData(ClipboardData(text: invitationUrl));
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(AppLocalizations.of(context)!.copied_to_clipboard),
+                    ),
+                  );
                 },
                 child: Text(
                   AppLocalizations.of(context)!.invite,
@@ -123,26 +107,6 @@ class InvitationDialog extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class _SocialIconButton extends StatelessWidget {
-  final IconData icon;
-  final Color color;
-
-  const _SocialIconButton({required this.icon, required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    return CircleAvatar(
-      radius: 26,
-      backgroundColor: color,
-      child: IconButton(
-        color: Colors.white,
-        onPressed: () {},
-        icon: Icon(icon, size: 22),
       ),
     );
   }

@@ -464,4 +464,7 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get order_received_message =>
       'Your order has been received and is being processed. Thank you for shopping with us!';
+
+  @override
+  String get copied_to_clipboard => 'Copied to clipboard';
 }

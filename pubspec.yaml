@@ -45,6 +45,8 @@ dependencies:
   permission_handler: ^11.3.0
   firebase_messaging: ^15.2.1
   googleapis_auth: ^1.6.0
+  url_launcher: ^6.3.2
+
 
 dev_dependencies:
   flutter_test:

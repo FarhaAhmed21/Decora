@@ -985,6 +985,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your order has been received and is being processed. Thank you for shopping with us!'**
   String get order_received_message;
+
+  /// No description provided for @copied_to_clipboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Copied to clipboard'**
+  String get copied_to_clipboard;
 }
 
 class _AppLocalizationsDelegate

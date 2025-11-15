@@ -149,7 +149,9 @@
   "redirecting_to_payment_gateway":"Redirecting to Payment Gateway",
     "emailAlreadyRegistered":"Email Already Registered",
     "order_placed_successfully": "Order Placed Successfully",
-"order_received_message": "Your order has been received and is being processed. Thank you for shopping with us!"
+"order_received_message": "Your order has been received and is being processed. Thank you for shopping with us!",
+    "copied_to_clipboard": "Copied to clipboard"
+
 
 
 
