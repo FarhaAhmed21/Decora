@@ -12,7 +12,7 @@ import '../../../../generated/assets.dart';
 // --- Placeholder for the Furniture Model (The Orange Chair) ---
 // Since we don't have the exact 3D model, we'll use a local asset or a placeholder.
 // For this example, let's assume you've added an asset for the orange chair.
-const String _kChairAssetName = 'assets/images/chair_placeholder.png';
+// const String _kChairAssetName = 'assets/images/chair_placeholder.png';
 // NOTE: Make sure to replace 'assets/images/office.png'
 // in furnitureImages with a list of actual furniture image assets,
 // and add the orange chair asset.
@@ -29,7 +29,7 @@ class _VtoScreenState extends State<VtoScreen> {
   XFile? _pickedImage;
   CameraController? _cameraController;
   bool _isLive = true; // Start with live camera on as a common VTO pattern
-  String _selectedFurniture = _kChairAssetName;
+  late String _selectedFurniture;
   final List<String> images = [];
 
   @override
@@ -41,6 +41,7 @@ class _VtoScreenState extends State<VtoScreen> {
         images.add(color.imageUrl);
       }
     }
+    _selectedFurniture = images.first;
   }
 
   @override
@@ -98,11 +99,10 @@ class _VtoScreenState extends State<VtoScreen> {
       return Container(
         decoration: const BoxDecoration(
           color: Colors.white,
-          image: DecorationImage(
-            // Replace with an asset if you want the specific room image
-            image: AssetImage('assets/images/room_placeholder.jpg'),
-            fit: BoxFit.cover,
-          ),
+          // image: DecorationImage(
+          //   image: AssetImage('assets/images/room_placeholder.jpg'),
+          //   fit: BoxFit.cover,
+          // ),
         ),
       );
     }
@@ -400,8 +400,3 @@ class DashedRectPainter extends CustomPainter {
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
-
-// To run this code, remember to:
-// 1. Add the necessary assets ('assets/images/chair_placeholder.png', 'assets/images/room_placeholder.jpg', etc.)
-//    and update the `furnitureImages` list.
-// 2. Update your `pubspec.yaml` to include the assets directory.
