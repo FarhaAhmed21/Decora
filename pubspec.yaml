@@ -54,6 +54,7 @@ dev_dependencies:
   flutter_lints: ^5.0.0
   integration_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.13.1  
 
   # Testing packages – MUST be here
   build_runner: ^2.4.9
@@ -63,6 +64,11 @@ dev_dependencies:
   firebase_auth_mocks: ^0.14.2
   google_sign_in_mocks: ^0.3.0
   fake_cloud_firestore: ^3.1.0
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icons/app_icon.png"
 
 
 flutter:

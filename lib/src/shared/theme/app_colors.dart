@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class AppThemeProvider with ChangeNotifier {
-  bool _isDarkMode = true;
+  bool _isDarkMode = false;
 
   bool get isDarkMode => _isDarkMode;
 
@@ -77,12 +77,8 @@ class AppColors {
   static const Color darkInnerProductCardBorder = Color(0xFF4C9C4C);
   static const Color darkInnerProductCardTypeText = Color(0xFF80C080);
 
-  // =========================
-  // دوال ذكية تبع الوضع الحالي
-  // =========================
-
   static bool _isDark(BuildContext context) =>
-      Provider.of<AppThemeProvider>(context, listen: false).isDarkMode;
+      Provider.of<AppThemeProvider>(context, listen: true).isDarkMode;
 
   static Color cardColor(BuildContext context) =>
       _isDark(context) ? darkCardColor : lightCardColor;
@@ -115,9 +111,7 @@ class AppColors {
       : lightOrderIconUnSelectedColor;
 
   static Color shoppingIconColor(BuildContext context, {double opacity = 1.0}) {
-    final color = _isDark(context)
-        ? darkMainText
-        : lightShoppingIconColor;
+    final color = _isDark(context) ? darkMainText : lightShoppingIconColor;
     return color.withOpacity(opacity);
   }
 

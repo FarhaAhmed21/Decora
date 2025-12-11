@@ -17,8 +17,12 @@ class AdminDashboard extends StatelessWidget {
             .where('participants', arrayContains: adminId)
             .snapshots(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
+          }
+
+          if (!snapshot.hasData) {
+            return const Center(child: Text("حدث خطأ في تحميل المحادثات"));
           }
 
           final chats = snapshot.data!.docs;
@@ -27,84 +31,108 @@ class AdminDashboard extends StatelessWidget {
             return const Center(child: Text("No chats yet."));
           }
 
-          return ListView.builder(
-            itemCount: chats.length,
-            itemBuilder: (context, index) {
-              final chat = chats[index];
-              final participants = List<String>.from(chat['participants']);
-              final userId = participants.firstWhere((id) => id != adminId);
+          final Set<String> userIds = {};
+          for (final chat in chats) {
+            final participants = List<String>.from(chat['participants']);
+            final other = participants.firstWhere(
+              (id) => id != adminId,
+              orElse: () => '',
+            );
+            if (other.isNotEmpty) userIds.add(other);
+          }
 
-              final userName = "User $userId";
-              final userImage = 'assets/images/default_user.png';
-              return StreamBuilder<QuerySnapshot>(
-                stream: chat.reference
-                    .collection('messages')
-                    .orderBy('timestamp', descending: true)
-                    .limit(1)
-                    .snapshots(),
-                builder: (context, msgSnapshot) {
-                  String lastMessage = "No messages yet";
-                  bool isRead = true;
-                  DateTime lastMessageTime = DateTime.now();
+          return FutureBuilder<Map<String, DocumentSnapshot>>(
+            future: _fetchUsers(userIds),
+            builder: (context, usersSnapshot) {
+              if (usersSnapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
 
-                  if (msgSnapshot.hasData &&
-                      msgSnapshot.data!.docs.isNotEmpty) {
-                    final msgDoc = msgSnapshot.data!.docs.first;
-                    lastMessage = msgDoc['text'];
-                    lastMessageTime = (msgDoc['timestamp'] as Timestamp)
-                        .toDate();
-                  }
+              if (usersSnapshot.hasError) {
+                return Center(child: Text("Error: ${usersSnapshot.error}"));
+              }
 
-                  return ListTile(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => ChatScreen(
-                            userId: userId,
-                            adminId: adminId,
-                            currentUserId: adminId,
-                          ),
+              final Map<String, DocumentSnapshot> usersMap =
+                  usersSnapshot.data ?? {};
+
+              return ListView.builder(
+                itemCount: chats.length,
+                itemBuilder: (context, index) {
+                  final chat = chats[index];
+                  final participants = List<String>.from(chat['participants']);
+                  final userId = participants.firstWhere(
+                    (id) => id != adminId,
+                    orElse: () => '',
+                  );
+
+                  final userDoc = usersMap[userId];
+                  final userName =
+                      (userDoc != null &&
+                          userDoc.exists &&
+                          userDoc.data() != null)
+                      ? (userDoc['name'] ?? "Unknown User")
+                      : "Unknown User";
+                  final userImage =
+                      (userDoc != null &&
+                          userDoc.exists &&
+                          userDoc.data() != null)
+                      ? (userDoc['photoUrl'] ??
+                            'assets/images/default_user.png')
+                      : 'assets/images/default_user.png';
+
+                  return StreamBuilder<QuerySnapshot>(
+                    stream: chat.reference
+                        .collection('messages')
+                        .orderBy('timestamp', descending: true)
+                        .limit(1)
+                        .snapshots(),
+                    builder: (context, msgSnapshot) {
+                      String lastMessage = "No messages yet";
+                      DateTime lastMessageTime = DateTime.now();
+
+                      if (msgSnapshot.hasData &&
+                          msgSnapshot.data!.docs.isNotEmpty) {
+                        final msgDoc = msgSnapshot.data!.docs.first;
+                        lastMessage = msgDoc['text'] ?? lastMessage;
+                        final ts = msgDoc['timestamp'];
+                        if (ts is Timestamp) lastMessageTime = ts.toDate();
+                      }
+
+                      return ListTile(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => ChatScreen(
+                                userId: userId,
+                                adminId: adminId,
+                                currentUserId: adminId,
+                              ),
+                            ),
+                          );
+                        },
+                        leading: CircleAvatar(
+                          backgroundImage:
+                              userImage.toString().startsWith("http")
+                              ? NetworkImage(userImage)
+                              : AssetImage(userImage) as ImageProvider,
+                          radius: 25,
                         ),
-                      );
-                    },
-                    leading: CircleAvatar(
-                      backgroundImage: AssetImage(userImage),
-                      radius: 25,
-                    ),
-                    title: Text(
-                      userName,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    subtitle: Text(
-                      lastMessage,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontWeight: isRead
-                            ? FontWeight.normal
-                            : FontWeight.bold,
-                      ),
-                    ),
-                    trailing: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
+                        title: Text(
+                          userName,
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        subtitle: Text(
+                          lastMessage,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        trailing: Text(
                           "${lastMessageTime.hour.toString().padLeft(2, '0')}:${lastMessageTime.minute.toString().padLeft(2, '0')}",
                           style: const TextStyle(fontSize: 12),
                         ),
-                        if (!isRead)
-                          Container(
-                            margin: const EdgeInsets.only(top: 4),
-                            width: 10,
-                            height: 10,
-                            decoration: const BoxDecoration(
-                              color: Colors.green,
-                              shape: BoxShape.circle,
-                            ),
-                          ),
-                      ],
-                    ),
+                      );
+                    },
                   );
                 },
               );
@@ -113,5 +141,22 @@ class AdminDashboard extends StatelessWidget {
         },
       ),
     );
+  }
+
+  Future<Map<String, DocumentSnapshot>> _fetchUsers(Set<String> userIds) async {
+    final Map<String, DocumentSnapshot> result = {};
+
+    final futures = userIds.map(
+      (id) => FirebaseFirestore.instance.collection('users').doc(id).get(),
+    );
+    final docs = await Future.wait(futures);
+
+    for (var doc in docs) {
+      if (doc.exists) {
+        result[doc.id] = doc;
+      }
+    }
+
+    return result;
   }
 }
