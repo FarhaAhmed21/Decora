@@ -152,7 +152,12 @@
   "emailAlreadyRegistered":"هذا الإيميل مسجل مسبقًا",
   "order_placed_successfully": "تم تقديم الطلب بنجاح",
 "order_received_message": "لقد تم استلام طلبك وهو قيد المعالجة. شكرًا لتسوقك معنا!",
-    "copied_to_clipboard": "تم النسخ إلى الحافظة"
+    "copied_to_clipboard": "تم النسخ إلى الحافظة",
+     "passwordResetEmailSentTitle": "تحقق من بريدك الإلكتروني",
+  "passwordResetEmailSentMessage": "لقد أرسلنا رابط إعادة تعيين كلمة المرور إلى {email}. يرجى التحقق من صندوق الوارد واتباع التعليمات لتغيير كلمة المرور.",
+  "backToLogin": "العودة إلى تسجيل الدخول",
+    "passwordResetEmailSent": "تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني.",
+  "errorOccurred": "حدث خطأ، يرجى المحاولة لاحقًا."
 
 
 
