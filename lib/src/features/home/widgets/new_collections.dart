@@ -25,7 +25,7 @@ class _NewCollectionsState extends State<NewCollections> {
     final titleSize = isLandscape ? w * 0.025 : 18.0;
     final subtitleSize = isLandscape ? w * 0.018 : 14.0;
     final buttonTextSize = isLandscape ? w * 0.018 : 14.0;
-    final containerHeight = isLandscape ? h * 0.45 : h * 0.18;
+    final containerHeight = isLandscape ? h * 0.45 : h * 0.19;
     final buttonHeight = isLandscape ? h * 0.05 : h * 0.045;
 
     return Padding(

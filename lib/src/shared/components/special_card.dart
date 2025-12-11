@@ -56,7 +56,10 @@ class _SpecialCardState extends State<SpecialCard> {
             ),
             color: AppColors.cardColor(context),
             child: Padding(
-              padding: EdgeInsets.all(cardWidth * 0.04),
+              padding: EdgeInsets.symmetric(
+                horizontal: cardWidth * 0.04,
+                vertical: cardWidth * 0.01,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

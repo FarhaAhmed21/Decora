@@ -149,7 +149,12 @@
   "redirecting_to_payment_gateway":"Redirecting to Payment Gateway",
     "emailAlreadyRegistered":"Email Already Registered",
     "order_placed_successfully": "Order Placed Successfully",
-"order_received_message": "Your order has been received and is being processed. Thank you for shopping with us!"
+"order_received_message": "Your order has been received and is being processed. Thank you for shopping with us!",
+  "passwordResetEmailSent": "A password reset link has been sent to your email.",
+  "errorOccurred": "An error occurred, please try again later.",
+    "passwordResetEmailSentTitle": "Check Your Email",
+  "passwordResetEmailSentMessage": "We have sent a password reset link to {email}. Please check your inbox and follow the instructions to reset your password.",
+  "backToLogin": "Back to Login"
 
 
 
