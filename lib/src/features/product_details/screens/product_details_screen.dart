@@ -457,7 +457,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     w: w,
                     onpressed: () {
                       context.read<CartBloc>().add(
-                        AddProductToCartEvent(productId: widget.product.id),
+                        AddProductToCartEvent(productId: widget.product.id,quantity: buyQuantity),
                       );
                     },
                   );

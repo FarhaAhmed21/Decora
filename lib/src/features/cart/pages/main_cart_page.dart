@@ -8,9 +8,12 @@ import 'package:decora/src/features/cart/pages/shared_cart.dart';
 import 'package:decora/src/features/cart/service/service.dart';
 import 'package:decora/src/features/cart/widgets/cart_app_bar.dart';
 import 'package:decora/src/features/myOrders/service/order_service.dart';
+import 'package:decora/src/features/product_details/models/product_model.dart';
+import 'package:decora/src/features/product_details/services/product_services.dart';
 import 'package:decora/src/payment/screen/payment-screen.dart';
 import 'package:decora/src/payment/repo/paymob-service.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -164,10 +167,13 @@ class _MainCartPageState extends State<MainCartPage> {
       );
 
       if (result != null && result == true) {
+        final userId = FirebaseAuth.instance.currentUser!.uid;
+        await ProductService().reduceStockFromCart(userId);
+
+        ctx.read<CartBloc>().add(LoadCartTotalsEvent());
         ScaffoldMessenger.of(ctx).showSnackBar(
           const SnackBar(content: Text("Payment completed successfully!")),
         );
-
       } else {
         ScaffoldMessenger.of(ctx).showSnackBar(
           const SnackBar(content: Text("Payment cancelled or failed")),

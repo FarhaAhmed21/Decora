@@ -11,6 +11,37 @@ class ProductService {
   factory ProductService.forTest(FirebaseFirestore fakeFirestore) {
     return ProductService(firestore: fakeFirestore);
   }
+
+Future<void> reduceStockFromCart(String userId) async {
+  final carts = await _firestore
+      .collection('carts')
+      .where('userIds', arrayContains: userId)
+      .where('isShared', isEqualTo: false)
+      .limit(1)
+      .get();
+
+  if (carts.docs.isEmpty) return;
+
+  final cart = carts.docs.first;
+  final Map<String, dynamic> products =
+      Map<String, dynamic>.from(cart['products'] ?? {});
+
+  WriteBatch batch = _firestore.batch();
+
+  for (var entry in products.entries) {
+    final String productId = entry.key;
+    final int quantityBought = entry.value;
+
+    final productRef = _firestore.collection('products').doc(productId);
+
+    batch.update(productRef, {
+      'quantity': FieldValue.increment(-quantityBought),
+    });
+  }
+
+  batch.update(cart.reference, {'products': {}});
+  await batch.commit();
+}
   Future<List<Product>> getProducts() async {
     final snapshot = await _firestore.collection('products').get();
     print("there is  ${snapshot.docs.length} products karen");
