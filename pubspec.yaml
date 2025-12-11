@@ -47,7 +47,6 @@ dependencies:
   googleapis_auth: ^1.6.0
   url_launcher: ^6.3.2
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -55,7 +54,6 @@ dev_dependencies:
   integration_test:
     sdk: flutter
 
-  # Testing packages – MUST be here
   build_runner: ^2.4.9
   mockito: ^5.5.0
   mocktail: ^1.0.4
@@ -63,7 +61,27 @@ dev_dependencies:
   firebase_auth_mocks: ^0.14.2
   google_sign_in_mocks: ^0.3.0
   fake_cloud_firestore: ^3.1.0
+  flutter_native_splash: ^2.3.0
+  flutter_launcher_icons: ^0.13.1
 
+flutter_icons:
+  android: true
+  ios: true
+
+  image_path: "assets/images/DECORA.png"
+
+  android_adaptive_icon:
+    foreground_image: "assets/images/DECORA.png"
+    background_color: "#446F4D"
+
+  remove_alpha_ios: true
+
+flutter_native_splash:
+  image: "assets/images/DECORA.png"
+  color: "#3b5d50"
+  fullscreen: true
+  android: true
+  ios: true
 
 flutter:
   uses-material-design: true
