@@ -154,7 +154,7 @@ class AppLocalizationsAr extends AppLocalizations {
       'تم التحقق من حسابك بنجاح. مرحبًا بك في مجموعات ديكورا المميزة';
 
   @override
-  String get backToLogin => 'العودة لتسجيل الدخول';
+  String get backToLogin => 'العودة إلى تسجيل الدخول';
 
   @override
   String get resetPassword => 'إعادة تعيين كلمة المرور';
@@ -465,4 +465,19 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get order_received_message =>
       'لقد تم استلام طلبك وهو قيد المعالجة. شكرًا لتسوقك معنا!';
+
+  @override
+  String get passwordResetEmailSent =>
+      'تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني.';
+
+  @override
+  String get errorOccurred => 'حدث خطأ، يرجى المحاولة لاحقًا.';
+
+  @override
+  String get passwordResetEmailSentTitle => 'تحقق من بريدك الإلكتروني';
+
+  @override
+  String passwordResetEmailSentMessage(Object email) {
+    return 'لقد أرسلنا رابط إعادة تعيين كلمة المرور إلى $email. يرجى التحقق من صندوق الوارد واتباع التعليمات لتغيير كلمة المرور.';
+  }
 }

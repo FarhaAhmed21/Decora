@@ -383,7 +383,7 @@ abstract class AppLocalizations {
   /// No description provided for @backToLogin.
   ///
   /// In en, this message translates to:
-  /// **'Back To Login'**
+  /// **'Back to Login'**
   String get backToLogin;
 
   /// No description provided for @resetPassword.
@@ -985,6 +985,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your order has been received and is being processed. Thank you for shopping with us!'**
   String get order_received_message;
+
+  /// No description provided for @passwordResetEmailSent.
+  ///
+  /// In en, this message translates to:
+  /// **'A password reset link has been sent to your email.'**
+  String get passwordResetEmailSent;
+
+  /// No description provided for @errorOccurred.
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred, please try again later.'**
+  String get errorOccurred;
+
+  /// No description provided for @passwordResetEmailSentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Check Your Email'**
+  String get passwordResetEmailSentTitle;
+
+  /// No description provided for @passwordResetEmailSentMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'We have sent a password reset link to {email}. Please check your inbox and follow the instructions to reset your password.'**
+  String passwordResetEmailSentMessage(Object email);
 }
 
 class _AppLocalizationsDelegate
