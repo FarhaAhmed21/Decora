@@ -1,5 +1,7 @@
 import 'package:decora/core/l10n/app_localizations.dart';
+import 'package:decora/src/features/Auth/models/address_model.dart';
 import 'package:decora/src/features/Auth/services/auth_service.dart';
+import 'package:decora/src/features/Auth/services/firestore_service.dart';
 import 'package:decora/src/features/notifications/screens/notifications_screen.dart';
 import 'package:decora/src/features/notifications/services/notifications_services.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
@@ -42,24 +44,57 @@ class _TopLocationBarState extends State<TopLocationBar> {
               fontSize: width * 0.035,
             ),
           ),
-          subtitle: Row(
-            children: [
-              Icon(
-                Icons.location_on,
-                size: width * 0.045,
-                color: isDark ? Colors.white : Colors.black,
-              ),
-              SizedBox(width: width * 0.015),
-              Text(
-                AppLocalizations.of(context)!.cairoEgypt,
-                style: TextStyle(
-                  color: isDark ? Colors.white : Colors.black,
-                  fontWeight: FontWeight.w600,
-                  fontSize: width * 0.04,
-                ),
-              ),
-            ],
+          subtitle: FutureBuilder<List<AddressModel>>(
+            future: FirestoreService().getUserAddresses(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return Row(
+                  children: [
+                    Icon(Icons.location_on, size: width * 0.045),
+                    SizedBox(width: width * 0.015),
+                    const Text("Loading..."),
+                  ],
+                );
+              }
+
+              final addresses = snapshot.data!;
+              if (addresses.isEmpty) {
+                return Row(
+                  children: [
+                    Icon(Icons.location_on, size: width * 0.045),
+                    SizedBox(width: width * 0.015),
+                    const Text("No Address Found"),
+                  ],
+                );
+              }
+
+              // Get default or first address
+              final defaultAddress = addresses.firstWhere(
+                (a) => a.isDefault,
+                orElse: () => addresses[0],
+              );
+
+              return Row(
+                children: [
+                  Icon(
+                    Icons.location_on,
+                    size: width * 0.045,
+                    color: isDark ? Colors.white : Colors.black,
+                  ),
+                  SizedBox(width: width * 0.015),
+                  Text(
+                    "${defaultAddress.city}, ${defaultAddress.street}",
+                    style: TextStyle(
+                      color: isDark ? Colors.white : Colors.black,
+                      fontWeight: FontWeight.w600,
+                      fontSize: width * 0.04,
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
+
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
