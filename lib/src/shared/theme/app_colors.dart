@@ -77,10 +77,6 @@ class AppColors {
   static const Color darkInnerProductCardBorder = Color(0xFF4C9C4C);
   static const Color darkInnerProductCardTypeText = Color(0xFF80C080);
 
-  // =========================
-  // دوال ذكية تبع الوضع الحالي
-  // =========================
-
   static bool _isDark(BuildContext context) =>
       Provider.of<AppThemeProvider>(context, listen: true).isDarkMode;
 
