@@ -33,7 +33,7 @@ void main() {
               isNewCollection: false,
               category: 'furniture',
               colors: [],
-              comments: [],
+              comments: [], 
             ),
             'quantity': 2,
           },
@@ -54,20 +54,31 @@ void main() {
     });
 
     test('LoadCartTotalsEvent → emits updated totals', () async {
-      when(() => mockRepository.getCartTotals())
-          .thenAnswer((_) async => {'initialTotal': 200.0, 'discountedTotal': 180.0});
+  // Arrange: set initial state with some items
+  final items = [
+    {
+      'product': Product(id: '1', price: 100.0, discount: 10, name: 'Test', extraInfo: '', details: '', quantity: 7, isNewCollection: false , category: '', colors: [], comments: []),
+      'quantity': 2,
+    },
+  ];
 
-      bloc.add(LoadCartTotalsEvent());
+  bloc.emit(CartState(items: items)); // set initial items
 
-      await expectLater(
-        bloc.stream,
-        emitsInOrder([
-          isA<CartState>().having((s) => s.initialTotal, 'initialTotal', 200.0)
-              .having((s) => s.discountedTotal, 'discountedTotal', 180.0),
-        ]),
-      );
-    });
+  // Act
+  bloc.add(LoadCartTotalsEvent());
+
+  // Assert
+  await expectLater(
+    bloc.stream,
+    emitsInOrder([
+      isA<CartState>()
+          .having((s) => s.initialTotal, 'initialTotal', 200.0)
+          .having((s) => s.discountedTotal, 'discountedTotal', 180.0),
+    ]),
+  );
+});
   });
 }
+
 
 class MockCartRepository extends Mock implements CartRepository {}
