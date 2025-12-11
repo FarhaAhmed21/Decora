@@ -57,7 +57,6 @@ class _MainCartPageState extends State<MainCartPage> {
               animation: controller,
               builder: (context, _) {
                 if (controller.index == 1) return const SizedBox.shrink();
-
                 return Container(
                   height: AppSize.height(context) * 0.13,
                   padding: const EdgeInsets.symmetric(
