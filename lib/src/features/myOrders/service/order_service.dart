@@ -28,7 +28,6 @@ class OrderService {
   // ADD ORDER FROM CART — FIXED FOREVER
   static Future<void> addOrderFromCart({
     required String amount,
-    required bool isShared,
     required BuildContext context,
   }) async {
     if (_currentUid == null) throw Exception("No user logged in");
@@ -37,7 +36,6 @@ class OrderService {
 
     final cartQuery = _firestore
         .collection('carts')
-        .where('isShared', isEqualTo: isShared)
         .where('userIds', arrayContains: _currentUid)
         .limit(1);
 

@@ -34,7 +34,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     Emitter<CartState> emit,
   ) async {
     try {
-      await _cartRepository.addProductToCart(event.productId);
+      await _cartRepository.addProductToCart(event.productId, event.ctx, event.quantity);
       final items = await _cartRepository.getPersonalCartProducts();
       emit(state.copyWith(items: items));
       add(LoadCartTotalsEvent());

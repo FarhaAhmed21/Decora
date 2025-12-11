@@ -169,9 +169,7 @@ class _CustomCardState extends State<CustomCard> {
               ),
             ),
 
-            // ✅ Rating placeholder (optional)
-
-            // ✅ Price + Add to cart
+            
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -191,7 +189,7 @@ class _CustomCardState extends State<CustomCard> {
                       return GestureDetector(
                         onTap: () {
                           context.read<CartBloc>().add(
-                            AddProductToCartEvent(productId: widget.product.id),
+                            AddProductToCartEvent(productId: widget.product.id, quantity: 1, ctx: context),
                           );
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(

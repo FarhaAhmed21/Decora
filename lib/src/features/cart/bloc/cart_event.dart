@@ -7,8 +7,9 @@ class LoadPersonalCart extends CartEvent {}
 class AddProductToCartEvent extends CartEvent {
   final String productId;
   final int quantity;
+  final dynamic ctx;
 
-  const AddProductToCartEvent( {this.quantity = 1, required this.productId});
+  const AddProductToCartEvent({required this.quantity, required this.productId, required this.ctx});
 
   @override
   List<Object?> get props => [productId, quantity];

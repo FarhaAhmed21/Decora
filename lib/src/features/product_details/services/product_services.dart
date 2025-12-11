@@ -12,11 +12,10 @@ class ProductService {
     return ProductService(firestore: fakeFirestore);
   }
 
-Future<void> reduceStockFromCart(String userId) async {
+  Future<void> reduceStockFromCart(String userId) async {
   final carts = await _firestore
       .collection('carts')
       .where('userIds', arrayContains: userId)
-      .where('isShared', isEqualTo: false)
       .limit(1)
       .get();
 
@@ -32,6 +31,7 @@ Future<void> reduceStockFromCart(String userId) async {
     final String productId = entry.key;
     final int quantityBought = entry.value;
 
+
     final productRef = _firestore.collection('products').doc(productId);
 
     batch.update(productRef, {
@@ -42,6 +42,7 @@ Future<void> reduceStockFromCart(String userId) async {
   batch.update(cart.reference, {'products': {}});
   await batch.commit();
 }
+  
   Future<List<Product>> getProducts() async {
     final snapshot = await _firestore.collection('products').get();
     print("there is  ${snapshot.docs.length} products karen");

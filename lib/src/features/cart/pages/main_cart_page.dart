@@ -154,7 +154,6 @@ class _MainCartPageState extends State<MainCartPage> {
 
       await OrderService.addOrderFromCart(
         amount: finalTotal.toString(),
-        isShared: false,
         context: ctx,
       );
 
@@ -167,14 +166,21 @@ class _MainCartPageState extends State<MainCartPage> {
       );
 
       if (result != null && result == true) {
-        final userId = FirebaseAuth.instance.currentUser!.uid;
-        await ProductService().reduceStockFromCart(userId);
+  final userId = FirebaseAuth.instance.currentUser!.uid;
 
-        ctx.read<CartBloc>().add(LoadCartTotalsEvent());
-        ScaffoldMessenger.of(ctx).showSnackBar(
-          const SnackBar(content: Text("Payment completed successfully!")),
-        );
-      } else {
+  // Reduce stock
+  await ProductService().reduceStockFromCart(userId);
+
+  // CLEAR THE CART (ADD THIS)
+  await CartRepository().clearCart(userId);
+
+  // Refresh UI
+  ctx.read<CartBloc>().add(LoadCartTotalsEvent());
+
+  ScaffoldMessenger.of(ctx).showSnackBar(
+    const SnackBar(content: Text("Payment completed successfully!")),
+  );
+}else {
         ScaffoldMessenger.of(ctx).showSnackBar(
           const SnackBar(content: Text("Payment cancelled or failed")),
         );

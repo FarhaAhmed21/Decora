@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:decora/src/features/product_details/models/product_model.dart';
+import 'package:flutter/material.dart';
 
 class CartRepository {
   final FirebaseFirestore _firestore;
@@ -19,7 +20,6 @@ class CartRepository {
       final query = await _firestore
           .collection('carts')
           .where('userIds', arrayContains: user.uid)
-          .where('isShared', isEqualTo: false)
           .limit(1)
           .get();
 
@@ -56,132 +56,140 @@ class CartRepository {
   }
 
   /// Add product to cart or increment quantity if already present
-Future<void> addProductToCart(String productId, {int requiredQuantity = 1}) async {
-  try {
-    final user = _auth.currentUser;
-    if (user == null) throw Exception("User not logged in.");
+  Future<void> addProductToCart(
+    String productId,
+    BuildContext ctx, 
+    int requiredQuantity,
+  ) async {
+    try {
+      final user = _auth.currentUser;
+      if (user == null) throw Exception("User not logged in.");
 
-    // Step 1: Get the user's normal (non-shared) cart
-    final cartQuery = await _firestore
-        .collection('carts')
-        .where('userIds', arrayContains: user.uid)
-        .where('isShared', isEqualTo: false)
-        .limit(1)
-        .get();
+      // Step 1: Get the user's normal (non-shared) cart
+      final cartQuery = await _firestore
+          .collection('carts')
+          .where('userIds', arrayContains: user.uid)
+          .limit(1)
+          .get();
 
-    // If no cart exists → create new one with the product
-    if (cartQuery.docs.isEmpty) {
-      // But first check product stock
-      final productSnap =
-          await _firestore.collection('products').doc(productId).get();
+      if (cartQuery.docs.isEmpty) {
+        final productSnap = await _firestore
+            .collection('products')
+            .doc(productId)
+            .get();
+        if (!productSnap.exists) throw Exception("Product not found.");
 
-      if (!productSnap.exists) throw Exception("Product not found.");
+        final int available = productSnap.data()!['quantity'] ?? 0;
 
-      final productData = productSnap.data()!;
-      final int available = productData['quantity'] ?? 0;
+        if (available < requiredQuantity) {
+          throw Exception("Not enough stock!");
+        }
 
-      if (available < requiredQuantity) {
-        throw Exception("Not enough stock!");
+        await _firestore.collection('carts').add({
+          'userIds': [user.uid],
+          'products': {productId: requiredQuantity},
+        });
+        return;
       }
 
-      await _firestore.collection('carts').add({
-        'userIds': [user.uid],
-        'isShared': false,
-        'products': {productId: requiredQuantity},
+      final cartRef = cartQuery.docs.first.reference;
+
+      // Step 2: Run transaction
+      await _firestore.runTransaction((transaction) async {
+        final cartSnap = await transaction.get(cartRef);
+        final Map<String, dynamic> products = Map<String, dynamic>.from(
+          cartSnap.data()?['products'] ?? {},
+        );
+
+        final productRef = _firestore.collection('products').doc(productId);
+        final productSnap = await transaction.get(productRef);
+
+        if (!productSnap.exists) throw Exception("Product not found.");
+
+        final int available = productSnap.data()?['quantity'] ?? 0;
+
+        final int currentInCart = products[productId] ?? 0;
+        int newQuantity = currentInCart + requiredQuantity;
+
+        if (newQuantity > available) {
+          newQuantity = available;
+          ScaffoldMessenger.of(ctx).showSnackBar(
+            SnackBar(content: Text("Only $available items available.")),
+          );
+        }
+        
+
+        products[productId] = newQuantity;
+
+        transaction.update(cartRef, {'products': products});
       });
-      return;
+    } catch (e) {
+      rethrow;
     }
-
-    final cartRef = cartQuery.docs.first.reference;
-
-    // Step 2: Run transaction: check stock + update cart
-    await _firestore.runTransaction((transaction) async {
-      // Read cart
-      final cartSnap = await transaction.get(cartRef);
-      final cartData = cartSnap.data() ?? {};
-      final Map<String, dynamic> products =
-          Map<String, dynamic>.from(cartData['products'] ?? {});
-
-      // Read product (inside transaction!)
-      final productRef = _firestore.collection('products').doc(productId);
-      final productSnap = await transaction.get(productRef);
-
-      if (!productSnap.exists) throw Exception("Product not found.");
-
-      final int available = productSnap.data()?['quantity'] ?? 0;
-      final int currentInCart = products[productId] ?? 0;
-      final int newQuantity = currentInCart + requiredQuantity;
-
-      // Step 3: Check stock
-      if (newQuantity > available) {
-        throw Exception(
-            "Only $available items available — cannot add $newQuantity.");
-      }
-
-      // Step 4: Update cart
-      products[productId] = newQuantity;
-
-      transaction.update(cartRef, {'products': products});
-    });
-  } catch (e) {
-    rethrow;
   }
-}
 
+  Future<void> clearCart(String userId) async {
+    final cartRef = FirebaseFirestore.instance
+        .collection("carts")
+        .doc(userId)
+        .collection("items");
+
+    final items = await cartRef.get();
+    for (var doc in items.docs) {
+      await doc.reference.delete();
+    }
+  }
 
   Future<List<Map<String, dynamic>>> getSharedCarts() async {
-  try {
-    final query = await _firestore.collection('carts').get();
-    if (query.docs.isEmpty) return [];
+    try {
+      final query = await _firestore.collection('carts').get();
+      if (query.docs.isEmpty) return [];
 
-    final Map<String, int> allProductsMap = {};
-    final Set<String> allUserIds = {};
+      final Map<String, int> allProductsMap = {};
+      final Set<String> allUserIds = {};
 
-    for (final cartDoc in query.docs) {
-      final data = cartDoc.data();
+      for (final cartDoc in query.docs) {
+        final data = cartDoc.data();
 
-      final productsData = data['products'];
-      final userIds = (data['userIds'] as List<dynamic>?) ?? [];
-      allUserIds.addAll(userIds.cast<String>());
+        final productsData = data['products'];
+        final userIds = (data['userIds'] as List<dynamic>?) ?? [];
+        allUserIds.addAll(userIds.cast<String>());
 
-      if (productsData == null) continue;
+        if (productsData == null) continue;
 
-      final productsMap = Map<String, dynamic>.from(productsData);
+        final productsMap = Map<String, dynamic>.from(productsData);
 
-      for (final entry in productsMap.entries) {
-        final productId = entry.key;
-        final quantity = (entry.value as num?)?.toInt() ?? 1;
+        for (final entry in productsMap.entries) {
+          final productId = entry.key;
+          final quantity = (entry.value as num?)?.toInt() ?? 1;
 
-        allProductsMap[productId] = (allProductsMap[productId] ?? 0) + quantity;
+          allProductsMap[productId] =
+              (allProductsMap[productId] ?? 0) + quantity;
+        }
       }
+
+      final List<Map<String, dynamic>> productsList = [];
+
+      for (final entry in allProductsMap.entries) {
+        final productSnap = await _firestore
+            .collection('products')
+            .doc(entry.key)
+            .get();
+
+        if (productSnap.exists && productSnap.data() != null) {
+          final product = Product.fromMap(productSnap.data()!, productSnap.id);
+          productsList.add({'product': product, 'quantity': entry.value});
+        }
+      }
+
+      // Return in the format UI expects
+      return [
+        {'products': productsList, 'userIds': allUserIds.toList()},
+      ];
+    } catch (e) {
+      rethrow;
     }
-
-    final List<Map<String, dynamic>> productsList = [];
-
-    for (final entry in allProductsMap.entries) {
-      final productSnap =
-          await _firestore.collection('products').doc(entry.key).get();
-
-      if (productSnap.exists && productSnap.data() != null) {
-        final product = Product.fromMap(productSnap.data()!, productSnap.id);
-        productsList.add({
-          'product': product,
-          'quantity': entry.value,
-        });
-      }
-    }
-
-    // Return in the format UI expects
-    return [
-      {
-        'products': productsList,
-        'userIds': allUserIds.toList(),
-      }
-    ];
-  } catch (e) {
-    rethrow;
   }
-}
 
   /// Decrease product quantity in cart or remove if quantity reaches zero
   Future<void> decreaseProductQuantityCart(String productId) async {
@@ -192,7 +200,6 @@ Future<void> addProductToCart(String productId, {int requiredQuantity = 1}) asyn
       final cartQuery = await _firestore
           .collection('carts')
           .where('userIds', arrayContains: user.uid)
-          .where('isShared', isEqualTo: false)
           .limit(1)
           .get();
 
@@ -229,7 +236,6 @@ Future<void> addProductToCart(String productId, {int requiredQuantity = 1}) asyn
       final query = await _firestore
           .collection('carts')
           .where('userIds', arrayContains: user.uid)
-          .where('isShared', isEqualTo: false)
           .limit(1)
           .get();
 
@@ -275,6 +281,4 @@ Future<void> addProductToCart(String productId, {int requiredQuantity = 1}) asyn
       rethrow;
     }
   }
-
 }
-

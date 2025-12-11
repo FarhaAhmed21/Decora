@@ -76,8 +76,7 @@ void main() {
             'userIds',
             arrayContains: any(named: 'arrayContains'),
           )).thenReturn(mockQuery);
-      when(() => mockQuery.where('isShared', isEqualTo: false))
-          .thenReturn(mockQuery);
+
       when(() => mockQuery.limit(1)).thenReturn(mockQuery);
       when(() => mockQuery.get()).thenAnswer((_) async => mockQuerySnapshot);
       when(() => mockQuerySnapshot.docs).thenReturn([mockQueryDoc]);
@@ -109,8 +108,6 @@ void main() {
             'userIds',
             arrayContains: any(named: 'arrayContains'),
           )).thenReturn(mockQuery);
-      when(() => mockQuery.where('isShared', isEqualTo: false))
-          .thenReturn(mockQuery);
       when(() => mockQuery.limit(1)).thenReturn(mockQuery);
       when(() => mockQuery.get()).thenAnswer((_) async => mockQuerySnapshot);
       when(() => mockQuerySnapshot.docs).thenReturn([]);

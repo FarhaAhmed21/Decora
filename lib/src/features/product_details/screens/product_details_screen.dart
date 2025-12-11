@@ -55,7 +55,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     isFavourite = false;
     _loadComments();
     _checkFavourite();
-    buyQuantity = 0;
+    buyQuantity = 1;
   }
 
   Future<void> _checkFavourite() async {
@@ -457,7 +457,18 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     w: w,
                     onpressed: () {
                       context.read<CartBloc>().add(
-                        AddProductToCartEvent(productId: widget.product.id,quantity: buyQuantity),
+                        AddProductToCartEvent(
+                          productId: widget.product.id,
+                          quantity: buyQuantity,
+                          ctx: context,
+                        ),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                            "Added to Cart Successfully",
+                          ),
+                        ),
                       );
                     },
                   );

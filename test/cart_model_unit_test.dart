@@ -11,7 +11,6 @@ void main() {
       final Map<String, dynamic> json = {
         'cartId': 'c1',
         'userIds': ['u1', 'u2'],
-        'isShared': true,
         'products': {'p1': 2, 'p2': 5},
       };
 
@@ -19,7 +18,6 @@ void main() {
 
       expect(cart.cartId, 'c1');
       expect(cart.userIds, ['u1', 'u2']);
-      expect(cart.isShared, true);
       expect(cart.products, {'p1': 2, 'p2': 5});
     });
 
@@ -27,7 +25,6 @@ void main() {
       final cart = Cart(
         cartId: 'c1',
         userIds: ['u1', 'u2'],
-        isShared: true,
         products: {'p1': 2, 'p2': 5},
       );
 
@@ -35,7 +32,6 @@ void main() {
 
       expect(json['cartId'], 'c1');
       expect(json['userIds'], ['u1', 'u2']);
-      expect(json['isShared'], true);
       expect(json['products'], {'p1': 2, 'p2': 5});
     });
   });

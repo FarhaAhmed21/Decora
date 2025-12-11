@@ -2,20 +2,17 @@
 class Cart {
   final String cartId;
   final List<String> userIds;
-  final bool isShared;
   final Map<String, int> products; 
 
   Cart({
     required this.cartId,
     required this.userIds,
-    required this.isShared,
     required this.products,
   });
 
   Map<String, dynamic> toJson() => {
         'cartId': cartId,
         'userIds': userIds,
-        'isShared': isShared,
         'products': products,
       };
 
@@ -35,7 +32,6 @@ class Cart {
     return Cart(
       cartId: json['cartId']?.toString() ?? '',
       userIds: (json['userIds'] as List?)?.map((e) => e.toString()).toList() ?? [],
-      isShared: json['isShared'] ?? false,
       products: parsedProducts,
     );
   }
