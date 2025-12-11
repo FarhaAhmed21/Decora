@@ -62,8 +62,7 @@ Decora aims to bridge the gap between **digital browsing and real-life home styl
 ### **Module 1: Authentication & Onboarding**  
 - Splash screen  
 - Onboarding screens  
-- Authentication (Google, Facebook, Email/Password, Forget password via OTP)  
-- Privacy Policy & Instructions page  
+- Authentication (Google, Facebook, Email/Password, Forget password via OTP)
 
 ### **Module 2: Home & Catalog**  
 - Home screen (with categories & best sellers)  
@@ -87,10 +86,20 @@ Decora aims to bridge the gap between **digital browsing and real-life home styl
 - Notifications screen (order tracking, stock updates)  
 - Out-of-stock bar + reminder notifications  
 - Delivery time estimation  
-- In-app chat with customer support  
+- In-app chat with customer support
+
+### **Module 6: Admin Panel & Product Management**
+- Add new products
+- Edit existing products
+- Delete products
+- Support Management:
+  - Open in-app chat with customer support
+  - Respond to customer queries
+  - Track chat history with user
+
 
 **Deliverables:**  
-- Fully working Flutter app (basic UI + integrated modules)  
+- Fully working Flutter app (UI + integrated modules)  
 - GitHub commits with progress tracking  
 
 ---
@@ -102,7 +111,8 @@ Decora aims to bridge the gap between **digital browsing and real-life home styl
 - Firestore database (Products, Users, Orders, Cart, Notifications)  
 - Cloud Functions (shared cart invites, stock notifications)  
 - Push notifications via Firebase Cloud Messaging  
-
+- Integrate with paymob.
+  
 **Deliverables:**  
 - Firebase connected with Flutter app  
 
@@ -112,13 +122,10 @@ Decora aims to bridge the gap between **digital browsing and real-life home styl
 **Tasks:**  
 - Write unit tests for core features (authentication, cart, favorites, search)  
 - Perform widget and integration testing for UI components  
-- Test Firestore queries, security rules, and offline persistence  
+- Test Firestore queries, security rules.
 
 **Deliverables:**  
 - Unit test reports (coverage, passed/failed cases)  
-- QA checklist and bug report log  
-- Verified stable build ready for deployment  
-
 
 ## **Phase 6 – Finalization & Deployment**  
 **Tasks:**  
@@ -128,7 +135,7 @@ Decora aims to bridge the gap between **digital browsing and real-life home styl
 **Deliverables:**  
 - Final presentation deck  
 - App published on stores  
-- Documentation & marketing kit  
+- Documentation
 
 ---
 
@@ -140,7 +147,7 @@ Decora aims to bridge the gap between **digital browsing and real-life home styl
 
 ---
 
-## **Bones Phase – Innovation & AI Features (Quiz & LLM Integration)**
+## **Future Work – Innovation & AI Features (Quiz & LLM Integration)**
 
 These advanced features will enhance personalization, engagement, and customer support:  
 
@@ -165,19 +172,7 @@ These advanced features will enhance personalization, engagement, and customer s
      - Integrated **Google Maps** to help users:  
      - Find **nearest Decora showrooms / partner stores**.  
      - Track **live delivery status** of purchased items on the map.  
-     - Push notifications when the delivery is nearby.    
----
-
-## 🛠️ Roles & Responsibilities  
-
-### **Phase 3 – Core App Development (Frontend)**  
-- **Farha** →  in-app chat, onboarding,favourites, Splash Screen, Categories Screen.  
-- **Karen** → Home screen, product details, AR preview UI (VTO).  
-- **Othman** → Cart, shared cart, privacy policy,order cancellation.  
-- **Habiba** → Authentication . 
-- **Abdelaziz** → Notifications, delivery estimation(Order details Screens ), My orders Screen.  
-- **AbdElrahman** → Profile , New Collection section, Offers Screen.  
-
+     - Push notifications when the delivery is nearby.   
 ---
 
 ### **Phase 4 – Backend Development & Integration**  
@@ -205,15 +200,6 @@ These advanced features will enhance personalization, engagement, and customer s
 - **Karen** → Documentation & app descriptions for stores.
 - **Othman** & **Abdelaziz**  &  **AbdElrahman Taher** → Final presentation (slides & pitch).
 - **Habiba Basel** → Demo video + screenshots .
-
----
-### **Bones Phase – Innovation & AI Features (Quiz & LLM Integration)**  
-- **Farha Ahmed** → Build quiz UI & AI assistant entry point.  
-- **Karen** → Design quiz questions & train LLM with product data.  
-- **Othman** → Integrate LLM API with Firestore catalog search.  
-- **Habiba Basel** → Multi-language support for quiz & chatbot.  
-- **Abdelaziz** → Visual identity for AI bot + quiz results screens.  
-- **AbdElrahman Taher** → Demo presentation & feature testing.  
 
 ---
 
