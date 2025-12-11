@@ -155,7 +155,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Your account has been verified successfully. Welcome to Decora’s curated collections';
 
   @override
-  String get backToLogin => 'Back To Login';
+  String get backToLogin => 'Back to Login';
 
   @override
   String get resetPassword => 'Reset Your Password';
@@ -467,4 +467,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get copied_to_clipboard => 'Copied to clipboard';
+
+  @override
+  String get passwordResetEmailSentTitle => 'Check Your Email';
+
+  @override
+  String passwordResetEmailSentMessage(Object email) {
+    return 'We have sent a password reset link to $email. Please check your inbox and follow the instructions to reset your password.';
+  }
+
+  @override
+  String get passwordResetEmailSent =>
+      'A password reset link has been sent to your email.';
+
+  @override
+  String get errorOccurred => 'An error occurred, please try again later.';
 }

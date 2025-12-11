@@ -150,7 +150,12 @@
     "emailAlreadyRegistered":"Email Already Registered",
     "order_placed_successfully": "Order Placed Successfully",
 "order_received_message": "Your order has been received and is being processed. Thank you for shopping with us!",
-    "copied_to_clipboard": "Copied to clipboard"
+    "copied_to_clipboard": "Copied to clipboard",
+      "passwordResetEmailSentTitle": "Check Your Email",
+  "passwordResetEmailSentMessage": "We have sent a password reset link to {email}. Please check your inbox and follow the instructions to reset your password.",
+  "backToLogin": "Back to Login",
+    "passwordResetEmailSent": "A password reset link has been sent to your email.",
+  "errorOccurred": "An error occurred, please try again later."
 
 
 
