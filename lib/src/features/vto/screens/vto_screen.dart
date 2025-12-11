@@ -9,14 +9,6 @@ import 'package:camera/camera.dart';
 import '../../../../core/utils/app_size.dart';
 import '../../../../generated/assets.dart';
 
-// --- Placeholder for the Furniture Model (The Orange Chair) ---
-// Since we don't have the exact 3D model, we'll use a local asset or a placeholder.
-// For this example, let's assume you've added an asset for the orange chair.
-// const String _kChairAssetName = 'assets/images/chair_placeholder.png';
-// NOTE: Make sure to replace 'assets/images/office.png'
-// in furnitureImages with a list of actual furniture image assets,
-// and add the orange chair asset.
-
 class VtoScreen extends StatefulWidget {
   final List<Product> products;
   const VtoScreen({super.key, required this.products});
@@ -28,7 +20,7 @@ class VtoScreen extends StatefulWidget {
 class _VtoScreenState extends State<VtoScreen> {
   XFile? _pickedImage;
   CameraController? _cameraController;
-  bool _isLive = true; // Start with live camera on as a common VTO pattern
+  bool _isLive = true;
   late String _selectedFurniture;
   final List<String> images = [];
 
@@ -66,7 +58,6 @@ class _VtoScreenState extends State<VtoScreen> {
 
   Future<void> _pickImage() async {
     final picked = await ImagePicker().pickImage(source: ImageSource.gallery);
-    // Changed source to gallery to allow selecting a room image easily.
     if (picked != null) {
       setState(() {
         _pickedImage = picked;
@@ -81,9 +72,6 @@ class _VtoScreenState extends State<VtoScreen> {
     });
   }
 
-  // --- Widget Builders for UI Components ---
-
-  // Renders the background, either live camera, picked image, or a placeholder
   Widget _buildBackground() {
     if (_isLive) {
       return (_cameraController != null &&
@@ -95,20 +83,18 @@ class _VtoScreenState extends State<VtoScreen> {
     } else if (_pickedImage != null) {
       return Image.file(File(_pickedImage!.path), fit: BoxFit.cover);
     } else {
-      // Placeholder background for the room aesthetic
       return Container(
         decoration: const BoxDecoration(
           color: Colors.white,
-          // image: DecorationImage(
-          //   image: AssetImage('assets/images/room_placeholder.jpg'),
-          //   fit: BoxFit.cover,
-          // ),
+          image: DecorationImage(
+            image: AssetImage('assets/images/room_placeholder.jpg'),
+            fit: BoxFit.cover,
+          ),
         ),
       );
     }
   }
 
-  // Renders the virtual furniture in the center with controls
   Widget _buildVtoView(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final double boxSize = size.width * 0.7;
@@ -166,7 +152,6 @@ class _VtoScreenState extends State<VtoScreen> {
     );
   }
 
-  // Renders the vertical scroll list of furniture on the right
   Widget _buildFurnitureList() {
     return Align(
       alignment: Alignment.centerRight,
@@ -222,7 +207,6 @@ class _VtoScreenState extends State<VtoScreen> {
     );
   }
 
-  // Renders the custom bottom controls (Camera, Gallery, Big Shutter)
   Widget _buildBottomControls() {
     return Positioned(
       bottom: 0,
@@ -230,13 +214,12 @@ class _VtoScreenState extends State<VtoScreen> {
       right: 0,
       child: Container(
         height: AppSize.height(context) * 0.2,
-        color: AppColors.background(context), // Dark background for contrast
+        color: AppColors.background(context),
         padding: const EdgeInsets.only(bottom: 20),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Video / Toggle Live
             GestureDetector(
               onTap: _toggleLiveCamera,
               child: Image.asset(
@@ -244,7 +227,6 @@ class _VtoScreenState extends State<VtoScreen> {
                 color: AppColors.mainText(context),
               ),
             ),
-            // Main Shutter Button
             GestureDetector(
               onTap: () async {
                 try {
@@ -254,11 +236,9 @@ class _VtoScreenState extends State<VtoScreen> {
                     final image = await _cameraController!.takePicture();
                     setState(() {
                       _pickedImage = image;
-                      _isLive = false; // Switch to display mode
+                      _isLive = false;
                     });
                   } else {
-                    // If using a gallery or background image, you can later implement
-                    // saving a screenshot using RepaintBoundary
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text(
@@ -284,16 +264,13 @@ class _VtoScreenState extends State<VtoScreen> {
                     width: 70,
                     height: 70,
                     decoration: BoxDecoration(
-                      color: AppColors.primary(
-                        context,
-                      ), // Green center like in the image
+                      color: AppColors.primary(context),
                       shape: BoxShape.circle,
                     ),
                   ),
                 ),
               ),
             ),
-            // Gallery / Pick Image
             GestureDetector(
               onTap: _pickImage,
               child: Image.asset(
@@ -310,24 +287,15 @@ class _VtoScreenState extends State<VtoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // The background color is black to match the outer frame of the screenshot
       backgroundColor: Colors.black,
       body: SafeArea(
-        // The main content area is the inner screen part
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(20), // Rounded screen corners
+          borderRadius: BorderRadius.circular(20),
           child: Stack(
             children: [
-              // 1. Background (Camera/Image/Placeholder)
               Positioned.fill(child: _buildBackground()),
-
-              // 2. Virtual Try-On (VTO) View with the chair and blue box
               _buildVtoView(context),
-
-              // 3. Furniture Selection List
               _buildFurnitureList(),
-
-              // 6. Bottom Controls (Camera/Gallery/Shutter)
               _buildBottomControls(),
             ],
           ),
@@ -337,7 +305,6 @@ class _VtoScreenState extends State<VtoScreen> {
   }
 }
 
-// --- Helper class to draw the dashed border ---
 class DashedRectPainter extends CustomPainter {
   final Color color;
   final double strokeWidth;
@@ -358,10 +325,8 @@ class DashedRectPainter extends CustomPainter {
 
     final path = Path();
 
-    // The rect boundary
     final rect = Rect.fromLTWH(0, 0, size.width, size.height);
 
-    // Draw the dashed lines (simplified, can be more complex for perfect corners)
     double distance = 0.0;
     while (distance < rect.width) {
       path.moveTo(rect.left + distance, rect.top);
