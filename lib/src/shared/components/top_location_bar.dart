@@ -17,7 +17,8 @@ class TopLocationBar extends StatefulWidget {
 class _TopLocationBarState extends State<TopLocationBar> {
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<AppThemeProvider>(context);
+    final themeProvider = context.watch<AppThemeProvider>();
+
     final isDark = themeProvider.isDarkMode;
 
     final localeCubit = context.read<LocaleCubit>();
