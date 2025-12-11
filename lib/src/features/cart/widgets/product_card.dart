@@ -76,7 +76,7 @@ class ProductCard extends StatelessWidget {
                               color: Colors.grey,
                               onTap: () {
                                 context.read<CartBloc>().add(
-                                  MinusProductToCartEvent(productId: id, quantity: quantity),
+                                  MinusProductToCartEvent(productId: id),
                                 );
                               },
                             ),

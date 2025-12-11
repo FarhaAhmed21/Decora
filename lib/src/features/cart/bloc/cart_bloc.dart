@@ -14,24 +14,31 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     on<LoadSharedCart>(_onLoadSharedCart);
   }
 
-  /// Load personal cart (optimized)
+  /// Load personal cart
   Future<void> _onLoadPersonalCart(
-      LoadPersonalCart event, Emitter<CartState> emit) async {
+    LoadPersonalCart event,
+    Emitter<CartState> emit,
+  ) async {
     emit(state.copyWith(loading: true, error: null));
     try {
       final items = await _cartRepository.getPersonalCartProducts();
       emit(state.copyWith(loading: false, items: items));
-      add(LoadCartTotalsEvent()); // calculate totals instantly
     } catch (e) {
       emit(state.copyWith(loading: false, error: e.toString()));
     }
   }
 
-  /// Increase quantity
+  /// Increase product quantity in cart
   Future<void> _onAddProductToCart(
-      AddProductToCartEvent event, Emitter<CartState> emit) async {
+    AddProductToCartEvent event,
+    Emitter<CartState> emit,
+  ) async {
     try {
-      await _cartRepository.addProductToCart(event.productId, event.ctx, event.quantity);
+      await _cartRepository.addProductToCart(
+        event.productId,
+        event.ctx,
+        event.quantity,
+      );
       final items = await _cartRepository.getPersonalCartProducts();
       emit(state.copyWith(items: items));
       add(LoadCartTotalsEvent());
@@ -40,9 +47,11 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     }
   }
 
-  /// Decrease quantity
+  /// Decrease product quantity in cart
   Future<void> _onMinusProductToCart(
-      MinusProductToCartEvent event, Emitter<CartState> emit) async {
+    MinusProductToCartEvent event,
+    Emitter<CartState> emit,
+  ) async {
     try {
       await _cartRepository.decreaseProductQuantityCart(event.productId);
       final items = await _cartRepository.getPersonalCartProducts();
@@ -53,30 +62,29 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     }
   }
 
-  /// Load totals instantly using cached products
+  /// Load total prices (initial and discounted)
   Future<void> _onLoadCartTotals(
-      LoadCartTotalsEvent event, Emitter<CartState> emit) async {
+    LoadCartTotalsEvent event,
+    Emitter<CartState> emit,
+  ) async {
     try {
-      double initialTotal = 0;
-      double discountedTotal = 0;
-
-      for (var item in state.items) {
-        final product = item['product'];
-        final quantity = item['quantity'];
-        initialTotal += product.price * quantity;
-        discountedTotal += product.price * quantity * (1 - product.discount / 100);
-      }
-
-      emit(state.copyWith(
-          initialTotal: initialTotal, discountedTotal: discountedTotal));
+      final totals = await _cartRepository.getCartTotals();
+      emit(
+        state.copyWith(
+          initialTotal: totals['initialTotal']!,
+          discountedTotal: totals['discountedTotal'],
+        ),
+      );
     } catch (e) {
       emit(state.copyWith(error: e.toString()));
     }
   }
 
-  /// Load shared carts
+  /// Load shared cart products
   Future<void> _onLoadSharedCart(
-      LoadSharedCart event, Emitter<CartState> emit) async {
+    LoadSharedCart event,
+    Emitter<CartState> emit,
+  ) async {
     emit(state.copyWith(loading: true, error: null));
     try {
       final items = await _cartRepository.getSharedCarts();
