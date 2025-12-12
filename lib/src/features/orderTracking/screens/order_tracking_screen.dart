@@ -5,6 +5,7 @@ import 'package:decora/src/features/orderTracking/service/add_days.dart';
 import 'package:decora/src/features/orderTracking/widgets/order_status.dart';
 import 'package:decora/src/features/orderTracking/widgets/order_tracking_product_container.dart';
 import 'package:decora/src/features/product_details/models/product_model.dart';
+import 'package:decora/src/features/product_details/services/product_services.dart';
 import 'package:decora/src/shared/components/appbar.dart';
 import 'package:decora/src/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,7 @@ class OrderTrackingScreen extends StatelessWidget {
           );
 
           return FutureBuilder<List<Product>>(
-            future: mainProductsFuture,
+            future: ProductService().getProducts(),
             builder: (context, productsSnapshot) {
               if (productsSnapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());

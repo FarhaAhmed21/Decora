@@ -206,7 +206,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: isLandscape ? h * 0.5 : h * 0.225,
+                        height: isLandscape ? h * 0.5 : h * 0.26,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: widget.specials.length,
