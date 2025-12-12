@@ -61,7 +61,7 @@ class _NewCollectionsState extends State<NewCollections> {
                         ),
                       ),
 
-                      SizedBox(height: h * 0.005),
+                      SizedBox(height: h * 0.0025),
 
                       Text(
                         AppLocalizations.of(
