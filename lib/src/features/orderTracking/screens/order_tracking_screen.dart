@@ -42,7 +42,7 @@ class OrderTrackingScreen extends StatelessWidget {
           );
 
           return FutureBuilder<List<Product>>(
-            future: ProductService().getProducts(),
+                       future: mainProductsFuture,
             builder: (context, productsSnapshot) {
               if (productsSnapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
