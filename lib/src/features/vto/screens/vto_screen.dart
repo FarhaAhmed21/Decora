@@ -220,13 +220,13 @@ class _VtoScreenState extends State<VtoScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            GestureDetector(
-              onTap: _toggleLiveCamera,
-              child: Image.asset(
-                Assets.videoIcon,
-                color: AppColors.mainText(context),
-              ),
-            ),
+            // GestureDetector(
+            //   onTap: _toggleLiveCamera,
+            //   child: Image.asset(
+            //     Assets.videoIcon,
+            //     color: AppColors.mainText(context),
+            //   ),
+            // ),
             GestureDetector(
               onTap: () async {
                 try {
